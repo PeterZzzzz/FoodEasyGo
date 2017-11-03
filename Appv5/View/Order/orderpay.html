@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>订单付款|FoodEasyGO</title>
+    <link rel="stylesheet" href="/Public/Home/css/reset.css">
+    <link rel="stylesheet" href="/Public/Home/css/main.css">
+    <link rel="stylesheet" href="/Public/Home/css/ensureOrder.css">
+    <script src="/Public/Home/js/jQuery.js"></script>
+    <script src="/Public/Home/js/fastClick.js"></script>
+    <script src="/Public/Home/js/main.js"></script>
+    <script src="/Public/Home/js/sonic.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script>
+
+        document.oncontextmenu = function(){
+            event.returnValue=false;
+        };//屏蔽鼠标右键
+        document.onkeydown = function(){
+            
+        	if((window.event.altKey)&&
+            ((window.event.keyCode==37)||            //屏蔽Alt+方向键←
+            (window.event.keyCode==39))){            //屏蔽Alt+方向键→
+                event.returnValue=false;
+            }
+            if((event.keyCode==8)||                  //屏蔽退格删除键
+            (event.keyCode==116)||                   //屏蔽F5刷新键
+            (event.ctrlKey && event.keyCode==82)){   //Ctrl+R
+                event.keyCode=0;
+                event.returnValue=false;
+            }
+            
+        };
+        var flag = true;
+		Stripe.setPublishableKey('pk_live_3IJ7djbfk8dPN2EMGJeYD2pj');
+		jQuery(function($) {
+
+            var circle = new Sonic({
+
+                width: 20,
+                height: 20,
+                padding: 5,
+
+                strokeColor: '#ffa334',
+
+                pointDistance: .01,
+                stepsPerFrame: 3,
+                trailLength: .8,
+
+                step: 'fader',
+
+                setup: function() {
+                    this._.lineWidth = 5;
+                },
+
+                path: [
+                    ['arc', 8, 8, 8, 0, 360]
+                ]
+
+            });
+
+            circle.play();
+
+            $(".waiting .loading").append(circle.canvas);
+            
+            $('.submitBtn').on('click', function() {
+                if(!flag) {
+                    return false;
+                }
+                flag = false;
+				$(".waiting").show();
+                $('.submitBtn').hide();
+                $('.errorTxt').text('Loading').show();
+                $("#MainFooter").absoluteFooter();
+                var $form = $('.inputForm');
+                Stripe.card.createToken($form, stripeResponseHandler);
+                return false;
+            });
+        });
+	
+		function stripeResponseHandler(status, response) {
+
+            if (response.error) {
+                // Show the errors on the form
+                $('.errorTxt').text(response.error.message).show();
+                flag = true;
+				$(".waiting").hide();
+                $('.submitBtn').show();
+				return false;
+            } else {
+                // response contains id and card, which contains additional card details
+                var token = response.id;
+                var order_id = $.trim($('#order_id').val());
+                var credit_card_number = $.trim($('#credit_card_number').val());
+                var security_code = $.trim($('#security_code').val());
+                var expiration_time = $.trim($('#month').val())+'/'+$.trim($('#year').val());
+                $.ajax({
+                    url: 'order_pay',
+                    data: {
+                    	order_id: order_id,
+                        token: token,
+                        credit_card_number: credit_card_number,
+                        security_code: security_code,
+                        expiration_time: expiration_time
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(1 === data.code) {
+                        	$('.errorTxt').text('Success!').show();
+			    			$(".waiting").hide();
+                	    	$('.submitBtn').show();
+                            //window.location.href = '{:U("orderSuccess")}';
+                        } else {
+                            $('.errorTxt').text(data.message).show();
+                            $("#MainFooter").absoluteFooter();
+                            flag = true;
+			    			$(".waiting").hide();
+                	    	$('.submitBtn').show();
+                            return false;
+                        }
+                    },
+                    error: function() {
+                        $('.errorTxt').text('Operation Failed Error').show();
+                        $("#MainFooter").absoluteFooter();
+                        flag = true;
+						$(".waiting").hide();
+	                	$('.submitBtn').show();
+                        return false;
+                    }
+                });
+            }
+		};
+	</script>
+</head>
+<body id="page-ensureOrder">
+<include file="Public/header" />
+
+<include file="Public/cart" />
+
+<div id="Main" class="wrapper">
+    <div class="content">
+        <div class="themeName"><i class="ico"></i>Submit Order</div>
+        <div class="themeSpec">
+            <div class="item">
+                <label>Price<if condition="LANG_SET eq 'zh-cn'">：<else />:&nbsp;</if></label>
+                <div class="price">$<span><?php echo $data['discont_total_price']; ?></span></div>
+            </div>
+            <div class="inputForm">
+            <div class="item">
+                    <div class="input">
+                        <input type="hidden" id="order_id" class="onlynum" size="20" value=<?php echo '"' . $data['id'] . '"'; ?> data-stripe="number" maxlength="16">
+                    </div>
+                </div>
+                <div class="item">
+                    <label>Credit Card<if condition="LANG_SET eq 'zh-cn'">：<else />:&nbsp;</if></label>
+                    <div class="input">
+                        <input type="text" id="credit_card_number" class="onlynum" size="20" disabled="disabled" value=<?php echo '"' . $data['credit_card_number'] . '"'; ?> data-stripe="number" maxlength="16">
+                    </div>
+                </div>
+                <div class="item">
+                    <label>Security Code<if condition="LANG_SET eq 'zh-cn'">：<else />:&nbsp;</if></label>
+                    <div class="input">
+                        <input type="text" id="security_code" class="onlynum" size="4" disabled="disabled" value=<?php echo '"' . $data['security_code'] . '"'; ?> data-stripe="cvc" maxlength="3">
+                    </div>
+                </div>
+                <div class="item">
+                    <label>Expiry Date<if condition="LANG_SET eq 'zh-cn'">：<else />:&nbsp;</if></label>
+                    <div class="input date">
+                        <input type="text" id="month" class="onlynum" disabled="disabled" value=<?php echo '"' . substr($data['expiration_time'], 0, 2) . '"'; ?> data-stripe="exp-month" maxlength="2">&nbsp;/
+                        <input type="text" id="year" class="onlynum" disabled="disabled" value=<?php echo '"' . substr($data['expiration_time'], -2) . '"'; ?> data-stripe="exp-year" maxlength="2">
+                    </div>
+                </div>
+                <input type="hidden" value="{$order.address}" data-stripe="address_line1">
+                <input type="hidden" value="{$order.street}" data-stripe="address_line2">
+                <input type="hidden" value="{$order.city}" data-stripe="address_city">
+                <input type="hidden" value="{$order.state}" data-stripe="address_state">
+                <input type="hidden" value="{$order.zip_code}" data-stripe="address_zip">
+                <input type="hidden" value="US" data-stripe="address_country">
+            </div>
+            <span class="errorTxt" style="display: none;">Error type.</span>
+            <span class="submitBtn">{:L('PAY')}</span>
+
+	    <div class="waiting">
+                <div class="loading"></div>
+                <span class="label">{:L("PAYING")}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public/footer" />
+<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+</body>
+</html>

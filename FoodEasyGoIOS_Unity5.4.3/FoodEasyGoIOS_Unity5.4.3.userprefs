@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs">
+    <Files>
+      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelController.cs" Line="123" Column="38" />
+      <File FileName="Assets/__Scripts/AppData/AppDataController.cs" Line="68" Column="56" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs" Line="40" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
