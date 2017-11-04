@@ -89,6 +89,19 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
     }
 
     public void OnPlusButtonClicked () {
+
+        //if (isRestaurant)
+        //{
+        //    if (!RestaurantDetailPanelController.instance.isRestaurantOpen)
+        //    {
+        //        if (string.IsNullOrEmpty(RestaurantPanelController.instance.deliveryTimeID))
+        //        {
+        //            MessagePanelController.instance.DisplayPanel("Restaurant is closed, please choose a delivery time");
+        //            return;
+        //        }
+        //    }
+        //}
+
         if (_quantity <= 0)
         {
             OnPointerClick(null);
@@ -128,9 +141,7 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
             minusButton.gameObject.SetActive (true);
         }
 
-        transform.GetComponent<Image> ().raycastTarget = isRestaurant ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
-        plusButton.GetComponent<Image> ().raycastTarget = isRestaurant ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
-        minusButton.GetComponent<Image> ().raycastTarget = isRestaurant ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
+
 
     }
 }

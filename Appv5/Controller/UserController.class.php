@@ -145,19 +145,33 @@ class UserController extends BaseController {
 	 * Get coupon list
 	 */
 	public function get_coupon_list () {
-	/*FoodEasyGo 3 years, one time only coupon, when user_id = 0, everyone can use it*/
+        // FoodEasyGo 3 years annivesary, 
+        // one time only coupon, when user_id = 0, everyone can use it
 		$couponIDList = M('coupon_sn')
 			->join(" `food_coupon` on `food_coupon_sn`.`coupon_id` = `food_coupon`.`id`")
-			->where("`food_coupon_sn`.`user_id`= $this->userID and `food_coupon`.`endtime` > now()
-					and (`food_coupon_sn`.`status`=0 or `food_coupon_sn`.`status`=1 and `food_coupon_sn`.`reusable`=1)")
+			->where(
+                // normal user's coupons
+                "(`food_coupon_sn`.`user_id`= $this->userID 
+                        and `food_coupon`.`endtime` > now() 
+                        and (`food_coupon_sn`.`status`=0 
+                                or `food_coupon_sn`.`status`=1 and `food_coupon_sn`.`reusable`=1))"
+                // user_id = 999999 and only non-reusable coupons
+                //.
+                //" or " 
+                //.
+                //"(`food_coupon_sn`.`user_id`=999999
+                //        and `food_coupon`.`endtime` > now()
+                //        and `food_coupon_sn`.`status`=0
+                //        and `food_coupon_sn`.`reusable`=0)"
+            )
 			//->field("food_coupon_sn.id, food_coupon.name, food_coupon.type, food_coupon.discont, 
 				//	food_coupon_sn.sn, food_coupon.endtime, food_coupon_sn.reusable")
 			->select();
 		
 		// Find common coupons
-		$commonCouponIDList = M('coupon_sn')
-			->where("`status` = 0 and `user_id` = 0")
-			->select();
+		//$commonCouponIDList = M('coupon_sn')
+		//	->where("`status` = 0 and `user_id` = 0")
+		//	->select();
 		$commonCouponIDList = M('coupon_sn')
 			->join(" `food_coupon` on `food_coupon_sn`.`coupon_id` = `food_coupon`.`id`")
 			->where("`food_coupon_sn`.`user_id`= 0 and `food_coupon`.`endtime` > now()
@@ -165,6 +179,8 @@ class UserController extends BaseController {
 					//->field("food_coupon_sn.id, food_coupon.name, food_coupon.type, food_coupon.discont,
 			//	food_coupon_sn.sn, food_coupon.endtime, food_coupon_sn.reusable")
 			->select();
+        
+        // Find 
 		
 		
 		$res = M('user')

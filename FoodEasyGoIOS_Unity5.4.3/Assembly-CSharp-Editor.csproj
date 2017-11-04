@@ -111,7 +111,7 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FeedEasyGo_App/FoodEasyGo_AppClient/FoodEasyGoIOS_Unity5.4.3/Assets/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Assets/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>

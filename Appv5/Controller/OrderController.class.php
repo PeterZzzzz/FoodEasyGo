@@ -278,7 +278,7 @@ class OrderController extends BaseController {
 		/*FoodEasyGo 3 years, one time only coupon, when user_id = 0, everyone can use it*/
 		
 		$couponSNDetail = M('coupon_sn')
-			->where("`coupon_id` = $couponSNID and (`user_id` = $this->userID || `user_id` = 0)")
+			->where("`coupon_id` = $couponSNID and (`user_id` in ($this->userID, 999999) || `user_id` = 0)")
 			->find();
 		
 		if (!$couponSNDetail) {
