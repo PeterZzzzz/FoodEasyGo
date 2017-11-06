@@ -1018,11 +1018,15 @@ class OrderController extends BaseController {
         $couponSNDetail = OrderController::get_coupon_detail_by_sn($couponSN, $this->userID);
         $couponSN = $couponSNDetail['sn']['sn'];
         
-        $paymentData = M('user_payment')
-				->where("`id` =  $paymentID and `user_id` = $this->userID")
-				->find();
-        if (!$paymentData) {
-            $this->return_error('Invalid payment data');
+        
+        if ($paymentType == 2) {
+            $paymentData = M('user_payment')
+                    ->where("`id` =  $paymentID and `user_id` = $this->userID")
+                    ->find();
+            if (!$paymentData) {
+                $this->return_error('Invalid payment data');
+            }
+        
         }
         
         $orderData = M('order')
