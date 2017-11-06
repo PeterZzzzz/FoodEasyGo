@@ -331,7 +331,7 @@ class BaseController extends Controller {
 	/**
 	 * 用户邮件 
 	 */
-	protected function user_email_set($order, $sendRegionID, $subOrderString) {
+	protected function user_email_set($order, $subOrderList) {
 		//echo 'user_email';
 		//print_r($order);
 		
@@ -341,24 +341,32 @@ class BaseController extends Controller {
 		} else if ($this->language == 'zh-cn') {
 			$lan = 'zh';
 		}
+        
+        foreach ($subOrderList as $subOrderData) {
 		
-		$email_data = [];
-		$email_data['category'] = 1;
-		$email_data['send_to'] = $order['email'];
-		$email_data['send_to_name'] = $order['first_name'] . ' ' . $order['last_name'];
-		$email_data['subject'] = 'FoodEasyGo: order ' . $subOrderString;
-		$email_data['template_name'] = 'orderuser_' . $lan;
-		$email_data['order_id'] = $order['id'];
-		$merchant_region = M('region')->where("`id`=$sendRegionID")->field('`mail_password`,`mail_address`,`mail_sender`')->find();
-		
-		$email_data['send_username'] = $merchant_region['mail_address'];
-		$email_data['send_password'] = think_encrypt($merchant_region['mail_password'], C('FOOD_AUTH_KEY'));
-		$email_data['send_from_name'] = $merchant_region['mail_sender'];
-		$email_data['expect_send_time'] = date('Y-m-d H:i:s');
-		$email_data['language'] = 'zh-cn';
-		$email_data['addtime'] = date('Y-m-d H:i:s');
-		$email_data['sort'] = 2;
-		M('email')->add($email_data);
+            $email_data = [];
+            $email_data['category'] = 1;
+            $email_data['send_to'] = $order['email'];
+            $email_data['send_to_name'] = $order['first_name'] . ' ' . $order['last_name'];
+            $email_data['subject'] = 'FoodEasyGo: order ' . $subOrderData['order_number'];
+            $email_data['template_name'] = 'orderuser_' . $lan;
+            $email_data['order_id'] = $order['id'];
+            $email_data['sub_order_id'] = $subOrderData['id'];
+            $merchant_region = M('region')
+                ->where("`id`=" . $subOrderData['dregion_id'])
+                ->field('`mail_password`,`mail_address`,`mail_sender`')
+                ->find();
+
+            $email_data['send_username'] = $merchant_region['mail_address'];
+            $email_data['send_password'] = think_encrypt($merchant_region['mail_password'], C('FOOD_AUTH_KEY'));
+            $email_data['send_from_name'] = $merchant_region['mail_sender'];
+            $email_data['expect_send_time'] = date('Y-m-d H:i:s');
+            $email_data['language'] = 'zh-cn';
+            $email_data['addtime'] = date('Y-m-d H:i:s');
+            $email_data['sort'] = 2;
+            M('email')->add($email_data);
+            
+        }
 	
 		return;
 	}
@@ -381,9 +389,13 @@ class BaseController extends Controller {
 		
 		//echo '\nend\n';
 		
-		$sub_orders = M('order_sub')->where('`order_id`='.$order['id'])->field('`id`,`category`,`order_number`, `dregion_id`')->select();
+		$sub_orders = M('order_sub')
+            ->where('`order_id`='.$order['id'])
+            ->field('`id`,`category`,`order_number`, `dregion_id`')
+            ->select();
 		int_to_string($sub_orders, array('category'=>array(1=>'【Right-now Delivery】', 2=>'【Pre-order】', 3=>'【Supermarket】', 4=>'【Group purchase】')));
-		foreach ($sub_orders as $sub_order) {
+		
+        foreach ($sub_orders as $sub_order) {
 			//echo 'order:';
 
 			$email_info = M('region')->where("`id`=" . $sub_order['dregion_id'])->field('`mail_password`,`mail_address`,`mail_sender`')->find();
@@ -419,29 +431,71 @@ class BaseController extends Controller {
 			$lan = $this->language;
 		}
 	
-		$sub_orders = M('order_sub')->where('`order_id`='.$order['id'])->field('`id`,`category`,`order_number`,`deliver_time_value`')->select();
+		$sub_orders = M('order_sub')
+            ->where('`order_id`='.$order['id'])
+            ->field('`id`,`category`,`order_number`,`deliver_time_value`')
+            ->select();
+        
 		foreach ($sub_orders as $sub_order) {
 			$deliver_times = explode('-', $sub_order['deliver_time_value']);
 			$reserve_set = Ext("CONFIG","","reserve");
-			$restaurants = M('order_goods')->where('`sub_order_id`='.$sub_order['id'])->group('`restaurant_id`')->field('`restaurant_id`')->select();
+			$restaurants = M('order_goods')
+                ->where('`sub_order_id`='.$sub_order['id'])
+                ->group('`restaurant_id`')
+                ->field('`restaurant_id`')
+                ->select();
 				
 			foreach ($restaurants as $restaurant) {
-				$restaurant_info = M('restaurant')->where('`id`='.$restaurant['restaurant_id'])->field('`email`,`name_en`,`reciver_type`, `region_id`')->find();
+				$restaurant_info = M('restaurant')
+                    ->where('`id`='.$restaurant['restaurant_id'])
+                    ->field('`email`,`name_en`,`reciver_type`,
+                    `deliver_type`,`reciver_language`, `region_id`')
+                    ->find();
+                
+                $deliverType = $restaurant_info['deliver_type'];
+                $receiverType = $restaurant_info['reciver_type'];
+                $receiverLanguage = $restaurant_info['reciver_language'];
+                
+                $templateName = 'ordermerchant_';
+                
+                if ($receiverType == 1) {
+                    $templateName = $templateName . 'email_';
+                } else {
+                    $templateName = $templateName . 'fax_';
+                }
+                
+                if ($deliverType == 1) {
+                    $templateName = $templateName . 'foodeasygo_deliver_';
+                } else {
+                    $templateName = $templateName . 'restaurant_deliver_';
+                }
+                
+                if ($receiverLanguage == 1) {
+                    $templateName = $templateName . 'ch';
+                } else {
+                    $templateName = $templateName . 'en';
+                }
+                
+                
 				$email_data = array();
 				$email_data['category'] = 3;
 				if(2 == $restaurant_info['reciver_type']) {
 					$email_data['send_to'] = $restaurant_info['email'].'/cp=off@metrofax.com';
-					$email_data['template_name'] = 'ordermerchant_fax';
 				} else {
 					$email_data['send_to'] = $restaurant_info['email'];
-					$email_data['template_name'] = 'ordermerchant_email';
 				}
+                
+				$email_data['template_name'] = $templateName;
+                
 				$email_data['send_to_name'] = $restaurant_info['name_en'];
 				$email_data['subject'] = 'FoodEasyGo: Order '.$sub_order['order_number'].' is waiting for deliver';
 				$email_data['sub_order_id'] = $sub_order['id'];
 				$email_data['restaurant_id'] = $restaurant['restaurant_id'];
 				
-				$merchant_region = M('region')->where("`id`=" . $restaurant_info['region_id'])->field('`mail_password`,`mail_address`,`mail_sender`')->find();
+				$merchant_region = M('region')
+                    ->where("`id`=" . $restaurant_info['region_id'])
+                    ->field('`mail_password`,`mail_address`,`mail_sender`')
+                    ->find();
 				
 				$email_data['send_username'] = $merchant_region['mail_address'];
 				$email_data['send_password'] = think_encrypt($merchant_region['mail_password'], C('FOOD_AUTH_KEY'));
@@ -456,7 +510,8 @@ class BaseController extends Controller {
 				$email_data['sort'] = 2;
 				//print_r($email_data);
 				//echo 'haha';
-				M('email')->add($email_data);
+				M('email')
+                    ->add($email_data);
 				unset($restaurant);
 			}
 			unset($sub_order);

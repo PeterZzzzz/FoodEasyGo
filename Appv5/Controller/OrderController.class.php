@@ -1091,6 +1091,15 @@ class OrderController extends BaseController {
                         ->save(['status' => 1]);
                 }
             }
+            
+            $order = M('order')
+                ->where("`id` = $orderID")
+                ->find();
+            
+			$this->user_email_set($order, $subOrderList);
+			//$this->user_email_set($order, $order['region_id']);
+			$this->platform_email_set($order);
+			$this->merchant_email_set($order);
         }
         
 		$this->return_data([], 'Success');
