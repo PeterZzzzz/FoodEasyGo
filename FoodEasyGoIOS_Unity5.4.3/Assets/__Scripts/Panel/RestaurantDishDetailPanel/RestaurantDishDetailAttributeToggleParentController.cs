@@ -16,14 +16,25 @@ public class RestaurantDishDetailAttributeToggleParentController : LDFWToggleCon
         int totalAmount = 0;
         for (int i = 0; i < toggleElementParent.childCount; i++)
         {
-            totalAmount += toggleElementParent.GetChild(i).GetComponent<RestaurantDishDetailAttributeToggleElementController>().quantity;
+            if (toggleElementParent.GetChild(i).GetComponent<RestaurantDishDetailAttributeToggleElementController>().isToggleOn)
+                totalAmount += toggleElementParent.GetChild(i).GetComponent<RestaurantDishDetailAttributeToggleElementController>().quantity;
 
         }
 
-        if (totalAmount >= leastAmount && totalAmount <= mostAmount)
-            return true;
-        else
+        DebugLogger.Log("amount: " + totalAmount + ", " + leastAmount + ", " + mostAmount);
+        if (leastAmount >= 0 && totalAmount < leastAmount)
             return false;
+        if (mostAmount >= 0 && totalAmount > mostAmount)
+            return false;
+
+        return true;
+
+    }
+
+    public void DisplayInvalidMessageError() {
+        MessagePanelController.instance.DisplayPanel("Quantity limit exceeded: " 
+            + transform.Find("Title").GetComponent<TextController>().text
+            + "[" + leastAmount + ", " + mostAmount + "]");
     }
 
 }

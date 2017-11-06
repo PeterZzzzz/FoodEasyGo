@@ -40,8 +40,17 @@ public class RestaurantDishDetailPanelSelectQuantityController : MonoBehaviour {
         RestaurantDishDetailAttributeToggleParentController toggleParentController = 
             attributeToggleElementController.toggleController as RestaurantDishDetailAttributeToggleParentController;
 
+        //int currentQuantity = attributeToggleElementController.quantity;
         attributeToggleElementController.quantity = selectedQuantity;
         attributeToggleElementController.UpdateUI();
+
+        //if (false && !toggleParentController.CheckForAmountValidity())
+        //{
+        //    attributeToggleElementController.quantity = currentQuantity;
+        //    attributeToggleElementController.UpdateUI();
+        //    toggleParentController.DisplayInvalidMessageError();
+        //}
+            
 
         //if (toggleParentController.CheckForAmountValidity())
         //{

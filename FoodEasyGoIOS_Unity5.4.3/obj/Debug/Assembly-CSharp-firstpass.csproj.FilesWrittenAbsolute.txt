@@ -24,3 +24,16 @@
 /Users/ealton/Work/Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/ealton/Work/Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/ealton/Work/Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/UnityEngine.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/UnityEditor.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Mono.Cecil.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Unity.DataContract.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Temp/bin/Debug/Mono.Cecil.Mdb.dll

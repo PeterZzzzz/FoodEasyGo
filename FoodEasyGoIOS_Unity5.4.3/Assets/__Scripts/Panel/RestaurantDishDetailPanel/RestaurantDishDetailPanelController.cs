@@ -351,6 +351,11 @@ public class RestaurantDishDetailPanelController : BasePanelController
 			LDFWToggleController toggleController = content.GetChild(i).GetComponent<LDFWToggleController>();
 			if (toggleController != null)
 			{
+                if (!(toggleController as RestaurantDishDetailAttributeToggleParentController).CheckForAmountValidity())
+                {
+                    (toggleController as RestaurantDishDetailAttributeToggleParentController).DisplayInvalidMessageError();
+                    return;
+                }
 				string[] selectedList = toggleController.GetSelectedElements().Split(',');
 				foreach (string index in selectedList)
 				{

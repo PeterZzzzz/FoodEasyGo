@@ -33,9 +33,10 @@ public class HomeSlideController : BaseUIController
         image.sizeDelta = new Vector2(MainCanvasController.instance.canvasSize.x, GetComponent<LayoutElement>().preferredHeight);
         image.gameObject.AddComponent<Button>().onClick.AddListener(() =>
             {
-                Debug.Log ("Open url: " + externalURL);
-                if (!string.IsNullOrEmpty(externalURL))
+                DebugLogger.Log ("Open url: " + externalURL);
+                if (!string.IsNullOrEmpty(externalURL)) {
                     Application.OpenURL(externalURL);
+                }
             });
     }
 
