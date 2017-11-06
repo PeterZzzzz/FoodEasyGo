@@ -1059,6 +1059,13 @@ class OrderController extends BaseController {
             ->where("`id` = $orderID")
             ->find();
         
+        // update order_sub table
+        if ($paymentType == 1) {
+            M('order_sub')
+                ->where("`order_id` = $orderID")
+                ->save(['status' => 2]);
+        }
+        
         // Save sub order data
         $subOrderList = M('order_sub')
             ->where("`order_id` = $orderID")
