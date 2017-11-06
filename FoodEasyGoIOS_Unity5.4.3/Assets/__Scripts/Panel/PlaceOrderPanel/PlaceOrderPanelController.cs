@@ -417,34 +417,41 @@ public class PlaceOrderPanelController : BasePanelController
 
         if (!string.IsNullOrEmpty(couponString))
         {
-            if (couponList.ContainsKey(couponString))
-            {
-                JSONObject coupon = couponList[couponString];
+            WWWForm form = new WWWForm();
+            form.AddField("coupon_sn", couponString);
+            LoadingPanelController.instance.DisplayPanel();
+            OrderNetworkController.instance.GetCouponData(form, 
+                new LDFWServerResponseEvent((JSONObject coupon, string m) =>
+                    {
+                        LoadingPanelController.instance.HidePanel();
+                        if (float.Parse(coupon.GetField("discont").str) != 0f)
+                        {
+                            float discount = float.Parse(coupon.GetField("discont").str);
+                            feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ -" +
+                            (float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) * (10f - discount) * 0.1f).ToString("0.00");
 
-                if (float.Parse(coupon.GetField("discont").str) != 0f)
-                {
-                    float discount = float.Parse(coupon.GetField("discont").str);
-                    feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ -" +
-                    (float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) * (10f - discount) * 0.1f).ToString("0.00");
+                            isUsingFreeDelivery = false;
+                        }
+                        else
+                        {
+                            feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ 0.00";
+                            feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ 0.00";
+                            isUsingFreeDelivery = true;
+                        }
 
-                    isUsingFreeDelivery = false;
-                }
-                else
-                {
-                    feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ 0.00";
-                    feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ 0.00";
-                    isUsingFreeDelivery = true;
-                }
+                        CalcualteTotalPrice();
+                        couponInputField.interactable = false;
+                        selectedCouponID = coupon.GetField("id").str;
 
-                CalcualteTotalPrice();
-                couponInputField.interactable = false;
-                selectedCouponID = coupon.GetField("id").str;
-            }
-            else
-            {
-                MessagePanelController.instance.DisplayPanel("Invalid coupon");
-                couponInputField.text = "";
-            }
+                    }),
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        couponInputField.text = "";
+                        MessagePanelController.instance.DisplayPanel(m);
+                        LoadingPanelController.instance.HidePanel();
+                    }));
+
+             
         }
     }
 
@@ -628,7 +635,7 @@ public class PlaceOrderPanelController : BasePanelController
             form.AddField("pay_type", "2");
         }
         form.AddField("tip", feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text.Substring(1));
-        form.AddField("coupon_id", selectedCouponID);
+        form.AddField("coupon_sn", couponSection.Find("Input").GetComponent<InputField>().text);
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
 

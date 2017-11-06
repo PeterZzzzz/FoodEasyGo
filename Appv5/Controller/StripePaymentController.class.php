@@ -61,7 +61,12 @@ class StripePaymentController extends BaseController {
 		$expiration_time = $this->get_param('post.expiration_time');
 		
 	
-		$order = M('order')->where("`id` = $orderID")->find();
+        OrderController::CheckCouponStatus($orderID);
+		$order = M('order')
+            ->where("`id` = $orderID")
+            ->find();
+        
+        
 	
 		if(IS_POST) {
 			$re_data = array();
@@ -70,7 +75,14 @@ class StripePaymentController extends BaseController {
 				$this->return_error('Missing order id');
 			}
 			
-			M('order')->where("`id` = $orderID")->save(array('credit_card_number'=>$credit_card_number, 'security_code'=>$security_code, 'expiration_time'=>$expiration_time));
+			M('order')
+                ->where("`id` = $orderID")
+                ->save([
+                    'credit_card_number'=>$credit_card_number, 
+                    'security_code'=>$security_code, 
+                    'expiration_time'=>$expiration_time]);
+            
+            
 			if($token) {
 	
 				require_once(VENDOR_PATH . 'stripe/init.php');
@@ -88,14 +100,46 @@ class StripePaymentController extends BaseController {
 						
 						$this->targetRegionID = $order['dregion_id'];
 						
-						M('order')->where("`id` = $orderID")->save(array('is_payment'=>1, 'status'=>2, 'credit_card_number'=>$order['id']));
-						M('order_sub')->where("`order_id` = $orderID")->save(array('status'=>2));
+                        // Update order data
+						M('order')
+                            ->where("`id` = $orderID")
+                            ->save([
+                                'is_payment'=>1, 'status'=>2, 
+                                'credit_card_number'=>$order['id']]);
                         
-						$sub_orders = M('order_sub')->where("`order_id` = $orderID")->field('`id`, `dregion_id`')->select();
+                        // Update order sub data
+						M('order_sub')
+                            ->where("`order_id` = $orderID")
+                            ->save(['status'=>2]);
+                        
+                        // Update coupon data
+                        $couponSN = $order['coupon_sn'];
+                        if ($couponSN == 'First Order') {
+                            M('user')
+                                ->where("`id` = " . $order['user_id'])
+                                ->save(['has_made_first_order' => 1]);
+                        } else {
+                            $couponSNDetail = M('coupon_sn')
+                                ->where("`sn` = '$couponSN'")
+                                ->find();
+                            if ($couponSNDetail['reusable'] == 0) {
+                                M('coupon_sn')
+                                    ->where("`sn` = '$couponSN'")
+                                    ->save(['status' => 1]);
+                            }
+                        }
+                        
+                        // Send emails
+						$sub_orders = M('order_sub')
+                            ->where("`order_id` = $orderID")
+                            ->field('`id`, `dregion_id`')
+                            ->select();
                         $sub_order_numbers = "";
 						if(array_filter($sub_orders)) {
 							foreach ($sub_orders as $sub_order) {
-								M('order_goods')->where('`sub_order_id`='.$sub_order['id'])->save(array('status'=>2));
+								M('order_goods')
+                                    ->where('`sub_order_id`='.$sub_order['id'])
+                                    ->save(['status'=>2]);
                                 if ($sub_order_numbers == "") {
                                     $sub_order_numbers = $sub_order['order_number'];
                                 } else {

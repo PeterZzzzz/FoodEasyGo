@@ -84,4 +84,13 @@ public class OrderNetworkController : ServerCallController {
         }
         submitCommentCall = CommonWWWCall (orderControllerURL + "submit_restaurant_driver_grade", form, success, failure);
     }
+
+    // Get coupon status
+    LDFWWWWCallCoroutineWrapper getCouponStatusCall = null;
+    public void GetCouponData (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
+        if (getCouponStatusCall != null) {
+            getCouponStatusCall.Dispose ();
+        }
+        getCouponStatusCall = CommonWWWCall (orderControllerURL + "get_coupon_data", form, success, failure);
+    }
 }

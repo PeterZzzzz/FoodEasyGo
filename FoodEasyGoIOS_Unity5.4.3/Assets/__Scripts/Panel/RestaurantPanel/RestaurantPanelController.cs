@@ -126,7 +126,7 @@ public class RestaurantPanelController : BasePanelController {
 
             DebugLogger.Log ("hour, minute: " + hour + ", " + minute);
             DebugLogger.Log ("current = " + currentTime.ToString ());
-            DebugLogger.Log ("comparent = " + currentTime.CompareTo (new TimeSpan (hour - 2, minute, 0)));
+            DebugLogger.Log ("comparent = " + currentTime.CompareTo (new TimeSpan (hour - 2, minute - 30, 0)));
             if (currentTime.CompareTo (new TimeSpan (hour - 2, minute, 0)) > 0) {
                 //DebugLogger.Log ("less than 2 hours");
                 deliveryTimeController.DisableInteraction ();

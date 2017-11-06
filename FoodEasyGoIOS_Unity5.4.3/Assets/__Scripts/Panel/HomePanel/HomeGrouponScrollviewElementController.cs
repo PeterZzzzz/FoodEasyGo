@@ -29,8 +29,8 @@ public class HomeGrouponScrollviewElementController : MonoBehaviour, IPointerCli
 
         
         transform.Find ("Title").GetComponent<TextController> ().ResetUI (title_zh.Replace ("/n", "\n"), title_en.Replace ("/n", "\n"));
-        /*
+
         transform.Find ("Text").GetComponent<TextController> ().ResetUI (text_zh.Replace ("/n", "\n"), text_en.Replace ("/n", "\n"));
-        */
+
     }
 }

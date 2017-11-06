@@ -34,8 +34,10 @@ public class HomeGrouponScrollviewController : BaseUIController, LanguageInterfa
 
                 currentGroupon.GetComponent<HomeGrouponScrollviewElementController> ().ResetUI (
                     data[i].GetField ("id").str, data[i].GetField ("groupon_name").str, data[i].GetField ("groupon_name_en").str,
-                    "预定时间: " + data[i].GetField ("begin_time").str + "-" + data[i].GetField ("end_time").str + "/n" + "配送时间: " + data[i].GetField ("send_time").str,
-                    "Reserve: " + data[i].GetField ("begin_time").str + "-" + data[i].GetField ("end_time").str + "/n" + "Delivery: " + data[i].GetField ("send_time").str,
+                    data[i].GetField ("describe").str,
+                    data[i].GetField ("describe_en").str,
+                    //"预定时间: " + data[i].GetField ("begin_time").str + "-" + data[i].GetField ("end_time").str + "/n" + "配送时间: " + data[i].GetField ("send_time").str,
+                    //"Reserve: " + data[i].GetField ("begin_time").str + "-" + data[i].GetField ("end_time").str + "/n" + "Delivery: " + data[i].GetField ("send_time").str,
                     data[i].GetField ("img").str.Replace ("\\/", "/"));
 
             }
