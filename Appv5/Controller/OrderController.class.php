@@ -1014,17 +1014,30 @@ class OrderController extends BaseController {
 		$tip = $this->get_param('post.tip');
         $couponSN = $this->get_param('post.coupon_sn');
         
+        $creditCardFirstName = $this->get_param('post.credit_card_first_name');
+		$creditCardLastName = $this->get_param('post.credit_card_last_name');
+		$creditCardNumber = $this->get_param('post.credit_card_number');
+		$creditCardMonth = $this->get_param('post.credit_card_month');
+		$creditCardYear = $this->get_param('post.credit_card_year');
+		$creditCardSecurityCode = $this->get_param('post.credit_card_security_code');
+		
+        
         
         $couponSNDetail = OrderController::get_coupon_detail_by_sn($couponSN, $this->userID);
         $couponSN = $couponSNDetail['sn']['sn'];
         
         
-        if ($paymentType == 2) {
+        $paymentData = [];
+        if ($paymentType == 2 && $paymentID != '') {
             $paymentData = M('user_payment')
                     ->where("`id` =  $paymentID and `user_id` = $this->userID")
                     ->find();
             if (!$paymentData) {
-                $this->return_error('Invalid payment data');
+                $paymentData['billing_first_name'] = $creditCardFirstName;
+				$paymentData['billing_last_name'] = $creditCardLastName;
+				$paymentData['credit_card_number'] = $creditCardNumber;
+				$paymentData['expiration_time'] = $creditCardMonth . '/' . $creditCardYear;
+				$paymentData['security_code'] = $creditCardSecurityCode;
             }
         
         }

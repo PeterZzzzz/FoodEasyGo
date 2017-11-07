@@ -34,9 +34,7 @@ public class HomeSlideController : BaseUIController
         image.gameObject.AddComponent<Button>().onClick.AddListener(() =>
             {
                 DebugLogger.Log ("Open url: " + externalURL);
-                if (!string.IsNullOrEmpty(externalURL)) {
-                    Application.OpenURL(externalURL);
-                }
+                Application.OpenURL(externalURL);
             });
     }
 

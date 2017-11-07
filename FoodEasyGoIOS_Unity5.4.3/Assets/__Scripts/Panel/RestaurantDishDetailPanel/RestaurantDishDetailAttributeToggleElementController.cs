@@ -63,8 +63,9 @@ public class RestaurantDishDetailAttributeToggleElementController : LDFWToggleEl
             quantityString + _textEN + (price == 0f ? "" : " ($" + price + ")"));
     }
 
+    /*
     public override void OnPointerClick(PointerEventData eventData)
     {
         toggleController.SelectToggle(transform.GetSiblingIndex());
-    }
+    }*/
 }
