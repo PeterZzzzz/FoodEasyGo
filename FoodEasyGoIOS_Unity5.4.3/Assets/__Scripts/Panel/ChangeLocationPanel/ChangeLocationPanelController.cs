@@ -11,6 +11,7 @@ public class ChangeLocationPanelController : BasePanelController
     public static ChangeLocationPanelController instance;
     public InputFieldController manualZipCodeInputField;
     public Button manualZipCodeSubmitButton;
+    public Text noteText;
     
 
     public Dictionary<string, JSONObject> regionDic;
@@ -38,6 +39,15 @@ public class ChangeLocationPanelController : BasePanelController
     public override void ResetPanel ()
     {
         manualZipCodeInputField.text = "";
+
+        if (Config.currentLanguage == Language.chinese)
+        {
+            noteText.text = "请输入当前所在地区邮编.";
+        }
+        else if (Config.currentLanguage == Language.english)
+        {
+            noteText.text = "Please enter the region\nyou are in right now.";
+        }
     }
 
     public override void ReloadPanel ()

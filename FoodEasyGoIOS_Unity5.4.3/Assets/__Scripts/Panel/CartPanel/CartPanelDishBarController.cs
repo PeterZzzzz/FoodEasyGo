@@ -9,7 +9,7 @@ using LDFW.Tween;
 using LDFW.Network;
 
 
-public class CartPanelDishBarController : MonoBehaviour, IPointerClickHandler {
+public class CartPanelDishBarController : MonoBehaviour {
 
     public Transform                generalParent;
     public ScrollRect               scrollRect;
@@ -117,7 +117,7 @@ public class CartPanelDishBarController : MonoBehaviour, IPointerClickHandler {
         CartPanelController.instance.UpdatePayButtonStatus ();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnImageClicked()
     {
         RestaurantDishDetailPanelController.instance.OpenPanel(cartDetailData);
         PanelListController.instance.removePanelAction = () =>

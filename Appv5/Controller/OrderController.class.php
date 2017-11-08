@@ -1026,12 +1026,14 @@ class OrderController extends BaseController {
         $couponSNDetail = OrderController::get_coupon_detail_by_sn($couponSN, $this->userID);
         $couponSN = $couponSNDetail['sn']['sn'];
         
-        
         $paymentData = [];
-        if ($paymentType == 2 && $paymentID != '') {
-            $paymentData = M('user_payment')
+        if ($paymentType == 2) {
+            if ($paymentID != '') {
+                $paymentData = M('user_payment')
                     ->where("`id` =  $paymentID and `user_id` = $this->userID")
                     ->find();
+            }
+            
             if (!$paymentData) {
                 $paymentData['billing_first_name'] = $creditCardFirstName;
 				$paymentData['billing_last_name'] = $creditCardLastName;
@@ -1045,6 +1047,10 @@ class OrderController extends BaseController {
         $orderData = M('order')
             ->where("`id` = $orderID")
             ->find();
+        $totalPrice = $orderData['goods_total_price'] * 1.07 + $orderData['deliver_price']
+			+ $orderData['extra_price'] + $tempDeliveryFee + $tip;
+        $discountTotalPrice = $orderData['discont_goods_price'] * 1.07 + $orderData['deliver_price']
+			+ $orderData['extra_price'] + $tempDeliveryFee + $tip;
         
         // Save order data
         $updatedOrderData = [
@@ -1053,11 +1059,16 @@ class OrderController extends BaseController {
 			'credit_card_number'                 => $paymentData['credit_card_number'],
 			'expiration_time'                    => $paymentData['expiration_time'],
 			'security_code'                      => $paymentData['security_code'],
+            
+            'payment'                            => $paymentType,
+            
             'coupon_sn'                          => $couponSN,
+            
             'tip_price'                          => $tip,
-            'total_price'                        => $orderData['total_price'] + $tip,
-            'discont_total_price'                => $orderData['discont_total_price'] + $tip,
+            'total_price'                        => $totalPrice,
+            'discont_total_price'                => $discountTotalPrice,
             ];
+        
         if ($paymentType == 1) {
             $updatedOrderData['is_payment'] = 1;
             $updatedOrderData['status'] = 2;
@@ -1071,15 +1082,26 @@ class OrderController extends BaseController {
         $orderData = M('order')
             ->where("`id` = $orderID")
             ->find();
+        $subOrderList = M('order_sub')
+            ->where("`order_id` = $orderID")
+            ->select();
+        $userData = M('user')
+            ->where("`id` = $this->userID")
+            ->find();
         
-        // update order_sub table
+        OrderController::CheckForCoupon($orderData, $subOrderList, $userData);
+        
+        
+        
+
+        
+        
+        // Save sub order data
         if ($paymentType == 1) {
             M('order_sub')
                 ->where("`order_id` = $orderID")
                 ->save(['status' => 2]);
         }
-        
-        // Save sub order data
         $subOrderList = M('order_sub')
             ->where("`order_id` = $orderID")
             ->select();

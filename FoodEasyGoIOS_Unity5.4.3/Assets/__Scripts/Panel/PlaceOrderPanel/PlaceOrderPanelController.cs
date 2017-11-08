@@ -124,6 +124,14 @@ public class PlaceOrderPanelController : BasePanelController
             addressSection.Find("AddressBar/Address").GetComponent<TextController>().ResetUI("");
         }
 
+
+        creditCardSection.Find("FirstNameSection/Input").GetComponent<InputField>().text = "";
+        creditCardSection.Find("LastNameSection/Input").GetComponent<InputField>().text = "";
+        creditCardSection.Find("CardSection/Input").GetComponent<InputField>().text = "";
+        creditCardSection.Find("MonthSection/Input").GetComponent<InputField>().text = "";
+        creditCardSection.Find("YearSection/Input").GetComponent<InputField>().text = "";
+        creditCardSection.Find("SecurityCodeSection/Input").GetComponent<InputField>().text = "";
+
         //couponSection.FindChild ("Text").GetComponent<Text> ().text = Config.currentLanguage == Language.chinese ? "点击添加优惠券" : "Click to add a coupon";
     }
 

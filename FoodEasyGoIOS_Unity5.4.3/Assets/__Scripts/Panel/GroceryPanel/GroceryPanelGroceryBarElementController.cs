@@ -72,12 +72,12 @@ public class GroceryPanelGroceryBarElementController : MonoBehaviour {
             title1.ResetUI (_nameZH1, _nameEN1);
             price1.ResetUI ("$" + _price1);
             Destroy (image1.texture);
-            LDFWImageDownloadController.instance.AddToCacheList (new ImageDownloader2 (_imageURL1.Replace ("\\/", "/"), "grocery", image1, 1, null, null));
+            LDFWImageDownloadController.instance.AddToCacheList (new ImageDownloader2 (_imageURL1.Replace ("\\/", "/"), "grocery", image1, 2, null, null));
 
             title2.ResetUI (_nameZH2, _nameEN2);
             price2.ResetUI ("$" + _price2);
             Destroy (image1.texture);
-            LDFWImageDownloadController.instance.AddToCacheList (new ImageDownloader2 (_imageURL2.Replace ("\\/", "/"), "grocery", image2, 1, null, null));
+            LDFWImageDownloadController.instance.AddToCacheList (new ImageDownloader2 (_imageURL2.Replace ("\\/", "/"), "grocery", image2, 2, null, null));
         }
         
         (image1.transform as RectTransform).sizeDelta = Vector2.one * ((transform as RectTransform).rect.size.x - 30) * 0.5f;
