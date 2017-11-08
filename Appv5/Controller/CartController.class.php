@@ -34,7 +34,7 @@ class CartController extends BaseController {
 		
 		// Get cartDetails
 		$this->cartDetails = M('cart_detail')
-			->where("`cart_id` = $this->cartID and `region_id` = $this->targetRegionID")
+			->where("`cart_id` = $this->cartID")
 			->select();
 		$this->cartDetails = $this->null_to_empty_array($this->cartDetails);
 		
@@ -196,7 +196,6 @@ class CartController extends BaseController {
 		}
 		
 		$data = ['cart_id' => $this->cartID];
-		$data['region_id'] = $this->targetRegionID;
 		$data['category'] = $this->get_param('post.category');
 		$data['deliver_time'] = $this->get_param('post.deliver_time');
 		$data['restaurant_id'] = $this->get_param('post.restaurant_id');

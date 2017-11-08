@@ -167,7 +167,7 @@ class RestaurantController extends BaseController {
 			if ($this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime)) {
 				$restaurant['is_open'] = "1";
 			} else {
-				$restaurant['is_open'] = "1";
+				$restaurant['is_open'] = "0";
 			}
 		}
 		
