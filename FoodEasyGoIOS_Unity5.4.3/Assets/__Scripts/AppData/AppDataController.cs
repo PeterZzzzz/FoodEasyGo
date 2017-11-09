@@ -65,7 +65,7 @@ public class AppDataController : MonoBehaviour {
     private void GetDeliveryDestineTime () {
         InfoNetworkController.instance.GetFoodReserveConfig (
             new LDFWServerResponseEvent ((JSONObject data, string m) => {
-                Debug.LogError("Deliver destine time： " + data.ToString());
+//                Debug.LogError("Deliver destine time： " + data.ToString());
                 deliveryDestineTime.Clear ();
                 for (int i=0; data[i] != null; i++) {
                     deliveryDestineTime.Add (data[i].GetField ("id").str, data[i].GetField ("destine_time").str);
