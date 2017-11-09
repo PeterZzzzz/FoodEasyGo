@@ -36,7 +36,7 @@ class OrderController extends BaseController {
 		// Get restaurant list	[0=>[restaurant_id], 1=>[restaurant_id], ...]
 		$restaurantList = M('cart_detail')
 			->where("`cart_id` = $cartID")
-			->field("distinct `restaurant_id`, `region_id`")
+			->field("distinct `restaurant_id`")
 			->select();
 		
 		$totalGoodsPrice = 0;
@@ -123,14 +123,14 @@ class OrderController extends BaseController {
 		$categoryList = ['1', '2', '3', '4'];
 		foreach ($categoryList as &$category) {
 		
-			// Get restaurant and category combinations
+			// Get distinct restaurant list
 			$restaurantList = M('cart_detail')
-				->where("`cart_id` = $cartID and `region_id` = $this->targetRegionID and `category` = $category and `number` > 0" . $cartDetailIDString )
-				->field("distinct `restaurant_id`, region_id")
+				->where("`cart_id` = $cartID and `category` = $category and `number` > 0" . $cartDetailIDString )
+				->field("distinct `restaurant_id`")
 				->select();
 			
-			
 			$cart['cat' . $category]['restaurant'] = $restaurantList;
+            
 			// If restaurantList is empty, then cart is empty, continue next iteration
 			if (!$restaurantList) {
 				$cart['cat' . $category]['restaurant'] = null;
@@ -139,8 +139,6 @@ class OrderController extends BaseController {
 			
 			$cart['cat' . $category]['total_goods_price'] = 0;
 			$cart['cat' . $category]['total_delivery_fee'] = 0;
-            
-            // Add driver_deliver_fee
             $cart['cat' . $category]['total_driver_delivery_fee'] = 0;
 			$cart['cat' . $category]['total_extra_fee'] = 0;
 			
@@ -166,7 +164,7 @@ class OrderController extends BaseController {
 				
 				// Get cart detail list 
 				$cartDetailList = M('cart_detail')
-					->where("`cart_id` = $cartID and `region_id` = $this->targetRegionID and `restaurant_id` = " . $resCatCombine['restaurant_id'] . 
+					->where("`cart_id` = $cartID and `restaurant_id` = " . $resCatCombine['restaurant_id'] . 
 						" and `category` = " . $category . $cartDetailListIDString)
 					->select();
 				
@@ -495,7 +493,7 @@ class OrderController extends BaseController {
 		$orderID = M('order')->add($orderData);
         
 		if (!$orderID) {
-			$this->server_unavailable_error();
+            $this->return_error('Unable to add order');
 		}
 		
 		// Generate suborder data for categories 1, 2, 3
@@ -570,7 +568,7 @@ class OrderController extends BaseController {
 				
 				$subOrderID = M('order_sub')->add($subOrderData);
 				if (!$subOrderID) {
-					$this->server_unavailable_error();
+                    $this->return_error('Cannot add sub order');
 				} else {
 					//echo 'success: ' . $subOrderID . ' ... ';
 				}
@@ -672,8 +670,7 @@ class OrderController extends BaseController {
 						M('order_sub')->where("`id` = $subOrderID")->delete();
 						M('order')->where("`id` = $orderID")->delete();
 							
-						
-						$this->server_unavailable_error();
+						$this->return_error('Cannot add order goods data');
 					}
 					
 				}
@@ -791,7 +788,6 @@ class OrderController extends BaseController {
      * 
      */
     public static function CheckCouponStatus($orderID) {
-        
         // Get orderData
         $orderData = M('order')
             ->where("`id` = $orderID")

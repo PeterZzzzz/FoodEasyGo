@@ -125,6 +125,7 @@ public class PlaceOrderPanelController : BasePanelController
         }
 
 
+        paymentCreditCardSection.Find("CardText").GetComponent<TextController>().ResetUI("");
         creditCardSection.Find("FirstNameSection/Input").GetComponent<InputField>().text = "";
         creditCardSection.Find("LastNameSection/Input").GetComponent<InputField>().text = "";
         creditCardSection.Find("CardSection/Input").GetComponent<InputField>().text = "";
