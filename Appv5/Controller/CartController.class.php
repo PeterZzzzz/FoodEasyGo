@@ -115,9 +115,12 @@ class CartController extends BaseController {
 					$attributeData = M('restaurant_dish_attr_detail')
 						->where("`id` = " . $attrList[$counter])
 						->find();
-					$attributeData['quantity'] = $attrAmountList[$counter];
+                    
+                    if ($attributeData) {
+					   $attributeData['quantity'] = $attrAmountList[$counter];
 					
-					array_push($cartDetail['attribute_data'], $attributeData);
+					   array_push($cartDetail['attribute_data'], $attributeData);
+                    }
 				}
 				
 			} else {
