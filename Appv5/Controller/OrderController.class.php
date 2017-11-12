@@ -953,7 +953,8 @@ class OrderController extends BaseController {
                 ->save($updatedOrderData);
             
             return true;
-        } else if ($couponDetail['type'] == 2) {
+        } 
+        else if ($couponDetail['type'] == 2) {
             // free delivery
             foreach ($subOrderList as &$subOrderData) {
                 $updatedSubOrderData = [
@@ -990,7 +991,8 @@ class OrderController extends BaseController {
                 ->save($updatedOrderData);
             
             return true;
-        } else {
+        } 
+        else {
         
             M('order')
                 ->where("`id` = " . $orderData['id'])
@@ -1106,11 +1108,25 @@ class OrderController extends BaseController {
             $updatedSubOrderData = [
                 'tip_price' => $subOrderData['goods_total_price'] / $goodsTotalPrice * $tip
                 ];
+            
+            
+            $updatedSubOrderData['total_price'] = 
+                $subOrderData['goods_total_price']
+                + $subOrderData['deliver_price']
+                + $subOrderData['extra_price']
+                + $subOrderData['sales_price']
+                + $updatedSubOrderData['tip_price'];
+            $updatedSubOrderData['discont_total_price'] = 
+                $updatedSubOrderData['total_price'];
+            
+            
+            
+            /*
             $updatedSubOrderData['total_price'] = 
                 $subOrderData['total_price'] + $updatedSubOrderData['tip_price'];
             $updatedSubOrderData['discont_total_price'] = 
                 $subOrderData['discont_total_price'] + $updatedSubOrderData['tip_price'];
-            
+            */
             //print_r($updatedSubOrderData);
             $result = M('order_sub')
                 ->where("`id` = " . $subOrderData['id'])
