@@ -50,7 +50,7 @@ public class HomePanelController : BasePanelController
     protected override void AutoScreenAdjustment ()
     {
         // slide show
-        slideShowLayoutElement.preferredHeight = 107f / 375f * panelSizeDelta.x;
+        slideShowLayoutElement.preferredHeight = 127f / 375f * panelSizeDelta.x;
 
         // restaurant section
         float imageWidth = (panelSizeDelta.x - 40) * 0.333f;

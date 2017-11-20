@@ -1,13 +1,11 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{A10F507C-EE82-5085-CFD3-FA7C2C6798AD}") = "FoodEasyGoIOS_Unity5.4.3", "Assembly-CSharp-firstpass.csproj", "{14484EDB-1618-7930-AAE6-9A3C831416E4}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEasyGoIOS_Unity5.4.3", "FoodEasyGoIOS_Unity5.4.3.csproj", "{48C89060-36AE-A674-4F30-645CC4A947A0}"
 EndProject
-Project("{A10F507C-EE82-5085-CFD3-FA7C2C6798AD}") = "FoodEasyGoIOS_Unity5.4.3", "Assembly-CSharp.csproj", "{5D90B754-EA0A-DD6B-E67B-5523954AB5D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEasyGoIOS_Unity5.4.3.Plugins", "FoodEasyGoIOS_Unity5.4.3.Plugins.csproj", "{01568FC6-4741-7FA8-47CD-2FB1A9575146}"
 EndProject
-Project("{A10F507C-EE82-5085-CFD3-FA7C2C6798AD}") = "FoodEasyGoIOS_Unity5.4.3", "Assembly-CSharp-Editor.csproj", "{B87B028D-3187-2374-29D5-E9B9BA30EE2B}"
-EndProject
-Project("{A10F507C-EE82-5085-CFD3-FA7C2C6798AD}") = "FoodEasyGoIOS_Unity5.4.3", "Assembly-UnityScript.unityproj", "{B4E5ACAA-7F26-A63A-D903-F57A0EB6FFD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEasyGoIOS_Unity5.4.3.Editor", "FoodEasyGoIOS_Unity5.4.3.Editor.csproj", "{F41EA079-C660-A3C6-FF1C-32A23F8FBE86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,27 +13,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14484EDB-1618-7930-AAE6-9A3C831416E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14484EDB-1618-7930-AAE6-9A3C831416E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14484EDB-1618-7930-AAE6-9A3C831416E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14484EDB-1618-7930-AAE6-9A3C831416E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D90B754-EA0A-DD6B-E67B-5523954AB5D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D90B754-EA0A-DD6B-E67B-5523954AB5D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D90B754-EA0A-DD6B-E67B-5523954AB5D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D90B754-EA0A-DD6B-E67B-5523954AB5D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B87B028D-3187-2374-29D5-E9B9BA30EE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B87B028D-3187-2374-29D5-E9B9BA30EE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B87B028D-3187-2374-29D5-E9B9BA30EE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B87B028D-3187-2374-29D5-E9B9BA30EE2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4E5ACAA-7F26-A63A-D903-F57A0EB6FFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4E5ACAA-7F26-A63A-D903-F57A0EB6FFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4E5ACAA-7F26-A63A-D903-F57A0EB6FFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4E5ACAA-7F26-A63A-D903-F57A0EB6FFD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C89060-36AE-A674-4F30-645CC4A947A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C89060-36AE-A674-4F30-645CC4A947A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C89060-36AE-A674-4F30-645CC4A947A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C89060-36AE-A674-4F30-645CC4A947A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01568FC6-4741-7FA8-47CD-2FB1A9575146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01568FC6-4741-7FA8-47CD-2FB1A9575146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01568FC6-4741-7FA8-47CD-2FB1A9575146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01568FC6-4741-7FA8-47CD-2FB1A9575146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F41EA079-C660-A3C6-FF1C-32A23F8FBE86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F41EA079-C660-A3C6-FF1C-32A23F8FBE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F41EA079-C660-A3C6-FF1C-32A23F8FBE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F41EA079-C660-A3C6-FF1C-32A23F8FBE86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

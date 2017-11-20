@@ -28,7 +28,7 @@ public class HomeGrouponScrollviewController : BaseUIController, LanguageInterfa
             } else {
 
 
-                currentGroupon.GetComponent<LayoutElement> ().preferredHeight = MainCanvasController.instance.canvasSize.x * 0.4f;
+                currentGroupon.GetComponent<LayoutElement> ().preferredHeight = MainCanvasController.instance.canvasSize.x * 0.9f;
 
                 currentGroupon.GetComponent<HomeGrouponScrollviewElementController> ().grouponData = data[i];
 

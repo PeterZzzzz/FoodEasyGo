@@ -1,8 +1,7 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/CartPanel/CartController.cs">
+﻿<Properties StartupConfiguration="{48C89060-36AE-A674-4F30-645CC4A947A0}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Config/Config.cs" Line="48" Column="73" />
+      <File FileName="Assets/__Scripts/Config/Config.cs" Line="28" Column="35" />
       <File FileName="Assets/__Scripts/Panel/PlaceOrderPanel/PlaceOrderPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets/__Scripts/Panel/CartPanel/CartPanelDishBarController.cs" Line="1" Column="1" />
       <File FileName="Assets/__Scripts/Panel/ChangeLocationPanel/ChangeLocationPanelController.cs" Line="1" Column="1" />
@@ -12,10 +11,17 @@
       <File FileName="Assets/__Scripts/AppData/AppDataController.cs" Line="68" Column="3" />
       <File FileName="Assets/__Scripts/Panel/CartPanel/CartPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets/__Scripts/Panel/CartPanel/CartController.cs" Line="37" Column="18" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeGrouponScrollviewController.cs" Line="31" Column="129" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeGroceryScrollviewController.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeSlideController.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs" Line="53" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.FoodEasyGoIOS__Unity5.4.3 PreferredExecutionTarget="Unity.Editor" />
 </Properties>
