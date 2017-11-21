@@ -34,13 +34,13 @@ public class MainCanvasController : MonoBehaviour {
 
         mRectTransform = transform as RectTransform;
 
-        imageDownloadController = LDFWImageDownloadController.instance;
-        userDataController = UserDataController.instance;
-
         transform.localScale = Vector3.one;
     }
 
     IEnumerator Start () {
+        imageDownloadController = LDFWImageDownloadController.instance;
+        userDataController = UserDataController.instance;
+
         yield return null;
 
         if (string.IsNullOrEmpty (userDataController.accessToken)) {
