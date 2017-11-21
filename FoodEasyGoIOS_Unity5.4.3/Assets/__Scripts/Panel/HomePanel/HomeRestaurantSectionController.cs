@@ -58,8 +58,8 @@ public class HomeRestaurantSectionController : BaseUIController, LanguageInterfa
         base.OnLanguageChanged (language);
 
         for (int i = 0; i < transform.childCount; i++) {
-            transform.GetChild (i).FindChild ("Title").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
-            transform.GetChild (i).FindChild ("Text").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
+            transform.GetChild (i).Find ("Title").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
+            transform.GetChild (i).Find ("Text").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
         }
     }
 }

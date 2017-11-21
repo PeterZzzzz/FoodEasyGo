@@ -1,0 +1,437 @@
+<linker>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="PopUpPanelController">
+			<method name="OnCancelButtonClicked"/>
+			<method name="OnConfirmButtonClicked"/>
+			<method name="OnCancelButtonClicked"/>
+			<method name="OnConfirmButtonClicked"/>
+			<method name="OnConfirmButtonClicked"/>
+			<method name="OnCancelButtonClicked"/>
+		</type>
+		<type fullname="PopUpTogglePanelController">
+			<method name="OnConfirmButtonClicked"/>
+			<method name="OnCancelButtonClicked"/>
+			<method name="OnConfirmButtonClicked"/>
+			<method name="OnCancelButtonClicked"/>
+			<method name="OnConfirmButtonClicked"/>
+			<method name="OnCancelButtonClicked"/>
+		</type>
+		<type fullname="BasePanelController">
+			<method name="DisplayPanelImmediately"/>
+			<method name="DisplayPanelImmediately"/>
+			<method name="OpenPanel"/>
+			<method name="DisplayPanelImmediately"/>
+		</type>
+		<type fullname="LoadingCanvasController">
+			<method name="LoadNextScene"/>
+		</type>
+		<type fullname="PasswordResetPanelController">
+			<method name="OpenPanel"/>
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnSubmitButtonClicked"/>
+		</type>
+		<type fullname="LanguageButtonController">
+			<method name="OnLanguageButtonClicked"/>
+		</type>
+		<type fullname="InputFieldController">
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+			<method name="OnEndEdit"/>
+			<method name="OnValueChanged"/>
+		</type>
+		<type fullname="RegistrationPanelController">
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnInputFieldsChanged"/>
+			<method name="OpenPanel"/>
+			<method name="ClosePanel"/>
+			<method name="OnPrivacyPolicyTextClicked"/>
+			<method name="OnTermsTextClicked"/>
+			<method name="OnRegistrationButtonClicked"/>
+			<method name="OpenPanel"/>
+			<method name="OnInputFieldsChanged"/>
+		</type>
+		<type fullname="LoginPanelController">
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnLoginButtonClicked"/>
+		</type>
+		<type fullname="ShareSDKAuthenticationController">
+			<method name="SwitchBindEmailPanel"/>
+			<method name="OnWeChatLoginButtonClicked"/>
+			<method name="OnBindEmailButtonClicked"/>
+			<method name="OnGooglePlusLoginButtonClicked"/>
+			<method name="OnFacebookLoginButtonClicked"/>
+		</type>
+		<type fullname="CartPanelDishBarController">
+			<method name="OnSelectForCheckOutButtonClicked"/>
+			<method name="OnDeselectForCheckOutButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnImageClicked"/>
+			<method name="OnMinusButtonClicked"/>
+		</type>
+		<type fullname="GroceryPanelGroceryBarElementController">
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage1AddButtonClicked"/>
+			<method name="OnImage2AddButtonClicked"/>
+		</type>
+		<type fullname="RestaurantDetailPanelDishBarController">
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+		</type>
+		<type fullname="AddressPanelAddressBarController">
+			<method name="OnSetDefaultButtonClicked"/>
+			<method name="OnModifyButtonClicked"/>
+			<method name="OnDeleteButtonCliced"/>
+			<method name="OnModifyButtonClicked"/>
+			<method name="OnSetDefaultButtonClicked"/>
+			<method name="OnDeleteButtonCliced"/>
+		</type>
+		<type fullname="PaymentPanelPaymentBarController">
+			<method name="OnModifyButtonClicked"/>
+			<method name="OnSetDefaultButtonClicked"/>
+			<method name="OnDeleteButtonCliced"/>
+			<method name="OnSetDefaultButtonClicked"/>
+			<method name="OnModifyButtonClicked"/>
+			<method name="OnDeleteButtonCliced"/>
+		</type>
+		<type fullname="CartPanelRestaurantBarController">
+			<method name="OnDeleteButtonClicked"/>
+			<method name="OnDeleteButtonClicked"/>
+		</type>
+		<type fullname="UserPanelController">
+			<method name="CreditCardButtonClicked"/>
+			<method name="PersonalDataButtonClicked"/>
+			<method name="RecruitButtonClicked"/>
+			<method name="SettingsButtonClicked"/>
+			<method name="SettingsButtonClicked"/>
+			<method name="PersonalDataButtonClicked"/>
+			<method name="MessageButtonClicked"/>
+			<method name="InviteFriendsButtonClicked"/>
+			<method name="BusinessCooperationButtonClicked"/>
+			<method name="CouponButtonClicked"/>
+			<method name="AddressButtonClicked"/>
+			<method name="PersonalDataButtonClicked"/>
+			<method name="OnUserImageClicked"/>
+		</type>
+		<type fullname="SearchPanelSearchResultPanelController">
+			<method name="OnSortTypeButtonClicked"/>
+			<method name="OnCategoryButtonClicked"/>
+			<method name="OnSortTypeButtonClicked"/>
+			<method name="OnCategoryButtonClicked"/>
+			<method name="SwitchCategoryDisplay"/>
+			<method name="OnSortTypeButtonClicked"/>
+			<method name="SwitchSortTypeDisplay"/>
+			<method name="OnCategoryButtonClicked"/>
+			<method name="SwitchSortTypeDisplay"/>
+			<method name="SwitchCategoryDisplay"/>
+			<method name="OnSortTypeButtonClicked"/>
+		</type>
+		<type fullname="SearchPanelController">
+			<method name="SetSearchOptionID"/>
+			<method name="OnClearHistoricalSearchButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="SearchForInput"/>
+			<method name="SwitchSearchOptionSection"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="SetSearchOptionID"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="OnSearchResultButtonClicked"/>
+			<method name="SetSearchOptionID"/>
+		</type>
+		<type fullname="ChangeLocationPanelController">
+			<method name="OnInputFieldsChanged"/>
+			<method name="OnCloseButtonClicked"/>
+			<method name="OnSubmitButtonClicked"/>
+			<method name="OnInputFieldsChanged"/>
+		</type>
+		<type fullname="OrderCommentPanelController">
+			<method name="OnCommodityStarClicked"/>
+			<method name="OnDriverStarClicked"/>
+			<method name="OnCommodityStarClicked"/>
+			<method name="OnCommodityStarClicked"/>
+			<method name="OnDriverStarClicked"/>
+			<method name="OnDriverStarClicked"/>
+			<method name="OnCommodityStarClicked"/>
+			<method name="OnSubmitButtonClicked"/>
+			<method name="OnDriverStarClicked"/>
+		</type>
+		<type fullname="RestaurantDetailPanelController">
+			<method name="SwitchToCommentMode"/>
+			<method name="SwitchToCommentMode"/>
+			<method name="SwitchToDishMode"/>
+			<method name="SwitchToDishMode"/>
+		</type>
+		<type fullname="GrouponDetailPanelController">
+			<method name="DisplayRegionPanel"/>
+			<method name="HideRegionPanel"/>
+		</type>
+		<type fullname="PlaceOrderPanelTipCustomToggleElementController">
+			<method name="OnInputFieldEndEdit"/>
+		</type>
+		<type fullname="PanelListController">
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+			<method name="RemovePanel"/>
+		</type>
+		<type fullname="RestaurantDishDetailPanelController">
+			<method name="OnAddButtonClicked"/>
+		</type>
+		<type fullname="SettingsPanelController">
+			<method name="OnLeaveMessageButtonClicked"/>
+			<method name="OnDeleteCacheButtonClicked"/>
+			<method name="OnRefundPolicyButtonClicked"/>
+			<method name="OnFAQButtonClicked"/>
+			<method name="OnLanguangeButtonClicked"/>
+			<method name="OnAbountUsButtonClicked"/>
+			<method name="SwitchDataSubPanel"/>
+			<method name="OnLogoutButtonClicked"/>
+		</type>
+		<type fullname="HomePanelController">
+			<method name="OnRestaurantMoreButtonClicked"/>
+			<method name="OnGroceryMoreButtonClicked"/>
+			<method name="OnRestaurantMoreButtonClicked"/>
+			<method name="OnGroceryMoreButtonClicked"/>
+			<method name="OnGrouponMoreButtonClicked"/>
+			<method name="OnGrouponMoreButtonClicked"/>
+			<method name="OnSearchEndEdit"/>
+			<method name="OpenChangeLocationPanel"/>
+		</type>
+		<type fullname="RestaurantDishDetailPanelSelectQuantityController">
+			<method name="OnPlusButtonClicked"/>
+			<method name="OnMinusButtonClicked"/>
+			<method name="OnCancelButtonClicked"/>
+			<method name="OnConfirmButtonClicked"/>
+		</type>
+		<type fullname="PlaceOrderPanelController">
+			<method name="SwitchUniwebviewPanel"/>
+			<method name="StopCheckForCompletetionCoroutine"/>
+			<method name="ConfirmOrder"/>
+			<method name="OnRestaurantButtonClicked"/>
+			<method name="On20TipButtonClicked"/>
+			<method name="On18TipButtonClicked"/>
+			<method name="ClearCartPanel"/>
+			<method name="ValidateCoupon"/>
+			<method name="OpenCreditCardPopUpToggle"/>
+			<method name="On15TipButtonClicked"/>
+		</type>
+		<type fullname="InvitationPanelController">
+			<method name="OnMyInvitationsButtonClicked"/>
+			<method name="OnInviteButtonClicked"/>
+		</type>
+		<type fullname="GroceryPanelController">
+			<method name="SwitchCategoryDisplay"/>
+			<method name="SwitchCategoryDisplay"/>
+			<method name="CloseTipBar"/>
+		</type>
+		<type fullname="AddressPanelController">
+			<method name="OnAddAddressButtonClicked"/>
+			<method name="OnCloseButtonClicked"/>
+			<method name="OnSaveModifyAddressButtonClicked"/>
+		</type>
+		<type fullname="SearchPanelSearchBarController">
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+			<method name="OpenDetails"/>
+		</type>
+		<type fullname="PersonalDataPanelController">
+			<method name="OnMaleButtonClicked"/>
+			<method name="OnSexButtonClicked"/>
+			<method name="OnUnspecifiedButtonClicked"/>
+			<method name="SwitchSexPanel"/>
+			<method name="OnSaveButtonClicked"/>
+			<method name="OnChangePasswordButtonClicked"/>
+			<method name="OnFemaleButtonClicked"/>
+		</type>
+		<type fullname="PaymentPanelController">
+			<method name="OnSaveModifyPaymentButtonClicked"/>
+			<method name="OnAddPaymentButtonClicked"/>
+			<method name="OnCloseButtonClicked"/>
+		</type>
+		<type fullname="ChangePasswordPanel">
+			<method name="OnSaveButtonClicked"/>
+			<method name="CheckForInputs"/>
+			<method name="CheckForInputs"/>
+			<method name="CheckForInputs"/>
+		</type>
+		<type fullname="LeaveMessagePanelController">
+			<method name="CheckForInputs"/>
+			<method name="CheckForInputs"/>
+			<method name="CheckForInputs"/>
+			<method name="CheckForInputs"/>
+			<method name="OnSubmitButtonClicked"/>
+			<method name="CheckForInputs"/>
+		</type>
+		<type fullname="RestaurantPanelController">
+			<method name="SwitchReserveDisplay"/>
+			<method name="SwitchCategoryDisplay"/>
+			<method name="OnSearchButtonClicked"/>
+			<method name="SwitchCategoryDisplay"/>
+			<method name="SetReserveStatus"/>
+			<method name="OnSearchButtonClicked"/>
+		</type>
+		<type fullname="LDFW.UI.LDFWToggleController">
+			<method name="SelectToggle"/>
+		</type>
+		<type fullname="NotificationPanelController">
+			<method name="DeleteAllNotifications"/>
+		</type>
+		<type fullname="CartPanelController">
+			<method name="SwitchDeliveryContent"/>
+			<method name="OpenAddressPopUpToggle"/>
+			<method name="OnCheckOutButtonClicked"/>
+			<method name="SwitchDeliveryContent"/>
+			<method name="OpenAddressPanel"/>
+		</type>
+		<type fullname="RestaurantPanelSearchDisplayController">
+			<method name="SelectSearchType"/>
+			<method name="SelectSearchType"/>
+			<method name="SelectSearchType"/>
+			<method name="SelectSearchType"/>
+			<method name="SelectSearchType"/>
+		</type>
+		<type fullname="FooterPanelController">
+			<method name="OnMineButtonClicked"/>
+			<method name="OnCartButtonClicked"/>
+			<method name="OnHomeButtonClicked"/>
+			<method name="OnOrdersButtonClicked"/>
+		</type>
+		<type fullname="OrderPanelOrderBarController">
+			<method name="OnShareButtonClicked"/>
+			<method name="OnCommentButtonClicked"/>
+		</type>
+	</assembly>
+</linker>

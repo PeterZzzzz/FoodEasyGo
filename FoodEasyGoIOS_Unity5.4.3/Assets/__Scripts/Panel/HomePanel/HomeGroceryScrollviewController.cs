@@ -53,8 +53,8 @@ public class HomeGroceryScrollviewController : BaseUIController, LanguageInterfa
         base.OnLanguageChanged (language);
 
         for (int i = 0; i < content.childCount; i++) {
-            content.GetChild (i).FindChild ("Title").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
-            content.GetChild (i).FindChild ("Text").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
+            content.GetChild (i).Find ("Title").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
+            content.GetChild (i).Find ("Text").GetComponent<LanguageInterface> ().OnLanguageChanged (language);
         }
     }
 }
