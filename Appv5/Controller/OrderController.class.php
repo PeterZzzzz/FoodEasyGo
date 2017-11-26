@@ -827,8 +827,9 @@ class OrderController extends BaseController {
         }
         
         if ($userData['has_made_first_order'] == "0") {
+            
 			$highestDeliverySubOrder  = null;
-			$highestDeliveryFee = -1;
+			$highestDeliveryFee = 0;
             $totalDeliverPrice = 0;
             
 			foreach ($subOrderList as &$subOrderData) {
@@ -836,17 +837,24 @@ class OrderController extends BaseController {
                     $highestDeliveryFee = $subOrderData['deliver_price'];
                     $highestDeliverySubOrder = $subOrderData;
 				}
+                $totalDeliverPrice += $subOrderData['deliver_price'];
                 
-                $currentDeliverPrice = M('restaurant_deliver_fee')
-                    ->where("`restaurant_id` = " . $subOrderData['dregion_id'] .
-                             " and `region_id` = " . $subOrderData['region_id'])
-                    ->find();
                 
-                if (!$currentDeliverPrice) {
-                    $totalDeliverPrice += $currentDeliverPrice['deliver_fee'];
-                }
+                //$currentDeliverPrice = M('restaurant_deliver_fee')
+                //    ->where("`restaurant_id` = " . $subOrderData['dregion_id'] .
+                //             " and `region_id` = " . $subOrderData['region_id'])
+                //    ->find();
+                //
+                //if (!$currentDeliverPrice) {
+                //    echo "couldn't find deliver price";
+                //}
+                //else {   
+                //    $totalDeliverPrice += $currentDeliverPrice['deliver_fee'];
+                //    print_r($currentDeliverPrice);
+                //}
 			}
 			
+            //echo 'highest deliver = ' . $highestDeliveryFee;
             // Update order data
 			$updatedOrderData = [
                 'coupon_sn'                     => 'First Order',
@@ -854,7 +862,7 @@ class OrderController extends BaseController {
                 'discont_total_price'           => $orderData['total_price'] - $highestDeliveryFee,
                 'deliver_price'                 => $totalDeliverPrice - $highestDeliveryFee,
                 ];
-            $updatedOrderData['sales_price'] = $updatedOrderData['discont_total_price'] * 0.07;
+            $updatedOrderData['sales_price'] = $updatedOrderData['discont_goods_price'] * 0.07;
             M('order')
                 ->where("`id` = " . $orderData['id'])
                 ->save($updatedOrderData);
@@ -865,7 +873,7 @@ class OrderController extends BaseController {
                 'discont_total_price'           => $highestDeliverySubOrder['total_price'] - $highestDeliveryFee,
                 'deliver_price'                 => 0,
                 ];
-            $updatedSubOrderData['sales_price'] = $updatedSubOrderData['discont_total_price'] * 0.07;
+            $updatedSubOrderData['sales_price'] = $updatedSubOrderData['discont_goods_price'] * 0.07;
             M('order_sub')
                 ->where("`id` = " . $highestDeliverySubOrder['id'])
                 ->save($updatedSubOrderData);
