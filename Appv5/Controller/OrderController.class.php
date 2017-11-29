@@ -273,7 +273,7 @@ class OrderController extends BaseController {
 		$orderList = M('order')
 			->where("`user_id` = $this->userID and `status` = 2")
 			->order('`create_time` desc')
-			->limit(50)
+			->limit(1)
 			->select();
 		
 		
@@ -295,7 +295,13 @@ class OrderController extends BaseController {
 					->field('distinct restaurant_id')
 					->select();
 				$subOrderCopy = $subOrder;
-				
+                
+                $subOrderCopy['deliver_status'] = 
+                    M('order_deliver')
+                        ->where("`sub_order_id` = " . $subOrderCopy['id'])
+                        ->find();
+
+
 				foreach ($restaurantList as &$restaurant) {
 					
 					$orderGoodsList = M('order_goods')
@@ -306,7 +312,7 @@ class OrderController extends BaseController {
 					foreach ($orderGoodsList as &$orderGoods) {
 						$orderGoods['restaurant'] = M('restaurant')
 							->where('id = ' . $orderGoods['restaurant_id'])
-							->field(['id', 'name', 'name_en', 'img'])
+							->field(['id', 'name', 'name_en', 'img', 'deliver_type'])
 							->find();
 					}
 					

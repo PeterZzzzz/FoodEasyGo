@@ -53,7 +53,29 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
         if (orderStatus == "1") {
             statusText.ResetUI ("未完成", "Incomplete");
         } else if (orderStatus == "2") {
-            statusText.ResetUI ("已完成", "Complete");
+            string zh = "已完成\n";
+            string en = "Complete\n";
+
+            string deliverType = goods[0].GetField("restaurant").GetField("deliver_type").str;
+            if (deliverType == "2") {
+                zh += "由餐馆配送";
+                en += "Deliver by Restaurant";
+            } else {
+                JSONObject orderDeliver = subOrderData.GetField("deliver_status");
+                if (orderDeliver.IsNull || "0,1,2,".Contains(orderDeliver.GetField("deliver_status").str)) {
+                    zh += "等待配送";
+                    en += "Waiting for Delivery";
+                } else if (orderDeliver.GetField("deliver_status").str == "3") {
+                    zh += "配送中";
+                    en += "Delivery in Progress";
+                } else if (orderDeliver.GetField("deliver_status").str == "4")
+                {
+                    zh += "配送成功";
+                    en += "Delivery Completed";
+                }
+            }
+            
+            statusText.ResetUI (zh, en);
         } else {
             statusText.ResetUI ("已取消", "Cancelled");
         }

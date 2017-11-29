@@ -16,6 +16,7 @@ public class OrderDetailPanelController : BasePanelController {
     // Order List
     public ScrollRect                                 defaultScrollRect;
     public TextController restaurant;
+    public TextController deliverStatus;
     public Transform dishBar;
     public Transform coupon;
     public Transform fees;
@@ -81,6 +82,55 @@ public class OrderDetailPanelController : BasePanelController {
     public void ResetData () {
         restaurant.ResetUI (_subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name").str, 
             _subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name_en").str);
+
+        string orderStatus = _subOrderData["status"].str;
+        if (orderStatus == "1")
+        {
+            deliverStatus.ResetUI("未完成", "Incomplete");
+        }
+        else if (orderStatus == "2")
+        {
+            string zh = "已完成";
+            string en = "Complete";
+
+            JSONObject goods = _subOrderData.GetField("goods");
+
+            string deliverType = goods[0].GetField("restaurant").GetField("deliver_type").str;
+            if (deliverType == "2")
+            {
+                zh = "由餐馆配送";
+                en = "Deliver by Restaurant";
+            }
+            else
+            {
+                JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
+                if (orderDeliver.IsNull || "0,1,2,".Contains(orderDeliver.GetField("deliver_status").str))
+                {
+                    zh = "等待配送";
+                    en = "Waiting for Delivery";
+                }
+                else if (orderDeliver.GetField("deliver_status").str == "3")
+                {
+                    zh = "配送中";
+                    en = "Delivery in Progress";
+                }
+                else if (orderDeliver.GetField("deliver_status").str == "4")
+                {
+                    zh = "配送成功";
+                    en = "Delivery Completed";
+                }
+            }
+
+            deliverStatus.ResetUI(zh, en);
+        }
+        else
+        {
+            deliverStatus.ResetUI("已取消", "Cancelled");
+        }
+
+
+
+
 
         for (int i=0; _subOrderData.GetField ("goods")[i] != null; i++) {
             JSONObject goodsData = _subOrderData.GetField ("goods")[i];
