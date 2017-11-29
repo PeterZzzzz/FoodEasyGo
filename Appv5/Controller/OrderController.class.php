@@ -295,12 +295,25 @@ class OrderController extends BaseController {
 					->field('distinct restaurant_id')
 					->select();
 				$subOrderCopy = $subOrder;
+                $subOrderCopy['create_time'] = date("F j, Y, g:i a", $subOrderCopy['create_time']);
                 
                 $subOrderCopy['deliver_status'] = 
                     M('order_deliver')
                         ->where("`sub_order_id` = " . $subOrderCopy['id'])
                         ->find();
-
+                if ($subOrderCopy['deliver_status']) {
+                    $subOrderCopy['deliver_status']['driver_assigned_time'] = 
+                        date("F j, Y, g:i a", $subOrderCopy['deliver_status']['driver_assigned_time']);
+                    
+                    $subOrderCopy['deliver_status']['driver_confirmed_time'] = 
+                        date("F j, Y, g:i a", $subOrderCopy['deliver_status']['driver_confirmed_time']);
+                    
+                    $subOrderCopy['deliver_status']['deliver_start_time'] = 
+                        date("F j, Y, g:i a", $subOrderCopy['deliver_status']['deliver_start_time']);
+                    
+                    $subOrderCopy['deliver_status']['deliver_complete_time'] = 
+                        date("F j, Y, g:i a", $subOrderCopy['deliver_status']['deliver_complete_time']);
+                }
 
 				foreach ($restaurantList as &$restaurant) {
 					

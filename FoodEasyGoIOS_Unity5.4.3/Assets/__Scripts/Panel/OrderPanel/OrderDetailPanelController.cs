@@ -104,20 +104,39 @@ public class OrderDetailPanelController : BasePanelController {
             else
             {
                 JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
-                if (orderDeliver.IsNull || "0,1,2,".Contains(orderDeliver.GetField("deliver_status").str))
+                if (orderDeliver.IsNull) {
+                    string time = _subOrderData.GetField("create_time").str;
+                    zh = "餐馆已接 (" + time + ")";
+                    en = "Restaurant Accepted (" + time + ")";
+                } 
+                else if (orderDeliver.GetField("deliver_status").str == "0")
                 {
-                    zh = "等待配送";
-                    en = "Waiting for Delivery";
+                    string time = _subOrderData.GetField("deliver_status").GetField("restaurant_accept_time").str;
+                    zh = "餐馆已接 (" + time + ")";
+                    en = "Restaurant Accepted (" + time + ")";
+                }
+                else if (orderDeliver.GetField("deliver_status").str == "1") {
+                    string time = _subOrderData.GetField("deliver_status").GetField("driver_assigned_time").str;
+                    zh = "司机已指派 (" + time + ")";
+                    en = "Driver Assigned (" + time + ")";
+                }
+                else if (orderDeliver.GetField("deliver_status").str == "1")
+                {
+                    string time = _subOrderData.GetField("deliver_status").GetField("driver_confirmed_time").str;
+                    zh = "司机赶往餐馆 (" + time + ")";
+                    en = "Driver on Route (" + time + ")";
                 }
                 else if (orderDeliver.GetField("deliver_status").str == "3")
                 {
-                    zh = "配送中";
-                    en = "Delivery in Progress";
+                    string time = _subOrderData.GetField("deliver_status").GetField("deliver_start_time").str;
+                    zh = "配送中 (" + time + ")";
+                    en = "Delivery in Progress (" + time + ")";
                 }
                 else if (orderDeliver.GetField("deliver_status").str == "4")
                 {
-                    zh = "配送成功";
-                    en = "Delivery Completed";
+                    string time = _subOrderData.GetField("deliver_status").GetField("deliver_complete_time").str;
+                    zh = "配送成功 (" + time + ")";
+                    en = "Delivery Completed (" + time + ")";
                 }
             }
 
