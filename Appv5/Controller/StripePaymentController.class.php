@@ -132,7 +132,6 @@ class StripePaymentController extends BaseController {
                         // Send emails
 						$sub_orders = M('order_sub')
                             ->where("`order_id` = $orderID")
-                            ->field('`id`, `dregion_id`')
                             ->select();
                         $sub_order_numbers = "";
 						if(array_filter($sub_orders)) {
@@ -150,7 +149,7 @@ class StripePaymentController extends BaseController {
                         
                         
                         
-						$this->user_email_set($order, $sub_orders[0]['dregion_id'], $sub_order_numbers);
+						$this->user_email_set($order, $sub_orders);
 						$this->platform_email_set($order);
 						$this->merchant_email_set($order);
 						
