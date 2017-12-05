@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48C89060-36AE-A674-4F30-645CC4A947A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>iOS:9</UnityBuildTarget>
+    <UnityVersion>2017.2.0f3</UnityVersion>
+    <RootNamespace></RootNamespace>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_2_0;UNITY_2017_2;UNITY_2017;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;ENABLE_RUNTIME_GI;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_NETWORK;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_IOS_NATIVE_CRASH_REPORTING;PLAYERCONNECTION_LISTENS_FIXED_PORT;DEBUGGER_LISTENS_FIXED_PORT;PLATFORM_SUPPORTS_ADS_ID;SUPPORT_ENVIRONMENT_VARIABLES;PLATFORM_SUPPORTS_PROFILER;PLATFORM_HAS_NO_SUPPORT_FOR_BUCKET_ALLOCATOR;STRICTCPP_NEW_DELETE_SIGNATURES;HAS_NEON_SKINNIG;UNITY_GFX_USE_PLATFORM_VSYNC;UNITY_INPUT_SIMULATE_EVENTS;PLATFORM_ALWAYS_USES_STDOUT_FOR_LOG;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;PLATFORM_IOS;UNITY_IOS;PLATFORM_IPHONE;UNITY_IPHONE;UNITY_IPHONE_API;SUPPORT_MULTIPLE_DISPLAYS;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;ENABLE_IOS_ON_DEMAND_RESOURCES;ENABLE_IOS_APP_SLICING;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_2_0;UNITY_2017_2;UNITY_2017;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;ENABLE_RUNTIME_GI;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_NETWORK;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_IOS_NATIVE_CRASH_REPORTING;PLAYERCONNECTION_LISTENS_FIXED_PORT;DEBUGGER_LISTENS_FIXED_PORT;PLATFORM_SUPPORTS_ADS_ID;SUPPORT_ENVIRONMENT_VARIABLES;PLATFORM_SUPPORTS_PROFILER;PLATFORM_HAS_NO_SUPPORT_FOR_BUCKET_ALLOCATOR;STRICTCPP_NEW_DELETE_SIGNATURES;HAS_NEON_SKINNIG;UNITY_GFX_USE_PLATFORM_VSYNC;UNITY_INPUT_SIMULATE_EVENTS;PLATFORM_ALWAYS_USES_STDOUT_FOR_LOG;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;PLATFORM_IOS;UNITY_IOS;PLATFORM_IPHONE;UNITY_IPHONE;UNITY_IPHONE_API;SUPPORT_MULTIPLE_DISPLAYS;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;ENABLE_IOS_ON_DEMAND_RESOURCES;ENABLE_IOS_APP_SLICING;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/System.XML.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/Boo.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityScript.Lang">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/UnityScript.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WebModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.WebModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ARModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StyleSheetsModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.StyleSheetsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticlesLegacyModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ParticlesLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Timeline">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIAutomation">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GoogleAudioSpatializer">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking">
+      <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>/Users/ealton/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>/Users/ealton/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>/Applications/Unity201723/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>/Applications/Unity201723/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="FoodEasyGoIOS_Unity5.4.3.Plugins.csproj">
+      <Project>{01568FC6-4741-7FA8-47CD-2FB1A9575146}</Project>
+      <Name>FoodEasyGoIOS_Unity5.4.3.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\__Scripts\AppData\AppDataController.cs" />
+    <Compile Include="Assets\__Scripts\Base\BasePanelController.cs" />
+    <Compile Include="Assets\__Scripts\Base\BaseRawImageController.cs" />
+    <Compile Include="Assets\__Scripts\Base\BaseUIController.cs" />
+    <Compile Include="Assets\__Scripts\Base\CommonFunctions.cs" />
+    <Compile Include="Assets\__Scripts\Base\LanguageInterface.cs" />
+    <Compile Include="Assets\__Scripts\Cache\RestaurantCacheController.cs" />
+    <Compile Include="Assets\__Scripts\Config\Config.cs" />
+    <Compile Include="Assets\__Scripts\Config\ErrorMessageConfig.cs" />
+    <Compile Include="Assets\__Scripts\Config\Extensions.cs" />
+    <Compile Include="Assets\__Scripts\Firebase\GoogleLogIn.cs" />
+    <Compile Include="Assets\__Scripts\HelperCanvasController.cs" />
+    <Compile Include="Assets\__Scripts\MainCanvasController.cs" />
+    <Compile Include="Assets\__Scripts\Network\AccountAccessNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\CartNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\GroceryNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\GrouponNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\ImageDownload.cs" />
+    <Compile Include="Assets\__Scripts\Network\InfoNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\NotificationNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\OrderNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\RestaurantNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\ServerCallController.cs" />
+    <Compile Include="Assets\__Scripts\Network\ThirdPartyNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Network\UserDataNetworkController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\CartPanel\CartController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\CartPanel\CartPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\CartPanel\CartPanelDishBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\CartPanel\CartPanelHeader2ToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\CartPanel\CartPanelRestaurantBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelToggleElement.cs" />
+    <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelToggleParent.cs" />
+    <Compile Include="Assets\__Scripts\Panel\FooterPanel\FooterPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GroceryPanel\GroceryPanelCategoryBarElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GroceryPanel\GroceryPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GroceryPanel\GroceryPanelDefaultDisplayCategoryBarElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GroceryPanel\GroceryPanelDefaultEndlessScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GroceryPanel\GroceryPanelDefaultScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GroceryPanel\GroceryPanelGroceryBarElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GrouponPanel\GrouponDetailPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GrouponPanel\GrouponDetailPanelGrouponDishBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GrouponPanel\GrouponPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\GrouponPanel\GrouponPanelGrouponBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeGroceryScrollviewController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeGroceryScrollviewElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeGrouponScrollviewController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeGrouponScrollviewElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomePanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeRestaurantSectionController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeRestaurantSectionElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeSlideController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\LanguageButtonController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\LoadingCanvasController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\LoadingPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\LoginCanvasController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\LoginPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\MessagePanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\NotificationPanel\NotificationPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\NotificationPanel\NotificationPanelEndlessScrollController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\NotificationPanel\NotificationPanelNotificationBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\NotificationPanel\NotificationPanelScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderCommentPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderDetailPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderPanelOrderBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PasswordResetPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PlaceOrderPanel\PlaceOrderPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PlaceOrderPanel\PlaceOrderPanelPaymentToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PlaceOrderPanel\PlaceOrderPanelTipCustomToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PlaceOrderPanel\PlaceOrderPanelTipToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PlaceOrderPanel\PlaceOrderPanelUniwebview.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PopUpPanel\PopUpPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PopUpTogglePanel\PopUpTogglePanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\PopUpTogglePanel\PopUpTogglePanelToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RegistrationPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelCategoryBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelCategoryBarToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelCategoryScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelCommentEndlessScroll.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelDishBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelDishEndlessScroll.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelMainScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelTitleSectionToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDetailPanel\RestaurantDetailPanelTransparentBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDishDetailPanel\RestaurantDishDetailAttributeToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDishDetailPanel\RestaurantDishDetailAttributeToggleParentController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDishDetailPanel\RestaurantDishDetailNoteInputFieldController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDishDetailPanel\RestaurantDishDetailPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantDishDetailPanel\RestaurantDishDetailPanelSelectQuantityController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelCategoryDisplayScrollviewElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelCategoryToggle.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelCategoryToggleController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelDeliveryMethodToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelDeliveryMethodToggleParentController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelDeliveryTimeController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelDeliveryTimeToggleController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelEndlessScrollview.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelMainScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelRestaurantBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\RestaurantPanel\RestaurantPanelSearchDisplayController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchResultEndlessScrollview.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchResultPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchResultScrollRect.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SharePanel\SharePanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\AboutUsPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\AddressPanelAddressBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\AddressPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\BusinessCooperationPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\ChangePasswordPanel.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\CouponPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\InvitationPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\LeaveMessagePanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\MyInvitationsPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\PaymentPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\PaymentPanelPaymentBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\PersonalDataPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\PersonalDataPanelSexToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\RecruitPanel.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\SettingsPanelController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\UserPanelController.cs" />
+    <Compile Include="Assets\__Scripts\PanelListController.cs" />
+    <Compile Include="Assets\__Scripts\PlayerPrefs\PlayerPrefsController.cs" />
+    <Compile Include="Assets\__Scripts\SceneController.cs" />
+    <Compile Include="Assets\__Scripts\ShareSDK\ShareSDKAuthenticationController.cs" />
+    <Compile Include="Assets\__Scripts\ShareSDK\ShareSDKSetup.cs" />
+    <Compile Include="Assets\__Scripts\Test\Test1.cs" />
+    <Compile Include="Assets\__Scripts\UI\ButtonController.cs" />
+    <Compile Include="Assets\__Scripts\UI\InputFieldController.cs" />
+    <Compile Include="Assets\__Scripts\UI\ScrollRectController.cs" />
+    <Compile Include="Assets\__Scripts\UI\TextController.cs" />
+    <Compile Include="Assets\__Scripts\Userdata\UserDataController.cs" />
+    <Compile Include="Assets\__Scripts\Util\IOManager.cs" />
+    <Compile Include="Assets\iOS_LoadTexture_Sample\Sample for UI Image\ChangeSprite.cs" />
+    <Compile Include="Assets\iOS_LoadTexture_Sample\Sample Scene (Full)\ChangePhoto.cs" />
+    <Compile Include="Assets\iOS_LoadTexture_Sample\Sample Scene (Simple)\ChangeSample.cs" />
+    <Compile Include="Assets\iOS_LoadTexture_Sample\ScreenCapture.cs" />
+    <Compile Include="Assets\LDAppFramework\AndroidHelpers\StatusBar\ApplicationChrome.cs" />
+    <Compile Include="Assets\LDAppFramework\plugins\GoogleMaps\Scripts\GoogleMap.cs" />
+    <Compile Include="Assets\LDAppFramework\plugins\JSON\JSONObject.cs" />
+    <Compile Include="Assets\LDAppFramework\plugins\JSON\JSONTemplates.cs" />
+    <Compile Include="Assets\LDAppFramework\plugins\JSON\VectorTemplates.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\AppObjectBase\LDFWBase2DSceneObject.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\AppObjectBase\LDFWBase3DSceneObject.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\AppObjectBase\LDFWBaseSceneObject.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Common\LDFWCommonConfig.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Common\LDFWCommonFunctionController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Common\LDFWCommonLogController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Config\LDFWTagConfig.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Debug\Debug.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\FileIO\LDFWAppConfigController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\FileIO\PersistentDataControl.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Network\LDFWServerCallController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Network\LDFWWWWForm.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\PlayerPrefs\LDFWPlayerPrefsBaseController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\PlayerPrefs\LDFWPlayerPrefsController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\PlayerPrefs\LDFWPlayerPrefsLoadSceneController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\PlayerPrefs\LDFWPlayerPrefsRootController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\PlayerPrefs\LDFWPlayerPrefsServerController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\PlayerPrefs\LDFWPlayerPrefsSettingsController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tools\FindMissingScripts.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenBase.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenColor.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenPosition.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenRotation.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenScale.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenUIAnchoredPosition.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenUICanvasGroup.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenUV.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenWorldPosition.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Tweener\LDFWTweenWorldRotation.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\InfiniteScrollRectController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\InfiniteScrollRectWrapper.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\LDFWImageDownloadController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\LDFWImageDownloader.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\LDFWRecursiveScrollview.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\LDFWToggleController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\UISection\LDFWToggleElementController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Util\DebugLogger.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Util\LDFWDeviceInfo.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Util\LDFWExtensions.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Util\LDFWGCController.cs" />
+    <Compile Include="Assets\LDAppFramework\Scripts\Util\LDFWSerializableDictionary.cs" />
+    <Compile Include="Assets\Lib\Blur Behind\BlurBehind.cs" />
+    <Compile Include="Assets\Lib\Blur Behind\Example\Assets\BlurBehindExampleUI.cs" />
+    <Compile Include="Assets\Lib\Blur Behind\Example\Assets\FPSMeter.cs" />
+    <Compile Include="Assets\Lib\Blur Behind\Scripts\BlurBehindViewport.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\1.Basic\TopSceneManager.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\2.UseWithCode\UseWithCodeSceneManager.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\3.LocalHTML\LocalHTMLSceneManager.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\4.SizeAndTransition\SizeAndTransitionSceneManager.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\5.CallbackFromWeb\CallbackFromWebSceneManager.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\6.RunJavaScriptInWeb\RunJavaScriptInWebSceneManager.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Demo\Common\Navigator.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Script\Helper\UniWebViewHelper.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Script\UniWebView.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Script\UniWebViewEdgeInsets.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Script\UniWebViewMessage.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Script\UniWebViewOrientation.cs" />
+    <Compile Include="Assets\Lib\UniWebView\Script\UniWebViewTransitionEdge.cs" />
+    <Compile Include="Assets\Notes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\LDAppFramework\Shaders\UITextureMask.shader" />
+    <None Include="Assets\LDAppFramework\plugins\GoogleMaps\README.txt" />
+    <None Include="Assets\LDAppFramework\plugins\JSON\readme.txt" />
+    <None Include="Assets\LDAppFramework\plugins\UI - BUILDER\Source Files\Fonts\OpenSans-Familiy\OpenSansLic.txt" />
+    <None Include="Assets\Lib\Blur Behind\Shaders\Blur.shader" />
+    <None Include="Assets\Lib\Blur Behind\Shaders\UI.shader" />
+    <None Include="Assets\Lib\UniWebView\ChangeLog.txt" />
+    <None Include="Assets\Lib\UniWebView\Readme.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_platform_cell_back.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_oks_strings.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_strings.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_instapaper_strings.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_color_drawables.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
+    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
+    <None Include="Assets\iOS_LoadTexture_Sample\ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+</Project>
