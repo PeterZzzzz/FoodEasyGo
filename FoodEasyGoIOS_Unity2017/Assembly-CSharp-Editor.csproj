@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B87B028D-3187-2374-29D5-E9B9BA30EE2B}</ProjectGuid>
+    <ProjectGuid>{C5411504-D149-340A-79E1-DA899CC2505F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -92,6 +92,9 @@
      <None Include="Assets\Lib\Blur Behind\Shaders\Blur.shader" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_oks_strings.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity2017/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -161,11 +164,8 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity201723/Unity201723.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
- <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
- </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity5.4.3/Assets/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity2017/Assets/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/ealton/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -191,11 +191,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{14484EDB-1618-7930-AAE6-9A3C831416E4}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{FFC9A788-16D5-7708-4FB6-3E3F527D57F3}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{5D90B754-EA0A-DD6B-E67B-5523954AB5D7}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript.csproj">
-      <Project>{B4E5ACAA-7F26-A63A-D903-F57A0EB6FFD7}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
+      <Project>{58D63F43-760A-3BC2-BDA0-1B645A1A9207}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
