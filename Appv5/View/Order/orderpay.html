@@ -3,18 +3,21 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <title>订单付款|FoodEasyGO</title>
-    <link rel="stylesheet" href="/Public/Home/css/reset.css">
-    <link rel="stylesheet" href="/Public/Home/css/main.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+<title>订单付款|FoodEasyGO</title>
+<link rel="stylesheet" href="/Public/Home/css/reset.css">
+<link rel="stylesheet" href="/Public/Home/css/main.css">
+
     <link rel="stylesheet" href="/Public/Home/css/ensureOrder.css">
+
     <script src="/Public/Home/js/jQuery.js"></script>
-    <script src="/Public/Home/js/fastClick.js"></script>
-    <script src="/Public/Home/js/main.js"></script>
+<script src="/Public/Home/js/fastClick.js"></script>
+<script src="/Public/Home/js/main.js"></script>
+
     <script src="/Public/Home/js/sonic.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script>
@@ -29,7 +32,7 @@
             (window.event.keyCode==39))){            //屏蔽Alt+方向键→
                 event.returnValue=false;
             }
-            if((event.keyCode==8)||                  //屏蔽退格删除键
+            if((event.keyCode==8)||                    //屏蔽退格删除键
             (event.keyCode==116)||                   //屏蔽F5刷新键
             (event.ctrlKey && event.keyCode==82)){   //Ctrl+R
                 event.keyCode=0;
@@ -146,7 +149,7 @@
 
 <div id="Main" class="wrapper">
     <div class="content">
-        <div class="themeName"><i class="ico"></i>Submit Order</div>
+        <div class="themeName"><i class="ico"></i>Place Order</div>
         <div class="themeSpec">
             <div class="item">
                 <label>Price<if condition="LANG_SET eq 'zh-cn'">：<else />:&nbsp;</if></label>
@@ -177,11 +180,14 @@
                         <input type="text" id="year" class="onlynum" disabled="disabled" value=<?php echo '"' . substr($data['expiration_time'], -2) . '"'; ?> data-stripe="exp-year" maxlength="2">
                     </div>
                 </div>
-                <input type="hidden" value="{$order.address}" data-stripe="address_line1">
-                <input type="hidden" value="{$order.street}" data-stripe="address_line2">
-                <input type="hidden" value="{$order.city}" data-stripe="address_city">
-                <input type="hidden" value="{$order.state}" data-stripe="address_state">
-                <input type="hidden" value="{$order.zip_code}" data-stripe="address_zip">
+                <!--patch starts pass cardholder's name to stripe server-->
+                <input type="hidden" value=<?php echo '"' . $data['first_name'] . '"'; ?> data-stripe="name">
+                <!--patch ends pass cardholder's name to stripe server-->
+                <input type="hidden" value=<?php echo '"' . $data['address'] . '"'; ?> data-stripe="address_line1">
+                <input type="hidden" value=<?php echo '"' . $data['street'] . '"'; ?> data-stripe="address_line2">
+                <input type="hidden" value=<?php echo '"' . $data['city'] . '"'; ?> data-stripe="address_city">
+                <input type="hidden" value=<?php echo '"' . $data['state'] . '"'; ?> data-stripe="address_state">
+                <input type="hidden" value=<?php echo '"' . $data['zip_code'] . '"'; ?> data-stripe="address_zip">
                 <input type="hidden" value="US" data-stripe="address_country">
             </div>
             <span class="errorTxt" style="display: none;">Error type.</span>
