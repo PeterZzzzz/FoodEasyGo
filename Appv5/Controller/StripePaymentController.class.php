@@ -130,12 +130,12 @@ class StripePaymentController extends BaseController {
                         }
                         
                         // Send emails
-						$sub_orders = M('order_sub')
+						$subOrderList = M('order_sub')
                             ->where("`order_id` = $orderID")
                             ->select();
                         $sub_order_numbers = "";
-						if(array_filter($sub_orders)) {
-							foreach ($sub_orders as $sub_order) {
+						if(array_filter($subOrderList)) {
+							foreach ($subOrderList as $sub_order) {
 								M('order_goods')
                                     ->where('`sub_order_id`='.$sub_order['id'])
                                     ->save(['status'=>2]);
@@ -149,7 +149,7 @@ class StripePaymentController extends BaseController {
                         
                         
                         
-						$this->user_email_set($order, $sub_orders);
+						$this->user_email_set($order, $subOrderList);
 						$this->platform_email_set($order);
 						$this->merchant_email_set($order);
 						
