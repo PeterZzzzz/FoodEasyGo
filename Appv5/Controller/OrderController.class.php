@@ -46,14 +46,20 @@ class OrderController extends BaseController {
 		for ($i=0; $restaurantList[$i] != null; $i++) {
 			// Get delivery fee
 			//$restaurantList[$i]['deliver_fee'] = $this->targetRegionInfo['fee'];
-			$restaurantList[$i]['deliver_fee'] = $this->get_restaurant_deliver_fee($restaurantList[$i]['restaurant_id'], $this->deliveryAddressRegionID);
+			$restaurantList[$i]['deliver_fee'] = 
+                $this->get_restaurant_deliver_fee($restaurantList[$i]['restaurant_id'], 
+                                                  $this->deliveryAddressRegionID);
             
             // Adding driver_deliver_fee
-            $restaurantList[$i]['driver_deliver_fee'] = $this->get_restaurant_driver_deliver_fee($restaurantList[$i]['restaurant_id'], $this->deliveryAddressRegionID);
+            $restaurantList[$i]['driver_deliver_fee'] = 
+                $this->get_restaurant_driver_deliver_fee($restaurantList[$i]['restaurant_id'], 
+                                                         $this->deliveryAddressRegionID);
             
 			$totalDeliveryPrice += $restaurantList[$i]['deliver_fee'];
 			// Get extra fee
-			$restaurantDetail =  M('restaurant')->where('`id`=' . $restaurantList[$i]['restaurant_id'])->find();
+			$restaurantDetail =  M('restaurant')
+                ->where('`id`=' . $restaurantList[$i]['restaurant_id'])
+                ->find();
 			$restaurantList[$i]['extra_fee'] = $restaurantDetail['extra_fee'];
 			$totalExtraPrice += $restaurantList[$i]['extra_fee'];
 			
@@ -732,7 +738,7 @@ class OrderController extends BaseController {
             ->find();
         
         $this->return_data($couponDetail);
-            
+        
     }
     
     
@@ -840,10 +846,10 @@ class OrderController extends BaseController {
      * ********************************************************
      */
     private static function CheckForFirstOrder($orderData, $subOrderList, $userData) {
-
         if (!$orderData || !$subOrderList || !$userData) {
             return false;
         }
+        
         
         if ($userData['has_made_first_order'] == "0") {
             
@@ -857,20 +863,6 @@ class OrderController extends BaseController {
                     $highestDeliverySubOrder = $subOrderData;
 				}
                 $totalDeliverPrice += $subOrderData['deliver_price'];
-                
-                
-                //$currentDeliverPrice = M('restaurant_deliver_fee')
-                //    ->where("`restaurant_id` = " . $subOrderData['dregion_id'] .
-                //             " and `region_id` = " . $subOrderData['region_id'])
-                //    ->find();
-                //
-                //if (!$currentDeliverPrice) {
-                //    echo "couldn't find deliver price";
-                //}
-                //else {   
-                //    $totalDeliverPrice += $currentDeliverPrice['deliver_fee'];
-                //    print_r($currentDeliverPrice);
-                //}
 			}
 			
             //echo 'highest deliver = ' . $highestDeliveryFee;
@@ -914,8 +906,9 @@ class OrderController extends BaseController {
      * ********************************************************
      */
     private static function CheckForCoupon($orderData, $subOrderList, $userData) {
+        //echo 'CheckForCoupon</br>';
         $couponSN = $orderData['coupon_sn'];
-        if ($couponSN == null || $couponSN == '') {
+        if ($couponSN == null || $couponSN == '' || $couponSN == 'First Order') {
             return false;
         }
         
