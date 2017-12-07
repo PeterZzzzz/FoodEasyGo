@@ -723,24 +723,20 @@ class OrderController extends BaseController {
 		$this->return_data(array_merge(['order_id' => $orderID], $orderData));
 	}
 	
+    /**
+     * Get coupon data based on coupon_sn
+     */
     public function get_coupon_data () {
         $couponSN = $this->get_param('post.coupon_sn');
-        $couponSNDetail = M('coupon_sn')
-            ->where("`sn` = '$couponSN'")
-            ->find();
         
-        if (!$couponSNDetail || $couponSNDetail['status'] == 1) {
+        $couponData = OrderController::get_coupon_detail_by_sn($couponSN, $this->userID);
+        
+        if ($couponData) {
+            $this->return_data($couponData);
+        } else {
             $this->return_error("Invalid coupon");
         }
-        
-        $couponDetail = M('coupon')
-            ->where("`id` = " . $couponSNDetail['coupon_id'])
-            ->find();
-        
-        $this->return_data($couponDetail);
-        
     }
-    
     
 	/**
 	 * Get coupon detail by coupon_sn id
@@ -808,11 +804,73 @@ class OrderController extends BaseController {
         return ['c' => 0, 'd' => $couponDetail];
 	}
     
+    /**
+     * Revert all discounts
+     */
+    public static function revert_all_discounts($orderID) {
+        echo ' rever all discounts';
+        $orderData = M('order')
+            ->where("`id` = $orderID")
+            ->find();
+        $subOrderData = M('order_sub')
+            ->where("`order_id` = $orderID")
+            ->select();
+            
+        $totalDeliverFee = 0;
+        // update sub order data
+        foreach ($subOrderList as &$subOrderData) {
+            $dishData = M('order_goods')
+                ->where("`sub_order_id` = " . $subOrderData['id'])
+                ->select();
+            $restaurantID = $dishData[0]['restaurant_id'];
+            $currentDeliverPrice = M('restaurant_deliver_fee')
+                ->where("`restaurant_id` = $restaurantID " . 
+                         " and `region_id` = " . $subOrderData['region_id'])
+                ->find();
+            
+            // Recalculate deliver fee
+            $deliverFee = $currentDeliverPrice['deliver_fee'];
+            
+            $totalDeliverFee += $deliverFee;
+            
+            $updatedSubOrderData = [
+                'discont_goods_price'       => $subOrderData['goods_total_price'],
+                'deliver_price'             => $deliverFee,
+                ];
+            $updatedSubOrderData['sales_price'] = 
+                $updatedSubOrderData['discont_goods_price'] * 0.07;
+            $updatedSubOrderData['total_price'] = 
+                $updatedSubOrderData['discont_goods_price'] + 
+                $subOrderData['extra_price'] +
+                $deliverFee +
+                $updatedSubOrderData['sales_price'] +
+                $subOrderData['tip_price'];
+            $updatedSubOrderData['discont_total_price'] = 
+                $updatedSubOrderData['total_price'];
+                
+            M('order_sub')
+                ->where("`id` = " . $subOrderData['id'])
+                ->save($updatedSubOrderData);
+		}
+        
+        $updatedOrderData = [
+            'discont_goods_price'           => $orderData['goods_total_price'],
+            'discont_total_prices'          => $orderData['total_price'],
+            'deliver_price'                 => $totalDeliverFee,
+            'sales_price'                   => $orderData['goods_total_price'] * 0.07,
+            'coupon_sn'                     => '',
+            ];
+        
+        M('order')
+            ->where("`id` = $orderID")
+            ->save($updatedOrderData);
+            
+    }
 	
     /**
      * 
      */
-    public static function CheckCouponStatus($orderID) {
+    public static function CheckCouponStatus($orderID, $finalValidation = false) {
         // Get orderData
         $orderData = M('order')
             ->where("`id` = $orderID")
@@ -828,11 +886,11 @@ class OrderController extends BaseController {
             ->where("`id` = " . $orderData['user_id'])
             ->find();
         
-        if (OrderController::CheckForFirstOrder($orderData, $subOrderList, $userData)) {
+        if (OrderController::CheckForFirstOrder($orderData, $subOrderList, $userData, $finalValidation)) {
             return 1;
         }
         
-        if (OrderController::CheckForCoupon($orderData, $subOrderList, $userData)) {
+        if (OrderController::CheckForCoupon($orderData, $subOrderList, $userData, $finalValidation)) {
             return 2;
         }
         
@@ -845,13 +903,15 @@ class OrderController extends BaseController {
      * NOTE!!! WILL OVERRIDE ALL COUPON AND DISCOUNT PRICES!!!!
      * ********************************************************
      */
-    private static function CheckForFirstOrder($orderData, $subOrderList, $userData) {
+    private static function CheckForFirstOrder($orderData, $subOrderList, $userData, $finalValidation = false) {
         if (!$orderData || !$subOrderList || !$userData) {
             return false;
         }
         
         
         if ($userData['has_made_first_order'] == "0") {
+            //echo 'first order';
+            $this->revert_all_discounts($orderData['id']);
             
 			$highestDeliverySubOrder  = null;
 			$highestDeliveryFee = 0;
@@ -889,12 +949,14 @@ class OrderController extends BaseController {
                 ->where("`id` = " . $highestDeliverySubOrder['id'])
                 ->save($updatedSubOrderData);
             
+            if ($finalValidation) {
+                M('user')
+                    ->where("`id` = " . $userData['id'])
+                    ->save(['has_made_first_order' => 1]);
+            }
+            
             return true;
 		} else {
-            
-            M('order')
-                ->where("`id` = " . $orderData['id'])
-                ->save(['coupon_sn' => '']);
             return false;
         }
     }
@@ -905,7 +967,7 @@ class OrderController extends BaseController {
      * NOTE!!! WILL OVERRIDE ALL COUPON AND DISCOUNT PRICES!!!!
      * ********************************************************
      */
-    private static function CheckForCoupon($orderData, $subOrderList, $userData) {
+    private static function CheckForCoupon($orderData, $subOrderList, $userData, $finalValidation = false) {
         //echo 'CheckForCoupon</br>';
         $couponSN = $orderData['coupon_sn'];
         if ($couponSN == null || $couponSN == '' || $couponSN == 'First Order') {
@@ -917,6 +979,8 @@ class OrderController extends BaseController {
         $discount = 1;
         $deliveryFee = $orderData['deliver_price'];
 		if ($couponDetail['type'] == 1) {
+            //echo 'discount type 1';
+
             // discount
             $discount = $couponDetail['discont'] / 10;
             $totalDeliverFee = 0;
@@ -972,9 +1036,16 @@ class OrderController extends BaseController {
                 ->where("`id` = " . $orderData['id'])
                 ->save($updatedOrderData);
             
+            if ($finalValidation) {
+                M('coupon_sn')
+                    ->where("`sn` = '$couponSN'")
+                    ->save(['status' => 1]);
+            }
+            
             return true;
         } 
         else if ($couponDetail['type'] == 2) {
+            //echo 'discount type 2';
             // free delivery
             foreach ($subOrderList as &$subOrderData) {
                 $updatedSubOrderData = [
@@ -1010,13 +1081,17 @@ class OrderController extends BaseController {
                 ->where("`id` = " . $orderData['id'])
                 ->save($updatedOrderData);
             
+            if ($finalValidation) {
+                M('coupon_sn')
+                    ->where("`sn` = '$couponSN'")
+                    ->save(['status' => 1]);
+            }
+            
             return true;
         } 
         else {
-        
-            M('order')
-                ->where("`id` = " . $orderData['id'])
-                ->save(['coupon_sn' => '']);
+            //echo 'no discount, revert all discounts';
+            $this->revert_all_discounts($orderData['id']);
             return false;
         }
     }
@@ -1072,6 +1147,7 @@ class OrderController extends BaseController {
         
         // Save order data
         $updatedOrderData = [
+            
             'billing_first_name'                 => $paymentData['billing_first_name'],
 			'billing_last_name'                  => $paymentData['billing_last_name'],
 			'credit_card_number'                 => $paymentData['credit_card_number'],
@@ -1083,8 +1159,10 @@ class OrderController extends BaseController {
             'coupon_sn'                          => $couponSN,
             
             'tip_price'                          => $tip,
+            
             'total_price'                        => $totalPrice,
             'discont_total_price'                => $discountTotalPrice,
+            
             ];
         
         if ($paymentType == 1) {
@@ -1107,12 +1185,7 @@ class OrderController extends BaseController {
             ->where("`id` = $this->userID")
             ->find();
         
-        OrderController::CheckForCoupon($orderData, $subOrderList, $userData);
-        
-        
-        
 
-        
         
         // Save sub order data
         if ($paymentType == 1) {
@@ -1140,21 +1213,16 @@ class OrderController extends BaseController {
                 $updatedSubOrderData['total_price'];
             
             
-            
-            /*
-            $updatedSubOrderData['total_price'] = 
-                $subOrderData['total_price'] + $updatedSubOrderData['tip_price'];
-            $updatedSubOrderData['discont_total_price'] = 
-                $subOrderData['discont_total_price'] + $updatedSubOrderData['tip_price'];
-            */
             //print_r($updatedSubOrderData);
             $result = M('order_sub')
                 ->where("`id` = " . $subOrderData['id'])
                 ->save($updatedSubOrderData);
         }
         
+        
         // Check for coupon status
         $couponStatus = OrderController::CheckCouponStatus($orderID);
+        
         
         if ($paymentType == 1 ) {
             if ($couponStatus == 1) {
@@ -1163,7 +1231,7 @@ class OrderController extends BaseController {
                     ->where("`id` = $this->userID")
                     ->save(['has_made_first_order' => 1]);
             } else if ($couponStatus == 2) {
-                if ($couponSNDetail['reusable'] == 0) {
+                if ($couponSNDetail['reusable'] == "0") {
                     M('coupon_sn')
                         ->where("`sn` = '$couponSN'")
                         ->save(['status' => 1]);
@@ -1180,6 +1248,7 @@ class OrderController extends BaseController {
 			$this->merchant_email_set($order);
         }
         
+        //$this->return_error('test');
 		$this->return_data([], 'Success');
 	}
 

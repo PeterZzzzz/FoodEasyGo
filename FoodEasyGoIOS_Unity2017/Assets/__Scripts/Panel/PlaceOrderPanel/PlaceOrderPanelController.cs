@@ -433,7 +433,8 @@ public class PlaceOrderPanelController : BasePanelController
                 new LDFWServerResponseEvent((JSONObject coupon, string m) =>
                     {
                         LoadingPanelController.instance.HidePanel();
-                        if (float.Parse(coupon.GetField("discont").str) != 0f)
+                        if (int.Parse(coupon.GetField("type").str) == 1)
+                        //float.Parse(coupon.GetField("discont").str) != 0f)
                         {
                             float discount = float.Parse(coupon.GetField("discont").str);
                             feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ -" +
@@ -877,4 +878,5 @@ public class PlaceOrderPanelController : BasePanelController
 
 
     #endregion
+
 }

@@ -15,6 +15,9 @@ class StripePaymentController extends BaseController {
 	protected function _initialize () {
 	}
 
+    /**
+     * Get order status
+     */
 	public function get_order_status () {
 		
 		$orderID = $this->get_param('post.order_id');
@@ -29,6 +32,9 @@ class StripePaymentController extends BaseController {
 		}
 	}
 
+    /**
+     * Display order pay page
+     */
 	public function order_pay_page () {
 		$orderID = $this->get_param('get.order_id');
 		$order = M('order')->where("`id` = $orderID")->find();
@@ -173,7 +179,7 @@ class StripePaymentController extends BaseController {
     /**
 	 * Pay order Test
 	 */
-	
+	/*
     public function order_pay_test () {
 	
 		//$stripeToken = $this->get_param('post.stripe_token');
@@ -272,5 +278,5 @@ class StripePaymentController extends BaseController {
 		exit();
 		
 	}
-    
+    */
 }
