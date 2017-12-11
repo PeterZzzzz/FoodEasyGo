@@ -809,7 +809,7 @@ class OrderController extends BaseController {
      * Revert all discounts
      */
     public static function revert_all_discounts($orderID) {
-        echo ' rever all discounts';
+        //echo ' rever all discounts';
         $orderData = M('order')
             ->where("`id` = $orderID")
             ->find();
@@ -912,7 +912,7 @@ class OrderController extends BaseController {
         
         if ($userData['has_made_first_order'] == "0") {
             //echo 'first order';
-            $this->revert_all_discounts($orderData['id']);
+            OrderController::revert_all_discounts($orderData['id']);
             
 			$highestDeliverySubOrder  = null;
 			$highestDeliveryFee = 0;
@@ -1092,7 +1092,7 @@ class OrderController extends BaseController {
         } 
         else {
             //echo 'no discount, revert all discounts';
-            $this->revert_all_discounts($orderData['id']);
+            OrderController::revert_all_discounts($orderData['id']);
             return false;
         }
     }
@@ -1212,6 +1212,7 @@ class OrderController extends BaseController {
                 + $updatedSubOrderData['tip_price'];
             $updatedSubOrderData['discont_total_price'] = 
                 $updatedSubOrderData['total_price'];
+            $updatedSubOrderData['create_time'] = time();
             
             
             //print_r($updatedSubOrderData);

@@ -62,7 +62,7 @@ public class LoginPanelController : BasePanelController {
 
     public void OnLoginButtonClicked () {
         Regex r = new Regex (@"^[a-zA-Z0-9._-]*@[a-zA-Z0-9]*[.][a-zA-Z0-9]*$");
-        if (r.IsMatch (emailInputField.text)) {
+        if (true || r.IsMatch (emailInputField.text)) {
 
             LoadingPanelController.instance.DisplayPanel ();
 

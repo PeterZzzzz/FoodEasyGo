@@ -346,12 +346,16 @@ class AccessController extends BaseController {
 		    
 		    //添加加到mailchimp的列表
             require_once(VENDOR_PATH.'/MailChimp.php');
-            $api=M('mailchimp_api')->where(array("id"=>1))->find();
+            $api=M('mailchimp_api')
+                ->where(array("id"=>1))
+                ->find();
             $api_key=$api['api_key'];
             $list_id=$api['list_id'];
 
             $MailChimp=new \DrewM\MailChimp\MailChimp($api_key);
-            $found=M('subscribe_list')->where(array("email"=>$userData['email']))->find();
+            $found=M('subscribe_list')
+                ->where(array("email"=>$userData['email']))
+                ->find();
             if(!$found)
             {
                 $result = $MailChimp->post("lists/".$list_id."/members", [

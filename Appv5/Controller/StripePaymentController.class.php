@@ -115,7 +115,7 @@ class StripePaymentController extends BaseController {
                         // Update order sub data
 						M('order_sub')
                             ->where("`order_id` = $orderID")
-                            ->save(['status'=>2]);
+                            ->save(['status'=>2, 'create_time' => time()]);
                         
                         // Update coupon data
                         $couponSN = $order['coupon_sn'];

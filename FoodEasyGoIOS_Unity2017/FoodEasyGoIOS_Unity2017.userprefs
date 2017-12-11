@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Config/Config.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Config/Config.cs" Line="31" Column="5" />
+      <File FileName="Assets/__Scripts/Config/Config.cs" Line="52" Column="5" />
       <File FileName="Assets/__Scripts/Panel/PlaceOrderPanel/PlaceOrderPanelController.cs" Line="448" Column="67" />
     </Files>
   </MonoDevelop.Ide.Workbench>

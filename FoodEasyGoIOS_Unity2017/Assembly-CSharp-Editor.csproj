@@ -92,9 +92,6 @@
      <None Include="Assets\Lib\Blur Behind\Shaders\Blur.shader" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_oks_strings.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
- <Reference Include="Assembly-UnityScript">
- <HintPath>/Users/ealton/Backups/Backup_20170902/Work/Client/FoodEasyGo/FoodEasyGo_Unity/FoodEasyGoIOS_Unity2017/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity201723/Unity201723.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -194,6 +191,8 @@
       <Project>{FFC9A788-16D5-7708-4FB6-3E3F527D57F3}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{58D63F43-760A-3BC2-BDA0-1B645A1A9207}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript.csproj">
+      <Project>{B2EF629D-6358-6ACE-5148-D586BC6FF717}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
