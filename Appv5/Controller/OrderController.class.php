@@ -554,6 +554,7 @@ class OrderController extends BaseController {
 				// SubOrder Data
 				$subOrderData = [
 						'order_id' => $orderID,
+                        'restaurant_id' => $cartRestaurant['restaurant_id'],
 						'region_id' => $addressData['region_id'],
 						'dregion_id' => $cartRestaurant['region_id'],
 						'category' => $category,
