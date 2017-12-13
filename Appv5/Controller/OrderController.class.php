@@ -159,6 +159,8 @@ class OrderController extends BaseController {
 					->where("`id` = " . $resCatCombine['restaurant_id'])
 					->find();
 				$resCatCombine['region_id'] = $restaurantData['region_id'];
+				$resCatCombine['deliver_type'] = $restaurantData['deliver_type'];
+				$resCatCombine['reciver_type'] = $restaurantData['reciver_type'];
 	
 				$extraFee = $restaurantData['extra_fee'];
 				$minOrder = $restaurantData['min_consume'];
@@ -553,34 +555,44 @@ class OrderController extends BaseController {
 				//print_r($cartRestaurant);
 				// SubOrder Data
 				$subOrderData = [
-						'order_id' => $orderID,
-                        'restaurant_id' => $cartRestaurant['restaurant_id'],
-						'region_id' => $addressData['region_id'],
-						'dregion_id' => $cartRestaurant['region_id'],
-						'category' => $category,
-						'order_number' => $categoryList[$category].date('ymdHis').mt_rand(1000, 9999),
-						'deliver_time' => $cartRestaurant['deliver_time_id'],
-						'deliver_time_value' => $cartRestaurant['deliver_time_value'],
+						'order_id'                    => $orderID,
+                        'restaurant_id'               => $cartRestaurant['restaurant_id'],
+						'region_id'                   => $addressData['region_id'],
+						'dregion_id'                  => $cartRestaurant['region_id'],
+						'category'                    => $category,
+						'order_number'                => $categoryList[$category].date('ymdHis').mt_rand(1000, 9999),
+						'deliver_time'                => $cartRestaurant['deliver_time_id'],
+						'deliver_time_value'          => $cartRestaurant['deliver_time_value'],
 
-						//'groupon_id' => $cartData['cat' . $category] $subCartData['groupon_id'],
-						'goods_total_price' => $subGoodsTotalPrice,
-						'total_price' => $subTotalPrice,
-						'discont_goods_price' => $discountedSubGoodsTotalPrice,
-						'discont_total_price' => $discountedSubTotalPrice,
-						'deliver_price' => $subDeliveryFee,
+						//'groupon_id'                => $cartData['cat' . $category] $subCartData['groupon_id'],
+						'goods_total_price'           => $subGoodsTotalPrice,
+						'total_price'                 => $subTotalPrice,
+						'discont_goods_price'         => $discountedSubGoodsTotalPrice,
+						'discont_total_price'         => $discountedSubTotalPrice,
+						'deliver_price'               => $subDeliveryFee,
 
                         // Add driver_deliver_fee
-                        'driver_deliver_price' => $subDriverDeliveryFee,
-						'extra_price' => $subExtraFee,
-						'sales_price' => $subSalesPrice,
-						'tip_price' => $subTipPrice,
-						'driver_id' => 0,
-						'driver_grade' => 0,
-						'create_time' => time(),
-						'create_date' => date('Y-m-d'),
-						'is_web'      => 2,
-						'status'      => 1,
+                        'driver_deliver_price'        => $subDriverDeliveryFee,
+						'extra_price'                 => $subExtraFee,
+						'sales_price'                 => $subSalesPrice,
+						'tip_price'                   => $subTipPrice,
+						'driver_id'                   => 0,
+						'driver_grade'                => 0,
+						'create_time'                 => time(),
+						'create_date'                 => date('Y-m-d'),
+						'is_web'                      => 2,
+						'status'                      => 1,
+                    
+                        'fax_status'                  => 0,
 				];
+                
+                if ($cartRestaurant['reciver_type'] == 2) {
+                    $subOrderData['fax_status'] = 1;
+                }
+                
+                if ($cartRestaurant['deliver_type'] == 2) {
+                    $subOrderData['driver_status'] = 20;
+                }
 				
 				if ($category == 3) {
 					$subOrderData['deliver_time'] = '0';
