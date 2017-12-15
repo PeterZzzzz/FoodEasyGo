@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEasyGoIOS_Unity2017", "Assembly-CSharp.csproj", "{58D63F43-760A-3BC2-BDA0-1B645A1A9207}"
 EndProject
-Project("{2935C1EF-6E64-B608-6924-3899FE31101C}") = "FoodEasyGoIOS_Unity2017", "Assembly-UnityScript.unityproj", "{B2EF629D-6358-6ACE-5148-D586BC6FF717}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEasyGoIOS_Unity2017", "Assembly-CSharp-firstpass.csproj", "{FFC9A788-16D5-7708-4FB6-3E3F527D57F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEasyGoIOS_Unity2017", "Assembly-CSharp-Editor.csproj", "{C5411504-D149-340A-79E1-DA899CC2505F}"
@@ -19,10 +17,6 @@ Global
 		{58D63F43-760A-3BC2-BDA0-1B645A1A9207}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D63F43-760A-3BC2-BDA0-1B645A1A9207}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58D63F43-760A-3BC2-BDA0-1B645A1A9207}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2EF629D-6358-6ACE-5148-D586BC6FF717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2EF629D-6358-6ACE-5148-D586BC6FF717}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2EF629D-6358-6ACE-5148-D586BC6FF717}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2EF629D-6358-6ACE-5148-D586BC6FF717}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFC9A788-16D5-7708-4FB6-3E3F527D57F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFC9A788-16D5-7708-4FB6-3E3F527D57F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC9A788-16D5-7708-4FB6-3E3F527D57F3}.Release|Any CPU.ActiveCfg = Release|Any CPU

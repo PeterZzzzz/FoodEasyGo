@@ -44,6 +44,7 @@ public class HomePanelController : BasePanelController
         instance = this;
 
         base.Awake ();
+
     }
 
 
@@ -70,7 +71,7 @@ public class HomePanelController : BasePanelController
 
         groceryScrollviewController.content.DestroyAllChildren ();
 
-        mainScrollRect.content.anchoredPosition = Vector2.zero;
+        //mainScrollRect.content.anchoredPosition = Vector2.zero;
     }
 
     public override void ReloadPanel ()
@@ -174,6 +175,7 @@ public class HomePanelController : BasePanelController
             LoadCategoryDdata ();
             //LoadRegionDeliveryFee ();
         }
+        mainScrollRect.content.anchoredPosition = Vector2.zero;
 
         yield return new WaitForSeconds (2f);
 

@@ -1,0 +1,166 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using LDFW;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class OrderHelpInputPanelController : BasePanelController {
+
+    public static OrderHelpInputPanelController instance;
+    private int helpType;
+    public Text descriptionTextView;
+    public Text nameLabel;
+    public Text contactMethodLabel;
+    public Text orderNumLabel;
+    public Text descriptionLabel;
+    public InputField nameInputField;
+    public InputField contactMethodInputField;
+    public InputField orderNumInputField;
+    public InputField descriptionInputField;
+    public Button submitBtn;
+    public Image customerServiceImage;
+
+    new void Awake()
+    {
+        if (instance != null)
+        {
+            instance.gameObject.DestroyGO();
+        }
+        instance = this;
+
+        base.Awake();
+
+    }
+
+    public void OpenPanel(int type)
+    {
+        helpType = type;
+        base.OpenPanel();
+
+        switch(helpType){
+            case 1:
+                headerTitle.ResetUI("漏餐", "Missing Items");
+                descriptionTextView.GetComponent<TextController>().ResetUI("请在下方注明漏送给您的餐点，我们将会直接退款给您。","Please enter the missing items below and we can make adjustments accordingly.");
+                nameLabel.gameObject.SetActive(true);
+                contactMethodLabel.gameObject.SetActive(true);
+                orderNumLabel.gameObject.SetActive(true);
+                descriptionLabel.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(true);
+                contactMethodInputField.gameObject.SetActive(true);
+                orderNumInputField.gameObject.SetActive(true);
+                descriptionInputField.gameObject.SetActive(true);
+                submitBtn.gameObject.SetActive(true);
+                customerServiceImage.gameObject.SetActive(false);
+
+                break;
+            case 2:
+                headerTitle.ResetUI("送错餐", "Incorrect Items");
+                descriptionTextView.GetComponent<TextController>().ResetUI("如果是整单送错，请在下方注明您收到错误的餐品内容，如包装上有订单号码也请注明，同时注明您需要重新配送还是全额退款。", "Please describe the wrong items you have received together with 4-digit order numbers outside the bag and specify whether you want full refund or re-delivery.");
+                nameLabel.gameObject.SetActive(true);
+                contactMethodLabel.gameObject.SetActive(true);
+                orderNumLabel.gameObject.SetActive(true);
+                descriptionLabel.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(true);
+                contactMethodInputField.gameObject.SetActive(true);
+                orderNumInputField.gameObject.SetActive(true);
+                descriptionInputField.gameObject.SetActive(true);
+                submitBtn.gameObject.SetActive(true);
+                customerServiceImage.gameObject.SetActive(false);
+
+                break;
+            case 3:
+                headerTitle.ResetUI("更改地址", "Change Address");
+                descriptionTextView.GetComponent<TextController>().ResetUI("如果您输错了地址，可以在下方输入您正确的地址，我们的客服人员会及时为您更改。", "If you enter the wrong delivery address by accident, please enter your order number below and the updated delivery address, we will update it for you.");
+                nameLabel.gameObject.SetActive(true);
+                contactMethodLabel.gameObject.SetActive(true);
+                orderNumLabel.gameObject.SetActive(true);
+                descriptionLabel.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(true);
+                contactMethodInputField.gameObject.SetActive(true);
+                orderNumInputField.gameObject.SetActive(true);
+                descriptionInputField.gameObject.SetActive(true);
+                submitBtn.gameObject.SetActive(true);
+                customerServiceImage.gameObject.SetActive(false);
+
+                break;
+            case 4:
+                headerTitle.ResetUI("取消订单", "Cancel Order");
+                descriptionTextView.GetComponent<TextController>().ResetUI("一般下单完成，所有的订单经餐馆确认后，我们将无法取消。如有特殊取消理由，请在下方填写取消理由，我们的客服会和餐馆取得联系。", "Order can be cancelled only before restaurant accepts the order. Please enter the reason why you would like to cancel below. We will try our best to help you out.");
+                nameLabel.gameObject.SetActive(true);
+                contactMethodLabel.gameObject.SetActive(true);
+                orderNumLabel.gameObject.SetActive(true);
+                descriptionLabel.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(true);
+                contactMethodInputField.gameObject.SetActive(true);
+                orderNumInputField.gameObject.SetActive(true);
+                descriptionInputField.gameObject.SetActive(true);
+                submitBtn.gameObject.SetActive(true);
+                customerServiceImage.gameObject.SetActive(false);
+
+                break;
+            case 5:
+                headerTitle.ResetUI("餐点质量问题", "Poor Quality of food");
+                descriptionTextView.GetComponent<TextController>().ResetUI("非常抱歉您的餐点出现了问题 ！ 请您务必在下方描述餐品的问题，我们会第一时间向餐馆做出反馈避免将来同样的事情再次发生！", "We apologize for the food you have received didn’t satisfy you. Please describe the issue below. We will work with restaurant to make sure it will never happen again.");
+                nameLabel.gameObject.SetActive(true);
+                contactMethodLabel.gameObject.SetActive(true);
+                orderNumLabel.gameObject.SetActive(true);
+                descriptionLabel.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(true);
+                contactMethodInputField.gameObject.SetActive(true);
+                orderNumInputField.gameObject.SetActive(true);
+                descriptionInputField.gameObject.SetActive(true);
+                submitBtn.gameObject.SetActive(true);
+                customerServiceImage.gameObject.SetActive(false);
+
+                break;
+            case 6:
+                headerTitle.ResetUI("退款需要多久到账", "Refund");
+                descriptionTextView.GetComponent<TextController>().ResetUI("如果您的订单有变更需要退款，我们将保证在7个工作日内完成退款。", "Refund will be issued within 7 business days. However, it may take up to 14 business day for bank to appear on your account balance.");
+
+                nameLabel.gameObject.SetActive(false);
+                contactMethodLabel.gameObject.SetActive(false);
+                orderNumLabel.gameObject.SetActive(false);
+                descriptionLabel.gameObject.SetActive(false);
+                nameInputField.gameObject.SetActive(false);
+                contactMethodInputField.gameObject.SetActive(false);
+                orderNumInputField.gameObject.SetActive(false);
+                descriptionInputField.gameObject.SetActive(false);
+                submitBtn.gameObject.SetActive(false);
+                customerServiceImage.gameObject.SetActive(false);
+
+                break;
+            case 7:
+                headerTitle.ResetUI("其他", "Other");
+                descriptionTextView.GetComponent<TextController>().ResetUI("如果您遇到了其他问题，请给我们留言，或直接联系我们的客服或饭店。", "If you experienced an issue that is not listed above, please enter below or add our Wechat: foodeasygo.");
+                nameLabel.gameObject.SetActive(false);
+                contactMethodLabel.gameObject.SetActive(false);
+                orderNumLabel.gameObject.SetActive(false);
+                descriptionLabel.gameObject.SetActive(true);
+                nameInputField.gameObject.SetActive(false);
+                contactMethodInputField.gameObject.SetActive(false);
+                orderNumInputField.gameObject.SetActive(false);
+                descriptionInputField.gameObject.SetActive(true);
+                submitBtn.gameObject.SetActive(true);
+                customerServiceImage.gameObject.SetActive(true);
+
+                Vector2 x = customerServiceImage.transform.position;
+                x.x -= 100f;
+                customerServiceImage.transform.position = x;
+
+                break;
+            //case 8:
+                //headerTitle.ResetUI("联系客服", "Contact Us");
+                //descriptionTextView.GetComponent<TextController>().ResetUI("","");
+
+                //break;
+
+
+        }
+
+    }
+
+    public void submitClick(){
+        
+    }
+
+}

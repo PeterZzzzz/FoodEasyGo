@@ -1,9 +1,14 @@
 ﻿<Properties StartupConfiguration="{58D63F43-760A-3BC2-BDA0-1B645A1A9207}|Unit Tests">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Config/Config.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/LDAppFramework/Scripts/UISection/LDFWToggleController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Config/Config.cs" Line="52" Column="5" />
-      <File FileName="Assets/__Scripts/Panel/PlaceOrderPanel/PlaceOrderPanelController.cs" Line="448" Column="67" />
+      <File FileName="Assets/__Scripts/Panel/OrderPanel/OrderPanelOrderBarController.cs" Line="126" Column="23" />
+      <File FileName="Assets/__Scripts/Panel/OrderPanel/OrderHelpPanelController.cs" Line="70" Column="63" />
+      <File FileName="Assets/__Scripts/Panel/OrderPanel/OrderHelpInputPanelController.cs" Line="148" Column="61" />
+      <File FileName="Assets/__Scripts/Panel/OrderPanel/OrderPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelController.cs" Line="110" Column="37" />
+      <File FileName="Assets/__Scripts/Panel/PlaceOrderPanel/PlaceOrderPanelController.cs" Line="313" Column="18" />
+      <File FileName="Assets/LDAppFramework/Scripts/UISection/LDFWToggleController.cs" Line="12" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -11,5 +16,6 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>

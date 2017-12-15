@@ -32,6 +32,7 @@ e8de817d00da24702a33ab3a8208f8f8 Assembly-CSharp.dll:.CartController
 6c58974e12068444260eecbe7494aa1d Assembly-CSharp.dll:.LoadingPanelController
 f45343ba94ead22e7443d67ea9543f50 Assembly-CSharp.dll:.MyInvitationsPanelController
 f38431b1302e88267d3e80fd2194f627 Assembly-CSharp.dll:.CouponPanelController
+e6a5f5d0a8a44aa6fb56845141479618 Assembly-CSharp.dll:.OrderHelpInputPanelController
 1ff3ad2d1b17e3126aa010e35aa5cb07 Assembly-CSharp.dll:.ChangePhoto
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -141,6 +142,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 c3402c5f7613b24707f041411f6e75f1 Assembly-CSharp.dll:.UniWebView
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ShareSDKSetup
 0147da05f6eaba6e650a488bbb60eb5c Assembly-CSharp.dll:.ChangePasswordPanel
+76379d4f90ea58af2b610618760ad423 Assembly-CSharp.dll:.OrderHelpPanelController
 b6cfa55a9cbde4f05f397c6602522bd7 Assembly-CSharp.dll:LDFW.Network.LDFWServerCallController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GoogleLogIn
 fcf028285635430b03c1233e17bd627e Assembly-CSharp.dll:.PersonalDataPanelSexToggleElementController
@@ -268,7 +270,7 @@ c9cc7703460faa08dcdec761bd549040 Assembly-CSharp.dll:.SearchPanelSearchResultPan
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 42f359b697a283d7765701a4c86b9702 Assembly-CSharp.dll:.RestaurantPanelDeliveryMethodToggleParentController
 57d3587eb43f33f9760d17f5509c361f Assembly-CSharp.dll:.RestaurantDetailPanelCategoryBarController
-cd63620b57c5d0b44b0f75a800d2d4dd Assembly-CSharp.dll:.OrderDetailPanelController
+9a74af01e7b18b0d54879edcc2f80de6 Assembly-CSharp.dll:.OrderDetailPanelController
 ea7a75a0ce525a3a3f43af624aaefa69 Assembly-CSharp.dll:LDFW.Tween.LDFWTweenPosition
 4253efb4b5cb5399e0598d4f7d998ae1 Assembly-CSharp.dll:.OrderNetworkController
 8f3493cffc2a71cda065ca9facd339b2 Assembly-CSharp.dll:.PasswordResetPanelController

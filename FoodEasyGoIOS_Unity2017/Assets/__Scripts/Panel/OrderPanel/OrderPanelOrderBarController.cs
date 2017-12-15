@@ -32,7 +32,6 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
 
 
 
-
     void Awake () {
         deleteButton.onClick.AddListener (OnDeleteButtonClicked);
         shareButton.onClick.AddListener (OnShareButtonClicked);
@@ -160,4 +159,9 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     public void OnPointerClick (PointerEventData eventData) {
         OrderDetailPanelController.instance.OpenPanel (_orderData, _subOrderData);
     }
+
+    public void OnHelpButtonClick(){
+        OrderHelpPanelController.instance.OpenPanel();
+    }
+
 }
