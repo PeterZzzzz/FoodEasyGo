@@ -298,8 +298,6 @@
     <Compile Include="Assets\__Scripts\Panel\NotificationPanel\NotificationPanelScrollRectController.cs" />
     <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderCommentPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderDetailPanelController.cs" />
-    <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderHelpInputPanelController.cs" />
-    <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderHelpPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\OrderPanel\OrderPanelOrderBarController.cs" />
     <Compile Include="Assets\__Scripts\Panel\PasswordResetPanelController.cs" />
