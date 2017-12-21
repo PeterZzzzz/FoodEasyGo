@@ -238,10 +238,17 @@ public class RestaurantDetailPanelController : BasePanelController {
             // cache categoryData
             dictionaryCategoryData.Add (typeData[typeIndex].GetField ("type_id").str, typeData[typeIndex]);
 
-            Transform categoryBar = Instantiate (categoryBarPrefab).transform;
+            RectTransform categoryBar = Instantiate (categoryBarPrefab).transform as RectTransform;
             categoryBar.Find ("Text").GetComponent<TextController> ().ResetUI (typeData[typeIndex].GetField ("title").str, typeData[typeIndex].GetField ("title_en").str);
             categoryBar.SetParent (RestaurantDetailPanelCategoryScrollRectController.instance.content);
             categoryBar.localScale = Vector3.one;
+
+            categoryBar.anchorMin = new Vector2(0, 1);
+            categoryBar.anchorMax = Vector2.one;
+            categoryBar.pivot = new Vector2(0.5f, 1);
+            categoryBar.anchoredPosition = new Vector2(0, -typeIndex * 50);
+            categoryBar.sizeDelta = new Vector2(0, 50);
+
             categoryBar.GetComponent<RestaurantDetailPanelCategoryBarController> ().Reset (typeData[typeIndex].GetField ("type_id").str);
             JSONObject dishData = typeData[typeIndex].GetField ("dish_details");
             for (int dishIndex = 0; dishIndex < dishData.Count; dishIndex++) {
