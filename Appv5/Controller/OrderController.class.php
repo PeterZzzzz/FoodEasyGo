@@ -281,7 +281,7 @@ class OrderController extends BaseController {
 		$orderList = M('order')
 			->where("`user_id` = $this->userID and `status` = 2")
 			->order('`create_time` desc')
-			->limit(1)
+			->limit(30)
 			->select();
 		
 		

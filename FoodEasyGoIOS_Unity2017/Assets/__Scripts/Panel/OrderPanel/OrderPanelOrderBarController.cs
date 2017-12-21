@@ -29,6 +29,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     public Button           shareButton;
     public Button           commentButton;
     public Button           againButton;
+    public Button           helpButton;
 
 
 
