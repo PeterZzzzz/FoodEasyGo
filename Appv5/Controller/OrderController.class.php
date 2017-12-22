@@ -309,6 +309,7 @@ class OrderController extends BaseController {
                     M('order_deliver')
                         ->where("`sub_order_id` = " . $subOrderCopy['id'])
                         ->find();
+                /*
                 if ($subOrderCopy['deliver_status']) {
                     $subOrderCopy['deliver_status']['driver_assigned_time'] = 
                         date("F j, Y, g:i a", $subOrderCopy['deliver_status']['driver_assigned_time']);
@@ -322,6 +323,7 @@ class OrderController extends BaseController {
                     $subOrderCopy['deliver_status']['deliver_complete_time'] = 
                         date("F j, Y, g:i a", $subOrderCopy['deliver_status']['deliver_complete_time']);
                 }
+                */
 
 				foreach ($restaurantList as &$restaurant) {
 					

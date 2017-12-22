@@ -16,7 +16,6 @@ public class OrderDetailPanelController : BasePanelController {
     // Order List
     public ScrollRect                                 defaultScrollRect;
     public TextController restaurant;
-    public TextController deliverStatus;
     public Transform dishBar;
     public Transform coupon;
     public Transform fees;
@@ -29,6 +28,10 @@ public class OrderDetailPanelController : BasePanelController {
     public TextController paymentMethod;
     public TextController orderTime;
     //public TextController notes;
+
+    public Image deliverStatusBar;
+    public Image[] deliverStatusIcons;
+    public TextController deliverStatus;
 
 
     // Private and temp variables;
@@ -82,70 +85,9 @@ public class OrderDetailPanelController : BasePanelController {
     public void ResetData () {
         restaurant.ResetUI (_subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name").str, 
             _subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name_en").str);
-
+        
         string orderStatus = _subOrderData["status"].str;
-        if (orderStatus == "1")
-        {
-            deliverStatus.ResetUI("未完成", "Incomplete");
-        }
-        else if (orderStatus == "2")
-        {
-            string zh = "已完成";
-            string en = "Complete";
-
-            JSONObject goods = _subOrderData.GetField("goods");
-
-            string deliverType = goods[0].GetField("restaurant").GetField("deliver_type").str;
-            if (deliverType == "2")
-            {
-                zh = "由餐馆配送";
-                en = "Deliver by Restaurant";
-            }
-            else
-            {
-                JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
-                if (orderDeliver.IsNull) {
-                    string time = _subOrderData.GetField("create_time").str;
-                    zh = "餐馆已接 (" + time + ")";
-                    en = "Restaurant Accepted (" + time + ")";
-                } 
-                else if (orderDeliver.GetField("deliver_status").str == "0")
-                {
-                    string time = _subOrderData.GetField("deliver_status").GetField("restaurant_accept_time").str;
-                    zh = "餐馆已接 (" + time + ")";
-                    en = "Restaurant Accepted (" + time + ")";
-                }
-                else if (orderDeliver.GetField("deliver_status").str == "1") {
-                    string time = _subOrderData.GetField("deliver_status").GetField("driver_assigned_time").str;
-                    zh = "司机已指派 (" + time + ")";
-                    en = "Driver Assigned (" + time + ")";
-                }
-                else if (orderDeliver.GetField("deliver_status").str == "1")
-                {
-                    string time = _subOrderData.GetField("deliver_status").GetField("driver_confirmed_time").str;
-                    zh = "司机赶往餐馆 (" + time + ")";
-                    en = "Driver on Route (" + time + ")";
-                }
-                else if (orderDeliver.GetField("deliver_status").str == "3")
-                {
-                    string time = _subOrderData.GetField("deliver_status").GetField("deliver_start_time").str;
-                    zh = "配送中 (" + time + ")";
-                    en = "Delivery in Progress (" + time + ")";
-                }
-                else if (orderDeliver.GetField("deliver_status").str == "4")
-                {
-                    string time = _subOrderData.GetField("deliver_status").GetField("deliver_complete_time").str;
-                    zh = "配送成功 (" + time + ")";
-                    en = "Delivery Completed (" + time + ")";
-                }
-            }
-
-            deliverStatus.ResetUI(zh, en);
-        }
-        else
-        {
-            deliverStatus.ResetUI("已取消", "Cancelled");
-        }
+        UpdateDeliverStatus(orderStatus);
 
 
 
@@ -217,6 +159,52 @@ public class OrderDetailPanelController : BasePanelController {
         }
         orderTime.ResetUI (_orderData.GetField ("create_time").str);
         //notes.ResetUI (_subOrderData.GetField ("note").str);
+    }
+
+    private void UpdateDeliverStatus(string deliverStatus) {
+        foreach (var icon in deliverStatusIcons)
+            icon.color = Color.gray;
+        deliverStatusBar.fillAmount = 0;
+
+        string zh = "已完成";
+        string en = "Complete";
+
+        JSONObject goods = _subOrderData.GetField("goods");
+        string deliverType = goods[0].GetField("restaurant").GetField("deliver_type").str;
+        if (deliverType == "2")
+        {
+            zh = "由餐馆配送";
+            en = "Deliver by Restaurant";
+            return;
+        }
+
+        JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
+        int fillRate = 0;
+        if (orderDeliver.IsNull 
+            || orderDeliver.GetField("deliver_status").str == "0")
+        {
+            zh = "餐馆已接";
+            en = "Order Placed";
+            fillRate = 1;
+        }
+        else if ("123".Contains(orderDeliver.GetField("deliver_status").str))
+        {
+            zh = "配送中";
+            en = "Out For Delivery";
+            fillRate = 3;
+        }
+        else if (orderDeliver.GetField("deliver_status").str == "4")
+        {
+            zh = "已送达";
+            en = "Delivered";
+            fillRate = 4;
+        }
+
+        deliverStatusBar.fillAmount = fillRate / 4f;
+        for (int i = 0; i < fillRate; i++)
+            deliverStatusIcons[i].color = new Color(1, 176f / 255f, 58f / 255f, 1);
+            
+        this.deliverStatus.ResetUI(zh, en);
     }
     #endregion
 
