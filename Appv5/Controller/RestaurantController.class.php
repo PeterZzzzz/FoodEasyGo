@@ -309,7 +309,7 @@ class RestaurantController extends BaseController {
 		}
 		
 		$res = M('restaurant_comment')
-				->where("restaurant_id = $restaurantID")
+				->where("restaurant_id = $restaurantID " . 'and user_comment != "" ')
 				->order(' create_time desc ')
 				->field('user_comment, create_time')
 				->limit(20)
