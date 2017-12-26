@@ -143,9 +143,9 @@ public class OrderHelpInputPanelController : BasePanelController {
                 submitBtn.gameObject.SetActive(true);
                 customerServiceImage.gameObject.SetActive(true);
 
-                Vector2 x = customerServiceImage.transform.position;
-                x.x -= 100f;
-                customerServiceImage.transform.position = x;
+                //Vector2 x = customerServiceImage.transform.position;
+                //x.x -= 100f;
+                //customerServiceImage.transform.position = x;
 
                 break;
             //case 8:
