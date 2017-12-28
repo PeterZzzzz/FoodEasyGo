@@ -171,6 +171,9 @@ public class AddressPanelController : BasePanelController {
         } else if (string.IsNullOrEmpty (modifyAddressPanel.Find ("ContactNumber/InputField").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Phone number cannot be null");
             return false;
+        } else if (modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text.Length != 10){
+            MessagePanelController.instance.DisplayPanel("Please enter 10 digits Phone number");
+            return false;
         } else if (string.IsNullOrEmpty (modifyAddressPanel.Find ("Street/InputField").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Street cannot be null");
             return false;

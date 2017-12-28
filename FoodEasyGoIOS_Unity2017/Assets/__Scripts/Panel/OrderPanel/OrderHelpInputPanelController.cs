@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using LDFW;
+using LDFW.Network;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,17 +9,19 @@ public class OrderHelpInputPanelController : BasePanelController {
 
     public static OrderHelpInputPanelController instance;
     private int helpType;
+    private string customerIssue;
     public Text descriptionTextView;
-    public Text nameLabel;
-    public Text contactMethodLabel;
-    public Text orderNumLabel;
-    public Text descriptionLabel;
+    public TextController nameLabel;
+    public TextController contactMethodLabel;
+    public TextController orderNumLabel;
+    public TextController descriptionLabel;
     public InputField nameInputField;
     public InputField contactMethodInputField;
     public InputField orderNumInputField;
     public InputField descriptionInputField;
     public Button submitBtn;
     public Image customerServiceImage;
+    private string subOrderID;
 
     new void Awake()
     {
@@ -32,13 +35,15 @@ public class OrderHelpInputPanelController : BasePanelController {
 
     }
 
-    public void OpenPanel(int type)
+    public void OpenPanel(int type, string orderID)
     {
-        helpType = type;
         base.OpenPanel();
+        helpType = type;
+        subOrderID = orderID;
 
         switch(helpType){
             case 1:
+                customerIssue = "漏餐";
                 headerTitle.ResetUI("漏餐", "Missing Items");
                 descriptionTextView.GetComponent<TextController>().ResetUI("请在下方注明漏送给您的餐点，我们将会直接退款给您。","Please enter the missing items below and we can make adjustments accordingly.");
                 nameLabel.gameObject.SetActive(true);
@@ -54,6 +59,7 @@ public class OrderHelpInputPanelController : BasePanelController {
 
                 break;
             case 2:
+                customerIssue = "送错餐";
                 headerTitle.ResetUI("送错餐", "Incorrect Items");
                 descriptionTextView.GetComponent<TextController>().ResetUI("如果是整单送错，请在下方注明您收到错误的餐品内容，如包装上有订单号码也请注明，同时注明您需要重新配送还是全额退款。", "Please describe the wrong items you have received together with 4-digit order numbers outside the bag and specify whether you want full refund or re-delivery.");
                 nameLabel.gameObject.SetActive(true);
@@ -69,6 +75,7 @@ public class OrderHelpInputPanelController : BasePanelController {
 
                 break;
             case 3:
+                customerIssue = "更改地址";
                 headerTitle.ResetUI("更改地址", "Change Address");
                 descriptionTextView.GetComponent<TextController>().ResetUI("如果您输错了地址，可以在下方输入您正确的地址，我们的客服人员会及时为您更改。", "If you enter the wrong delivery address by accident, please enter your order number below and the updated delivery address, we will update it for you.");
                 nameLabel.gameObject.SetActive(true);
@@ -84,6 +91,7 @@ public class OrderHelpInputPanelController : BasePanelController {
 
                 break;
             case 4:
+                customerIssue = "取消订单";
                 headerTitle.ResetUI("取消订单", "Cancel Order");
                 descriptionTextView.GetComponent<TextController>().ResetUI("一般下单完成，所有的订单经餐馆确认后，我们将无法取消。如有特殊取消理由，请在下方填写取消理由，我们的客服会和餐馆取得联系。", "Order can be cancelled only before restaurant accepts the order. Please enter the reason why you would like to cancel below. We will try our best to help you out.");
                 nameLabel.gameObject.SetActive(true);
@@ -99,6 +107,7 @@ public class OrderHelpInputPanelController : BasePanelController {
 
                 break;
             case 5:
+                customerIssue = "餐点质量问题";
                 headerTitle.ResetUI("餐点质量问题", "Poor Quality of food");
                 descriptionTextView.GetComponent<TextController>().ResetUI("非常抱歉您的餐点出现了问题 ！ 请您务必在下方描述餐品的问题，我们会第一时间向餐馆做出反馈避免将来同样的事情再次发生！", "We apologize for the food you have received didn’t satisfy you. Please describe the issue below. We will work with restaurant to make sure it will never happen again.");
                 nameLabel.gameObject.SetActive(true);
@@ -130,6 +139,7 @@ public class OrderHelpInputPanelController : BasePanelController {
 
                 break;
             case 7:
+                customerIssue = "其他";
                 headerTitle.ResetUI("其他", "Other");
                 descriptionTextView.GetComponent<TextController>().ResetUI("如果您遇到了其他问题，请给我们留言，或直接联系我们的客服或饭店。", "If you experienced an issue that is not listed above, please enter below or add our Wechat: foodeasygo.");
                 nameLabel.gameObject.SetActive(false);
@@ -148,19 +158,43 @@ public class OrderHelpInputPanelController : BasePanelController {
                 //customerServiceImage.transform.position = x;
 
                 break;
-            //case 8:
-                //headerTitle.ResetUI("联系客服", "Contact Us");
-                //descriptionTextView.GetComponent<TextController>().ResetUI("","");
-
-                //break;
 
 
         }
-
+        nameInputField.text = UserDataController.instance.firstName + " " + UserDataController.instance.lastName;
+        contactMethodInputField.text = UserDataController.instance.email;
+        orderNumInputField.text = subOrderID;
+        descriptionInputField.text = "";
     }
 
-    public void submitClick(){
-        
+    public void SubmitClick()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("first_name", nameInputField.text);
+        form.AddField("last_name", "_");
+        form.AddField("reply_email", contactMethodInputField.text);
+        form.AddField("reply_phone", "_");
+        form.AddField("message", "类型:" + customerIssue + "  " + "留言:" + descriptionInputField.text);
+
+        UserDataNetworkController.instance.LeaveMessage(form,
+            new LDFWServerResponseEvent((JSONObject data, string m) => {
+                MessagePanelController.instance.DisplayPanel("Message has been sent");
+                PanelListController.instance.RemovePanel();
+            }), null);
+    }
+
+    public void CheckForInputs()
+    {
+        if (string.IsNullOrEmpty(nameInputField.text) ||
+            string.IsNullOrEmpty(contactMethodInputField.text) ||
+            string.IsNullOrEmpty(descriptionInputField.text))
+        {
+            submitBtn.interactable = false;
+        }
+        else
+        {
+            submitBtn.interactable = true;
+        }
     }
 
 }
