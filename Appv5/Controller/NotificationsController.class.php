@@ -18,7 +18,7 @@ class NotificationsController extends BaseController {
 		$this->checkRegion = false;
 		$this->errorCode = 18000;
 	
-		parent::_initialize ();
+		//parent::_initialize ();
 	}
 	
 	/**

@@ -727,17 +727,11 @@ class OrderController extends BaseController {
         $subOrderList = M('order_sub')
             ->where("`order_id` = $orderID")
             ->select();
-        
-        //if (OrderController::CheckForFirstOrder($orderData, $subOrderList, $userData)) {
-        //    $orderData = M('order')
-        //        ->where("`id` = $orderID")
-        //        ->find();
-        //}
 
 		settype($orderID, "string");
 		$this->return_data(array_merge(['order_id' => $orderID], $orderData));
 	}
-	
+    
     /**
      * Get coupon data based on coupon_sn
      */
