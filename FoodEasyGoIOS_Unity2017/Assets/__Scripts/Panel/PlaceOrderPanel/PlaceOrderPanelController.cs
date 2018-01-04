@@ -203,7 +203,7 @@ public class PlaceOrderPanelController : BasePanelController
                         restaurantBarController.transform.Find("Header/Title").GetComponent<TextController>().textEN,
                         "即买即送", "Delivers Now");
 
-                    foreach (var dishBarController in deliveryContent.GetChild (i).GetComponent<CartPanelRestaurantBarController> ().dishBarList)
+                    foreach (var dishBarController in deliveryContent.GetChild(i).GetComponent<CartPanelRestaurantBarController>().dishBarList)
                     {
                         if (dishBarController.isSelectedForCheckOut)
                             cartDetailIDString = cartDetailIDString + "," + dishBarController.cartDetailData._id;
@@ -256,7 +256,7 @@ public class PlaceOrderPanelController : BasePanelController
                         AppDataController.instance.GetDeliveryDestineTime (
                             reservationContent.GetChild (i).GetChild (1).GetComponent<CartPanelDishBarController> ().cartDetailData._deliverTimeID), "");
                             */
-                    foreach (var dishBar in reservationContent.GetChild (i).GetComponent<CartPanelRestaurantBarController> ().dishBarList)
+                    foreach (var dishBar in reservationContent.GetChild(i).GetComponent<CartPanelRestaurantBarController>().dishBarList)
                     {
                         cartDetailIDString = cartDetailIDString + "," + dishBar.cartDetailData._id;
                     }
@@ -280,10 +280,10 @@ public class PlaceOrderPanelController : BasePanelController
 
 
         cartDetailIDString = cartDetailIDString.Substring(1);
-        
+
         // Get fees
         CartPanelController.instance.GetTotalPriceDetails(out totalPrice, out extraFee, out deliveryFee);
-        
+
         feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text = "$ " + totalPrice;
         feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text = "$ " + extraFee;
         DebugLogger.Log("Updating current deliveryFee to " + deliveryFee);
@@ -429,7 +429,7 @@ public class PlaceOrderPanelController : BasePanelController
             WWWForm form = new WWWForm();
             form.AddField("coupon_sn", couponString);
             LoadingPanelController.instance.DisplayPanel();
-            OrderNetworkController.instance.GetCouponData(form, 
+            OrderNetworkController.instance.GetCouponData(form,
                 new LDFWServerResponseEvent((JSONObject coupon, string m) =>
                     {
                         LoadingPanelController.instance.HidePanel();
@@ -461,7 +461,7 @@ public class PlaceOrderPanelController : BasePanelController
                         LoadingPanelController.instance.HidePanel();
                     }));
 
-             
+
         }
     }
 
@@ -494,7 +494,7 @@ public class PlaceOrderPanelController : BasePanelController
                     DebugLogger.Log("Updating highest delivery to " + key + ", " + CartPanelController.instance.restaurantDeliverFee[key]);
                     highestRestaurantID = key;
                     highestDelivery = CartPanelController.instance.restaurantDeliverFee[key];
-                }   
+                }
             }
             DebugLogger.Log("Total and highestDelivery = " + totalDelivery.ToString("0.00") + ", " + highestDelivery.ToString("0.00"));
             feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + (totalDelivery - highestDelivery).ToString("0.00");
@@ -648,7 +648,7 @@ public class PlaceOrderPanelController : BasePanelController
         form.AddField("coupon_sn", couponSection.Find("Input").GetComponent<InputField>().text);
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
-        form.AddField("instruction",addressSection.Find("AddressBar/Instruction/Text").GetComponent<Text>().text);
+        form.AddField("instruction", addressSection.Find("AddressBar/Instruction").GetComponent<InputField>().text);
         //Debug.Log(addressSection.Find("AddressBar/Instruction/Text").GetComponent<Text>().text);
 
         if (string.IsNullOrEmpty(selectedCreditCardID))
@@ -677,7 +677,7 @@ public class PlaceOrderPanelController : BasePanelController
                         OpenConfirmWindow();
                         UserDataController.instance.hasMadeFirstOrder = "1";
                     }
-                
+
                     /*
                 confirmOrderPanel.Find ("OrderNumber").GetComponent<TextController> ().ResetUI (
                     "订单号: <color=orange>" + orderNumber + "</color>",
@@ -721,7 +721,7 @@ public class PlaceOrderPanelController : BasePanelController
                         confirmOrderPanel.Find("OrderNumber").GetComponent<TextController>().ResetUI(
                             "订单号: " + subOrderNumber + "\n" + checkEmailZH,
                             "Order ID: " + subOrderNumber + "\n" + checkEmailEN);
-                        
+
                         confirmOrderPanel.gameObject.SetActive(true);
                         if (checkForCompletionIEnumerator != null)
                         {
