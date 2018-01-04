@@ -648,7 +648,8 @@ public class PlaceOrderPanelController : BasePanelController
         form.AddField("coupon_sn", couponSection.Find("Input").GetComponent<InputField>().text);
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
-
+        form.AddField("instruction",addressSection.Find("AddressBar/Instruction/Text").GetComponent<Text>().text);
+        //Debug.Log(addressSection.Find("AddressBar/Instruction/Text").GetComponent<Text>().text);
 
         if (string.IsNullOrEmpty(selectedCreditCardID))
         {

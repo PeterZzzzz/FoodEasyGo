@@ -142,6 +142,29 @@ public class UserDataNetworkController : ServerCallController {
         leaveMessageCall = CommonWWWCall (userDataControllerURL + "leave_message", form, success, failure);
     }
 
+    //save_help
+    LDFWWWWCallCoroutineWrapper saveHelpCall = null;
+    public void SaveHelp(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (saveHelpCall != null)
+        {
+            saveHelpCall.Dispose();
+        }
+        saveHelpCall = CommonWWWCall(userDataControllerURL + "save_help", form, success, failure);
+    }
+
+    //send_help_email
+    LDFWWWWCallCoroutineWrapper sendEmail = null;
+    public void SendEmail(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (sendEmail != null)
+        {
+            sendEmail.Dispose();
+        }
+        sendEmail = CommonWWWCall(userDataControllerURL + "send_help_email", form, success, failure);
+    }
+
+
     LDFWWWWCallCoroutineWrapper updateUserIOSTokenCall = null;
     public void UpdateUserIOSToken (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
     {

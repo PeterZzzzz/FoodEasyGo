@@ -13,7 +13,7 @@ public class GroceryPanelController : BasePanelController {
     public RectTransform categoryBar;
     public RectTransform categoryBarContent;
 
-
+    public Animator tipAnimator;
 
     public RectTransform defaultDisplay;
     public RectTransform defaultDisplayContent;
@@ -89,6 +89,7 @@ public class GroceryPanelController : BasePanelController {
     #region TipBar
     public void CloseTipBar () {
         tipBar.localScale = Vector3.zero;
+        tipAnimator.enabled = false;
         categoryBar.anchoredPosition = new Vector2 (0, -70);
         defaultDisplay.anchoredPosition = new Vector2 (0, -120);
         defaultDisplay.sizeDelta = new Vector2 (defaultDisplay.sizeDelta.x, -170);

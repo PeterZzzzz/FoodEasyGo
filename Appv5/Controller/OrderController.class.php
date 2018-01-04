@@ -1115,6 +1115,7 @@ class OrderController extends BaseController {
 		$paymentID = $this->get_param('post.payment_id');
 		$tip = $this->get_param('post.tip');
         $couponSN = $this->get_param('post.coupon_sn');
+        $instruction = $this->get_param('post.instruction');
         
         $creditCardFirstName = $this->get_param('post.credit_card_first_name');
 		$creditCardLastName = $this->get_param('post.credit_card_last_name');
@@ -1171,7 +1172,8 @@ class OrderController extends BaseController {
             
             'total_price'                        => $totalPrice,
             'discont_total_price'                => $discountTotalPrice,
-            
+        
+        'instruction'=>$instruction,
             ];
         
         if ($paymentType == 1) {

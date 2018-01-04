@@ -162,7 +162,9 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     }
 
     public void OnHelpButtonClick(){
-        OrderHelpPanelController.instance.OpenPanel();
+
+        string orderId = _subOrderData.GetField("order_number").str;
+        OrderHelpPanelController.instance.OpenPanel(orderId);
     }
 
 }
