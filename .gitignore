@@ -10,6 +10,7 @@ sysinfo.txt
 *.stackdump
 *.apk
 *.unitypackage
+*.zip
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
