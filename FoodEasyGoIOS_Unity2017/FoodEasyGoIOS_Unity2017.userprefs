@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{96D694EA-F372-4C6A-1CEC-9A368C9D4875}|">
   <MonoDevelop.Ide.ItemProperties.FoodEasyGoIOS__Unity2017 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelEndlessScrollview.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/RestaurantDetailPanel/RestaurantDetailPanelController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelController.cs" Line="204" Column="78" />
-      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelEndlessScrollview.cs" Line="19" Column="51" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs" Line="164" Column="53" />
+      <File FileName="Assets/__Scripts/Network/GrouponNetworkController.cs" Line="41" Column="17" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeGrouponScrollviewController.cs" Line="33" Column="92" />
+      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeGrouponScrollviewElementController.cs" Line="22" Column="1" />
+      <File FileName="Assets/__Scripts/Panel/RestaurantDetailPanel/RestaurantDetailPanelController.cs" Line="367" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

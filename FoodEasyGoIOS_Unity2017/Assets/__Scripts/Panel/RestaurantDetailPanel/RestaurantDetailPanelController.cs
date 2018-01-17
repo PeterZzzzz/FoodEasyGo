@@ -127,6 +127,10 @@ public class RestaurantDetailPanelController : BasePanelController
     {
         commentContent.gameObject.SetActive(false);
         dishContent.gameObject.SetActive(true);
+
+        transform.Find("Viewport/DishContent/TitleSection/DishesButton").GetComponent<RestaurantDetailPanelTitleSectionToggleElementController>().SelectToggleElement();
+        transform.Find("Viewport/DishContent/TitleSection/CommentsButton").GetComponent<RestaurantDetailPanelTitleSectionToggleElementController>().DeselectToggleElement();
+
     }
 
     private IEnumerator LoadDishDetailPanelCoroutine()
@@ -166,7 +170,6 @@ public class RestaurantDetailPanelController : BasePanelController
                 Debug.LogError("Missing groupon iD!");
                 yield break;
             }
-
             LoadingPanelController.instance.DisplayPanel();
             WWWForm form = new WWWForm();
             form.AddField("groupon_id", grouponID);

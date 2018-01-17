@@ -78,7 +78,7 @@ public class OrderHelpInputPanelController : BasePanelController {
             case 3:
                 customerIssue = "更改地址";
                 headerTitle.ResetUI("更改地址", "Change Address");
-                descriptionTextView.GetComponent<TextController>().ResetUI("如果您输错了地址，可以在下方输入您正确的地址，我们的客服人员会及时为您更改。", "If you enter the wrong delivery address by accident, please enter your order number below and the updated delivery address, we will update it for you.");
+                descriptionTextView.GetComponent<TextController>().ResetUI("如果您输错了地址，可以在下方输入您正确的地址，我们的客服人员会及时为您更改。（注意：更改后的地址有可能需要额外收取外送费差额或不在此餐馆的服务范围，如遇此情况，我们将会以邮件形式通知您）", "If you enter the wrong delivery address by accident, please enter your order number below and the updated delivery address, we will update it for you.(Please be advised that the updated delivery address may be charged for extra delivery fees or may not be covered by delivery range, we will notify you via email if it happens.)");
                 nameLabel.gameObject.SetActive(true);
                 contactMethodLabel.gameObject.SetActive(true);
                 orderNumLabel.gameObject.SetActive(true);
@@ -94,16 +94,16 @@ public class OrderHelpInputPanelController : BasePanelController {
             case 4:
                 customerIssue = "取消订单";
                 headerTitle.ResetUI("取消订单", "Cancel Order");
-                descriptionTextView.GetComponent<TextController>().ResetUI("一般下单完成，所有的订单经餐馆确认后，我们将无法取消。如有特殊取消理由，请在下方填写取消理由，我们的客服会和餐馆取得联系。", "Order can be cancelled only before restaurant accepts the order. Please enter the reason why you would like to cancel below. We will try our best to help you out.");
-                nameLabel.gameObject.SetActive(true);
-                contactMethodLabel.gameObject.SetActive(true);
-                orderNumLabel.gameObject.SetActive(true);
-                descriptionLabel.gameObject.SetActive(true);
-                nameInputField.gameObject.SetActive(true);
-                contactMethodInputField.gameObject.SetActive(true);
-                orderNumInputField.gameObject.SetActive(true);
-                descriptionInputField.gameObject.SetActive(true);
-                submitBtn.gameObject.SetActive(true);
+                descriptionTextView.GetComponent<TextController>().ResetUI("一般下单完成，所有的订单经餐馆确认后，我们将无法取消。", "Order can be cancelled only before restaurant accepts the order. ");
+                nameLabel.gameObject.SetActive(false);
+                contactMethodLabel.gameObject.SetActive(false);
+                orderNumLabel.gameObject.SetActive(false);
+                descriptionLabel.gameObject.SetActive(false);
+                nameInputField.gameObject.SetActive(false);
+                contactMethodInputField.gameObject.SetActive(false);
+                orderNumInputField.gameObject.SetActive(false);
+                descriptionInputField.gameObject.SetActive(false);
+                submitBtn.gameObject.SetActive(false);
                 customerServiceImage.gameObject.SetActive(false);
 
                 break;
