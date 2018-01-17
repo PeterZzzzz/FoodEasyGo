@@ -42,6 +42,7 @@ class GrouponController extends BaseController {
 		
         $restaurantList = M('restaurant')
 			->where("id in (select goods_belong_id from food_groupon_goods where groupon_id = $grouponID)")
+            ->order('id desc') //按照id倒序排列
 			->select();
 		
 		foreach ($restaurantList as &$restaurant) {
