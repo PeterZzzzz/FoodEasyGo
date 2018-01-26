@@ -10,6 +10,7 @@ public class UserDataNetworkController : ServerCallController {
     public string userAddressControllerURL;
     public string userPaymentControllerURL;
     public string imageControllerURL;
+    public string smsControllerURL;
 
 
     protected void Awake () {
@@ -23,6 +24,7 @@ public class UserDataNetworkController : ServerCallController {
         userAddressControllerURL = Config.serverAPIURL + "UserAddress/";
         userPaymentControllerURL = Config.serverAPIURL + "UserPayment/";
         imageControllerURL = Config.serverAPIURL + "Image/";
+        smsControllerURL = Config.serverAPIURL + "SMS/";
     }
 
 
@@ -69,6 +71,28 @@ public class UserDataNetworkController : ServerCallController {
         }
         userAddressCall = CommonWWWCall (userAddressControllerURL + "modify_user_address", form, success, failure);
     }
+    #endregion
+
+
+    #region SendVerifiationCode
+    LDFWWWWCallCoroutineWrapper sendCodeCall = null;
+    public void SendVerificationCode(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if(sendCodeCall != null){
+            sendCodeCall.Dispose();
+        }
+        CommonWWWCall(smsControllerURL + "generateCode", form, success, failure);
+    }
+
+    public void CheckVerificationCode(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (sendCodeCall != null)
+        {
+            sendCodeCall.Dispose();
+        }
+        sendCodeCall = CommonWWWCall(smsControllerURL + "checkCode", form, success, failure);
+    }
+
     #endregion
 
 

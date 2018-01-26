@@ -19,9 +19,14 @@ public class AddressPanelController : BasePanelController {
     // Transform
     public ScrollRect defaultScrollRect;
     public Transform modifyAddressPanel;
+    public InputField codeInputField;
+    public Button sendCodeBtn;
+    public int waitForResend = 20;
 
     // private
     AddressPanelAddressBarController currentBar = null;
+
+    private bool useYunPianServer = true;
 
     new void Awake () {
         if (instance != null) {
@@ -164,6 +169,34 @@ public class AddressPanelController : BasePanelController {
         }
     }
 
+    public void SendCodeButtonClicked()
+    {
+        if(modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text.Length == 10)
+        {
+            StartCoroutine(sendCodeCoroutine());
+        }else
+        {
+            MessagePanelController.instance.DisplayPanel("Please enter 10 digits Phone number");
+        }
+
+    }
+
+    private IEnumerator sendCodeCoroutine()
+    {
+        sendCodeBtn.interactable = false;
+        SendVerificationCode();
+
+        for (int i = waitForResend; i >= 0; i--)
+        {
+            modifyAddressPanel.Find("SendCodeButton/Text").GetComponent<TextController>().ResetUI("重新发送" + i, "Resend" + i);
+            yield return new WaitForSeconds(1.0f);
+        }
+        modifyAddressPanel.Find("SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
+        sendCodeBtn.interactable = true;
+
+    }
+
+
     public bool ValidateModifyAddressPanel () {
         if (string.IsNullOrEmpty (modifyAddressPanel.Find ("Name/InputField").GetComponent<InputField>().text)) {
             MessagePanelController.instance.DisplayPanel ("Name cannot be null");
@@ -242,5 +275,45 @@ public class AddressPanelController : BasePanelController {
         form.AddField ("address_zip_code", zipCode);
         UserDataNetworkController.instance.ModifyUserAddress (form, success, failure);
     }
+
+    public void SendVerificationCode()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("phone", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
+
+        if (useYunPianServer)
+        {
+            Debug.Log("使用云片");
+            form.AddField("service", "Yunpian/send_sms");
+            useYunPianServer = !useYunPianServer;
+        }
+        else
+        {
+            Debug.Log("使用AWS");
+            form.AddField("service", "Aws/send_sms");
+            useYunPianServer = !useYunPianServer;
+        }
+        UserDataNetworkController.instance.SendVerificationCode(form,
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(data.GetField("c").f.ToString() + ":" + m); }));
+    }
+
+    public void CheckVerificationCode()
+    {
+        Debug.Log(codeInputField.text);
+
+        if(codeInputField.text.Length == 4)
+        {
+            Debug.Log("Check code now");
+
+            WWWForm form = new WWWForm();
+            form.AddField("phone", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
+            form.AddField("code", codeInputField.text);
+            UserDataNetworkController.instance.CheckVerificationCode(form, 
+                                                                     new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }),
+                                                                     new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(data.GetField("c").f.ToString() + ":" + m); }));
+        }
+    }
+
     #endregion
 }

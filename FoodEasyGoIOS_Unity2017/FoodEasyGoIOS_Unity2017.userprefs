@@ -1,14 +1,12 @@
 ﻿<Properties StartupConfiguration="{96D694EA-F372-4C6A-1CEC-9A368C9D4875}|">
   <MonoDevelop.Ide.ItemProperties.FoodEasyGoIOS__Unity2017 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Config/Config.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/UserPanel/AddressPanelController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs" Line="164" Column="65" />
-      <File FileName="Assets/__Scripts/Network/GrouponNetworkController.cs" Line="41" Column="17" />
-      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeGrouponScrollviewController.cs" Line="33" Column="92" />
-      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeGrouponScrollviewElementController.cs" Line="22" Column="1" />
-      <File FileName="Assets/__Scripts/Panel/RestaurantDetailPanel/RestaurantDetailPanelController.cs" Line="137" Column="105" />
-      <File FileName="Assets/__Scripts/Config/Config.cs" Line="29" Column="61" />
+      <File FileName="Assets/__Scripts/Panel/LoadingCanvasController.cs" Line="13" Column="26" />
+      <File FileName="Assets/__Scripts/Panel/UserPanel/AddressPanelController.cs" Line="312" Column="57" />
+      <File FileName="Assets/__Scripts/Network/UserDataNetworkController.cs" Line="78" Column="46" />
+      <File FileName="Assets/__Scripts/Network/ServerCallController.cs" Line="13" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
