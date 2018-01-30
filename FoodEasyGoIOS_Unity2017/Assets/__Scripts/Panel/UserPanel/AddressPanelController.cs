@@ -27,8 +27,9 @@ public class AddressPanelController : BasePanelController {
     AddressPanelAddressBarController currentBar = null;
 
     private bool useYunPianServer = true;
-    private bool isPhoneVerified = false;
-    private bool isPhoneChanged = false;
+    public bool isPhoneVerified = false;
+    public bool isPhoneChanged = false;
+    public string modifyAddressID;
 
     new void Awake () {
         if (instance != null) {
@@ -47,10 +48,6 @@ public class AddressPanelController : BasePanelController {
     public override void ResetPanel () {
         defaultScrollRect.content.DestroyAllChildren ();
 
-        Debug.Log(isPhoneChanged.ToString() + isPhoneVerified.ToString());
-        isPhoneChanged = false;
-        isPhoneVerified = false;
-        Debug.Log(isPhoneChanged.ToString() + isPhoneVerified.ToString());
         SwitchModifyAddressPanel (false);
     }
 
@@ -108,7 +105,10 @@ public class AddressPanelController : BasePanelController {
 
     #region ModifyAddress
     public void OnAddAddressButtonClicked () {
-
+        Debug.Log("首次添加地址" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+        isPhoneChanged = false;
+        isPhoneVerified = false;
+        modifyAddressID = "";
         SwitchModifyAddressPanel (true, null);
     }
 
@@ -117,6 +117,8 @@ public class AddressPanelController : BasePanelController {
         currentBar = null;
 
         if (state && bar != null) {
+            Debug.Log("进入修改页面" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+
             currentBar = bar;
             modifyAddressPanel.Find ("Name/InputField").GetComponent<InputField> ().text = currentBar._name;
             modifyAddressPanel.Find ("ContactNumber/InputField").GetComponent<InputField> ().text = currentBar._phone;
@@ -125,8 +127,10 @@ public class AddressPanelController : BasePanelController {
             modifyAddressPanel.Find ("City/InputField").GetComponent<InputField> ().text = currentBar._city;
             modifyAddressPanel.Find ("State/InputField").GetComponent<InputField> ().text = currentBar._state;
             modifyAddressPanel.Find ("Postal/InputField").GetComponent<InputField> ().text = currentBar._zipCode;
-
+            codeInputField.text = "";
         } else {
+            Debug.Log("进入空白页面" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+
             modifyAddressPanel.Find ("Name/InputField").GetComponent<InputField> ().text = "";
             modifyAddressPanel.Find ("ContactNumber/InputField").GetComponent<InputField> ().text = "";
             modifyAddressPanel.Find ("Unit/InputField").GetComponent<InputField> ().text = "";
@@ -134,6 +138,8 @@ public class AddressPanelController : BasePanelController {
             modifyAddressPanel.Find ("City/InputField").GetComponent<InputField> ().text = "";
             modifyAddressPanel.Find ("State/InputField").GetComponent<InputField> ().text = "";
             modifyAddressPanel.Find ("Postal/InputField").GetComponent<InputField> ().text = "";
+            codeInputField.text = "";
+
         }
     }
     
@@ -151,25 +157,27 @@ public class AddressPanelController : BasePanelController {
                     new LDFWServerResponseEvent ((JSONObject data, string m) => {
                         SwitchModifyAddressPanel (false);
                         AppDataController.instance.SyncAddressList (() => {
-                            //AddressPanelController.instance.ResetPanel ();
-                        defaultScrollRect.content.DestroyAllChildren();
-                        SwitchModifyAddressPanel(false);
+                        //可以删除以下两行，因为走到这一定会走setPhoneVerified，在那个方法中有刷新界面以及关闭loading
 
-                        AddressPanelController.instance.ReloadPanel ();
+                        //AddressPanelController.instance.ResetPanel ();
+
+                        //AddressPanelController.instance.ReloadPanel ();
                         });
 
-                    Debug.Log(isPhoneChanged.ToString());
-                        if (isPhoneChanged)
-                        {
-                            Debug.Log("认证了此电话");
-                        Debug.LogError("bugairenzheng shi ren zheng"+isPhoneChanged.ToString() + isPhoneVerified.ToString());
-
-                            SetPhoneVerified();
-                        }
                 }),
                     new LDFWServerResponseEvent((JSONObject data, string m) => { 
                     MessagePanelController.instance.DisplayPanel(m);
                 }));
+
+                if (isPhoneChanged)
+                {
+                    Debug.Log("认证了此电话");
+                    Debug.Log("新用户添加地址" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+
+                    SetPhoneVerified();
+                }
+
+
             } else {
                 ModifyAddress (
                     currentBar._addressID,
@@ -183,31 +191,22 @@ public class AddressPanelController : BasePanelController {
                     new LDFWServerResponseEvent ((JSONObject data, string m) => {
                         SwitchModifyAddressPanel (false);
                         AppDataController.instance.SyncAddressList (() => {
-                        //AddressPanelController.instance.ResetPanel ();
-
-                        defaultScrollRect.content.DestroyAllChildren();
-                        SwitchModifyAddressPanel(false);
+                        //以下两行不可以删除，因为如果只是修改地址或者又输入了原号码则不会调用setPhoneVerified，但是还是会修改地址进入loading页面，需要在这里刷新页面并关闭loading
+                        AddressPanelController.instance.ResetPanel ();
 
                         AddressPanelController.instance.ReloadPanel ();
                         });
-                    if (isPhoneChanged)
-                        {
-                            Debug.Log("认证了此电话");
-                        Debug.LogError("bugairenzheng shi ren zheng"+isPhoneChanged.ToString() + isPhoneVerified.ToString());
-
-                            SetPhoneVerified();
-                        }
                 }),
                     new LDFWServerResponseEvent((JSONObject data, string m) => { 
                     MessagePanelController.instance.DisplayPanel(m);
-                    if (isPhoneChanged)
-                        {
-                            Debug.Log("认证了此电话");
-                        Debug.LogError("bugairenzheng shi ren zheng"+isPhoneChanged.ToString() + isPhoneVerified.ToString());
-
-                            SetPhoneVerified();
-                        }
                 }));
+                if (isPhoneChanged)
+                {
+                    Debug.Log("认证了此电话");
+                    Debug.Log("老用户已验证改电话+老用户未验证来验证" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+
+                    SetPhoneVerified();
+                }
             }
         }
     }
@@ -232,7 +231,7 @@ public class AddressPanelController : BasePanelController {
 
         for (int i = waitForResend; i >= 0; i--)
         {
-            modifyAddressPanel.Find("SendCodeButton/Text").GetComponent<TextController>().ResetUI("重新发送" + i, "Resend" + i);
+            modifyAddressPanel.Find("SendCodeButton/Text").GetComponent<TextController>().ResetUI("重新发送" + i + "s", "Resend in" + i + "s");
             yield return new WaitForSeconds(1.0f);
         }
         modifyAddressPanel.Find("SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
@@ -393,7 +392,10 @@ public class AddressPanelController : BasePanelController {
         WWWForm form = new WWWForm();
         form.AddField("phoneNumber", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
         UserDataNetworkController.instance.SetPhoneNumberVerified(form,
-                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
+                                                                    AddressPanelController.instance.ResetPanel();
+                                                                    AddressPanelController.instance.ReloadPanel();
+        }),
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }));
     }
 
@@ -447,9 +449,42 @@ public class AddressPanelController : BasePanelController {
 
     public void PhoneInputFieldChanged()
     {
-        isPhoneChanged = true;
-        isPhoneVerified = false;
-        Debug.Log("用户修改电话");
+        if(currentBar != null)
+        {
+            Debug.Log("修改的时候测试有没有改电话");
+
+            if (modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text != currentBar._phone)
+            {
+                isPhoneChanged = true;
+                isPhoneVerified = false;
+                Debug.Log("用户修改电话" + modifyAddressID);
+                //把后台的此ID电话verify改为0，否则新的号码验证信息写不进去。之后可以把此方法放在解锁点击事件中
+                WWWForm form = new WWWForm();
+                form.AddField("addressID", modifyAddressID);
+                UserDataNetworkController.instance.SetPhoneNumberUnverified(form,
+                                                                         new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                         {
+                                                                             Debug.Log("解除验证成功");
+                                                                         }),
+                                                                         new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                         {
+                                                                             Debug.Log("解除验证失败");
+                                                                         }));
+            }
+            else
+            {
+                Debug.Log("电话号码相同" + currentBar._phone);
+                isPhoneChanged = false;
+                isPhoneVerified = false;
+            }   
+        }else
+        {
+            Debug.Log("第一次无信息");
+            isPhoneChanged = true;
+            isPhoneVerified = false;
+            Debug.Log("用户修改电话 这时候ID应该为空：" + modifyAddressID);
+        }
+
     }
 
     #endregion

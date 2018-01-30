@@ -79,6 +79,9 @@ public class AddressPanelAddressBarController : MonoBehaviour {
     
 
     public void OnModifyButtonClicked () {
+        AddressPanelController.instance.isPhoneChanged = false;
+        AddressPanelController.instance.isPhoneVerified = false;
+        AddressPanelController.instance.modifyAddressID = _addressID;
         AddressPanelController.instance.SwitchModifyAddressPanel (true, this);
     }
 
