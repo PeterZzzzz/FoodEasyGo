@@ -150,4 +150,62 @@ class UserAddressController extends BaseController {
 			$this->return_data([], 'Address modified successfully');
 		}
 	}
+
+
+	/**
+	 * Get user phone verified info
+	 */
+	public function get_phone_verification () {
+		$phoneNumber = $this->get_param('post.phoneNumber');
+		$isPhoneVerified = M('user_address')->field('`phone_verified`')
+			->where("`user_id` = $this->userID and `phone` = $phoneNumber")
+			->find();
+		
+		
+		$this->return_data($isPhoneVerified['phone_verified']);
+	}
+
+
+	/**
+	 * Set user phone verified
+	 */
+	public function set_phone_verification () {
+		$phoneNumber = $this->get_param('post.phoneNumber');
+
+		
+		$addressData = [
+				'phone_verified' => 1,
+		];
+		
+		$res = M('user_address')
+			->where("`user_id` = $this->userID and `phone` = $phoneNumber")
+			->save($addressData);
+		
+		if (!$res) {
+			$this->return_error('Can not verify this phone');
+		} else {
+			$this->return_data([], 'Phone verified');
+		}
+	}
+
+	/**
+	 * Set user phone unverified
+	 */
+	public function set_phone_unverification () {
+		$addressID = $this->get_param('post.addressID');
+		
+		$addressData = [
+				'phone_verified' => 0,
+		];
+		
+		$res = M('user_address')
+			->where("`id`=$addressID")
+			->save($addressData);
+		
+		if (!$res) {
+			$this->return_error('Can not unverify this phone');
+		} else {
+			$this->return_data([], 'Phone unverified');
+		}
+	}
 }
