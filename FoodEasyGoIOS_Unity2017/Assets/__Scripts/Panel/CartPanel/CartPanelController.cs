@@ -398,6 +398,7 @@ public class CartPanelController : BasePanelController
 
             return;
         }
+
         StartCoroutine (CheckOutCoroutine ());
     }
 
