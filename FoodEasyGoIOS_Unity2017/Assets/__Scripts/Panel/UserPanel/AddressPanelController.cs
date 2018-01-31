@@ -401,7 +401,7 @@ public class AddressPanelController : BasePanelController {
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
                                                                     AddressPanelController.instance.ResetPanel();
                                                                     AddressPanelController.instance.ReloadPanel();
-        }),s
+        }),
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
                                                                     AddressPanelController.instance.ResetPanel();
                                                                     AddressPanelController.instance.ReloadPanel();
@@ -449,7 +449,7 @@ public class AddressPanelController : BasePanelController {
                                                                      }),
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                      {
-                                                                         MessagePanelController.instance.DisplayPanel(data.GetField("c").f.ToString() + ":" + m);
+                                                                         MessagePanelController.instance.DisplayPanel(m);
                                                                          isPhoneVerified = false;
                                                                          Debug.Log("code错误");
                                                                      }));
