@@ -86,6 +86,14 @@ public class UserDataNetworkController : ServerCallController {
         }
         userAddressCall = CommonWWWCall(userAddressControllerURL + "set_phone_unverification", form, success, failure);
     }
+    public void GetVerificationInfo(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (sendCodeCall != null)
+        {
+            sendCodeCall.Dispose();
+        }
+        sendCodeCall = CommonWWWCall(userAddressControllerURL + "get_phone_verification", form, success, failure);
+    }
     #endregion
 
 

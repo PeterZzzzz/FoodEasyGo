@@ -206,6 +206,10 @@ public class AddressPanelController : BasePanelController {
                     Debug.Log("老用户已验证改电话+老用户未验证来验证" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
 
                     SetPhoneVerified();
+                }else
+                {
+                    Debug.Log("已有数据，已验证，再次点击了验证" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+
                 }
             }
         }

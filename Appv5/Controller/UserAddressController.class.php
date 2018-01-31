@@ -156,13 +156,13 @@ class UserAddressController extends BaseController {
 	 * Get user phone verified info
 	 */
 	public function get_phone_verification () {
-		$phoneNumber = $this->get_param('post.phoneNumber');
+
+		$addressID = $this->get_param('post.addressID');
 		$isPhoneVerified = M('user_address')->field('`phone_verified`')
-			->where("`user_id` = $this->userID and `phone` = $phoneNumber")
-			->find();
+		->where("`id`=$addressID")
+        ->find();
 		
-		
-		$this->return_data($isPhoneVerified['phone_verified']);
+		$this->return_data(isset($isPhoneVerified['phone_verified'])?$isPhoneVerified['phone_verified']:-1);
 	}
 
 
@@ -202,9 +202,8 @@ class UserAddressController extends BaseController {
 			->where("`id`=$addressID")
 			->save($addressData);
 		
-		if (!$res) {
-			$this->return_error('Can not unverify this phone');
-		} else {
+
+		if ($res) {
 			$this->return_data([], 'Phone unverified');
 		}
 	}

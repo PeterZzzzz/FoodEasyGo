@@ -45,6 +45,7 @@ public class CartPanelController : BasePanelController
     private Dictionary<string, JSONObject>          restaurantDic;
     private bool                                    isDisplayNowRestaurant;
     private IEnumerator                             getDeliverFeeIEnumerator;
+    private bool isPhoneVerified;
 
 
     new void Awake ()
@@ -357,7 +358,8 @@ public class CartPanelController : BasePanelController
             address.GetField ("address").str + ", " + address.GetField ("street").str + ", " + address.GetField ("city").str + ", "
             + address.GetField ("state").str + ", " + address.GetField("zip_code").str);
 
-        //TestAddress (address);
+        CheckPhoneVerification(address.GetField("id").str);
+        Debug.Log("这个地址的ID是："+address.GetField("id").str);
     }
 
 
@@ -398,7 +400,15 @@ public class CartPanelController : BasePanelController
 
             return;
         }
+        if (!isPhoneVerified)
+        {
+            if (Config.currentLanguage == Language.chinese)
+                MessagePanelController.instance.DisplayPanel("号码未认证, 请前往地址管理认证号码");
+            else
+                MessagePanelController.instance.DisplayPanel("This phone number is has not been verified, please go to Address to verify this number");
 
+            return;
+        }
         StartCoroutine (CheckOutCoroutine ());
     }
 
@@ -582,6 +592,33 @@ public class CartPanelController : BasePanelController
                 restaurant.UpdateUI ();
             }
         }
+    }
+
+
+    public void CheckPhoneVerification(string addressID)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("addressID", addressID);
+        UserDataNetworkController.instance.GetVerificationInfo(form,
+        new LDFWServerResponseEvent((JSONObject data, string m) => 
+        {
+            Debug.Log("电话验证后台交互成功 结果是：" + data.str);
+            if (data.str == "1")
+            {
+                Debug.Log("yes ver");
+                isPhoneVerified = true;
+            }
+            else
+            {
+                Debug.Log("no ver");
+                isPhoneVerified = false;
+            };
+        }),
+        new LDFWServerResponseEvent((JSONObject data, string m) => 
+        {
+            Debug.Log("电话验证后台交互失败：" + data.str);
+
+        }));
     }
     #endregion
 }

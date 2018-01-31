@@ -1172,8 +1172,8 @@ class OrderController extends BaseController {
             
             'total_price'                        => $totalPrice,
             'discont_total_price'                => $discountTotalPrice,
-            
-            'instruction'                        => $instruction,
+        
+        'instruction'=>$instruction,
             ];
         
         if ($paymentType == 1) {
