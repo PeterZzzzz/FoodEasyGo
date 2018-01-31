@@ -209,7 +209,9 @@ public class AddressPanelController : BasePanelController {
                 }else
                 {
                     Debug.Log("已有数据，已验证，再次点击了验证" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
+                    AddressPanelController.instance.ResetPanel();
 
+                    AddressPanelController.instance.ReloadPanel();
                 }
             }
         }
@@ -399,8 +401,11 @@ public class AddressPanelController : BasePanelController {
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
                                                                     AddressPanelController.instance.ResetPanel();
                                                                     AddressPanelController.instance.ReloadPanel();
-        }),
-                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }));
+        }),s
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
+                                                                    AddressPanelController.instance.ResetPanel();
+                                                                    AddressPanelController.instance.ReloadPanel();
+        }));
     }
 
     public void SendVerificationCode()
