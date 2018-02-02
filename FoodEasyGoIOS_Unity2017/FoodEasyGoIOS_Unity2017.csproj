@@ -387,6 +387,7 @@
     <Compile Include="Assets\__Scripts\Test\Test1.cs" />
     <Compile Include="Assets\__Scripts\UI\ButtonController.cs" />
     <Compile Include="Assets\__Scripts\UI\InputFieldController.cs" />
+    <Compile Include="Assets\__Scripts\UI\MobileInputController.cs" />
     <Compile Include="Assets\__Scripts\UI\ScrollRectController.cs" />
     <Compile Include="Assets\__Scripts\UI\TextController.cs" />
     <Compile Include="Assets\__Scripts\Userdata\UserDataController.cs" />

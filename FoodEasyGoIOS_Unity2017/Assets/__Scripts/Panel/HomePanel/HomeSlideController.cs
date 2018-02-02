@@ -16,6 +16,8 @@ public class HomeSlideController : BaseUIController
 
     private RectTransform imageParent;
     private IEnumerator startSlideShowIEnumerator = null;
+    private IEnumerator startSlideShowReverseIEnumerator = null;
+
 
     protected new void Awake()
     {
@@ -31,11 +33,12 @@ public class HomeSlideController : BaseUIController
         image.SetParent(imageParent);
         image.localScale = Vector3.one;
         image.sizeDelta = new Vector2(MainCanvasController.instance.canvasSize.x, GetComponent<LayoutElement>().preferredHeight);
-        image.gameObject.AddComponent<Button>().onClick.AddListener(() =>
-            {
-                DebugLogger.Log ("Open url: " + externalURL);
-                Application.OpenURL(externalURL);
-            });
+        //image.gameObject.AddComponent<Button>().onClick.AddListener(() =>
+            //{
+            //    DebugLogger.Log ("Open url: " + externalURL);
+            //    Application.OpenURL(externalURL);
+            //});
+        image.gameObject.AddComponent<MobileInputController>();
     }
 
     public void StartSlideShow(JSONObject data)
@@ -45,11 +48,12 @@ public class HomeSlideController : BaseUIController
             StopCoroutine(startSlideShowIEnumerator);
         }
 
-        startSlideShowIEnumerator = StartSlideShowCoroutine(data);
+        startSlideShowIEnumerator = StartSlideShowCoroutine(data, true);
+        startSlideShowReverseIEnumerator = StartSlideShowCoroutine(data, false);
         StartCoroutine(startSlideShowIEnumerator);
     }
 
-    private IEnumerator StartSlideShowCoroutine(JSONObject data)
+    private IEnumerator StartSlideShowCoroutine(JSONObject data, bool isLeftSwipe)
     {
         while (imageParent.childCount > 0)
         {
@@ -65,7 +69,7 @@ public class HomeSlideController : BaseUIController
                 new ImageDownloader2(data[i].GetField("img_link").str.Replace("\\/", "/"), "general", slide.GetComponent<RawImage>(), 4, null, null));
             AddImage(slide as RectTransform, data[i].GetField("external_link").str.Replace("\\/", "/"));
         }
-        
+
         yield return null;
 
         slideNumber = imageParent.childCount;
@@ -86,6 +90,7 @@ public class HomeSlideController : BaseUIController
         {
             tp = imageParent.GetChild(i).GetComponent<LDFWTweenPosition>();
             tp.Init(Vector3.zero, new Vector3(-MainCanvasController.instance.canvasSize.x, 0f, 0f), 0.5f, 0f);
+            
             tp.Play();
 
             if (i < slideNumber - 1)
@@ -103,9 +108,37 @@ public class HomeSlideController : BaseUIController
             {
                 i -= slideNumber;
             }
-            
+
             yield return new WaitForSeconds(Config.slideShowTimeInterval);
         }
+
     }
+
+
+    private void Update()
+    {
+        if (MobileInputController.instance != null)
+        {
+            //Debug.Log("检查手势");
+            if (MobileInputController.instance.SwipeLeft)
+            {
+                StopCoroutine(startSlideShowIEnumerator);
+                StopCoroutine(startSlideShowReverseIEnumerator);
+                Debug.Log("向左滑");
+                StartCoroutine(startSlideShowIEnumerator);
+
+
+            }
+
+            if (MobileInputController.instance.SwipeRight)
+            {
+                StopCoroutine(startSlideShowIEnumerator);
+                StopCoroutine(startSlideShowReverseIEnumerator);
+                Debug.Log("向右滑");
+                StartCoroutine(startSlideShowReverseIEnumerator);
+            }
+        }
+    }
+
 
 }
