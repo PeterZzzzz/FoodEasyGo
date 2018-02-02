@@ -22,7 +22,6 @@ public class MobileInputController : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("0000000000000");
         tap = swipeLeft = swipeRight = false;
         //从右向左的顺序执行，先执行swipeRignt的赋值
 
