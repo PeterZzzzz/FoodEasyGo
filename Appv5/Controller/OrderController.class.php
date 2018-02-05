@@ -652,7 +652,7 @@ class OrderController extends BaseController {
 					$amounts=explode(',', $orderGoodsData['amount']);
 					$amounts=array_reverse($amounts);
 					$orderGoodsData['amount']=implode(',', $amounts);
-					
+						
 					$attributeData = $cartDetail['attribute_list'];
 					foreach ($attributeData as $key=>&$attribute) {
 						if ($attributeList == '') {
@@ -731,14 +731,52 @@ class OrderController extends BaseController {
 		settype($orderID, "string");
 		$this->return_data(array_merge(['order_id' => $orderID], $orderData));
 	}
+
+	/**
+	 * Get order data
+	 */
+	public function get_order_data () {
+		$orderID = $this->get_param('post.order_id');
+
+		$orderData = M('order')
+			->where("`id` = $orderID")
+			->find();
+
+		$this->return_data(array_merge(['order_id' => $orderID], $orderData));
+	}
+
+	/**
+	 * Try to apply coupon
+	 */
+	public function apply_coupon_sn () {
+		$orderID = $this->get_param('post.order_id');
+		$couponSN = $this->get_param('post.coupon_sn');
+
+		M('order')
+			->where("`id` = " . $orderID)
+			->save(['coupon_sn' => $couponSN]);
+
+
+		if (CouponController::ValidateCouponStatus($orderID)) {
+			$orderData = M('order')
+				->where("`id` = " . $orderID)
+				->find();
+			$this->return_data(['d' => $orderData]);
+		} else {
+			$this->return_error('Invalid coupon');
+		}
+	}
     
     /**
      * Get coupon data based on coupon_sn
      */
     public function get_coupon_data () {
-        $couponSN = $this->get_param('post.coupon_sn');
+		$couponSN = $this->get_param('post.coupon_sn');
+		$restaurantIDList = $this->get_param('post.restaurant_id_list');
+
+		echo $restaurantIDList;
         
-        $couponData = OrderController::get_coupon_detail_by_sn($couponSN, $this->userID);
+        $couponData = CouponController::get_coupon_detail_by_sn($couponSN, $this->userID, $restaurantIDList);
         
         if ($couponData) {
             $this->return_data($couponData);
@@ -746,376 +784,18 @@ class OrderController extends BaseController {
             $this->return_error("Invalid coupon");
         }
     }
-    
-	/**
-	 * Get coupon detail by coupon_sn id
-	 */
-	public static function get_coupon_detail_by_snid ($couponID, $userID) {
-		
-		$couponSNDetail = M('coupon_sn')
-			->where("`coupon_id` = $couponID and `user_id` in ($userID, 999999, 0)")
-			->find();
-        
-        $couponStatus = OrderController::check_for_coupon($couponSNDetail);
-        
-        if ($couponStatus['c'] != 0) {
-            return null;
-        }
-        
-        return $couponStatus['d'];
-    }
-    
-    /**
-     * Get coupon detail by coupon_sn number
-     */
-    public static function get_coupon_detail_by_sn ($couponSN, $userID) {
-		
-		$couponSNDetail = M('coupon_sn')
-			->where("`sn` = '$couponSN' and `user_id` in ($userID, 999999, 0)")
-			->find();
-        
-        $couponStatus = OrderController::check_for_coupon($couponSNDetail);
-        
-        if ($couponStatus['c'] != 0) {
-            return null;
-        }
-        
-        return $couponStatus['d'];
-    }
-    
-    /**
-     * Check if coupon is valid
-     */
-    public static function check_for_coupon ($couponSNDetail) {
-		
-        // Check if couponSN exist
-		if (!$couponSNDetail) {
-            return ['c' => 1, 'm' => 'Invalid coupon 1'];
-		}
-        
-        // Check if coupon exist
-        $couponDetail = M('coupon')
-			->where("`id` = " . $couponSNDetail['coupon_id'] . ' and endtime > now()')
-			->find();
-        
-        if (!$couponDetail) {
-            return ['c' => 1, 'm' => 'Invalid coupon 2'];
-		}
-		
-        // Check if coupon reusable
-		if ($couponSNDetail['status'] == 1) {
-            return ['c' => 1, 'm' => 'Invalid coupon 3'];
-		}
-        
-        $couponDetail['sn'] = $couponSNDetail;
-        
-		
-        return ['c' => 0, 'd' => $couponDetail];
-	}
-    
-    /**
-     * Revert all discounts
-     */
-    public static function revert_all_discounts($orderID) {
-        //echo ' rever all discounts';
-        $orderData = M('order')
-            ->where("`id` = $orderID")
-            ->find();
-        $subOrderData = M('order_sub')
-            ->where("`order_id` = $orderID")
-            ->select();
-            
-        $totalDeliverFee = 0;
-        // update sub order data
-        foreach ($subOrderList as &$subOrderData) {
-            $dishData = M('order_goods')
-                ->where("`sub_order_id` = " . $subOrderData['id'])
-                ->select();
-            $restaurantID = $dishData[0]['restaurant_id'];
-            $currentDeliverPrice = M('restaurant_deliver_fee')
-                ->where("`restaurant_id` = $restaurantID " . 
-                         " and `region_id` = " . $subOrderData['region_id'])
-                ->find();
-            
-            // Recalculate deliver fee
-            $deliverFee = $currentDeliverPrice['deliver_fee'];
-            
-            $totalDeliverFee += $deliverFee;
-            
-            $updatedSubOrderData = [
-                'discont_goods_price'       => $subOrderData['goods_total_price'],
-                'deliver_price'             => $deliverFee,
-                ];
-            $updatedSubOrderData['sales_price'] = 
-                $updatedSubOrderData['discont_goods_price'] * 0.07;
-            $updatedSubOrderData['total_price'] = 
-                $updatedSubOrderData['discont_goods_price'] + 
-                $subOrderData['extra_price'] +
-                $deliverFee +
-                $updatedSubOrderData['sales_price'] +
-                $subOrderData['tip_price'];
-            $updatedSubOrderData['discont_total_price'] = 
-                $updatedSubOrderData['total_price'];
-                
-            M('order_sub')
-                ->where("`id` = " . $subOrderData['id'])
-                ->save($updatedSubOrderData);
-		}
-        
-        $updatedOrderData = [
-            'discont_goods_price'           => $orderData['goods_total_price'],
-            'discont_total_prices'          => $orderData['total_price'],
-            'deliver_price'                 => $totalDeliverFee,
-            'sales_price'                   => $orderData['goods_total_price'] * 0.07,
-            'coupon_sn'                     => '',
-            ];
-        
-        M('order')
-            ->where("`id` = $orderID")
-            ->save($updatedOrderData);
-            
-    }
-	
-    /**
-     * 
-     */
-    public static function CheckCouponStatus($orderID, $finalValidation = false) {
-        // Get orderData
-        $orderData = M('order')
-            ->where("`id` = $orderID")
-            ->find();
-        
-        // Get subOrderData
-        $subOrderList = M('order_sub')
-			->where("`order_id` = $orderID")
-			->select();
-        
-        // Get userData
-        $userData = M('user')
-            ->where("`id` = " . $orderData['user_id'])
-            ->find();
-        
-        if (OrderController::CheckForFirstOrder($orderData, $subOrderList, $userData, $finalValidation)) {
-            return 1;
-        }
-        
-        if (OrderController::CheckForCoupon($orderData, $subOrderList, $userData, $finalValidation)) {
-            return 2;
-        }
-        
-        return 0;
-    }
-    
-    /**
-     * Check if order is valid for first order discont
-     * ********************************************************
-     * NOTE!!! WILL OVERRIDE ALL COUPON AND DISCOUNT PRICES!!!!
-     * ********************************************************
-     */
-    private static function CheckForFirstOrder($orderData, $subOrderList, $userData, $finalValidation = false) {
-        if (!$orderData || !$subOrderList || !$userData) {
-            return false;
-        }
-        
-        
-        if ($userData['has_made_first_order'] == "0") {
-            //echo 'first order';
-            OrderController::revert_all_discounts($orderData['id']);
-            
-			$highestDeliverySubOrder  = null;
-			$highestDeliveryFee = 0;
-            $totalDeliverPrice = 0;
-            
-			foreach ($subOrderList as &$subOrderData) {
-				if ($subOrderData['deliver_price'] > $highestDeliveryFee) {
-                    $highestDeliveryFee = $subOrderData['deliver_price'];
-                    $highestDeliverySubOrder = $subOrderData;
-				}
-                $totalDeliverPrice += $subOrderData['deliver_price'];
-			}
-			
-            //echo 'highest deliver = ' . $highestDeliveryFee;
-            // Update order data
-			$updatedOrderData = [
-                'coupon_sn'                     => 'First Order',
-                'discont_goods_price'           => $orderData['goods_total_price'],
-                'discont_total_price'           => $orderData['total_price'] - $highestDeliveryFee,
-                'deliver_price'                 => $totalDeliverPrice - $highestDeliveryFee,
-                ];
-            $updatedOrderData['sales_price'] = $updatedOrderData['discont_goods_price'] * 0.07;
-            M('order')
-                ->where("`id` = " . $orderData['id'])
-                ->save($updatedOrderData);
-            
-            // Update sub order data
-            $updatedSubOrderData = [
-                'discont_goods_price'           => $highestDeliverySubOrder['goods_total_price'],
-                'discont_total_price'           => $highestDeliverySubOrder['total_price'] - $highestDeliveryFee,
-                'deliver_price'                 => 0,
-                ];
-            $updatedSubOrderData['sales_price'] = $updatedSubOrderData['discont_goods_price'] * 0.07;
-            M('order_sub')
-                ->where("`id` = " . $highestDeliverySubOrder['id'])
-                ->save($updatedSubOrderData);
-            
-            if ($finalValidation) {
-                M('user')
-                    ->where("`id` = " . $userData['id'])
-                    ->save(['has_made_first_order' => 1]);
-            }
-            
-            return true;
-		} else {
-            return false;
-        }
-    }
-    
-    /**
-     * Check if order's coupon is still valid
-     * ********************************************************
-     * NOTE!!! WILL OVERRIDE ALL COUPON AND DISCOUNT PRICES!!!!
-     * ********************************************************
-     */
-    private static function CheckForCoupon($orderData, $subOrderList, $userData, $finalValidation = false) {
-        //echo 'CheckForCoupon</br>';
-        $couponSN = $orderData['coupon_sn'];
-        if ($couponSN == null || $couponSN == '' || $couponSN == 'First Order') {
-            return false;
-        }
-        
-        $couponDetail = OrderController::get_coupon_detail_by_sn($couponSN, $userData['id']);
-        
-        $discount = 1;
-        $deliveryFee = $orderData['deliver_price'];
-		if ($couponDetail['type'] == 1) {
-            //echo 'discount type 1';
-
-            // discount
-            $discount = $couponDetail['discont'] / 10;
-            $totalDeliverFee = 0;
-            
-            // update sub order data
-            foreach ($subOrderList as &$subOrderData) {
-                $dishData = M('order_goods')
-                    ->where("`sub_order_id` = " . $subOrderData['id'])
-                    ->select();
-                $restaurantID = $dishData[0]['restaurant_id'];
-                $currentDeliverPrice = M('restaurant_deliver_fee')
-                    ->where("`restaurant_id` = $restaurantID " . 
-                             " and `region_id` = " . $subOrderData['region_id'])
-                    ->find();
-                
-                // Recalculate deliver fee
-                $deliverFee = $currentDeliverPrice['deliver_fee'];
-                
-                $totalDeliverFee += $deliverFee;
-                
-                $updatedSubOrderData = [
-                    'discont_goods_price'       => $subOrderData['goods_total_price'] * $discount,
-                    'deliver_price'             => $deliverFee,
-                    ];
-                $updatedSubOrderData['sales_price'] = 
-                    $updatedSubOrderData['discont_goods_price'] * 0.07;
-                $updatedSubOrderData['discont_total_price'] = 
-                    $updatedSubOrderData['discont_goods_price'] + 
-                    $subOrderData['extra_price'] +
-                    $deliverFee +
-                    $updatedSubOrderData['sales_price'] +
-                    $subOrderData['tip_price'];
-                    
-                M('order_sub')
-                    ->where("`id` = " . $subOrderData['id'])
-                    ->save($updatedSubOrderData);
-			}
-            
-            $updatedOrderData = [
-                'discont_goods_price'           => $orderData['goods_total_price'] * $discount,
-                'deliver_price'                 => $totalDeliverFee,
-                ];
-            $updatedOrderData['sales_price'] = 
-                $updatedOrderData['discont_goods_price'] * 0.07;
-            $updatedOrderData['discont_total_price'] =
-                $updatedOrderData['discont_goods_price'] +
-                $orderData['extra_price'] + 
-                $totalDeliverFee + 
-                $updatedOrderData['sales_price'] +
-                $orderData['tip_price'];
-            
-            M('order')
-                ->where("`id` = " . $orderData['id'])
-                ->save($updatedOrderData);
-            
-            if ($finalValidation) {
-                M('coupon_sn')
-                    ->where("`sn` = '$couponSN'")
-                    ->save(['status' => 1]);
-            }
-            
-            return true;
-        } 
-        else if ($couponDetail['type'] == 2) {
-            //echo 'discount type 2';
-            // free delivery
-            foreach ($subOrderList as &$subOrderData) {
-                $updatedSubOrderData = [
-                    'discont_goods_price'      => $subOrderData['goods_total_price'],
-                    'deliver_price'             => 0,
-                    ];
-                $updatedSubOrderData['sales_price'] = 
-                    $updatedSubOrderData['discont_goods_price'] * 0.07;
-                $updatedSubOrderData['discont_total_price'] = 
-                    $updatedSubOrderData['discont_goods_price'] + 
-                    $subOrderData['extra_price'] +
-                    $updatedSubOrderData['sales_price'] +
-                    $subOrderData['tip_price'];
-                
-                M('order_sub')
-                    ->where("`id` = " . $subOrderData['id'])
-                    ->save($updatedSubOrderData);
-            }
-            
-            $updatedOrderData = [
-                'discont_goods_price'           => $orderData['goods_total_price'],
-                'deliver_price'                 => 0,
-                ];
-            $updatedOrderData['sales_price'] = 
-                $updatedOrderData['discont_goods_price'] * 0.07;
-            $updatedOrderData['discont_total_price'] =
-                $updatedOrderData['discont_goods_price'] +
-                $orderData['extra_price'] + 
-                $updatedOrderData['sales_price'] +
-                $orderData['tip_price'];
-            
-            M('order')
-                ->where("`id` = " . $orderData['id'])
-                ->save($updatedOrderData);
-            
-            if ($finalValidation) {
-                M('coupon_sn')
-                    ->where("`sn` = '$couponSN'")
-                    ->save(['status' => 1]);
-            }
-            
-            return true;
-        } 
-        else {
-            //echo 'no discount, revert all discounts';
-            OrderController::revert_all_discounts($orderData['id']);
-            return false;
-        }
-    }
-    
 	
 	/**
 	 * Confirm order
 	 */
 	public function confirm_order () {
+
+		// Step1, Get params
 		$orderID = $this->get_param('post.order_id');
 		$paymentType = $this->get_param('post.pay_type');
 		$paymentID = $this->get_param('post.payment_id');
 		$tip = $this->get_param('post.tip');
-        $couponSN = $this->get_param('post.coupon_sn');
-        $instruction = $this->get_param('post.instruction');
+		$instruction = $this->get_param('post.instruction');
         
         $creditCardFirstName = $this->get_param('post.credit_card_first_name');
 		$creditCardLastName = $this->get_param('post.credit_card_last_name');
@@ -1124,11 +804,9 @@ class OrderController extends BaseController {
 		$creditCardYear = $this->get_param('post.credit_card_year');
 		$creditCardSecurityCode = $this->get_param('post.credit_card_security_code');
 		
+		
         
-        
-        $couponSNDetail = OrderController::get_coupon_detail_by_sn($couponSN, $this->userID);
-        $couponSN = $couponSNDetail['sn']['sn'];
-        
+		// Step2-2, Get payment data
         $paymentData = [];
         if ($paymentType == 2) {
             if ($paymentID != '') {
@@ -1146,7 +824,8 @@ class OrderController extends BaseController {
             }
         
         }
-        
+		
+		// Step3, Save order data
         $orderData = M('order')
             ->where("`id` = $orderID")
             ->find();
@@ -1163,22 +842,17 @@ class OrderController extends BaseController {
 			'credit_card_number'                 => $paymentData['credit_card_number'],
 			'expiration_time'                    => $paymentData['expiration_time'],
 			'security_code'                      => $paymentData['security_code'],
-            
             'payment'                            => $paymentType,
-            
-            'coupon_sn'                          => $couponSN,
-            
             'tip_price'                          => $tip,
-            
             'total_price'                        => $totalPrice,
             'discont_total_price'                => $discountTotalPrice,
-        
-        	'instruction'						 => $instruction,
+            'instruction'                        => $instruction,
             ];
-        
+		
+		$couponSN = $orderData['coupon_sn'];
         if ($paymentType == 1) {
             $updatedOrderData['is_payment'] = 1;
-            $updatedOrderData['status'] = 2;
+			$updatedOrderData['status'] = 2;
         } else {
             $updatedOrderData['is_payment'] = 0;
         }
@@ -1233,8 +907,9 @@ class OrderController extends BaseController {
         
         
         // Check for coupon status
-        $couponStatus = OrderController::CheckCouponStatus($orderID);
-        
+		$couponStatus = CouponController::ValidateCouponStatus($orderID);
+
+		
         
         if ($paymentType == 1 ) {
             if ($couponStatus == 1) {
@@ -1242,14 +917,9 @@ class OrderController extends BaseController {
                 M('user')
                     ->where("`id` = $this->userID")
                     ->save(['has_made_first_order' => 1]);
-            } else if ($couponStatus == 2) {
-                if ($couponSNDetail['reusable'] == "0") {
-                    M('coupon_sn')
-                        ->where("`sn` = '$couponSN'")
-                        ->save(['status' => 1]);
-                }
             }
             
+			CouponController::IncrementCouponSNUsedTimes($couponSN);
             $order = M('order')
                 ->where("`id` = $orderID")
                 ->find();
