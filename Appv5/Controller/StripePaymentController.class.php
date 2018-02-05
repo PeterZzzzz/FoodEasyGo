@@ -128,9 +128,7 @@ class StripePaymentController extends BaseController {
                                 ->where("`sn` = '$couponSN'")
                                 ->find();
                             if ($couponSNDetail['reusable'] == 0) {
-                                M('coupon_sn')
-                                    ->where("`sn` = '$couponSN'")
-                                    ->save(['status' => 1]);
+								CouponController::IncrementCouponSNUsedTimes($couponSN);
                             }
                         }
                         

@@ -87,10 +87,10 @@ public class OrderNetworkController : ServerCallController {
 
     // Get coupon status
     LDFWWWWCallCoroutineWrapper getCouponStatusCall = null;
-    public void GetCouponData (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
+    public void ApplyCoupon (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
         if (getCouponStatusCall != null) {
             getCouponStatusCall.Dispose ();
         }
-        getCouponStatusCall = CommonWWWCall (orderControllerURL + "get_coupon_data", form, success, failure);
+        getCouponStatusCall = CommonWWWCall (orderControllerURL + "apply_coupon_sn", form, success, failure);
     }
 }

@@ -284,19 +284,10 @@ public class PlaceOrderPanelController : BasePanelController
         // Get fees
         CartPanelController.instance.GetTotalPriceDetails(out totalPrice, out extraFee, out deliveryFee);
 
-        feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text = "$ " + totalPrice;
-        feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text = "$ " + extraFee;
-        DebugLogger.Log("Updating current deliveryFee to " + deliveryFee);
-        feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + deliveryFee;
-        feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.07f).ToString("0.00");
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
-        //UpdateDeliveryFee (targetRegionDeliveryFee.ToString ("0.00"));
-        feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ 0.00";
-        tipSection.Find("ToggleController").GetComponent<LDFWToggleController>().Reset();
+        UpdateFeeSection(float.Parse(totalPrice), float.Parse(extraFee), float.Parse(deliveryFee), 0);
         LoadingPanelController.instance.HidePanelImmediately();
 
         UpdateDeliveryFee(deliveryFee);
-        CalcualteTotalPrice();
 
 
         if (string.IsNullOrEmpty(orderNumber))
@@ -305,6 +296,17 @@ public class PlaceOrderPanelController : BasePanelController
             SubmitOrder();
         }
 
+    }
+
+    private void UpdateFeeSection(float goodsTotalPrice, float extraFee, float deliveryFee, float discountPrice) {
+        feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text = "$ " + goodsTotalPrice.ToString("0.00");
+        feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text = "$ " + extraFee.ToString("0.00");
+        feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + deliveryFee.ToString("0.00");
+        feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * 0.07f).ToString("0.00");
+        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * 0.15f).ToString("0.00");
+        feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ " + discountPrice.ToString("0.00");
+
+        CalcualteTotalPrice();
     }
 
     /// <summary>
@@ -424,45 +426,31 @@ public class PlaceOrderPanelController : BasePanelController
         string couponString = couponInputField.text;
         Debug.Log("Entered Coupon = " + couponString);
 
-        if (!string.IsNullOrEmpty(couponString))
-        {
-            WWWForm form = new WWWForm();
-            form.AddField("coupon_sn", couponString);
-            LoadingPanelController.instance.DisplayPanel();
-            OrderNetworkController.instance.GetCouponData(form,
-                new LDFWServerResponseEvent((JSONObject coupon, string m) =>
-                    {
-                        LoadingPanelController.instance.HidePanel();
-                        if (int.Parse(coupon.GetField("type").str) == 1)
-                        //float.Parse(coupon.GetField("discont").str) != 0f)
-                        {
-                            float discount = float.Parse(coupon.GetField("discont").str);
-                            feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ -" +
-                            (float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) * (10f - discount) * 0.1f).ToString("0.00");
+        WWWForm form = new WWWForm();
+        form.AddField("coupon_sn", couponString);
+        form.AddField("order_id", orderID);
+        LoadingPanelController.instance.DisplayPanel();
+        OrderNetworkController.instance.ApplyCoupon(form,
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+                {
+                    data = data.GetField("d");
+                    LoadingPanelController.instance.HidePanel();
+                    UpdateFeeSection(
+                        float.Parse(data.GetField("goods_total_price").str),
+                        float.Parse(data.GetField("extra_price").str),
+                        float.Parse(data.GetField("deliver_price").str),
+                        float.Parse(data.GetField("discont_goods_price").str) - float.Parse(data.GetField("goods_total_price").str));
 
-                            isUsingFreeDelivery = false;
-                        }
-                        else
-                        {
-                            feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ 0.00";
-                            feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ 0.00";
-                            isUsingFreeDelivery = true;
-                        }
-
-                        CalcualteTotalPrice();
-                        couponInputField.interactable = false;
-                        selectedCouponID = coupon.GetField("id").str;
-
-                    }),
-                new LDFWServerResponseEvent((JSONObject data, string m) =>
-                    {
-                        couponInputField.text = "";
-                        MessagePanelController.instance.DisplayPanel(m);
-                        LoadingPanelController.instance.HidePanel();
-                    }));
+                }),
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+                {
+                    couponInputField.text = "";
+                    MessagePanelController.instance.DisplayPanel(m);
+                    LoadingPanelController.instance.HidePanel();
+                }));
 
 
-        }
+
     }
 
     #endregion

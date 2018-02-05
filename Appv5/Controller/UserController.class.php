@@ -140,121 +140,20 @@ class UserController extends BaseController {
 			}
 		}
 	}
-    
-    
-    
-    /**
-     * Save User Help
-     */
-    public function save_help () {
-        $subject = $this->get_param('post.customer_issue');
-        $userName = $this->get_param('post.user_name');
-        $userContact = $this->get_param('post.user_contact');
-        $orderNumber = $this->get_param('post.order_number');
-        $description = $this->get_param('post.description');
-        
-        if (!$subject || !$userName || !$userContact || !$orderNumber || !$description) {
-            $this->return_error('Please fill in all info');
-        } else {
-            $saveData = [
-            'subject' => $subject,
-            'name' => $userName,
-            'contact' => $userContact,
-            'sub_order_number' => $orderNumber,
-            'description' => $description,
-            'create_time' => time(),
-            ];
-            
-            $res = M('user_gethelp')->add($saveData);
-            if (!$res) {
-                $this->server_unavailable_error();
-            } else {
-                $this->return_data([], 'Message has been received');
-            }
-        }
-    }
-    
-    
-    
-    /**
-     * Send Help Email
-     */
-    public function send_help_email () {
-        $subject = $this->get_param('post.customer_issue');
-        $userName = $this->get_param('post.user_name');
-        $userContact = $this->get_param('post.user_contact');
-        $orderNumber = $this->get_param('post.order_number');
-        $description = $this->get_param('post.description');
-        
-        if (!$subject || !$userName || !$userContact || !$orderNumber || !$description) {
-            $this->return_error('Please fill in all info');
-        } else {
-            $content="<p>".$userName." 提交了关于 ".$subject." 的留言， 订单号： ".$orderNumber." ，联系方式： ".$userContact." ，详情如下:</p>"
-            ."<p>".$description."</p>";
-            $res=send_email(
-                            "info@foodeasygo.com",
-                            "获取帮助：".$subject,
-                            $content,
-                            array(
-                                  "mail_address"=>"info@foodeasygo.com",
-                                  "mail_password"=>"oranllcfood8",
-                                  "mail_sender"=>"Foodeasygo Info"
-                                  ),
-                            "Info",
-                            null,
-                            null
-                            );
-            
-            if (!$res) {
-                $this->server_unavailable_error();
-            } else {
-                $this->return_data([], 'Email has been send');
-            }
-        }
-    }
-    
 	
 	/**
 	 * Get coupon list
 	 */
 	public function get_coupon_list () {
-        // FoodEasyGo 3 years annivesary, 
-        // one time only coupon, when user_id = 0, everyone can use it
-		$couponIDList = M('coupon_sn')
+		$couponList = M('coupon_sn')
 			->join(" `food_coupon` on `food_coupon_sn`.`coupon_id` = `food_coupon`.`id`")
 			->where(
-                // normal user's coupons
-                "(`food_coupon_sn`.`user_id`= $this->userID 
-                        and `food_coupon`.`endtime` > now() 
-                        and (`food_coupon_sn`.`status`=0 
-                                or `food_coupon_sn`.`status`=1 and `food_coupon_sn`.`reusable`=1))"
-                // user_id = 999999 and only non-reusable coupons
-                //.
-                //" or " 
-                //.
-                //"(`food_coupon_sn`.`user_id`=999999
-                //        and `food_coupon`.`endtime` > now()
-                //        and `food_coupon_sn`.`status`=0
-                //        and `food_coupon_sn`.`reusable`=0)"
+				" `food_coupon_sn`.`user_id` = " . $this->userID .
+				" and `food_coupon`.`endtime` > now() " .
+				" and `food_coupon_sn`.`status` = 0 " .
+				" and `food_coupon_sn`.`used_times` < `food_coupon_sn`.`usable_times` "
             )
-			//->field("food_coupon_sn.id, food_coupon.name, food_coupon.type, food_coupon.discont, 
-				//	food_coupon_sn.sn, food_coupon.endtime, food_coupon_sn.reusable")
 			->select();
-		
-		// Find common coupons
-		//$commonCouponIDList = M('coupon_sn')
-		//	->where("`status` = 0 and `user_id` = 0")
-		//	->select();
-		$commonCouponIDList = M('coupon_sn')
-			->join(" `food_coupon` on `food_coupon_sn`.`coupon_id` = `food_coupon`.`id`")
-			->where("`food_coupon_sn`.`user_id`= 0 and `food_coupon`.`endtime` > now()
-					and (`food_coupon_sn`.`status`=0)")
-					//->field("food_coupon_sn.id, food_coupon.name, food_coupon.type, food_coupon.discont,
-			//	food_coupon_sn.sn, food_coupon.endtime, food_coupon_sn.reusable")
-			->select();
-        
-        // Find 
-		
 		
 		$res = M('user')
 			->where("`id`=$this->userID")
@@ -272,10 +171,10 @@ class UserController extends BaseController {
 		$totalInvitationCoupon = count($res);
 		
 		
-		if (!$couponIDList) {
+		if (!$couponList) {
 			$this->return_data([], 'No coupon found');
 		} else {
-			$this->return_data(['normal_coupon' => $couponIDList, 'invitation_coupon_count' => $totalInvitationCoupon, 'common_coupon' => $commonCouponIDList]);
+			$this->return_data(['normal_coupon' => $couponList, 'invitation_coupon_count' => $totalInvitationCoupon]);
 		}
 	}
 	

@@ -16,7 +16,6 @@ class ImageController extends BaseController {
 		//parent::_initialize ();
 	}
 	
-	
 	/**
 	 * Resize image to a small dimension
 	 */

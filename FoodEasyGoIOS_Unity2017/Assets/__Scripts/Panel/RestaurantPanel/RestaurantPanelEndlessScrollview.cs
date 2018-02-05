@@ -45,26 +45,54 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
         form.AddField("sort_type_id", _sortTypeID);
 
         LoadingPanelController.instance.DisplayPanel();
-        RestaurantNetworkController.instance.GetRestaurantList(
-            form.wwwForm,
-            new LDFWServerResponseEvent((JSONObject data, string m) =>
-            {
-                LoadingPanelController.instance.HidePanelImmediately();
 
-                data = data.GetField("data");
-                _data = data;
-                _dataLength = _data.Count;
-                base.LoadData();
+        if (_isSchedule)
+        {
+            RestaurantNetworkController.instance.GetRestaurantReserveList(
+                form.wwwForm,
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        LoadingPanelController.instance.HidePanelImmediately();
 
-                for (int i = 0; i < _scrollRectElementParentContent.childCount; i++)
-                {
-                    _scrollRectElementParentContent.GetChild(i).GetComponent<Image>().raycastTarget = RestaurantDetailPanelController.instance.isRestaurantOpen ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
-                }
-            }),
-            new LDFWServerResponseEvent((JSONObject data, string m) =>
-            {
-                LoadingPanelController.instance.HidePanelImmediately();
-            }));
+                        data = data.GetField("data");
+                        _data = data;
+                        _dataLength = _data.Count;
+                        base.LoadData();
+
+                        for (int i = 0; i < _scrollRectElementParentContent.childCount; i++)
+                        {
+                            _scrollRectElementParentContent.GetChild(i).GetComponent<Image>().raycastTarget = RestaurantDetailPanelController.instance.isRestaurantOpen ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
+                        }
+                    }),
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        LoadingPanelController.instance.HidePanelImmediately();
+                    }));
+        }
+        else
+        {
+            
+            RestaurantNetworkController.instance.GetRestaurantList(
+                form.wwwForm,
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        LoadingPanelController.instance.HidePanelImmediately();
+
+                        data = data.GetField("data");
+                        _data = data;
+                        _dataLength = _data.Count;
+                        base.LoadData();
+
+                        for (int i = 0; i < _scrollRectElementParentContent.childCount; i++)
+                        {
+                            _scrollRectElementParentContent.GetChild(i).GetComponent<Image>().raycastTarget = RestaurantDetailPanelController.instance.isRestaurantOpen ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
+                        }
+                    }),
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        LoadingPanelController.instance.HidePanelImmediately();
+                    }));
+        }
     }
 
 

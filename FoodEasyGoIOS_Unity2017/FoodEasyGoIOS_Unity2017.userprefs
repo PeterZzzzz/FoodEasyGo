@@ -1,18 +1,18 @@
-﻿<Properties StartupConfiguration="{96D694EA-F372-4C6A-1CEC-9A368C9D4875}|">
+﻿<Properties StartupConfiguration="{58D63F43-760A-3BC2-BDA0-1B645A1A9207}|Unit Tests" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.ItemProperties.FoodEasyGoIOS__Unity2017 PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/UI/MobileInputController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelEndlessScrollview.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Panel/HomePanel/HomePanelController.cs" Line="49" Column="5" />
-      <File FileName="Assets/LDAppFramework/Scripts/Tweener/LDFWTweenPosition.cs" Line="1" Column="1" />
-      <File FileName="Assets/__Scripts/UI/MobileInputController.cs" Line="25" Column="1" />
-      <File FileName="Assets/__Scripts/Panel/HomePanel/HomeSlideController.cs" Line="95" Column="1" />
+      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelController.cs" Line="239" Column="43" />
+      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelRestaurantBarController.cs" Line="54" Column="38" />
+      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelEndlessScrollview.cs" Line="61" Column="25" />
+      <File FileName="Assets/__Scripts/Network/RestaurantNetworkController.cs" Line="56" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
