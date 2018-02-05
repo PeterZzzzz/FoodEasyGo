@@ -89,7 +89,7 @@ public class HomeSlideController : BaseUIController
     private void Update()
     {
         time += Time.deltaTime;
-        Debug.Log(indexOfImage);
+        //Debug.Log(indexOfImage);
         if (MobileInputController.instance != null)
         {
             if (MobileInputController.instance.SwipeLeft)
@@ -146,10 +146,10 @@ public class HomeSlideController : BaseUIController
                             }
         }
 
-        if(time >= interval)
+        if(time >= interval && imageParent.childCount > 0)
         {
             time -= interval;
-            Debug.Log("每三秒执行一次");
+            //Debug.Log("每三秒执行一次");
 
             LDFWTweenPosition tp;
             if (indexOfImage < slideNumber)
