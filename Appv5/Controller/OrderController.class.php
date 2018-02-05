@@ -650,34 +650,35 @@ class OrderController extends BaseController {
 					
 					//origin amounts order is reversed(don't know why), so reverse it here
 					$amounts=explode(',', $orderGoodsData['amount']);
-
+					$amounts=array_reverse($amounts);
+					$orderGoodsData['amount']=implode(',', $amounts);
 					
 					$attributeData = $cartDetail['attribute_list'];
 					foreach ($attributeData as $key=>&$attribute) {
 						if ($attributeList == '') {
 							$attributeList = $attribute['id'];
-							if($attribute['amount']=='1')
+							if($amounts[$key]=='1')
 							{
 							    $attributeZH = $attribute['name'];
 							    $attributeEN = $attribute['name_en'];
 							}
 							else
 							{
-							    $attributeZH = $attribute['name'].'×'.$attribute['amount'];
-							    $attributeEN = $attribute['name_en'].'×'.$attribute['amount'];
+							    $attributeZH = $attribute['name'].'×'.$amounts[$key];
+							    $attributeEN = $attribute['name_en'].'×'.$amounts[$key];
 							}
 							
 						} else {
 							$attributeList = $attributeList . ", " . $attribute['id'];
-						    if($attribute['amount']=='1')
+						    if($amounts[$key]=='1')
 							{
 								$attributeZH = $attributeZH . ", " . $attribute['name'];
 								$attributeEN = $attributeEN . ", " . $attribute['name_en'];
 							}
 						    else
 							{
-								$attributeZH = $attributeZH . ", " . $attribute['name'].'×'.$attribute['amount'];
-								$attributeEN = $attributeEN . ", " . $attribute['name_en'].'×'.$attribute['amount'];
+								$attributeZH = $attributeZH . ", " . $attribute['name'].'×'.$amounts[$key];
+								$attributeEN = $attributeEN . ", " . $attribute['name_en'].'×'.$amounts[$key];
 							}
 						}
 						
@@ -1172,7 +1173,7 @@ class OrderController extends BaseController {
             'total_price'                        => $totalPrice,
             'discont_total_price'                => $discountTotalPrice,
         
-        'instruction'=>$instruction,
+        	'instruction'						 => $instruction,
             ];
         
         if ($paymentType == 1) {
