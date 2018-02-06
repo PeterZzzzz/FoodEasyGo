@@ -141,6 +141,78 @@ class UserController extends BaseController {
 		}
 	}
 	
+
+
+    /**
+     * Save User Help
+     */
+    public function save_help () {
+        $subject = $this->get_param('post.customer_issue');
+        $userName = $this->get_param('post.user_name');
+        $userContact = $this->get_param('post.user_contact');
+        $orderNumber = $this->get_param('post.order_number');
+        $description = $this->get_param('post.description');
+         
+        if (!$subject || !$userName || !$userContact || !$orderNumber || !$description) {
+             $this->return_error('Please fill in all info');
+        } else {
+            $saveData = [
+            'subject' => $subject,
+            'name' => $userName,
+            'contact' => $userContact,
+            'sub_order_number' => $orderNumber,
+            'description' => $description,
+            'create_time' => time(),
+            ];
+             
+            $res = M('user_gethelp')->add($saveData);
+            if (!$res) {
+                $this->server_unavailable_error();
+            }else {
+                $this->return_data([], 'Message has been received');
+            }
+        }
+    }
+     
+     
+     
+    /**
+     * Send Help Email
+     */
+    public function send_help_email () {
+        $subject = $this->get_param('post.customer_issue');
+        $userName = $this->get_param('post.user_name');
+        $userContact = $this->get_param('post.user_contact');
+        $orderNumber = $this->get_param('post.order_number');
+        $description = $this->get_param('post.description');
+         
+        if (!$subject || !$userName || !$userContact || !$orderNumber || !$description) {
+            $this->return_error('Please fill in all info');
+        } else {
+            $content="<p>".$userName." 提交了关于 ".$subject." 的留言， 订单号： ".$orderNumber." ，联系方式： ".$userContact." ，详情如下:</p>"
+            ."<p>".$description."</p>";
+            $res=send_email(
+                            "info@foodeasygo.com",
+                            "获取帮助：".$subject,
+                            $content,
+                            array(
+                                  "mail_address"=>"info@foodeasygo.com",
+                                  "mail_password"=>"oranllcfood8",
+                                  "mail_sender"=>"Foodeasygo Info"
+                                  ),
+                            "Info",
+                            null,
+                            null
+                            );
+             
+            if (!$res) {
+                $this->server_unavailable_error();
+            } else {
+                $this->return_data([], 'Email has been send');
+            }
+        }
+    }
+     
 	/**
 	 * Get coupon list
 	 */

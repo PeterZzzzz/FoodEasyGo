@@ -21,7 +21,7 @@ public class AddressPanelController : BasePanelController {
     public Transform modifyAddressPanel;
     public InputField codeInputField;
     public Button sendCodeBtn;
-    public int waitForResend = 20;
+    public int waitForResend = 60;
 
     // private
     AddressPanelAddressBarController currentBar = null;
