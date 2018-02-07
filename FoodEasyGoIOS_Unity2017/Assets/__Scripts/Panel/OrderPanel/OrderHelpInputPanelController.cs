@@ -36,6 +36,16 @@ public class OrderHelpInputPanelController : BasePanelController {
 
     }
 
+    public override void ResetPanel()
+    {
+
+    }
+
+    public override void ReloadPanel()
+    {
+
+    }
+
     public void OpenPanel(int type, string orderID)
     {
         helpType = type;

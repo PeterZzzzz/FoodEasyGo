@@ -38,6 +38,15 @@ public class OrderHelpPanelController : BasePanelController {
         subOrderID = orderID;
     }
  
+    public override void ResetPanel()
+    {
+    
+    }
+
+    public override void ReloadPanel()
+    {
+        
+    }
 
     public void MissingItemBtnClick(){
         OrderHelpInputPanelController.instance.OpenPanel(1, subOrderID);
