@@ -70,7 +70,9 @@ public class AddressPanelController : BasePanelController {
                         data[i].GetField ("city").str,
                         data[i].GetField ("state").str,
                         data[i].GetField ("zip_code").str,
-                        data[i].GetField ("region_id").str);
+                        data[i].GetField ("region_id").str,
+                        data[i].GetField("phone_verified").str == "1" ? true : false
+                    );
                     address.SetParent (defaultScrollRect.content);
                     address.localScale = Vector3.one;
                     address.GetComponent<AddressPanelAddressBarController> ().parentScrollRect = defaultScrollRect;
