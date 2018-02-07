@@ -157,6 +157,7 @@ public class PlaceOrderPanelController : BasePanelController
             yield return new WaitForSeconds(0.5f);
 
 
+        tipSection.Find("ToggleController").GetComponent<LDFWToggleController>().Reset();
         targetRegionDeliveryFee = 0f;
 
         JSONObject creditCardJSON = AppDataController.instance.GetCreditCard("default");
@@ -531,20 +532,29 @@ public class PlaceOrderPanelController : BasePanelController
 
     public void On15TipButtonClicked()
     {
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
-        CalcualteTotalPrice();
+        if (!string.IsNullOrEmpty(totalPrice))
+        {
+            feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
+            CalcualteTotalPrice();
+        }
     }
 
     public void On18TipButtonClicked()
     {
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.18f).ToString("0.00");
-        CalcualteTotalPrice();
+        if (!string.IsNullOrEmpty(totalPrice))
+        {
+            feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.18f).ToString("0.00");
+            CalcualteTotalPrice();
+        }
     }
 
     public void On20TipButtonClicked()
     {
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.2f).ToString("0.00");
-        CalcualteTotalPrice();
+        if (!string.IsNullOrEmpty(totalPrice))
+        {
+            feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.2f).ToString("0.00");
+            CalcualteTotalPrice();
+        }
     }
 
     public void OnCustomTipButtonClicked(string text)
