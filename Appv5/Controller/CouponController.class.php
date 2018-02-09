@@ -243,14 +243,19 @@ class CouponController extends BaseController {
             $couponRestaurantID = $couponDetail['restaurant_id'];
             $discount = $couponDetail['discont'] / 10;
             $totalDeliverFee = 0;
+            $totalOrderDiscontGoodsPrice=0;
             
             // update sub order data
             foreach ($subOrderList as &$subOrderData) {
                 $restaurantID = $subOrderData['restaurant_id'];
                 $currentDiscount = $discount;
-                if ($couponRestaurantID != 0 && $restaurantIDList != $couponRestaurantID) {
+                if ($couponRestaurantID != 0 && $restaurantID != $couponRestaurantID) {
                     $currentDiscount = 1;
                 }
+
+                // var_dump($restaurantID) ;
+                // var_dump($couponRestaurantID) ;
+                // var_dump($currentDiscount) ;
 
                 
                 $currentDeliverPrice = M('restaurant_deliver_fee')
@@ -270,14 +275,15 @@ class CouponController extends BaseController {
 
 
                 $updatedSubOrderData['sales_price'] = 
-                    $updatedSubOrderData['discont_goods_price'] * 0.07;
+                    $subOrderData['goods_total_price'] * 0.07;
                 $updatedSubOrderData['discont_total_price'] = 
                     $updatedSubOrderData['discont_goods_price'] + 
                     $subOrderData['extra_price'] +
                     $deliverFee +
                     $updatedSubOrderData['sales_price'] +
                     $subOrderData['tip_price'];
-                    
+                $totalOrderDiscontGoodsPrice+=$updatedSubOrderData['discont_goods_price'];
+    
                 M('order_sub')
                     ->where("`id` = " . $subOrderData['id'])
                     ->save($updatedSubOrderData);
@@ -285,18 +291,18 @@ class CouponController extends BaseController {
 			}
             
             $updatedOrderData = [
-                'discont_goods_price'           => $orderData['goods_total_price'] * $currentDiscount,
+                'discont_goods_price'           => $totalOrderDiscontGoodsPrice,//$orderData['goods_total_price'] * $currentDiscount,
                 'deliver_price'                 => $totalDeliverFee,
                 ];
             $updatedOrderData['sales_price'] = 
-                $updatedOrderData['discont_goods_price'] * 0.07;
+                $orderData['goods_total_price'] * 0.07;
             $updatedOrderData['discont_total_price'] =
                 $updatedOrderData['discont_goods_price'] +
                 $orderData['extra_price'] + 
                 $totalDeliverFee + 
                 $updatedOrderData['sales_price'] +
                 $orderData['tip_price'];
-            
+
             M('order')
                 ->where("`id` = " . $orderData['id'])
                 ->save($updatedOrderData);

@@ -55,6 +55,8 @@ public class PlaceOrderPanelController : BasePanelController
     public string orderNumber;
     public string orderID;
 
+    private float tipChose = 0.15f;
+
 
     new void Awake()
     {
@@ -303,8 +305,11 @@ public class PlaceOrderPanelController : BasePanelController
         feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text = "$ " + goodsTotalPrice.ToString("0.00");
         feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text = "$ " + extraFee.ToString("0.00");
         feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + deliveryFee.ToString("0.00");
-        feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * 0.07f).ToString("0.00");
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * 0.15f).ToString("0.00");
+        //feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * 0.07f).ToString("0.00");
+        feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.07f).ToString("0.00");
+        Debug.Log("qqqqqqq"+feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text);
+        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * tipChose).ToString("0.00");
+
         feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ " + discountPrice.ToString("0.00");
 
         CalcualteTotalPrice();
@@ -317,8 +322,7 @@ public class PlaceOrderPanelController : BasePanelController
     {
 
         feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " +
-        ((float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) +
-        float.Parse(feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text.Substring(2))) * 0.07f).ToString("0.00");
+        ((float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2))) * 0.07f).ToString("0.00");
 
 
         feeSection.Find("TotalFeeTitle/Text").GetComponent<Text>().text = "$ " +
@@ -441,6 +445,7 @@ public class PlaceOrderPanelController : BasePanelController
                         float.Parse(data.GetField("extra_price").str),
                         float.Parse(data.GetField("deliver_price").str),
                         float.Parse(data.GetField("discont_goods_price").str) - float.Parse(data.GetField("goods_total_price").str));
+            
 
                 }),
             new LDFWServerResponseEvent((JSONObject data, string m) =>
@@ -535,6 +540,7 @@ public class PlaceOrderPanelController : BasePanelController
         if (!string.IsNullOrEmpty(totalPrice))
         {
             feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
+            tipChose = 0.15f;
             CalcualteTotalPrice();
         }
     }
@@ -544,6 +550,7 @@ public class PlaceOrderPanelController : BasePanelController
         if (!string.IsNullOrEmpty(totalPrice))
         {
             feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.18f).ToString("0.00");
+            tipChose = 0.18f;
             CalcualteTotalPrice();
         }
     }
@@ -553,6 +560,7 @@ public class PlaceOrderPanelController : BasePanelController
         if (!string.IsNullOrEmpty(totalPrice))
         {
             feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.2f).ToString("0.00");
+            tipChose = 0.2f;
             CalcualteTotalPrice();
         }
     }
