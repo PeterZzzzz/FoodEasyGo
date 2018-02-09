@@ -63,7 +63,7 @@ class CouponController extends BaseController {
         $orderData = M('order')
             ->where("`id` = $orderID")
             ->find();
-        $subOrderData = M('order_sub')
+        $subOrderList = M('order_sub')
             ->where("`order_id` = $orderID")
             ->select();
             
