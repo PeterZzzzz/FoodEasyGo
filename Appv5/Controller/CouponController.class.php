@@ -318,10 +318,26 @@ class CouponController extends BaseController {
         } else if ($couponDetail['type'] == 2) {
             // echo 'coupon type 2, free delivery coupon';
             // free delivery
+            $couponRestaurantID = $couponDetail['restaurant_id'];
+            $totalDeliverFee = 0;
             foreach ($subOrderList as &$subOrderData) {
+                $restaurantID = $subOrderData['restaurant_id'];
+                $currentDeliverPrice = M('restaurant_deliver_fee')
+                    ->where("`restaurant_id` = $restaurantID " . 
+                             " and `region_id` = " . $subOrderData['region_id'])
+                    ->find();
+                
+                // Recalculate deliver fee
+                $deliverFee = $currentDeliverPrice['deliver_fee'];
+                if ($restaurantID == $couponRestaurantID) {
+                    $deliverFee = 0;
+                }
+
+                $totalDeliverFee += $deliverFee;
+
                 $updatedSubOrderData = [
                     'discont_goods_price'      => $subOrderData['goods_total_price'],
-                    'deliver_price'             => 0,
+                    'deliver_price'             => $deliverFee,
                     ];
                 $updatedSubOrderData['sales_price'] = 
                     $updatedSubOrderData['discont_goods_price'] * 0.07;
@@ -334,17 +350,20 @@ class CouponController extends BaseController {
                 M('order_sub')
                     ->where("`id` = " . $subOrderData['id'])
                     ->save($updatedSubOrderData);
+                
+
             }
             
             $updatedOrderData = [
                 'discont_goods_price'           => $orderData['goods_total_price'],
-                'deliver_price'                 => 0,
+                'deliver_price'                 => $totalDeliverFee,
                 ];
             $updatedOrderData['sales_price'] = 
                 $updatedOrderData['discont_goods_price'] * 0.07;
             $updatedOrderData['discont_total_price'] =
                 $updatedOrderData['discont_goods_price'] +
                 $orderData['extra_price'] + 
+                $totalDeliverFee + 
                 $updatedOrderData['sales_price'] +
                 $orderData['tip_price'];
             
