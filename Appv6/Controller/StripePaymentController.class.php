@@ -1,6 +1,6 @@
 <?php
 
-namespace Appv5\Controller;
+namespace Appv6\Controller;
 use Think\Storage;
 
 /**
@@ -51,7 +51,7 @@ class StripePaymentController extends BaseController {
 		}
 		
 		$this->assign('data', $order);
-		$this->display('./Application/Appv5/View/Order/orderpay.html');
+		$this->display('./Application/Appv6/View/Order/orderpay.html');
 	}
 	
 	/**

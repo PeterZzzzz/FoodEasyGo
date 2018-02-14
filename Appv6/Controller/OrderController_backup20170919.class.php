@@ -1,6 +1,6 @@
 <?php
 
-namespace Appv5\Controller;
+namespace Appv6\Controller;
 use Think\Storage;
 
 /**
@@ -47,10 +47,6 @@ class OrderController extends BaseController {
 			// Get delivery fee
 			//$restaurantList[$i]['deliver_fee'] = $this->targetRegionInfo['fee'];
 			$restaurantList[$i]['deliver_fee'] = $this->get_restaurant_deliver_fee($restaurantList[$i]['restaurant_id'], $this->deliveryAddressRegionID);
-            
-            // Adding driver_deliver_fee
-            $restaurantList[$i]['driver_deliver_fee'] = $this->get_restaurant_driver_deliver_fee($restaurantList[$i]['restaurant_id'], $this->deliveryAddressRegionID);
-            
 			$totalDeliveryPrice += $restaurantList[$i]['deliver_fee'];
 			// Get extra fee
 			$restaurantDetail =  M('restaurant')->where('`id`=' . $restaurantList[$i]['restaurant_id'])->find();
@@ -139,9 +135,6 @@ class OrderController extends BaseController {
 			
 			$cart['cat' . $category]['total_goods_price'] = 0;
 			$cart['cat' . $category]['total_delivery_fee'] = 0;
-            
-            // Add driver_deliver_fee
-            $cart['cat' . $category]['total_driver_delivery_fee'] = 0;
 			$cart['cat' . $category]['total_extra_fee'] = 0;
 			
 			
@@ -245,10 +238,6 @@ class OrderController extends BaseController {
 				
 				$resCatCombine['total_goods_price'] = $tempRestaurantTotalPrice;
 				$resCatCombine['delivery_price'] = $this->get_restaurant_deliver_fee($resCatCombine['restaurant_id'], $this->deliveryAddressRegionID);
-                
-                // Adding driver_delivery_price
-                $resCatCombine['driver_delivery_price'] = $this->get_restaurant_driver_deliver_fee($resCatCombine['restaurant_id'], $this->deliveryAddressRegionID);
-                
 				$resCatCombine['extra_price'] = $extraFee;
 				if ($tempRestaurantTotalPrice >= $minOrder) {
 					$resCatCombine['extra_price'] = 0;
@@ -257,9 +246,6 @@ class OrderController extends BaseController {
 				
 				$cart['cat' . $category]['total_goods_price'] += $resCatCombine['total_goods_price'];
 				$cart['cat' . $category]['total_delivery_fee'] += $resCatCombine['delivery_price'];
-                
-                // Add driver_deliver_fee
-				$cart['cat' . $category]['total_driver_delivery_fee'] += $resCatCombine['driver_delivery_price'];
 				$cart['cat' . $category]['total_extra_fee'] += $resCatCombine['extra_price'];
 				
 			}
@@ -468,9 +454,6 @@ class OrderController extends BaseController {
 		
 		$totalGoodsPrice = 0;
 		$totalDeliveryFee = 0;
-        
-        // Adding driver_delivery_fee
-        $totalDriverDeliveryFee = 0;
 		$totalExtraFee = 0;
 		$totalPrice = 0;
 		
@@ -488,9 +471,6 @@ class OrderController extends BaseController {
 				$totalGoodsPrice += $cartData['cat' . $cat]['total_goods_price'];
 				$totalExtraFee += $cartData['cat' . $cat]['total_extra_fee'];
 				$totalDeliveryFee += $cartData['cat' . $cat]['total_delivery_fee'];
-                
-                // Adding driver_delivery_fee
-                $totalDriverDeliveryFee += $cartData['cat' . $cat]['total_driver_delivery_fee'];
 			} 
 		}
 		//echo 'tatlDeliveryFee = ' . $totalDeliveryFee;
@@ -544,9 +524,6 @@ class OrderController extends BaseController {
 				'discont_goods_price' => $totalGoodsPrice,
 				'discont_total_price' => $totalPrice,
 				'deliver_price' => $totalDeliveryFee,
-            
-                // adding driver_delivery_fee
-                'driver_deliver_price' => $totalDriverDeliveryFee,
 				'extra_price' => $totalExtraFee,
 				'sales_price' => $totalSalesTax,
 				'tip_price' => $tipPrice,
@@ -578,9 +555,6 @@ class OrderController extends BaseController {
 				// Get prices
 				$subGoodsTotalPrice = $cartRestaurant['total_goods_price'];
 				$subDeliveryFee = $cartRestaurant['delivery_price'];
-                
-                // Add driver_deliver_fee
-                $subDriverDeliveryFee = $cartRestaurant['driver_delivery_price'];
 				$subExtraFee = $cartRestaurant['extra_price'];
 				$subTipPrice = $tipPrice * $subGoodsTotalPrice / $totalGoodsPrice;
 				$subSalesPrice = $subGoodsTotalPrice * 0.07;
@@ -609,9 +583,6 @@ class OrderController extends BaseController {
 						'discont_goods_price' => $discountedSubGoodsTotalPrice,
 						'discont_total_price' => $discountedSubTotalPrice,
 						'deliver_price' => $subDeliveryFee,
-
-                        // Add driver_deliver_fee
-                        'driver_deliver_price' => $subDriverDeliveryFee,
 						'extra_price' => $subExtraFee,
 						'sales_price' => $subSalesPrice,
 						'tip_price' => $subTipPrice,
@@ -876,7 +847,7 @@ class OrderController extends BaseController {
 				'discont_total_price' => $discountTotalPrice,
 				/*insert coupon_sn into food_order*/
 				'coupon_sn' => $couponSN,
-				'deliver_price' => $deliveryFee,
+				'delivery_price' => $deliveryFee,
 				'sales_price' => $salesTax,
 				'tip_price' => $tip,
 		];

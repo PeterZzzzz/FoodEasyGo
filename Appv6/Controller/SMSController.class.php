@@ -1,6 +1,6 @@
 <?php
 
-namespace Appv5\Controller;
+namespace Appv6\Controller;
 
 /**
  * 用户控制器
