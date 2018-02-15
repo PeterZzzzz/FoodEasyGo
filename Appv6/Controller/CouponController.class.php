@@ -551,7 +551,7 @@ class CouponController extends BaseController {
                 'deliver_price'             => 0,
                 ];
             $updatedSubOrderData['sales_price'] = $updatedSubOrderData['discont_goods_price'] * 0.07;
-                
+
             M('order_sub')
                 ->where("`id` = " . $hightestDeliverySubOrder['id'])
                 ->save($updatedSubOrderData);
@@ -562,7 +562,7 @@ class CouponController extends BaseController {
                 'deliver_price'                 => $totalDeliverFee - $hightestDeliveryFee,
                 ];
             $updatedOrderData['sales_price'] = $updatedOrderData['discont_goods_price'] * 0.07;
-            
+
             M('order')
                 ->where("`id` = " . $orderData['id'])
                 ->save($updatedOrderData);

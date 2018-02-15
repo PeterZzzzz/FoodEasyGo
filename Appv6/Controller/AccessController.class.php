@@ -440,6 +440,25 @@ class AccessController extends BaseController {
 		
 		$this->return_data([], 'Password changed successfully');
 	}
+
+
+
+
+	/**
+	 * Get App Version
+	 */
+	public function get_app_version () {
+		$appVersion = M('app_version')->where('id=1')->find();
+        $appVersionContent = [
+        'appVersion' => $appVersion['user_app_version'],
+        ];
+        
+        if ($appVersionContent) {
+        	$this->return_data($appVersionContent['appVersion']);
+        } else {
+        	$this->return_error('Login failed');
+        }
+	}
 	
 }
 

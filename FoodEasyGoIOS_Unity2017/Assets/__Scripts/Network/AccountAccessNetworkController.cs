@@ -66,6 +66,14 @@ public class AccountAccessNetworkController : ServerCallController {
         CommonWWWCall (Config.accessControllerURL + "login", form, success, failure);
     }
 
+    public void GetAppVersion(LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+
+        WWWForm form = new WWWForm();
+
+        CommonWWWCall(Config.accessControllerURL + "get_app_version", form, success, failure);
+    }
+
     public void ThirdPartyLogin (string userid, string platform, string email, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
         WWWForm form = new WWWForm ();
         form.AddField ("user_third_party", 1);

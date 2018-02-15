@@ -33,7 +33,7 @@ public class AboutUsPanelController : BasePanelController {
     public override void ResetPanel () {
     }
     public override void ReloadPanel () {
-        versionText.text = Config.versionNumberString;
+        versionText.text = "Version :"+Application.version;
 
         LoadingPanelController.instance.DisplayPanel ();
         InfoNetworkController.instance.GetContactInfo (
