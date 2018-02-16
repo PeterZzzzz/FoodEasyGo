@@ -529,8 +529,6 @@ class CouponController extends BaseController {
                     ->where("`id` = " . $subOrderData['id'])
                     ->save($updatedSubOrderData);
 
-
-
                 if ($couponRestaurantID == 0) {
                     if ($deliverFee > $hightestDeliveryFee) {
                         $hightestDeliveryFee = $deliverFee;
@@ -547,21 +545,35 @@ class CouponController extends BaseController {
                 
             $updatedSubOrderData = [
                 'discont_goods_price'       => $hightestDeliverySubOrder['goods_total_price'],
-                'discont_total_price'       => $hightestDeliverySubOrder['total_price'] - $hightestDeliveryFee,
+                // 'discont_total_price'       => $hightestDeliverySubOrder['total_price'] - $hightestDeliveryFee,
                 'deliver_price'             => 0,
                 ];
             $updatedSubOrderData['sales_price'] = $updatedSubOrderData['discont_goods_price'] * 0.07;
+            $updatedSubOrderData['discont_total_price'] = 
+            	$updatedSubOrderData['discont_goods_price']+
+            	$hightestDeliverySubOrder['extra_price']+
+            	$updatedSubOrderData['sales_price']+
+            	$hightestDeliverySubOrder['tip_price'];
+            $updatedSubOrderData['total_price'] = $updatedSubOrderData['discont_total_price'] + $hightestDeliveryFee;
 
             M('order_sub')
                 ->where("`id` = " . $hightestDeliverySubOrder['id'])
                 ->save($updatedSubOrderData);
             
+
             $updatedOrderData = [
                 'discont_goods_price'           => $orderData['goods_total_price'],
-                'discont_total_price'           => $orderData['total_price'] - $hightestDeliveryFee,
+                // 'discont_total_price'           => $orderData['total_price'] - $hightestDeliveryFee,
                 'deliver_price'                 => $totalDeliverFee - $hightestDeliveryFee,
                 ];
             $updatedOrderData['sales_price'] = $updatedOrderData['discont_goods_price'] * 0.07;
+            $updatedOrderData['discont_total_price'] =
+                $updatedOrderData['discont_goods_price'] +
+                $orderData['extra_price'] + 
+                $updatedOrderData['deliver_price'] + 
+                $updatedOrderData['sales_price'] +
+                $orderData['tip_price'];
+            $updatedOrderData['total_price'] = $updatedOrderData['discont_total_price'] + $hightestDeliveryFee;
 
             M('order')
                 ->where("`id` = " . $orderData['id'])
