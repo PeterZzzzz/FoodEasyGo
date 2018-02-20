@@ -48,7 +48,7 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
 
         if (_isSchedule)
         {
-            RestaurantNetworkController.instance.GetRestaurantReserveList(
+            RestaurantNetworkController.instance.GetRestaurantList(
                 form.wwwForm,
                 new LDFWServerResponseEvent((JSONObject data, string m) =>
                     {
