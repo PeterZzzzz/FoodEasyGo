@@ -847,6 +847,8 @@ class OrderController extends BaseController {
             'discont_total_price'                => $discountTotalPrice,
             'instruction'                        => $instruction,
             ];
+        $updatedOrderData['create_time'] = time();
+
 		
 		$couponSN = $orderData['coupon_sn'];
         if ($paymentType == 1) {
