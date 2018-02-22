@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{96D694EA-F372-4C6A-1CEC-9A368C9D4875}|">
   <MonoDevelop.Ide.ItemProperties.FoodEasyGoIOS__Unity2017 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/UserPanel/AddressPanelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/UserPanel/AboutUsPanelController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Config/Config.cs" Line="34" Column="58" />
-      <File FileName="Assets/__Scripts/Panel/CartPanel/CartPanelController.cs" Line="405" Column="60" />
+      <File FileName="Assets/__Scripts/Config/Config.cs" Line="29" Column="56" />
+      <File FileName="Assets/__Scripts/Panel/CartPanel/CartPanelController.cs" Line="598" Column="17" />
       <File FileName="Assets/__Scripts/Panel/UserPanel/AddressPanelController.cs" Line="103" Column="6" />
+      <File FileName="Assets/__Scripts/Panel/LoginPanelController.cs" Line="35" Column="9" />
+      <File FileName="Assets/__Scripts/Panel/UserPanel/AboutUsPanelController.cs" Line="48" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

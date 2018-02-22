@@ -22,6 +22,8 @@ public class LoginPanelController : BasePanelController {
     public Transform                        facebookButton;
     public RectTransform                    logoTransform;
 
+    public Text versionText;
+
     protected new void Awake () {
         if (instance != null) {
             Destroy (instance.gameObject);
@@ -29,7 +31,8 @@ public class LoginPanelController : BasePanelController {
         instance = this;
 
         base.Awake ();
-        
+        versionText.text = "Version :" + Application.version;
+
     }
     
     protected new IEnumerator Start () {
