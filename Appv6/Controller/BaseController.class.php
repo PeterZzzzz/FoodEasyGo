@@ -298,6 +298,23 @@ class BaseController extends Controller {
 		}
 	}
 	
+	protected function is_within_target_time_frame($targetTime, $startTime, $endTime, $secondStartTime, $secondEndTime) {
+
+        if (strtotime($startTime) <= strtotime($targetTime) && 
+				strtotime($endTime) >= strtotime($targetTime)) {
+			return true;
+		} else {
+			if ($secondStartTime == "" || $secondEndTime == "") {
+				return false;
+			} else if (strtotime($secondStartTime) <= strtotime($targetTime) && 
+					strtotime($secondEndTime) >= strtotime($targetTime)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
 	/**
 	 * Converts time to string
 	 */
