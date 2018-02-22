@@ -89,16 +89,6 @@ class RestaurantController extends BaseController {
 			
 			$isSchedule = $this->get_param('post.is_schedule');
             $scheduleID = $this->get_param('post.schedule_id');
-            $scheduleTime = "";
-            
-            if ($isSchedule == "1") {
-                $temp = M('reserve_config')
-                    ->where("id = $scheduleID")
-                    ->find();
-                $scheduleTime = explode('-', $temp[destine_time])[0];
-                
-                //echo 'scheduleTime = ' . $scheduleTime;
-			}
 			
 			// restaurant type id
 			$restaurantTypeID = $this->get_param('post.restaurant_type_id');
@@ -180,8 +170,8 @@ class RestaurantController extends BaseController {
                 $this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime)) {
 				$restaurant['is_open'] = "1";
             } else if ($isSchedule == "1" && 
-                $this->is_within_target_time_frame($scheduleTime, $startTime, $endTime, $secondStartTime, $secondEndTime)) {
-                $restaurant['is_open'] = "1";
+				strpos($restaurant['destine_time'], $scheduleID) !== false) {
+				$restaurant['is_open'] = "1";
 			} else {
 				$restaurant['is_open'] = "0";
 			}
