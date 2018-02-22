@@ -1,13 +1,11 @@
 ﻿<Properties StartupConfiguration="{96D694EA-F372-4C6A-1CEC-9A368C9D4875}|">
   <MonoDevelop.Ide.ItemProperties.FoodEasyGoIOS__Unity2017 PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Network/RestaurantNetworkController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Panel/UserPanel/AddressPanelController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Config/Config.cs" Line="34" Column="56" />
-      <File FileName="Assets/LDAppFramework/Scripts/UISection/LDFWToggleController.cs" Line="26" Column="74" />
-      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelController.cs" Line="204" Column="78" />
-      <File FileName="Assets/__Scripts/Network/RestaurantNetworkController.cs" Line="46" Column="17" />
-      <File FileName="Assets/__Scripts/Panel/RestaurantPanel/RestaurantPanelEndlessScrollview.cs" Line="51" Column="58" />
+      <File FileName="Assets/__Scripts/Config/Config.cs" Line="34" Column="58" />
+      <File FileName="Assets/__Scripts/Panel/CartPanel/CartPanelController.cs" Line="405" Column="60" />
+      <File FileName="Assets/__Scripts/Panel/UserPanel/AddressPanelController.cs" Line="103" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

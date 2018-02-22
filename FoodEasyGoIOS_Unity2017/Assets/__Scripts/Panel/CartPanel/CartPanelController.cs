@@ -403,9 +403,9 @@ public class CartPanelController : BasePanelController
         if (!isPhoneVerified)
         {
             if (Config.currentLanguage == Language.chinese)
-                MessagePanelController.instance.DisplayPanel("号码未认证, 请前往地址管理认证号码");
+                MessagePanelController.instance.DisplayPanel("号码未认证, 请前往“我的账户”—>“地址管理”认证号码");
             else
-                MessagePanelController.instance.DisplayPanel("This phone number is has not been verified, please go to Address to verify this number");
+                MessagePanelController.instance.DisplayPanel("This phone number is has not been verified, please go to “Account” -> “Address Management” to verify this number");
 
             return;
         }
