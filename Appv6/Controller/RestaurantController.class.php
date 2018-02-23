@@ -79,6 +79,12 @@ class RestaurantController extends BaseController {
 	 * Get restaurant list
 	 */
 	public function get_restaurant_list ($restaurantList = "") {
+		$isSchedule = $this->get_param('post.is_schedule');
+		$scheduleID = $this->get_param('post.schedule_id');
+
+		//echo "isschedule = " . $isSchedule;
+		//echo " id = " . $scheduleID;
+
 		if ($restaurantList == "") {
 			// 1: supports instant send, 0: doesn't support instant send
 			$instantSendValue = $this->get_param('post.instant_send');
@@ -87,8 +93,6 @@ class RestaurantController extends BaseController {
 				$instantSendSQL = " and `support_send` = 1 ";
 			}
 			
-			$isSchedule = $this->get_param('post.is_schedule');
-            $scheduleID = $this->get_param('post.schedule_id');
 			
 			// restaurant type id
 			$restaurantTypeID = $this->get_param('post.restaurant_type_id');

@@ -13,52 +13,52 @@ using Debug = UnityEngine.Debug;
 public class CartPanelController : BasePanelController
 {
 
-    public static CartPanelController               instance;
+    public static CartPanelController instance;
 
 
     // Transform
-    public Transform                                addressSection;
-    public ScrollRect                               scrollRect;
-    public LDFWToggleController                     header2ToggleController;
-    public RectTransform                            deliveryContent;
-    public RectTransform                            reservationContent;
-    public TextController                           totalPriceText;
-    public TextController                           deliveryTitle;
-    public TextController                           reservationTitle;
-    public Button                                   payButton;
+    public Transform addressSection;
+    public ScrollRect scrollRect;
+    public LDFWToggleController header2ToggleController;
+    public RectTransform deliveryContent;
+    public RectTransform reservationContent;
+    public TextController totalPriceText;
+    public TextController deliveryTitle;
+    public TextController reservationTitle;
+    public Button payButton;
 
-    public string                                   selectedAddressID = "";
-    public string                                   selectedRegionID = "";
+    public string selectedAddressID = "";
+    public string selectedRegionID = "";
 
 
     // Prefab
-    public GameObject                               restaurantBarPrefab;
-    public GameObject                               dishBarPrefab;
+    public GameObject restaurantBarPrefab;
+    public GameObject dishBarPrefab;
 
 
-    public Dictionary<int, float>                   restaurantDeliverFee;
-    public List<CartPanelRestaurantBarController>   nowRestaurantBarList;
-    public List<CartPanelRestaurantBarController>   deliveryRestaurantBarList;
+    public Dictionary<int, float> restaurantDeliverFee;
+    public List<CartPanelRestaurantBarController> nowRestaurantBarList;
+    public List<CartPanelRestaurantBarController> deliveryRestaurantBarList;
 
 
     // Restaurant Data
-    private Dictionary<string, JSONObject>          restaurantDic;
-    private bool                                    isDisplayNowRestaurant;
-    private IEnumerator                             getDeliverFeeIEnumerator;
+    private Dictionary<string, JSONObject> restaurantDic;
+    private bool isDisplayNowRestaurant;
+    private IEnumerator getDeliverFeeIEnumerator;
     private bool isPhoneVerified;
 
 
-    new void Awake ()
+    new void Awake()
     {
         if (instance != null)
         {
-            instance.gameObject.DestroyGO ();
+            instance.gameObject.DestroyGO();
         }
         instance = this;
 
-        base.Awake ();
+        base.Awake();
 
-        totalPriceText.ResetUI ("");
+        totalPriceText.ResetUI("");
     }
 
 
@@ -66,47 +66,51 @@ public class CartPanelController : BasePanelController
 
     #region Overrides
 
-    public override void ResetPanel ()
+    public override void ResetPanel()
     {
     }
 
-    public override void ReloadPanel ()
+    public override void ReloadPanel()
     {
-		selectedAddressID = "";
-		selectedRegionID = "";
-        deliveryContent.DestroyAllChildren ();
-        reservationContent.DestroyAllChildren ();
-        StartCoroutine (ReloadPanelCoroutine ());
+        if (PanelListController.instance != null &&
+            PanelListController.instance.currentBasePanel == this)
+        {
+            selectedAddressID = "";
+            selectedRegionID = "";
+            deliveryContent.DestroyAllChildren();
+            reservationContent.DestroyAllChildren();
+            StartCoroutine(ReloadPanelCoroutine());
+        }
     }
 
-    private IEnumerator ReloadPanelCoroutine ()
+    private IEnumerator ReloadPanelCoroutine()
     {
-        LoadingPanelController.instance.DisplayPanel ();
-        CartController.instance.cart.SyncWithServer ();
-        yield return new WaitForSeconds (1f);
-        while (!CartController.instance.cart.IsSyncedWithServer ())
+        LoadingPanelController.instance.DisplayPanel();
+        CartController.instance.cart.SyncWithServer();
+        yield return new WaitForSeconds(1f);
+        while (!CartController.instance.cart.IsSyncedWithServer())
         {
             yield return null;
         }
 
         bool isGetCartDetailFinished = false;
-        CartController.instance.GetCartDetails (() =>
-        {
-            isGetCartDetailFinished = true;
-        });
+        CartController.instance.GetCartDetails(() =>
+       {
+           isGetCartDetailFinished = true;
+       });
         while (!isGetCartDetailFinished)
             yield return null;
 
-        GetRestaurantData ();
+        GetRestaurantData();
 
         while (restaurantDic == null)
             yield return null;
 
-        LoadingPanelController.instance.HidePanel ();
+        LoadingPanelController.instance.HidePanel();
 
 
 
-        yield return StartCoroutine (LoadAllPanelCoroutine ());
+        yield return StartCoroutine(LoadAllPanelCoroutine());
 
 
 
@@ -118,54 +122,54 @@ public class CartPanelController : BasePanelController
 
     #region LoadData
 
-    IEnumerator LoadAllPanelCoroutine ()
+    IEnumerator LoadAllPanelCoroutine()
     {
 
-        Dictionary<string, CartPanelRestaurantBarController> restaurantBarDic = new Dictionary<string, CartPanelRestaurantBarController> ();
-        nowRestaurantBarList = new List<CartPanelRestaurantBarController> ();
-        deliveryRestaurantBarList = new List<CartPanelRestaurantBarController> ();
+        Dictionary<string, CartPanelRestaurantBarController> restaurantBarDic = new Dictionary<string, CartPanelRestaurantBarController>();
+        nowRestaurantBarList = new List<CartPanelRestaurantBarController>();
+        deliveryRestaurantBarList = new List<CartPanelRestaurantBarController>();
 
         foreach (KeyValuePair<string, CartDetailData> pair in CartController.instance.cart._cartDetailDic)
         {
             //DebugLogger.Log ("CartDetailData: " + pair.Value._dishData._nameZH);
-            Transform dishBar = Instantiate (dishBarPrefab).transform;
-            CartPanelDishBarController dishBarScript = dishBar.GetComponent<CartPanelDishBarController> ();
+            Transform dishBar = Instantiate(dishBarPrefab).transform;
+            CartPanelDishBarController dishBarScript = dishBar.GetComponent<CartPanelDishBarController>();
             dishBarScript.cartDetailData = pair.Value;
             dishBarScript.scrollRect = scrollRect;
 
 
             string restaurantID = pair.Value._restaurantID;
             string key = pair.Value._restaurantID + "-" + pair.Value._categoryID;
-            if (restaurantBarDic.ContainsKey (key))
+            if (restaurantBarDic.ContainsKey(key))
             {
-                restaurantBarDic[key].AddDishBar (dishBarScript);
+                restaurantBarDic[key].AddDishBar(dishBarScript);
                 dishBarScript.isRestaurantOpen = restaurantBarDic[key].isOpen;
-                dishBarScript.ResetUI ();
+                dishBarScript.ResetUI();
             }
             else
             {
-                Transform restaurantBar = Instantiate (restaurantBarPrefab).transform;
+                Transform restaurantBar = Instantiate(restaurantBarPrefab).transform;
 
                 if (pair.Value._categoryID == "1")
-                    restaurantBar.SetParent (deliveryContent);
+                    restaurantBar.SetParent(deliveryContent);
                 else
-                    restaurantBar.SetParent (reservationContent);
+                    restaurantBar.SetParent(reservationContent);
 
                 restaurantBar.localScale = Vector3.one;
                 CartPanelRestaurantBarController restaurantBarScript = restaurantBar.GetComponent<CartPanelRestaurantBarController>();
 
                 if (pair.Value._categoryID == "1")
-                    nowRestaurantBarList.Add (restaurantBarScript);
+                    nowRestaurantBarList.Add(restaurantBarScript);
                 else
-                    deliveryRestaurantBarList.Add (restaurantBarScript);
+                    deliveryRestaurantBarList.Add(restaurantBarScript);
 
-                restaurantBarScript.ResetUI (restaurantDic[pair.Value._restaurantID], pair.Value._categoryID == "1", pair.Value._restaurantID, pair.Value._restaurantNameZH, pair.Value._restaurantNameEN, float.Parse (restaurantDic[pair.Value._restaurantID].GetField ("min_consume").str));
-                restaurantBarScript.AddDishBar (dishBarScript);
+                restaurantBarScript.ResetUI(restaurantDic[pair.Value._restaurantID], pair.Value._categoryID == "1", pair.Value._restaurantID, pair.Value._restaurantNameZH, pair.Value._restaurantNameEN, float.Parse(restaurantDic[pair.Value._restaurantID].GetField("min_consume").str));
+                restaurantBarScript.AddDishBar(dishBarScript);
                 dishBarScript.isRestaurantOpen = restaurantBarScript.isOpen;
-                dishBarScript.ResetUI ();
+                dishBarScript.ResetUI();
 
 
-                restaurantBarDic.Add (key, restaurantBarScript);
+                restaurantBarDic.Add(key, restaurantBarScript);
             }
 
             yield return null;
@@ -173,52 +177,54 @@ public class CartPanelController : BasePanelController
 
         }
 
-        CheckForAddress (selectedAddressID);
-        UpdateRestaurantStatus ();
-        UpdateTitleBarInfo ();
+        CheckForAddress(selectedAddressID);
+        UpdateRestaurantStatus();
+        UpdateTitleBarInfo();
 
-        RestartGetDeliverFee ();
+        RestartGetDeliverFee();
         while (getDeliverFeeIEnumerator != null)
-            yield return new WaitForSeconds (0.5f);
+            yield return new WaitForSeconds(0.5f);
 
-        UpdatePayButtonStatus ();
+        UpdatePayButtonStatus();
 
-        header2ToggleController.SelectToggle (0);
+        //header2ToggleController.SelectToggle(0);
         //SwitchDeliveryContent (true);
     }
 
 
-    private void GetRestaurantData ()
+    private void GetRestaurantData()
     {
 
         restaurantDic = null;
 
-        WWWForm form = new WWWForm ();
-        form.AddField ("list", CartController.instance.cart.GetRestaurantIDList ());
-        DebugLogger.Log ("GetRestaurantData = " + CartController.instance.cart.GetRestaurantIDList ());
+        WWWForm form = new WWWForm();
+        form.AddField("list", CartController.instance.cart.GetRestaurantIDList());
+        form.AddField("is_schedule", isDisplayNowRestaurant ? "0" : "1");
+        form.AddField("schedule_id", RestaurantPanelController.instance.deliveryTimeID);
+        DebugLogger.Log("GetRestaurantData = " + CartController.instance.cart.GetRestaurantIDList());
 
-        LoadingPanelController.instance.DisplayPanelImmediately ();
-        RestaurantNetworkController.instance.GetTargetRestaurantList (
+        LoadingPanelController.instance.DisplayPanelImmediately();
+        RestaurantNetworkController.instance.GetTargetRestaurantList(
             form,
-            new LDFWServerResponseEvent ((JSONObject data, string m) =>
-            {
-                LoadingPanelController.instance.HidePanelImmediately ();
-                restaurantDic = new Dictionary<string, JSONObject> ();
-                data = data.GetField ("data");
-                for (int i = 0; data[i] != null; i++)
-                {
-                    restaurantDic.Add (data[i].GetField ("id").str, data[i]);
-                }
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+           {
+               LoadingPanelController.instance.HidePanelImmediately();
+               restaurantDic = new Dictionary<string, JSONObject>();
+               data = data.GetField("data");
+               for (int i = 0; data[i] != null; i++)
+               {
+                   restaurantDic.Add(data[i].GetField("id").str, data[i]);
+               }
 
-            }),
-            new LDFWServerResponseEvent ((JSONObject data, string m) =>
-            {
-                LoadingPanelController.instance.HidePanelImmediately ();
-                GetRestaurantData ();
-            }));
+           }),
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+           {
+               LoadingPanelController.instance.HidePanelImmediately();
+               GetRestaurantData();
+           }));
     }
 
-    public void GetTotalPriceDetails (out string totalPrice, out string extraFee, out string deliveryFee)
+    public void GetTotalPriceDetails(out string totalPrice, out string extraFee, out string deliveryFee)
     {
         float tp = 0f;
         float xf = 0f;
@@ -233,11 +239,11 @@ public class CartPanelController : BasePanelController
                 {
                     if (restaurant.isOpen && restaurant.isMinOrderSatisfied && restaurant.canDeliver)
                     {
-                        tp += restaurant.GetTotalPrice ();
-                        xf += restaurant.GetExtraFee ();
-                        if (restaurantDeliverFee.ContainsKey (int.Parse (restaurant.restaurantID)))
-                           df += restaurantDeliverFee[int.Parse (restaurant.restaurantID)];
-                        
+                        tp += restaurant.GetTotalPrice();
+                        xf += restaurant.GetExtraFee();
+                        if (restaurantDeliverFee.ContainsKey(int.Parse(restaurant.restaurantID)))
+                            df += restaurantDeliverFee[int.Parse(restaurant.restaurantID)];
+
                     }
                 }
             }
@@ -247,20 +253,20 @@ public class CartPanelController : BasePanelController
                 {
                     if (restaurant.isOpen && restaurant.isMinOrderSatisfied && restaurant.canDeliver)
                     {
-                        tp += restaurant.GetTotalPrice ();
-                        xf += restaurant.GetExtraFee ();
-                        if (restaurantDeliverFee.ContainsKey (int.Parse (restaurant.restaurantID)))
+                        tp += restaurant.GetTotalPrice();
+                        xf += restaurant.GetExtraFee();
+                        if (restaurantDeliverFee.ContainsKey(int.Parse(restaurant.restaurantID)))
                         {
-                            df += restaurantDeliverFee[int.Parse (restaurant.restaurantID)];
+                            df += restaurantDeliverFee[int.Parse(restaurant.restaurantID)];
                         }
                     }
                 }
             }
         }
 
-        totalPrice = tp.ToString ("0.00");
-        extraFee = xf.ToString ("0.00");
-        deliveryFee = df.ToString ("0.00");
+        totalPrice = tp.ToString("0.00");
+        extraFee = xf.ToString("0.00");
+        deliveryFee = df.ToString("0.00");
     }
 
     #endregion
@@ -271,116 +277,117 @@ public class CartPanelController : BasePanelController
     /// <summary>
     /// Check for "default" address
     /// </summary>
-    private void CheckForAddress (string selectedString = "")
+    private void CheckForAddress(string selectedString = "")
     {
         JSONObject address = null;
-        if (!string.IsNullOrEmpty (selectedString))
-            address = AppDataController.instance.GetAddress (selectedString);
+        if (!string.IsNullOrEmpty(selectedString))
+            address = AppDataController.instance.GetAddress(selectedString);
 
         if (address == null)
-            address = AppDataController.instance.GetAddress ("default");
+            address = AppDataController.instance.GetAddress("default");
 
         if (address == null)
-            address = AppDataController.instance.GetAddress ("0");
+            address = AppDataController.instance.GetAddress("0");
 
         if (address == null)
         {
-            addressSection.Find ("AddressBar").gameObject.SetActive (false);
-            addressSection.Find ("Empty").gameObject.SetActive (true);
+            addressSection.Find("AddressBar").gameObject.SetActive(false);
+            addressSection.Find("Empty").gameObject.SetActive(true);
         }
 
         // check for delivery fee based on address
         if (address != null)
-            ResetAddress (address);
+            ResetAddress(address);
     }
 
     /// <summary>
     /// Opens address panel
     /// </summary>
-    public void OpenAddressPanel ()
+    public void OpenAddressPanel()
     {
         PanelListController.instance.removePanelAction = () =>
         {
-			ReloadPanel();
+            ReloadPanel();
 
         };
 
-        AddressPanelController.instance.OpenPanel ();
+        AddressPanelController.instance.OpenPanel();
     }
 
     /// <summary>
     /// Opens address pop up toggle
     /// </summary>
-    public void OpenAddressPopUpToggle ()
+    public void OpenAddressPopUpToggle()
     {
-        List<string> addressList = new List<string> ();
-        List<string> addressIDList = new List<string> ();
+        List<string> addressList = new List<string>();
+        List<string> addressIDList = new List<string>();
         JSONObject address = null;
         List<JSONObject> addressJSONList = AppDataController.instance.GetAllAddresses("default");
 
 
-        DebugLogger.Log ("AddressJsonList length = " + addressJSONList.Count);
+        DebugLogger.Log("AddressJsonList length = " + addressJSONList.Count);
         for (int i = 0; i < addressJSONList.Count; i++)
         {
             address = addressJSONList[i];
-            addressList.Add (address.GetField ("address").str + " " + address.GetField ("street").str);
-            addressIDList.Add (address.GetField ("id").str);
+            addressList.Add(address.GetField("address").str + " " + address.GetField("street").str);
+            addressIDList.Add(address.GetField("id").str);
         }
 
-        PopUpTogglePanelController.instance.DisplayPopUpTogglePanel (true, true, addressList, null, addressIDList,
+        PopUpTogglePanelController.instance.DisplayPopUpTogglePanel(true, true, addressList, null, addressIDList,
             () =>
             {
-                ResetAddress (AppDataController.instance.GetAddress (PopUpTogglePanelController.instance.toggleController.GetSelectedElementIDs ()));
-                RestartGetDeliverFee ();
-                UpdatePayButtonStatus ();
+                ResetAddress(AppDataController.instance.GetAddress(PopUpTogglePanelController.instance.toggleController.GetSelectedElementIDs()));
+                RestartGetDeliverFee();
+                UpdatePayButtonStatus();
             },
             () =>
             {
-                RestartGetDeliverFee ();
+                RestartGetDeliverFee();
             });
     }
-    
+
 
     /// <summary>
     /// Resets address data with the new address json data
     /// </summary>
     /// <param name="address"></param>
-    public void ResetAddress (JSONObject address)
+    public void ResetAddress(JSONObject address)
     {
-        selectedAddressID = address.GetField ("id").str;
-        selectedRegionID = address.GetField ("region_id").str;
-        
-        addressSection.Find ("AddressBar").gameObject.SetActive (true);
-        addressSection.Find ("Empty").gameObject.SetActive (false);
-        addressSection.Find ("AddressBar/Name").GetComponent<TextController> ().ResetUI (address.GetField ("name").str);
-        addressSection.Find ("AddressBar/ContactNumber").GetComponent<TextController> ().ResetUI (address.GetField ("phone").str);
-        addressSection.Find ("AddressBar/Address").GetComponent<TextController> ().ResetUI (
-            address.GetField ("address").str + ", " + address.GetField ("street").str + ", " + address.GetField ("city").str + ", "
-            + address.GetField ("state").str + ", " + address.GetField("zip_code").str);
+        selectedAddressID = address.GetField("id").str;
+        selectedRegionID = address.GetField("region_id").str;
+
+        addressSection.Find("AddressBar").gameObject.SetActive(true);
+        addressSection.Find("Empty").gameObject.SetActive(false);
+        addressSection.Find("AddressBar/Name").GetComponent<TextController>().ResetUI(address.GetField("name").str);
+        addressSection.Find("AddressBar/ContactNumber").GetComponent<TextController>().ResetUI(address.GetField("phone").str);
+        addressSection.Find("AddressBar/Address").GetComponent<TextController>().ResetUI(
+            address.GetField("address").str + ", " + address.GetField("street").str + ", " + address.GetField("city").str + ", "
+            + address.GetField("state").str + ", " + address.GetField("zip_code").str);
 
         CheckPhoneVerification(address.GetField("id").str);
-        Debug.Log("这个地址的ID是："+address.GetField("id").str);
+        Debug.Log("这个地址的ID是：" + address.GetField("id").str);
     }
 
 
     #endregion
 
 
+
     #region Others
 
 
-    public void UpdateTitleBarInfo ()
+    public void UpdateTitleBarInfo()
     {
-        deliveryTitle.ResetUI ("即买即送" + " (" + deliveryContent.childCount + ")", "Now" + " (" + deliveryContent.childCount + ")");
-        reservationTitle.ResetUI ("预定，超市，团购" + " (" + reservationContent.childCount + ")", "Schedule, Grocery, Groupon" + " (" + reservationContent.childCount + ")");
+        deliveryTitle.ResetUI("即买即送" + " (" + deliveryContent.childCount + ")", "Now" + " (" + deliveryContent.childCount + ")");
+        reservationTitle.ResetUI("预定，超市，团购" + " (" + reservationContent.childCount + ")", "Schedule, Grocery, Groupon" + " (" + reservationContent.childCount + ")");
     }
 
-    public void OnOrderSomethingButtonClicked ()
+    public void OnOrderSomethingButtonClicked()
     {
-        RestaurantPanelController.instance.OpenPanel ();
+        RestaurantPanelController.instance.OpenPanel();
     }
 
-    public void OnCheckOutButtonClicked ()
+    public void OnCheckOutButtonClicked()
     {
         if (addressSection.Find("AddressBar/Name").GetComponent<TextController>().IsTextEmpty())
         {
@@ -409,10 +416,10 @@ public class CartPanelController : BasePanelController
 
             return;
         }
-        StartCoroutine (CheckOutCoroutine ());
+        StartCoroutine(CheckOutCoroutine());
     }
 
-    private IEnumerator CheckOutCoroutine ()
+    private IEnumerator CheckOutCoroutine()
     {
 
         if (isDisplayNowRestaurant)
@@ -420,27 +427,27 @@ public class CartPanelController : BasePanelController
         else
             PlaceOrderPanelController.instance.isCurrentOrderInstantSend = false;
 
-        LoadingPanelController.instance.DisplayPanel ();
-        CartController.instance.cart.SyncWithServer ();
-        while (!CartController.instance.cart.IsSyncedWithServer ())
+        LoadingPanelController.instance.DisplayPanel();
+        CartController.instance.cart.SyncWithServer();
+        while (!CartController.instance.cart.IsSyncedWithServer())
         {
-            DebugLogger.Log ("Syncing...");
-            yield return new WaitForSeconds (1f);
+            DebugLogger.Log("Syncing...");
+            yield return new WaitForSeconds(1f);
         }
         CartController.instance.cart = null;
-        CartController.instance.GetCartDetails (() => { PlaceOrderPanelController.instance.OpenPanel (); });
+        CartController.instance.GetCartDetails(() => { PlaceOrderPanelController.instance.OpenPanel(); });
         while (CartController.instance.cart == null)
         {
-            DebugLogger.Log ("Syncing...");
-            yield return new WaitForSeconds (1f);
+            DebugLogger.Log("Syncing...");
+            yield return new WaitForSeconds(1f);
         }
-        LoadingPanelController.instance.HidePanel ();
+        LoadingPanelController.instance.HidePanel();
         //ResetPanel ();
         //ReloadPanel ();
         //PlaceOrderPanelController.instance.OpenPanel ();
     }
 
-    public void SwitchDeliveryContent (bool state)
+    public void SwitchDeliveryContent(bool state)
     {
 
 
@@ -463,41 +470,42 @@ public class CartPanelController : BasePanelController
             deliveryContent.localScale = Vector3.zero;
         }
 
-        UpdateTotalFeeAmount ();
-        UpdatePayButtonStatus ();
+        UpdateTotalFeeAmount();
+        UpdatePayButtonStatus();
+        //ReloadPanel();
     }
 
-    public void UpdateTotalFeeAmount ()
+    public void UpdateTotalFeeAmount()
     {
         string tp;
         string xf;
         string df;
-        GetTotalPriceDetails (out tp, out xf, out df);
-        totalPriceText.ResetUI ("总金额: " + tp, "Total price: " + tp);
+        GetTotalPriceDetails(out tp, out xf, out df);
+        totalPriceText.ResetUI("总金额: " + tp, "Total price: " + tp);
     }
 
-    public void UpdateRestaurantStatus ()
+    public void UpdateRestaurantStatus()
     {
         foreach (var restaurant in nowRestaurantBarList)
         {
             if (restaurant != null)
             {
-                restaurant.CheckForMinOrder ();
+                restaurant.CheckForMinOrder();
             }
         }
         foreach (var restaurant in deliveryRestaurantBarList)
         {
             if (restaurant != null)
             {
-                restaurant.CheckForMinOrder ();
+                restaurant.CheckForMinOrder();
             }
         }
     }
 
-    public void UpdatePayButtonStatus ()
+    public void UpdatePayButtonStatus()
     {
         payButton.interactable = false;
-        if (string.IsNullOrEmpty (selectedAddressID))
+        if (string.IsNullOrEmpty(selectedAddressID))
             return;
 
         if (isDisplayNowRestaurant && nowRestaurantBarList != null)
@@ -524,63 +532,63 @@ public class CartPanelController : BasePanelController
 
         }
 
-        UpdateTotalFeeAmount ();
+        UpdateTotalFeeAmount();
     }
 
-    public void RestartGetDeliverFee ()
+    public void RestartGetDeliverFee()
     {
         if (getDeliverFeeIEnumerator != null)
-            StopCoroutine (getDeliverFeeIEnumerator);
+            StopCoroutine(getDeliverFeeIEnumerator);
 
-        StartCoroutine (getDeliverFeeIEnumerator = GetDeliverFeeCoroutine ());
+        StartCoroutine(getDeliverFeeIEnumerator = GetDeliverFeeCoroutine());
     }
 
-    private IEnumerator GetDeliverFeeCoroutine ()
+    private IEnumerator GetDeliverFeeCoroutine()
     {
-        LoadingPanelController.instance.DisplayPanel ();
+        LoadingPanelController.instance.DisplayPanel();
 
         bool isFinishedGettingDeliverFee = false;
         WWWForm form = new WWWForm();
-        form.AddField ("restaurant_id_list", CartController.instance.cart.GetRestaurantIDList ());
-        form.AddField ("delivery_region_id", this.selectedRegionID);
+        form.AddField("restaurant_id_list", CartController.instance.cart.GetRestaurantIDList());
+        form.AddField("delivery_region_id", this.selectedRegionID);
 
-        RestaurantNetworkController.instance.GetRestaurantListDeliverFees (form,
-            new LDFWServerResponseEvent ((JSONObject data, string message) =>
-            {
-                restaurantDeliverFee = new Dictionary<int, float> ();
-                if (data != null)
-                {
-                    for (int i = 0; data[i] != null; i++)
-                    {
-                        DebugLogger.Log ("RestaurantDeliveryFee.add: " + int.Parse (data[i].GetField ("restaurant_id").str) + ": " + float.Parse (data[i].GetField ("deliver_fee").str));
-                        restaurantDeliverFee.Add (int.Parse (data[i].GetField ("restaurant_id").str), float.Parse (data[i].GetField ("deliver_fee").str));
-                    }
-                }
-                isFinishedGettingDeliverFee = true;
-            }),
-            new LDFWServerResponseEvent ((JSONObject data, string message) =>
-            {
-                MessagePanelController.instance.DisplayPanel (message);
-            }));
+        RestaurantNetworkController.instance.GetRestaurantListDeliverFees(form,
+            new LDFWServerResponseEvent((JSONObject data, string message) =>
+           {
+               restaurantDeliverFee = new Dictionary<int, float>();
+               if (data != null)
+               {
+                   for (int i = 0; data[i] != null; i++)
+                   {
+                       DebugLogger.Log("RestaurantDeliveryFee.add: " + int.Parse(data[i].GetField("restaurant_id").str) + ": " + float.Parse(data[i].GetField("deliver_fee").str));
+                       restaurantDeliverFee.Add(int.Parse(data[i].GetField("restaurant_id").str), float.Parse(data[i].GetField("deliver_fee").str));
+                   }
+               }
+               isFinishedGettingDeliverFee = true;
+           }),
+            new LDFWServerResponseEvent((JSONObject data, string message) =>
+           {
+               MessagePanelController.instance.DisplayPanel(message);
+           }));
 
         while (!isFinishedGettingDeliverFee)
-            yield return new WaitForSeconds (0.5f);
+            yield return new WaitForSeconds(0.5f);
 
-        ProcessRestaurantListBasedOnDeliverFee ();
-        UpdatePayButtonStatus ();
-        LoadingPanelController.instance.HidePanel ();
+        ProcessRestaurantListBasedOnDeliverFee();
+        UpdatePayButtonStatus();
+        LoadingPanelController.instance.HidePanel();
 
         getDeliverFeeIEnumerator = null;
     }
 
-    private void ProcessRestaurantListBasedOnDeliverFee ()
+    private void ProcessRestaurantListBasedOnDeliverFee()
     {
         if (isDisplayNowRestaurant && nowRestaurantBarList != null)
         {
             foreach (CartPanelRestaurantBarController restaurant in nowRestaurantBarList)
             {
-                restaurant.canDeliver = restaurantDeliverFee.ContainsKey (int.Parse (restaurant.restaurantID));
-                restaurant.UpdateUI ();
+                restaurant.canDeliver = restaurantDeliverFee.ContainsKey(int.Parse(restaurant.restaurantID));
+                restaurant.UpdateUI();
             }
         }
         else if (!isDisplayNowRestaurant && deliveryRestaurantBarList != null)
@@ -588,8 +596,8 @@ public class CartPanelController : BasePanelController
 
             foreach (CartPanelRestaurantBarController restaurant in deliveryRestaurantBarList)
             {
-                restaurant.canDeliver = restaurantDeliverFee.ContainsKey (int.Parse (restaurant.restaurantID));
-                restaurant.UpdateUI ();
+                restaurant.canDeliver = restaurantDeliverFee.ContainsKey(int.Parse(restaurant.restaurantID));
+                restaurant.UpdateUI();
             }
         }
     }
@@ -600,7 +608,7 @@ public class CartPanelController : BasePanelController
         WWWForm form = new WWWForm();
         form.AddField("addressID", addressID);
         UserDataNetworkController.instance.GetVerificationInfo(form,
-        new LDFWServerResponseEvent((JSONObject data, string m) => 
+        new LDFWServerResponseEvent((JSONObject data, string m) =>
         {
             Debug.Log("电话验证后台交互成功 结果是：" + data.str);
             if (data.str == "1")
@@ -613,8 +621,9 @@ public class CartPanelController : BasePanelController
                 Debug.Log("no ver");
                 isPhoneVerified = false;
             };
+            isPhoneVerified = true;
         }),
-        new LDFWServerResponseEvent((JSONObject data, string m) => 
+        new LDFWServerResponseEvent((JSONObject data, string m) =>
         {
             Debug.Log("电话验证后台交互失败：" + data.str);
 
