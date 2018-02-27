@@ -9,6 +9,7 @@ using System;
 
 public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler {
 
+    private JSONObject      goods;
     public string           _orderID;
     public string           _subOrderID;
     public string           _restaurantID;
@@ -41,7 +42,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     }
 
     public void Reset (string orderID, string orderStatus, string date, JSONObject orderData, JSONObject subOrderData) {
-        JSONObject goods = subOrderData.GetField ("goods");
+        goods = subOrderData.GetField ("goods");
         _orderStatus = orderStatus;
 
         _orderData = orderData;
@@ -146,7 +147,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     }
 
     public void OnShareButtonClicked () {
-        MainCanvasController.instance.ShareFoodEasyGo ();
+        MainCanvasController.instance.ShareToMoments(goods);
     }
 
     public void OnCommentButtonClicked () {

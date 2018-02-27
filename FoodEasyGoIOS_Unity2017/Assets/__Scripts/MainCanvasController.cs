@@ -139,12 +139,35 @@ public class MainCanvasController : MonoBehaviour {
         Debug.Log ("Device Token = " + deviceToken);
     }
 
-    public void ShareFoodEasyGo (string text = null) {
-        if (string.IsNullOrEmpty (text))
-            text = "Come and download FoodEasyGo: " + Config.iOSDownloadAddress;
+    public void ShareFoodEasyGo (string title, string content) {
+        if (string.IsNullOrEmpty (title))
+            title = "Come and download FoodEasyGo: ";
 
-        SharePanelController.instance.ShareContent (text);
+        SharePanelController.instance.ShareContent(title, content);
     }
 
+    public void ShareToMoments(JSONObject goods)
+    {
+        //string imgPath = goods[0].GetField("restaurant").GetField("img").str.Replace("\\/", "/");
+        //string imgPath = Application.dataPath + "/Resources/logo.png";
+
+        //string imagePath = Application.persistentDataPath + "/logo.png";
+        //if(!System.IO.File.Exists(imagePath))
+        //{
+        //    MessagePanelController.instance.DisplayPanel("xxxxxxxxxxxxxxxxxxxx");
+
+        //    Texture2D texture = Resources.Load("logo") as Texture2D;
+        //    System.IO.File.WriteAllBytes(imagePath, texture.EncodeToPNG());
+        //}
+
+        string restaurantName = "";
+        if (Config.currentLanguage == Language.chinese)
+            restaurantName = goods[0].GetField("restaurant").GetField("name").str;
+        else
+            restaurantName = goods[0].GetField("restaurant").GetField("name_en").str;
+        string text = "Hey! 刚刚我在FoodEasyGo上点了" + restaurantName + "的餐，首单免运费，快来试试吧！";
+            
+        SharePanelController.instance.ShareMomentsContent(text);
+    }
 
 }

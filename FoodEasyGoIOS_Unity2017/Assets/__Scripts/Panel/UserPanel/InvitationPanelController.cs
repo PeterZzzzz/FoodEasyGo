@@ -36,7 +36,19 @@ public class InvitationPanelController : BasePanelController {
 
 
     public void OnInviteButtonClicked () {
-        MainCanvasController.instance.ShareFoodEasyGo ("Come and download FoodEasyGo with invite code: " + UserDataController.instance.invitationCode);
+        string title = "";
+        string content = "";
+        if (Config.currentLanguage == Language.chinese)
+        {
+            title = "邀请码: " + UserDataController.instance.invitationCode;
+            content = "下载FoodEasyGo之后使用邀请码注册即可第一单免运费!!!";
+        }
+        else
+        {
+            title = "Invite Code: " + UserDataController.instance.invitationCode;
+            content = "Download FoodEasyGo at Apple Store, First Order FREE Delivery!!!";
+        }
+        MainCanvasController.instance.ShareFoodEasyGo(title, content);
         //MainCanvasController.instance.uniShare.ShareText = Config.currentLanguage == Language.chinese ? "快来下载好用的FoodEasyGO吧" : "Come and use this incredible app FoodEasyGO";
         //MainCanvasController.instance.uniShare.ShareScreenshot ();
 

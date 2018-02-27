@@ -257,8 +257,11 @@ public class HomePanelController : BasePanelController
     #region Others
     public void OnSearchEndEdit ()
     {
-        SearchPanelController.instance.OpenPanel ();
-        SearchPanelController.instance.SearchForInput (searchInput.text);
+        if(!string.IsNullOrEmpty(searchInput.text))
+        {
+            SearchPanelController.instance.OpenPanel();
+            SearchPanelController.instance.SearchForInput(searchInput.text);
+        }
     }
 
     public void OpenChangeLocationPanel () {
