@@ -41,7 +41,7 @@ public class InvitationPanelController : BasePanelController {
         if (Config.currentLanguage == Language.chinese)
         {
             title = "邀请码: " + UserDataController.instance.invitationCode;
-            content = "下载FoodEasyGo之后使用邀请码注册即可第一单免运费!!!";
+            content = "快来下载FoodEasyGo吧！新用户注册第一单免运费!!!";
         }
         else
         {
