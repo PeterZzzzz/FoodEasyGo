@@ -27,7 +27,7 @@ class CouponController extends BaseController {
 			->where("`sn` = '$couponSN' and " . 
 					"`status` = 0 and " .
 					"`used_times` < `usable_times` and " .
-					"(`user_id` = $userID or `reusable` = 1)")
+					"(`user_id` in ($userID, 999999, 0))")
             ->find();
         if (!$couponSNDetail) {
             return null;

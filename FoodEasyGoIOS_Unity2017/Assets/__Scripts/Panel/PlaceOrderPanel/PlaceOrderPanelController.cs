@@ -425,7 +425,7 @@ public class PlaceOrderPanelController : BasePanelController
     /// </summary>
     public void ValidateCoupon()
     {
-        string couponString = couponInputField.text;
+        string couponString = couponInputField.text.ToUpper();
         Debug.Log("Entered Coupon = " + couponString);
 
         WWWForm form = new WWWForm();
