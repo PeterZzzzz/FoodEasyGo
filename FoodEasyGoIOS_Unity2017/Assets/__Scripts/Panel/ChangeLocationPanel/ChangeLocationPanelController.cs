@@ -42,11 +42,11 @@ public class ChangeLocationPanelController : BasePanelController
 
         if (Config.currentLanguage == Language.chinese)
         {
-            noteText.text = "请输入当前所在地区邮编.";
+            noteText.text = "请输入当前所在地区邮编\n(定位按钮可以帮您获取当前地址邮编)";
         }
         else if (Config.currentLanguage == Language.english)
         {
-            noteText.text = "Please enter the region\nyou are in right now.";
+            noteText.text = "Please enter the your zip code.\nLocation Button will fetch your current zip";
         }
     }
 
@@ -55,7 +55,7 @@ public class ChangeLocationPanelController : BasePanelController
         if (Config.isDebug && false)
         {
             manualZipCodeInputField.contentType = InputField.ContentType.Alphanumeric;
-            manualZipCodeInputField.text = "02119";
+            manualZipCodeInputField.text = "02170";
             OnSubmitButtonClicked ();
         }
     }
@@ -123,18 +123,38 @@ public class ChangeLocationPanelController : BasePanelController
 
 
     #region GeoLocation
+    public void OnFetchGeoButtonClicked()
+    {
+        StartCoroutine(FetchGeoLocationCoroutine());
+    }
+
     private IEnumerator FetchGeoLocationCoroutine ()
     {
-        LoadingPanelController.instance.DisplayPanelImmediately ();
+        if (Config.currentLanguage == Language.chinese)
+        {
+            noteText.text = "正在获取您的地址...";
+        }
+        else if (Config.currentLanguage == Language.english)
+        {
+            noteText.text = "Loading Your Location...";
+        }
+        //LoadingPanelController.instance.DisplayPanelImmediately ();
         // check if location is enabled
         if (!Input.location.isEnabledByUser)
         {
-            MessagePanelController.instance.DisplayPanel ("Please turn on your gps");
-            LoadingPanelController.instance.HidePanelImmediately ();
+            if (Config.currentLanguage == Language.chinese)
+            {
+                noteText.text = "请在设置中允许FoodEasyGo获取您的位置";
+            }
+            else if (Config.currentLanguage == Language.english)
+            {
+                noteText.text = "Please turn on your gps";
+            }
+            //MessagePanelController.instance.DisplayPanel ("Please turn on your gps");
+            //LoadingPanelController.instance.HidePanelImmediately ();
             yield break;
         }
-        Input.location.Start ();
-
+        Input.location.Start();
 
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
@@ -143,10 +163,33 @@ public class ChangeLocationPanelController : BasePanelController
             maxWait--;
         }
 
-        if (maxWait < 1 || Input.location.status == LocationServiceStatus.Failed)
+        if (maxWait < 1)
         {
-            MessagePanelController.instance.DisplayPanel ("Failed to get location data");
-            LoadingPanelController.instance.HidePanelImmediately ();
+            if (Config.currentLanguage == Language.chinese)
+            {
+                noteText.text = "请求超时";
+            }
+            else if (Config.currentLanguage == Language.english)
+            {
+                noteText.text = "Time Out";
+            }            
+            //MessagePanelController.instance.DisplayPanel("Time out");
+            //LoadingPanelController.instance.HidePanelImmediately ();
+            yield break;
+        }
+
+        if(Input.location.status == LocationServiceStatus.Failed)
+        {
+            if (Config.currentLanguage == Language.chinese)
+            {
+                noteText.text = "获取位置失败";
+            }
+            else if (Config.currentLanguage == Language.english)
+            {
+                noteText.text = "Fetch Location Failed";
+            }
+            //MessagePanelController.instance.DisplayPanel("Fetch Location Failed");
+            //LoadingPanelController.instance.HidePanelImmediately();
             yield break;
         }
         else
@@ -160,7 +203,15 @@ public class ChangeLocationPanelController : BasePanelController
             JSONObject data = new JSONObject (www.text);
             if (data.GetField ("status") == null || data.GetField ("status").str != "OK")
             {
-                MessagePanelController.instance.DisplayPanel ("Failed to get location data");
+                if (Config.currentLanguage == Language.chinese)
+                {
+                    noteText.text = "获取位置失败";
+                }
+                else if (Config.currentLanguage == Language.english)
+                {
+                    noteText.text = "Failed to get location data";
+                }
+                //MessagePanelController.instance.DisplayPanel ("Failed to get location data");
                 LoadingPanelController.instance.HidePanelImmediately ();
                 yield break;
             }
@@ -175,12 +226,31 @@ public class ChangeLocationPanelController : BasePanelController
                     {
                         string zipCode = addressComponent[i].GetField ("long_name").str;
                         UserDataController.instance.zipCode = zipCode;
+
+                        if (Config.currentLanguage == Language.chinese)
+                        {
+                            noteText.text = "您所在地址的邮编是：\n" + zipCode;
+                        }
+                        else if (Config.currentLanguage == Language.english)
+                        {
+                            noteText.text = "Your zip code is :\n" + zipCode;
+                        }
+                        //LoadingPanelController.instance.HidePanelImmediately();
                         yield break;
                     }
                 }
-                MessagePanelController.instance.DisplayPanel ("Failed to get your current location");
+                if (Config.currentLanguage == Language.chinese)
+                {
+                    noteText.text = "获取当前位置失败";
+                }
+                else if (Config.currentLanguage == Language.english)
+                {
+                    noteText.text = "Failed to get your current location";
+                }
+                //MessagePanelController.instance.DisplayPanel ("Failed to get your current location");
                 LoadingPanelController.instance.HidePanelImmediately ();
             }
+            Input.location.Stop();
         }
     }
     #endregion
