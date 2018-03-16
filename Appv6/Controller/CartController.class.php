@@ -20,8 +20,21 @@ class CartController extends BaseController {
 		parent::_initialize ();
 		
 		//$cartID = $this->get_param('post.cart_id');
+		$openRestaurantsList = M('restaurant')
+			->field('id')
+			->where(array("status"=>1))
+			->select();
+		$openRestaurantId=array();
+		foreach($openRestaurantsList as $openRestaurant)
+		{
+			$openRestaurantId[]=$openRestaurant['id'];
+		}
+		$restaurantsOpenId=join(',', $openRestaurantId);
+		$restaurantsOpenId="(".$restaurantsOpenId.")";
+
+
 		$cartID = M('cart')
-			->where("`user_id`= $this->userID")
+			->where("`user_id`= $this->userID ")
 			->order('operate_time desc')
 			->find();
 		
@@ -34,10 +47,10 @@ class CartController extends BaseController {
 		
 		// Get cartDetails
 		$this->cartDetails = M('cart_detail')
-			->where("`cart_id` = $this->cartID")
+			->where("`cart_id` = $this->cartID and restaurant_id in ".$restaurantsOpenId)
 			->select();
 		$this->cartDetails = $this->null_to_empty_array($this->cartDetails);
-		
+
 		// Foreach cartDetail
 		foreach ($this->cartDetails as &$cartDetail) {
 			
