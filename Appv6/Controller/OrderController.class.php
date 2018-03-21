@@ -161,7 +161,8 @@ class OrderController extends BaseController {
 				$resCatCombine['region_id'] = $restaurantData['region_id'];
 				$resCatCombine['deliver_type'] = $restaurantData['deliver_type'];
 				$resCatCombine['reciver_type'] = $restaurantData['reciver_type'];
-	
+				$resCatCombine['phone_remind'] = $restaurantData['phone_remind'];
+
 				$extraFee = $restaurantData['extra_fee'];
 				$minOrder = $restaurantData['min_consume'];
 	
@@ -586,10 +587,15 @@ class OrderController extends BaseController {
 						'status'                      => 1,
                     
                         'fax_status'                  => 0,
+                        'phone_reminded'			  => 1,
 				];
                 
                 if ($cartRestaurant['reciver_type'] == 2) {
                     $subOrderData['fax_status'] = 1;
+                }
+
+                if ($cartRestaurant['phone_remind'] == 1) {
+                    $subOrderData['phone_reminded'] = 0;
                 }
                 
                 if ($cartRestaurant['deliver_type'] == 2) {

@@ -14,3 +14,6 @@ CREATE TABLE `food_app_version` (
   `merchant_app_version` varchar(32) NOT NULL COMMENT '商家app版本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+//数据库更改如下03/21/2018
+ALTER TABLE `food_order_sub` ADD `phone_reminded` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '0是未提醒，1是已提醒，不需要提醒的都为1' AFTER `fax_status`;
