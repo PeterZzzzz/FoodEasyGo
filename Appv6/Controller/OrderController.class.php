@@ -906,6 +906,9 @@ class OrderController extends BaseController {
             $updatedSubOrderData['create_time'] = time();
             
             
+            $restaurant_info = M('restaurant')->where(array("id"=>$subOrderData['restaurant_id']))->find();
+            $this->createInitNotification($restaurant_info,$subOrderData);
+
             //print_r($updatedSubOrderData);
             $result = M('order_sub')
                 ->where("`id` = " . $subOrderData['id'])
@@ -936,9 +939,21 @@ class OrderController extends BaseController {
 			$this->platform_email_set($order);
 			$this->merchant_email_set($order);
         }
-        
+
         //$this->return_error('test');
 		$this->return_data([], 'Success');
 	}
+
+	private function createInitNotification($restaurant_info, $sub_order_info)
+    {
+        //如果餐馆没有ios_token，那么不写入推送表，直接返回成功，不然可能会卡住推送表，使后续推送失败
+        if(!$restaurant_info['ios_token'])
+            return true;
+        $res1=M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "title"=>"有新单/New Order", "body"=>"你有新的订单，单号".$sub_order_info['order_number']." / You have a new order, order number ".$sub_order_info['order_number'], "status"=>0, "create_time"=>time(), "target_send_time"=>time()));
+        $res3=M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "title"=>"5分钟未确认/5 min order not confirmed", "body"=>"你的订单".$sub_order_info['order_number']."已经下单5分钟，尚未确认，请尽快确认，如有问题，请联系FoodEasyGo客服/Your order ".$sub_order_info['order_number']." has been unconfirmed for more than 5 minutes, please confirm order ASAP, or contact us if there's a prlblem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+300)));
+        $res10= M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "title"=>"10分钟未确认/10 min order not confirmed", "body"=>"你的订单".$sub_order_info['order_number']."已经下单了10分钟，请尽快送达，如有问题，请联系FoodEasyGo客服/Your order ".$sub_order_info['order_number']." has been under unconfirmed for more than 10 minutes, please confirm ASAP, or contact us if there's a prlblem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+600)));
+        // $res20= M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "title"=>"120分钟未送达/120 min order not delivered", "body"=>"你的订单".$sub_order_info['order_number']."已经配送了120分钟，请尽快送达，如有问题，请联系配单经理/Your order ".$sub_order_info['order_number']." has been under delivery for more than 120 minutes, please deliver ASAP, or contact us if there's a prlblem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+6900)));
+        return $res1&&$res3&&$res10;
+    }
 
 }	
