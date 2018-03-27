@@ -35,7 +35,7 @@ class CouponController extends BaseController {
 
         // Check for coupon table
         $couponDetail = M('coupon')
-			->where("`id` = " . $couponSNDetail['coupon_id'] . ' and endtime > now()')
+			->where("`id` = " . $couponSNDetail['coupon_id'] . ' and endtime > now() - interval 1 day')
 			->find();
         if (!$couponDetail) {
             return null;
