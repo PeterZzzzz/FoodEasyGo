@@ -126,7 +126,7 @@ class RestaurantController extends BaseController {
 			}
 			
 			$res = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, from_time, to_time, second_from_time, second_to_time, extra_fee')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
 				->where("`id` in
 						(select restaurant_id from food_restaurant_deliver_fee where region_id = $this->targetRegionID) and region_id not in (172, 174)
 						and `status` = 1 and `goods_type` = 2 " . $instantSendSQL . $restaurantTypeSQL)
@@ -139,7 +139,7 @@ class RestaurantController extends BaseController {
 			
 		} else {
 			$res = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, from_time, to_time, second_from_time, second_to_time, extra_fee')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
 				->where("`id` in ($restaurantList)")
 				->select();
 		}
@@ -170,14 +170,17 @@ class RestaurantController extends BaseController {
 				$endTime = $endTimeArray[0];
 			}
 			
-			if ($isSchedule == "0" && 
-                $this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime)) {
+			if ($isSchedule == "0" && $this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime)) {
 				$restaurant['is_open'] = "1";
-            } else if ($isSchedule == "1" && 
-				strpos($restaurant['destine_time'], $scheduleID) !== false) {
+            } else if ($isSchedule == "1" && strpos($restaurant['destine_time'], $scheduleID) !== false) {
 				$restaurant['is_open'] = "1";
 			} else {
 				$restaurant['is_open'] = "0";
+			}
+
+
+			if ($restaurant['goods_type'] == 1) {
+				$restaurant['is_open'] = "1";
 			}
 		}
 		
@@ -242,7 +245,6 @@ class RestaurantController extends BaseController {
 		} else {
 			$restaurantDetails['is_open'] = "0";
 		}
-		//$restaurantDetails['is_open'] = "1";
 		
 		$restaurantDishList = M('restaurant_dish_type_seperate')
 			->join(' left join food_restaurant_dish on food_restaurant_dish_type_seperate.id = food_restaurant_dish.type_seperate ')
