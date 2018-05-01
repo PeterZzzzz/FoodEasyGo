@@ -198,7 +198,8 @@ public class CartPanelController : BasePanelController
         restaurantDic = null;
 
         WWWForm form = new WWWForm();
-        form.AddField("list", CartController.instance.cart.GetRestaurantIDList());
+        form.AddField("restaurant_list", CartController.instance.cart.GetRestaurantIDList());
+        form.AddField("groupon_restaurant_list", CartController.instance.cart.GetGrouponRestaurantIDList());
         form.AddField("is_schedule", isDisplayNowRestaurant ? "0" : "1");
         form.AddField("schedule_id", RestaurantPanelController.instance.deliveryTimeID);
         DebugLogger.Log("GetRestaurantData = " + CartController.instance.cart.GetRestaurantIDList());

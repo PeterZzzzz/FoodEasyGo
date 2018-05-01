@@ -345,6 +345,9 @@ public class CartData
         string restaurantIDListString = "";
         foreach (KeyValuePair<string, CartDetailData> pair in _cartDetailDic)
         {
+            if (pair.Value._grouponID != "0")
+                continue;
+
             if (!restaurantIDListString.Contains(" " + pair.Value._restaurantID + " "))
             {
                 if (restaurantIDListString == "")
@@ -361,6 +364,32 @@ public class CartData
 
         return restaurantIDListString;
     }
+
+    public string GetGrouponRestaurantIDList()
+    {
+        string restaurantIDListString = "";
+        foreach (KeyValuePair<string, CartDetailData> pair in _cartDetailDic)
+        {
+            if (pair.Value._grouponID == "0")
+                continue;
+
+            if (!restaurantIDListString.Contains(" " + pair.Value._restaurantID + " "))
+            {
+                if (restaurantIDListString == "")
+                {
+                    restaurantIDListString = " " + pair.Value._restaurantID + " ";
+                }
+                else
+                {
+                    restaurantIDListString = restaurantIDListString + ", " + pair.Value._restaurantID + " ";
+                }
+
+            }
+        }
+
+        return restaurantIDListString;
+    }
+
 }
 
 [System.Serializable]
