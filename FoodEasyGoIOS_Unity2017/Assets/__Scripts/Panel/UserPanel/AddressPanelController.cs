@@ -7,7 +7,8 @@ using LDFW.Network;
 
 using Debug = UnityEngine.Debug;
 
-public class AddressPanelController : BasePanelController {
+public class AddressPanelController : BasePanelController
+{
 
     public static AddressPanelController instance;
 
@@ -31,145 +32,172 @@ public class AddressPanelController : BasePanelController {
     public bool isPhoneChanged = false;
     public string modifyAddressID;
 
-    new void Awake () {
-        if (instance != null) {
-            instance.gameObject.DestroyGO ();
+    new void Awake()
+    {
+        if (instance != null)
+        {
+            instance.gameObject.DestroyGO();
         }
         instance = this;
 
-        base.Awake ();
+        base.Awake();
 
-        SwitchModifyAddressPanel (false);
+        SwitchModifyAddressPanel(false);
     }
 
 
 
     #region Overrides
-    public override void ResetPanel () {
-        defaultScrollRect.content.DestroyAllChildren ();
+    public override void ResetPanel()
+    {
+        defaultScrollRect.content.DestroyAllChildren();
 
-        SwitchModifyAddressPanel (false);
+        SwitchModifyAddressPanel(false);
     }
 
-    public override void ReloadPanel () {
+    public override void ReloadPanel()
+    {
 
 
-        LoadingPanelController.instance.DisplayPanel ();
-        GetAddressList (new LDFWServerResponseEvent ((JSONObject data, string m) => {
-            LoadingPanelController.instance.HidePanelImmediately ();
-            if (data != null && data.Count > 0) {
-                for (int i = 0; data[i] != null; i++) {
-                    Transform address = Instantiate (addressBarPrefab).transform;
-                    address.GetComponent<AddressPanelAddressBarController> ().Reset (
-                        data[i].GetField ("is_default").str == "1" ? true : false,
-                        data[i].GetField ("id").str,
-                        data[i].GetField ("name").str,
-                        data[i].GetField ("phone").str,
-                        data[i].GetField ("address").str,
-                        data[i].GetField ("street").str,
-                        data[i].GetField ("city").str,
-                        data[i].GetField ("state").str,
-                        data[i].GetField ("zip_code").str,
-                        data[i].GetField ("region_id").str,
-                        data[i].GetField("phone_verified").str == "1" ? true : false
+        LoadingPanelController.instance.DisplayPanel();
+        GetAddressList(new LDFWServerResponseEvent((JSONObject data, string m) =>
+        {
+            LoadingPanelController.instance.HidePanelImmediately();
+            if (data != null && data.Count > 0)
+            {
+                for (int i = 0; data[i] != null; i++)
+                {
+                    Transform address = Instantiate(addressBarPrefab).transform;
+                    address.GetComponent<AddressPanelAddressBarController>().Reset(
+                        data[i].GetField("is_default").str == "1" ? true : false,
+                        data[i].GetField("id").str,
+                        data[i].GetField("name").str,
+                        data[i].GetField("phone").str,
+                        data[i].GetField("address").str,
+                        data[i].GetField("street").str,
+                        data[i].GetField("city").str,
+                        data[i].GetField("state").str,
+                        data[i].GetField("zip_code").str,
+                        data[i].GetField("region_id").str,
+                        true
                     );
-                    address.SetParent (defaultScrollRect.content);
+                    address.SetParent(defaultScrollRect.content);
                     address.localScale = Vector3.one;
-                    address.GetComponent<AddressPanelAddressBarController> ().parentScrollRect = defaultScrollRect;
-                    if (address.GetComponent<AddressPanelAddressBarController>()._isDefault) {
-                        address.SetAsFirstSibling ();
+                    address.GetComponent<AddressPanelAddressBarController>().parentScrollRect = defaultScrollRect;
+                    if (address.GetComponent<AddressPanelAddressBarController>()._isDefault)
+                    {
+                        address.SetAsFirstSibling();
                     }
                 }
             }
 
-            if (defaultScrollRect.content.childCount <= 0) {
-                defaultScrollRect.content.parent.Find ("EmptyText").gameObject.SetActive (true);
-            } else {
-                defaultScrollRect.content.parent.Find ("EmptyText").gameObject.SetActive (false);
+            if (defaultScrollRect.content.childCount <= 0)
+            {
+                defaultScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(true);
+            }
+            else
+            {
+                defaultScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(false);
             }
         }),
-        new LDFWServerResponseEvent ((JSONObject data, string m) => {
-            LoadingPanelController.instance.HidePanelImmediately ();
+        new LDFWServerResponseEvent((JSONObject data, string m) =>
+        {
+            LoadingPanelController.instance.HidePanelImmediately();
         }));
     }
 
-    private void ReloadModifyAddreessPanel () {
+    private void ReloadModifyAddreessPanel()
+    {
 
 
     }
 
-    public void OnCloseButtonClicked () {
-        AppDataController.instance.SyncAddressList ();
+    public void OnCloseButtonClicked()
+    {
+        AppDataController.instance.SyncAddressList();
     }
     #endregion
 
 
 
     #region ModifyAddress
-    public void OnAddAddressButtonClicked () {
+    public void OnAddAddressButtonClicked()
+    {
         isPhoneChanged = false;
         isPhoneVerified = false;
         modifyAddressID = "";
-        SwitchModifyAddressPanel (true, null);
+        SwitchModifyAddressPanel(true, null);
     }
 
-    public void SwitchModifyAddressPanel (bool state, AddressPanelAddressBarController bar = null) {
-        modifyAddressPanel.gameObject.SetActive (state);
+    public void SwitchModifyAddressPanel(bool state, AddressPanelAddressBarController bar = null)
+    {
+        modifyAddressPanel.gameObject.SetActive(state);
         currentBar = null;
 
-        if (state && bar != null) {
+        if (state && bar != null)
+        {
 
             currentBar = bar;
-            modifyAddressPanel.Find ("Name/InputField").GetComponent<InputField> ().text = currentBar._name;
-            modifyAddressPanel.Find ("ContactNumber/InputField").GetComponent<InputField> ().text = currentBar._phone;
-            modifyAddressPanel.Find ("Unit/InputField").GetComponent<InputField> ().text = currentBar._address;
-            modifyAddressPanel.Find ("Street/InputField").GetComponent<InputField> ().text = currentBar._street;
-            modifyAddressPanel.Find ("City/InputField").GetComponent<InputField> ().text = currentBar._city;
-            modifyAddressPanel.Find ("State/InputField").GetComponent<InputField> ().text = currentBar._state;
-            modifyAddressPanel.Find ("Postal/InputField").GetComponent<InputField> ().text = currentBar._zipCode;
+            modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text = currentBar._name;
+            modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text = currentBar._phone;
+            modifyAddressPanel.Find("Unit/InputField").GetComponent<InputField>().text = currentBar._address;
+            modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = currentBar._street;
+            modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text = currentBar._city;
+            modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text = currentBar._state;
+            modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = currentBar._zipCode;
             codeInputField.text = "";
-        } else {
+        }
+        else
+        {
 
-            modifyAddressPanel.Find ("Name/InputField").GetComponent<InputField> ().text = "";
-            modifyAddressPanel.Find ("ContactNumber/InputField").GetComponent<InputField> ().text = "";
-            modifyAddressPanel.Find ("Unit/InputField").GetComponent<InputField> ().text = "";
-            modifyAddressPanel.Find ("Street/InputField").GetComponent<InputField> ().text = "";
-            modifyAddressPanel.Find ("City/InputField").GetComponent<InputField> ().text = "";
-            modifyAddressPanel.Find ("State/InputField").GetComponent<InputField> ().text = "";
-            modifyAddressPanel.Find ("Postal/InputField").GetComponent<InputField> ().text = "";
+            modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text = "";
+            modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text = "";
+            modifyAddressPanel.Find("Unit/InputField").GetComponent<InputField>().text = "";
+            modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = "";
+            modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text = "";
+            modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text = "";
+            modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = "";
             codeInputField.text = "";
 
         }
     }
-    
-    public void OnSaveModifyAddressButtonClicked () {
-        if (ValidateModifyAddressPanel ()) {
-            if (currentBar == null) {
-                AddAddress (
-                    modifyAddressPanel.Find ("Name/InputField").GetComponent<InputField> ().text,
-                    modifyAddressPanel.Find ("ContactNumber/InputField").GetComponent<InputField> ().text,
-                    modifyAddressPanel.Find ("Unit/InputField").GetComponent<InputField> ().text,
-                    modifyAddressPanel.Find ("Street/InputField").GetComponent<InputField> ().text,
-                    modifyAddressPanel.Find ("City/InputField").GetComponent<InputField> ().text,
-                    modifyAddressPanel.Find ("State/InputField").GetComponent<InputField> ().text,
-                    modifyAddressPanel.Find ("Postal/InputField").GetComponent<InputField> ().text,
-                    new LDFWServerResponseEvent ((JSONObject data, string m) => {
-                        AppDataController.instance.SyncAddressList (() => {
+
+    public void OnSaveModifyAddressButtonClicked()
+    {
+        if (ValidateModifyAddressPanel())
+        {
+            if (currentBar == null)
+            {
+                AddAddress(
+                    modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text,
+                    modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text,
+                    modifyAddressPanel.Find("Unit/InputField").GetComponent<InputField>().text,
+                    modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text,
+                    modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text,
+                    modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text,
+                    modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text,
+                    new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        AppDataController.instance.SyncAddressList(() =>
+                        {
                             Debug.Log("本地更新地址成功");
                         });
 
-                    if (isPhoneChanged)
+                        if (isPhoneChanged)
                         {
                             Debug.Log("新用户添加地址成功后开始验证电话" + "手机号有改动：" + isPhoneChanged.ToString() + "手机号已验证：" + isPhoneVerified.ToString());
                             SetPhoneVerified();
                         }
-                }),
-                    new LDFWServerResponseEvent((JSONObject data, string m) => { 
-                    MessagePanelController.instance.DisplayPanel(m);
-                }));
+                    }),
+                    new LDFWServerResponseEvent((JSONObject data, string m) =>
+                    {
+                        MessagePanelController.instance.DisplayPanel(m);
+                    }));
 
 
-            } else {
+            }
+            else
+            {
                 ModifyAddress(
                     currentBar._addressID,
                     modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text,
@@ -225,10 +253,11 @@ public class AddressPanelController : BasePanelController {
     public void SendCodeButtonClicked()
     {
         isPhoneChanged = true;
-        if(modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text.Length == 10)
+        if (modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text.Length == 10)
         {
             StartCoroutine(SendCodeCoroutine());
-        }else
+        }
+        else
         {
             MessagePanelController.instance.DisplayPanel("Please enter 10 digits Phone number");
         }
@@ -251,8 +280,9 @@ public class AddressPanelController : BasePanelController {
     }
 
 
-    public bool ValidateModifyAddressPanel () {
-        if(isPhoneChanged)
+    public bool ValidateModifyAddressPanel()
+    {
+        if (isPhoneChanged)
         {
             Debug.Log("改电话后最后check一下code");
             CheckVerificationCode();
@@ -299,8 +329,9 @@ public class AddressPanelController : BasePanelController {
             else
             {
                 return true;
-            } 
-        }else
+            }
+        }
+        else
         {
             Debug.Log("不改电话只是修改地址");
             if (string.IsNullOrEmpty(modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text))
@@ -352,50 +383,55 @@ public class AddressPanelController : BasePanelController {
 
 
     #region ServerCalls
-    public void GetAddressList (LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
-        LoadingPanelController.instance.DisplayPanel ();
-        UserDataNetworkController.instance.GetUserAddressList (success, failure);
+    public void GetAddressList(LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        UserDataNetworkController.instance.GetUserAddressList(success, failure);
     }
 
-    public void SetDefaultAddress (string defaultAddressID, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
-        LoadingPanelController.instance.DisplayPanel ();
-        WWWForm form = new WWWForm ();
-        form.AddField ("address_id", defaultAddressID);
-        UserDataNetworkController.instance.SetDefaultAddress (form, success, failure);
+    public void SetDefaultAddress(string defaultAddressID, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        WWWForm form = new WWWForm();
+        form.AddField("address_id", defaultAddressID);
+        UserDataNetworkController.instance.SetDefaultAddress(form, success, failure);
     }
 
-    public void AddAddress (string name, string phone, string address, string street, string city, string state, string zipCode, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
-        LoadingPanelController.instance.DisplayPanel ();
-        WWWForm form = new WWWForm ();
-        form.AddField ("name", name);
-        form.AddField ("phone", phone);
-        form.AddField ("address", address);
-        form.AddField ("street", street);
-        form.AddField ("city", city);
-        form.AddField ("state", state);
-        form.AddField ("address_zip_code", zipCode);
-        UserDataNetworkController.instance.AddUserAddress (form, success, failure);
+    public void AddAddress(string name, string phone, string address, string street, string city, string state, string zipCode, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        WWWForm form = new WWWForm();
+        form.AddField("name", name);
+        form.AddField("phone", phone);
+        form.AddField("address", address);
+        form.AddField("street", street);
+        form.AddField("city", city);
+        form.AddField("state", state);
+        form.AddField("address_zip_code", zipCode);
+        UserDataNetworkController.instance.AddUserAddress(form, success, failure);
     }
 
-    public void DeleteAddress (string addressID, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
-        LoadingPanelController.instance.DisplayPanel ();
-        WWWForm form = new WWWForm ();
-        form.AddField ("address_id", addressID);
-        UserDataNetworkController.instance.DeleteUserAddress (form, success, failure);
+    public void DeleteAddress(string addressID, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        WWWForm form = new WWWForm();
+        form.AddField("address_id", addressID);
+        UserDataNetworkController.instance.DeleteUserAddress(form, success, failure);
     }
 
-    public void ModifyAddress (string id, string name, string phone, string address, string street, string city, string state, string zipCode, LDFWServerResponseEvent success, LDFWServerResponseEvent failure) {
-        LoadingPanelController.instance.DisplayPanel ();
-        WWWForm form = new WWWForm ();
-        form.AddField ("address_id", id);
-        form.AddField ("name", name);
-        form.AddField ("phone", phone);
-        form.AddField ("address", address);
-        form.AddField ("street", street);
-        form.AddField ("city", city);
-        form.AddField ("state", state);
-        form.AddField ("address_zip_code", zipCode);
-        UserDataNetworkController.instance.ModifyUserAddress (form, success, failure);
+    public void ModifyAddress(string id, string name, string phone, string address, string street, string city, string state, string zipCode, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        WWWForm form = new WWWForm();
+        form.AddField("address_id", id);
+        form.AddField("name", name);
+        form.AddField("phone", phone);
+        form.AddField("address", address);
+        form.AddField("street", street);
+        form.AddField("city", city);
+        form.AddField("state", state);
+        form.AddField("address_zip_code", zipCode);
+        UserDataNetworkController.instance.ModifyUserAddress(form, success, failure);
     }
 
     public void SetPhoneVerified()
@@ -403,18 +439,22 @@ public class AddressPanelController : BasePanelController {
         WWWForm form = new WWWForm();
         form.AddField("phoneNumber", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
         UserDataNetworkController.instance.SetPhoneNumberVerified(form,
-                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                {
+                                                                    MessagePanelController.instance.DisplayPanel(m);
                                                                     Debug.Log("验证电话成功");
                                                                     SwitchModifyAddressPanel(false);
                                                                     AddressPanelController.instance.ResetPanel();
                                                                     AddressPanelController.instance.ReloadPanel();
-        }),
-                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m);
+                                                                }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                {
+                                                                    MessagePanelController.instance.DisplayPanel(m);
                                                                     Debug.Log("验证电话失败");
                                                                     SwitchModifyAddressPanel(false);
                                                                     AddressPanelController.instance.ResetPanel();
                                                                     AddressPanelController.instance.ReloadPanel();
-        }));
+                                                                }));
     }
 
     public void SendVerificationCode()
@@ -442,14 +482,14 @@ public class AddressPanelController : BasePanelController {
     public void CheckVerificationCode()
     {
 
-        if(codeInputField.text.Length == 4)
+        if (codeInputField.text.Length == 4)
         {
             Debug.Log("Check code now");
 
             WWWForm form = new WWWForm();
             form.AddField("phone", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
             form.AddField("code", codeInputField.text);
-            UserDataNetworkController.instance.CheckVerificationCode(form, 
+            UserDataNetworkController.instance.CheckVerificationCode(form,
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                      {
                                                                          MessagePanelController.instance.DisplayPanel(m);
@@ -467,7 +507,7 @@ public class AddressPanelController : BasePanelController {
 
     public void PhoneInputFieldChanged()
     {
-        if(currentBar != null)
+        if (currentBar != null)
         {
             Debug.Log("修改的时候测试有没有改电话");
 
@@ -494,8 +534,9 @@ public class AddressPanelController : BasePanelController {
                 Debug.Log("电话号码相同" + currentBar._phone);
                 isPhoneChanged = false;
                 isPhoneVerified = false;
-            }   
-        }else
+            }
+        }
+        else
         {
             Debug.Log("第一次无信息");
             isPhoneChanged = true;

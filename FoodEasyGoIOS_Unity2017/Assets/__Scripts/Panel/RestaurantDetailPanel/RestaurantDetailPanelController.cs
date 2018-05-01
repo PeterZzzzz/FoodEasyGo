@@ -130,10 +130,12 @@ public class RestaurantDetailPanelController : BasePanelController
 
         transform.Find("Viewport/DishContent/TitleSection/DishesButton").GetComponent<RestaurantDetailPanelTitleSectionToggleElementController>().SelectToggleElement();
         transform.Find("Viewport/DishContent/TitleSection/CommentsButton").GetComponent<RestaurantDetailPanelTitleSectionToggleElementController>().DeselectToggleElement();
-        if(!isRestaurantData)
+        if (!isRestaurantData)
         {
             transform.Find("Viewport/DishContent/TitleSection/CommentsButton").gameObject.SetActive(false);
-        }else{
+        }
+        else
+        {
             transform.Find("Viewport/DishContent/TitleSection/CommentsButton").gameObject.SetActive(true);
         }
     }
@@ -355,7 +357,7 @@ public class RestaurantDetailPanelController : BasePanelController
             JSONObject dishData = data[i].GetField("groupon_list");
 
         }
-        if (groupon.Count > 0)
+        if (data.Count > 0)
         {
             LoadGrouponListData(data[0].GetField("id").str);
         }
