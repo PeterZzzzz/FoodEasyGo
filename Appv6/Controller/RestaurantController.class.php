@@ -71,20 +71,25 @@ class RestaurantController extends BaseController {
 	 * Get target restaurant list
 	 */
 	public function get_target_restaurant_list () {
-		$list = $this->get_param('post.list');
-		$this->get_restaurant_list($list);
+		$restaurantList = $this->get_param('post.restaurant_list');
+		$grouponRestaurantList = $this->get_param('post.groupon_restaurant_list');
+
+		$this->get_restaurant_list($restaurantList, $grouponRestaurantList);
 	}
 	
 	/**
 	 * Get restaurant list
 	 */
-	public function get_restaurant_list ($restaurantList = "") {
+	public function get_restaurant_list ($restaurantList = "", $grouponRestaurantList = "") {
 		$isSchedule = $this->get_param('post.is_schedule');
 		$scheduleID = $this->get_param('post.schedule_id');
 
+		//echo 'res = ' . $restaurantList . ' and grp = ' . $grouponRestaurantList;
 		//echo "isschedule = " . $isSchedule;
 		//echo " id = " . $scheduleID;
 
+		$res = [];
+		$grp = [];
 		if ($restaurantList == "") {
 			// 1: supports instant send, 0: doesn't support instant send
 			$instantSendValue = $this->get_param('post.instant_send');
@@ -142,9 +147,14 @@ class RestaurantController extends BaseController {
 				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
 				->where("`id` in ($restaurantList)")
 				->select();
+			$grp = M('restaurant')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
+				->where("`id` in ($grouponRestaurantList)")
+				->select();
 		}
 		
-		$res = $this->null_to_empty_array($res);		
+		$res = $this->null_to_empty_array($res);
+		$grp = $this->null_to_empty_array($grp);
 		$resultData = ['total' => count($res)];
 		
 		foreach ($res as &$restaurant) {
@@ -183,6 +193,10 @@ class RestaurantController extends BaseController {
 				$restaurant['is_open'] = "1";
 			}
 		}
+
+		foreach ($grp as &$grouponRestaurant) {
+			$grouponRestaurant['is_open'] = "1";
+		}
 		
 		$open = [];
 		$openIndex = 0;
@@ -196,6 +210,11 @@ class RestaurantController extends BaseController {
 				$closed[$closedIndex] = $restaurant;
 				$closedIndex++;
 			}
+		}
+
+		foreach ($grp as &$grouponRestaurant) {
+			$open[$openIndex] = $grouponRestaurant;
+			$openIndex++;
 		}
 		
 		foreach ($closed as &$restaurant) {
