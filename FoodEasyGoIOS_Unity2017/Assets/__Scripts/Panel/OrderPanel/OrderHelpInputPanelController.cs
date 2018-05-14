@@ -197,8 +197,9 @@ public class OrderHelpInputPanelController : BasePanelController {
         UserDataNetworkController.instance.SendEmail(form,
         new LDFWServerResponseEvent((JSONObject data, string m) => {
             MessagePanelController.instance.DisplayPanel("Message has been sent");
-            PanelListController.instance.RemovePanel();
         }), null);
+
+        PanelListController.instance.RemovePanel();
     }
 
     public void CheckForInputs()
