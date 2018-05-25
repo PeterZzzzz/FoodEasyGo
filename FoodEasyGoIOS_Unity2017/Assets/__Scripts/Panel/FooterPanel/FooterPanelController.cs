@@ -29,6 +29,8 @@ public class FooterPanelController : MonoBehaviour {
     public Sprite mineIconSelected;
     private Image mineIcon;
     private Text mineText;
+
+    public RectTransform tabbar;
     
 
     private Color turnOffColor = new Color (0.37f, 0.37f, 0.37f, 1f);
@@ -57,6 +59,16 @@ public class FooterPanelController : MonoBehaviour {
         TurnOffAllButtons ();
         homeIcon.sprite = homeIconSelected;
         homeText.color = Extensions.MainColor ();
+
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            Vector2 pos = tabbar.position;
+            pos.y += 20;
+            tabbar.position = pos;
+        }
+
     }
 
 

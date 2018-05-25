@@ -564,16 +564,16 @@ public class PlaceOrderPanelController : BasePanelController
         }
     }
 
-    public void OnCustomTipButtonClicked(string text)
-    {
-        float amount = 0f;
-        if (!string.IsNullOrEmpty(text) && !float.TryParse(text, out amount))
-        {
-            MessagePanelController.instance.DisplayPanel("Invalid tip");
-        }
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + amount.ToString("0.00");
-        CalcualteTotalPrice();
-    }
+    //public void OnCustomTipButtonClicked(string text)
+    //{
+    //    float amount = 0f;
+    //    if (!string.IsNullOrEmpty(text) && !float.TryParse(text, out amount))
+    //    {
+    //        MessagePanelController.instance.DisplayPanel("Invalid tip");
+    //    }
+    //    feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + amount.ToString("0.00");
+    //    CalcualteTotalPrice();
+    //}
 
     #endregion
 
