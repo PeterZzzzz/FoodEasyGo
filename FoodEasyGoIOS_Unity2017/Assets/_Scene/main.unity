@@ -107139,8 +107139,8 @@ MonoBehaviour:
     17:00\u4E4B\u540E\u7684\u8D85\u5E02\u8BA2\u5355,\u5C06\u4E8E\u6B21\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;"
   textZH: "\u63D0\u793A: \u8D85\u5E02\u6700\u4F4E\u8D77\u9001\u91D1\u989D$30.00. \u5F53\u65E517:00\u524D\u4E0B\u5355,\u5C06\u5728\u5F53\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;
     17:00\u4E4B\u540E\u7684\u8D85\u5E02\u8BA2\u5355,\u5C06\u4E8E\u6B21\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;"
-  textEN: 'Note: 7-9pm delivery on orders placed before 5pm and 2nd day after 5pm.
-    Minimum order $30'
+  textEN: 'Note: 7pm - 10pm delivery on orders placed before 5pm and 2nd day after
+    5pm. Minimum order $30'
 --- !u!222 &1757355798
 CanvasRenderer:
   m_ObjectHideFlags: 0
