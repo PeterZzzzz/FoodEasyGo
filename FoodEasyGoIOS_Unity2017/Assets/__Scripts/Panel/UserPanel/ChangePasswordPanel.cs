@@ -13,8 +13,7 @@ public class ChangePasswordPanel : BasePanelController {
     public InputField newP;
     public InputField reP;
     public Button submitButton;
-
-
+    public RectTransform contentRect;
 
     new void Awake () {
         if (instance != null) {
@@ -23,6 +22,14 @@ public class ChangePasswordPanel : BasePanelController {
         instance = this;
 
         base.Awake ();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            contentRect.offsetMin = new Vector2(contentRect.offsetMin.x, contentRect.offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配16");
+        }
     }
 
     public override void ResetPanel () {

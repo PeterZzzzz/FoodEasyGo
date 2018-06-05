@@ -14,6 +14,8 @@ public class RestaurantPanelController : BasePanelController
 
     public InfiniteScrollRectController infiniteScrollRectController;
     public Transform defaultDisplay;
+    public RectTransform defaultDisplayRect;
+    public RectTransform reserveDisplayRect;
     public LDFWToggleController deliveryToggleController;
     public RectTransform categoryScrollviewContent;
     public RectTransform restaurantListContent;
@@ -44,6 +46,15 @@ public class RestaurantPanelController : BasePanelController
         instance = this;
 
         base.Awake();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultDisplayRect.offsetMin = new Vector2(defaultDisplayRect.offsetMin.x, defaultDisplayRect.offsetMin.y + 20);
+            reserveDisplayRect.offsetMin = new Vector2(reserveDisplayRect.offsetMin.x, reserveDisplayRect.offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配9");
+        }
     }
 
     protected override void AutoScreenAdjustment()

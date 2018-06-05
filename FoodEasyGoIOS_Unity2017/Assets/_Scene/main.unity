@@ -9120,7 +9120,7 @@ RectTransform:
   m_Children:
   - {fileID: 1235067749}
   m_Father: {fileID: 606803338}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -34801,8 +34801,8 @@ RectTransform:
   - {fileID: 1214876993}
   - {fileID: 1576102694}
   - {fileID: 160077822}
-  - {fileID: 1976837484}
   - {fileID: 176146791}
+  - {fileID: 1976837484}
   - {fileID: 1961918966}
   - {fileID: 972320492}
   - {fileID: 36814816}
@@ -35129,7 +35129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your cart is empty
+  m_Text: "\u60A8\u7684\u8D2D\u7269\u8F66\u662F\u7A7A\u7684"
   textZH: "\u60A8\u7684\u8D2D\u7269\u8F66\u662F\u7A7A\u7684"
   textEN: Your cart is empty
 --- !u!222 &608026105
@@ -49456,6 +49456,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteScrollRectController: {fileID: 1400194827}
   defaultDisplay: {fileID: 1400194823}
+  defaultDisplayRect: {fileID: 1400194823}
+  reserveDisplayRect: {fileID: 1947317132}
   deliveryToggleController: {fileID: 1722926381}
   categoryScrollviewContent: {fileID: 1305513908}
   restaurantListContent: {fileID: 754685603}
@@ -51640,7 +51642,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 881624773}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -187.50037, y: 198.52501, z: 0}
+  m_LocalPosition: {x: -187.50037, y: 198.50002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 917816491}
@@ -56599,6 +56601,7 @@ MonoBehaviour:
   dishDescription: {fileID: 0}
   deliveryText: {fileID: 0}
   noteInputField: {fileID: 1067713560}
+  footerRect: {fileID: 211288415}
   toggleParentPrefab: {fileID: 1000011605849078, guid: 1caae74a9cc8f6e48836ace4153c62a3,
     type: 2}
   toggleElementPrefab: {fileID: 1000012230215554, guid: 9763592007b1a444fb760e19ae77bb44,
@@ -56697,6 +56700,7 @@ MonoBehaviour:
   deliveryTitle: {fileID: 917816493}
   reservationTitle: {fileID: 1591581841}
   payButton: {fileID: 1405226703}
+  bottomBarRect: {fileID: 823247579}
   selectedAddressID: 
   selectedRegionID: 
   restaurantBarPrefab: {fileID: 1000011779677724, guid: 7b56e05a0ba0dc04cb76087c887c5c5d,
@@ -58998,6 +59002,82 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007101363}
+--- !u!1 &1007417010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1007417011}
+  - component: {fileID: 1007417013}
+  - component: {fileID: 1007417012}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1007417011
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007417010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1595223996}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1007417012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007417010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93edbcf0f3205434cb5ba2c0570be946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u5237\u65B0"
+  textZH: "\u5237\u65B0"
+  textEN: Refresh
+--- !u!222 &1007417013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007417010}
 --- !u!1 &1008185294
 GameObject:
   m_ObjectHideFlags: 0
@@ -65808,7 +65888,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1128381374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -189.5, y: 147.525, z: 0}
+  m_LocalPosition: {x: -189.5, y: 147.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1090658665}
@@ -71244,6 +71324,7 @@ MonoBehaviour:
   isRestaurantOpen: 0
   categoryToggleController: {fileID: 2070093056}
   dishEndlessScrollController: {fileID: 1315392666}
+  viewPortRect: {fileID: 142770111}
   dishContent: {fileID: 1821779994}
   commentContent: {fileID: 1278605364}
   noCommentBar: {fileID: 1170634048}
@@ -76682,7 +76763,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1903436194
+  randomSeed: 1180844037
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -82973,8 +83054,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your order has been placed, if you need further help, please goto order
-    history.
+  m_Text: "\u60A8\u7684\u8BA2\u5355\u5DF2\u63D0\u4EA4\u3002\u5982\u9700\u5E2E\u52A9\uFF0C\u8BF7\u524D\u5F80\u6211\u7684\u8BA2\u5355\u3002"
   textZH: "\u60A8\u7684\u8BA2\u5355\u5DF2\u63D0\u4EA4\u3002\u5982\u9700\u5E2E\u52A9\uFF0C\u8BF7\u524D\u5F80\u6211\u7684\u8BA2\u5355\u3002"
   textEN: Your order has been placed, if you need further help, please goto order
     history.
@@ -96330,6 +96410,8 @@ MonoBehaviour:
   couponInputField: {fileID: 1877934907}
   payButton: {fileID: 303884335}
   isCurrentOrderInstantSend: 0
+  scrollRect: {fileID: 1428423619}
+  bottomBarRect: {fileID: 1527195030}
   restaurantBarPrefab: {fileID: 224000011906472228, guid: 4970dbcdfa52a08499693e4ff1a085e0,
     type: 2}
   orderNumber: 
@@ -97501,6 +97583,100 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1594998686}
+--- !u!1 &1595223995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1595223996}
+  - component: {fileID: 1595223998}
+  - component: {fileID: 1595223997}
+  m_Layer: 5
+  m_Name: Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1595223996
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595223995}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 187.5, y: -50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1007417011}
+  m_Father: {fileID: 1736226330}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: 80, y: -30}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1595223997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595223995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1894204147}
+        m_MethodName: RefershPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!222 &1595223998
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595223995}
 --- !u!1 &1597208577
 GameObject:
   m_ObjectHideFlags: 0
@@ -101038,9 +101214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a231333bbfb32b4694e59c20a30181a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainPanelRect: {fileID: 1357067047}
   commodityCommentSection: {fileID: 198701898}
   driverCommentSection: {fileID: 2130941297}
   submitButton: {fileID: 1945365186}
+  submitBtnRect: {fileID: 1945365185}
   commodityInputField: {fileID: 631296304}
   driverInputField: {fileID: 1411576969}
 --- !u!114 &1653716756
@@ -101146,7 +101324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue to order
+  m_Text: "\u7EE7\u7EED\u70B9\u9910"
 --- !u!222 &1653871290
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -105379,6 +105557,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1275531987}
+  - {fileID: 1595223996}
   m_Father: {fileID: 1894204146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111499,7 +111678,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1818060996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00048828125, y: -35.024994, z: 0}
+  m_LocalPosition: {x: 0.00048828125, y: -35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 881624774}
@@ -111509,8 +111688,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00048828125, y: -35.024994}
-  m_SizeDelta: {x: 0, y: -269.95}
+  m_AnchoredPosition: {x: 0.00048828125, y: -35}
+  m_SizeDelta: {x: 0, y: -270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818060998
 MonoBehaviour:
@@ -115499,6 +115678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyOrderPanel: {fileID: 2078982817}
   orderListContent: {fileID: 88596704}
+  defaultScrollRect: {fileID: 1706675512}
 --- !u!114 &1894204148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119222,6 +119402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   historicalSearchScrollRect: {fileID: 830908247}
+  resultSearchScrollRect: {fileID: 1356535008}
   searchInput: {fileID: 734429818}
   searchOptionSection: {fileID: 1666942073}
   searchButtonText: {fileID: 1270005046}
@@ -120660,7 +120841,7 @@ RectTransform:
   - {fileID: 1843388753}
   - {fileID: 178578622}
   m_Father: {fileID: 606803338}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -120682,6 +120863,7 @@ MonoBehaviour:
   newP: {fileID: 2125392927}
   reP: {fileID: 917417164}
   submitButton: {fileID: 594655899}
+  contentRect: {fileID: 178578622}
 --- !u!114 &1976837486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122030,7 +122212,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Go order something
+  m_Text: "\u53BB\u8BA2\u9910"
 --- !u!222 &2000695263
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -131158,6 +131340,7 @@ MonoBehaviour:
   contactInputField: {fileID: 802008808}
   commentInputField: {fileID: 1113789860}
   submitButton: {fileID: 1509408397}
+  panelRect: {fileID: 2060382790}
 --- !u!1 &2144525763
 GameObject:
   m_ObjectHideFlags: 0
@@ -131401,7 +131584,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2145052023}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 355, y: 0, z: 0}
+  m_LocalPosition: {x: 375, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 274771713}
@@ -131409,7 +131592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &2145052025
@@ -131491,7 +131674,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0

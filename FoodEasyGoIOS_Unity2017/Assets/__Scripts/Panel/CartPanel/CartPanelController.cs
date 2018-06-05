@@ -26,6 +26,7 @@ public class CartPanelController : BasePanelController
     public TextController deliveryTitle;
     public TextController reservationTitle;
     public Button payButton;
+    public RectTransform bottomBarRect;
 
     public string selectedAddressID = "";
     public string selectedRegionID = "";
@@ -59,6 +60,19 @@ public class CartPanelController : BasePanelController
         base.Awake();
 
         totalPriceText.ResetUI("");
+
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            scrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(scrollRect.GetComponent<RectTransform>().offsetMin.x, scrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Vector2 pos = bottomBarRect.position;
+            pos.y += 20;
+            bottomBarRect.position = pos;
+            Debug.Log("iPhoneX适配3");
+
+        }
     }
 
 

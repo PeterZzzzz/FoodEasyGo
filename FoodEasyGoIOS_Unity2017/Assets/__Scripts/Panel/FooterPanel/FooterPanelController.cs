@@ -67,6 +67,8 @@ public class FooterPanelController : MonoBehaviour {
             Vector2 pos = tabbar.position;
             pos.y += 20;
             tabbar.position = pos;
+            Debug.Log("iPhoneX适配1");
+
         }
 
     }

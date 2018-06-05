@@ -16,6 +16,7 @@ public class LeaveMessagePanelController : BasePanelController {
     public InputFieldController contactInputField;
     public InputFieldController commentInputField;
     public ButtonController submitButton;
+    public RectTransform panelRect;
 
 
     new void Awake () {
@@ -27,6 +28,14 @@ public class LeaveMessagePanelController : BasePanelController {
         base.Awake ();
 
         headerTitle.ResetUI ("留言", "Leave a comment");
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            panelRect.offsetMin = new Vector2(panelRect.offsetMin.x, panelRect.offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配17");
+        }
     }
 
 

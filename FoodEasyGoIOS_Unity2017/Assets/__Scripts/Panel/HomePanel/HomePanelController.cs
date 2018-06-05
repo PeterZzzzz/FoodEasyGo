@@ -62,6 +62,16 @@ public class HomePanelController : BasePanelController
         float height = panelSizeDelta.x * 0.25f + 50;
         groceryLayoutElement.preferredHeight = height;
 
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            mainScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(mainScrollRect.GetComponent<RectTransform>().offsetMin.x, mainScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配2");
+
+        }
+
     }
 
     #region Overrides

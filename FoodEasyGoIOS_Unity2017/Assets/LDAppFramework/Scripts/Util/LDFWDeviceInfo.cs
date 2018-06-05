@@ -47,7 +47,6 @@ public static class LDFWDeviceInfo
         }
         else if (screenWidth == 1125){
             // iPhoneX
-            //Debug.Log("xxxxxxxxxxxxxxxxxxxx");
             return new Vector2(375, 812);
         }
 

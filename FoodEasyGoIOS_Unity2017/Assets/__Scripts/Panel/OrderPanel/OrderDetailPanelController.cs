@@ -53,6 +53,14 @@ public class OrderDetailPanelController : BasePanelController {
         headerTitle.ResetUI ("订单详情", "Order Details");
         mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
         tempGO = new List<GameObject> ();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(defaultScrollRect.GetComponent<RectTransform>().offsetMin.x, defaultScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配7");
+        }
     }
 
     protected new void Start () {

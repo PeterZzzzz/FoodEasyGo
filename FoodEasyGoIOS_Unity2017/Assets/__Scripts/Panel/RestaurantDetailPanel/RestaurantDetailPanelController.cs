@@ -26,6 +26,7 @@ public class RestaurantDetailPanelController : BasePanelController
 
     //public ScrollRectController                     parentScrolLRect;
     public RestaurantDetailPanelDishEndlessScroll dishEndlessScrollController;
+    public RectTransform viewPortRect;
     public RectTransform dishContent;
     public RectTransform commentContent;
     public RectTransform noCommentBar;
@@ -62,6 +63,14 @@ public class RestaurantDetailPanelController : BasePanelController
         dictionaryCategoryData = null;
         dictionaryDishData = null;
         dictionaryCommentData = null;
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            viewPortRect.offsetMin = new Vector2(viewPortRect.offsetMin.x, viewPortRect.offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配10");
+        }
     }
 
     new void Start()
@@ -69,6 +78,11 @@ public class RestaurantDetailPanelController : BasePanelController
         base.Start();
 
         dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 70 - 30 - 50;
+        if (Screen.width == 1125)
+        {
+            dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 70 - 30 - 50 - 20;
+            Debug.Log("iPhoneX适配10");
+        }
 
         SwitchToDishMode();
     }

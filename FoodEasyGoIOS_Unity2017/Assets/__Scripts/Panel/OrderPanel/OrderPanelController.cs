@@ -16,7 +16,7 @@ public class OrderPanelController : BasePanelController {
 
     // Order List
     public Transform                            orderListContent;
-
+    public ScrollRect defaultScrollRect;
 
 
     protected new void Awake () {
@@ -28,6 +28,14 @@ public class OrderPanelController : BasePanelController {
         base.Awake ();
 
         headerTitle.ResetUI ("订单列表", "Order List");
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(defaultScrollRect.GetComponent<RectTransform>().offsetMin.x, defaultScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配6");
+        }
     }
 
     protected new void Start () {
@@ -93,6 +101,11 @@ public class OrderPanelController : BasePanelController {
     #region Other
     public void SwitchEmptyOrderPanel (int scale) {
         emptyOrderPanel.localScale = Vector3.one * scale;
+    }
+
+    public void RefershPage()
+    {
+        FooterPanelController.instance.OnOrdersButtonClicked();
     }
 
     #endregion

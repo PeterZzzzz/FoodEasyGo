@@ -30,6 +30,8 @@ public class PlaceOrderPanelController : BasePanelController
     public InputField couponInputField;
     public Button payButton;
     public bool isCurrentOrderInstantSend = false;
+    public RectTransform scrollRect;
+    public RectTransform bottomBarRect;
 
     // Prefab
     public Transform restaurantBarPrefab;
@@ -69,6 +71,18 @@ public class PlaceOrderPanelController : BasePanelController
         base.Awake();
 
         tempGOList = new List<GameObject>();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            scrollRect.offsetMin = new Vector2(scrollRect.offsetMin.x, scrollRect.offsetMin.y + 20);
+
+            Vector2 pos = bottomBarRect.position;
+            pos.y += 20;
+            bottomBarRect.position = pos;
+            Debug.Log("iPhoneX适配4");
+
+        }
     }
 
 

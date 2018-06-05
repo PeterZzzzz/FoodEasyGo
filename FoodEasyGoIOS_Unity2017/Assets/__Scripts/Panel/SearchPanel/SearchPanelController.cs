@@ -13,6 +13,7 @@ public class SearchPanelController : BasePanelController {
     public static SearchPanelController instance;
     
     public ScrollRect historicalSearchScrollRect;
+    public ScrollRect resultSearchScrollRect;
     public InputField searchInput;
     public RectTransform searchOptionSection;
     public Text searchButtonText;
@@ -26,6 +27,16 @@ public class SearchPanelController : BasePanelController {
         instance = this;
 
         base.Awake ();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+            resultSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配5");
+
+        }
     }
 
     new void Start () {
