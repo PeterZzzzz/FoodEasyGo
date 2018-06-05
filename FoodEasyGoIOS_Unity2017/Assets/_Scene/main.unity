@@ -76767,7 +76767,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1180844037
+  randomSeed: 1247751204
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -109556,6 +109556,7 @@ MonoBehaviour:
   slideShow: {fileID: 1612305482}
   slideImagePrefab: {fileID: 224000013685461190, guid: d8565903e3da40948b37bcd2775b1f1a,
     type: 2}
+  headerRect: {fileID: 2107905483}
   mainScrollRect: {fileID: 990147026}
   restaurantSectionController: {fileID: 658075675}
   groceryScrollviewController: {fileID: 575984969}

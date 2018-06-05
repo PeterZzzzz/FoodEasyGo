@@ -16,6 +16,7 @@ public class HomePanelController : BasePanelController
     public Transform slideShow;
     public Transform slideImagePrefab;
 
+    public RectTransform headerRect;
     public ScrollRect mainScrollRect;
     public HomeRestaurantSectionController restaurantSectionController;
     public HomeGroceryScrollviewController groceryScrollviewController;
@@ -67,6 +68,11 @@ public class HomePanelController : BasePanelController
         {
             // iPhoneX
             mainScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(mainScrollRect.GetComponent<RectTransform>().offsetMin.x, mainScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+            mainScrollRect.GetComponent<RectTransform>().offsetMax = new Vector2(mainScrollRect.GetComponent<RectTransform>().offsetMax.x, mainScrollRect.GetComponent<RectTransform>().offsetMax.y - 15);
+
+            Vector2 pos = headerRect.position;
+            pos.y -= 15;
+            headerRect.position = pos;
 
             Debug.Log("iPhoneX适配2");
 
