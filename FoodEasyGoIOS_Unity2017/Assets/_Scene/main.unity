@@ -9150,7 +9150,11 @@ MonoBehaviour:
   mineButton: {fileID: 1010193853}
   mineIconNormal: {fileID: 21300000, guid: 7ec2a8b8c98c476409621d25056146d3, type: 3}
   mineIconSelected: {fileID: 21300000, guid: 8a48329de9ed6e74baced1ef2bf81184, type: 3}
-  tabbar: {fileID: 1235067749}
+  tabbarRect: {fileID: 1235067749}
+  homeBtnTextRect: {fileID: 781044397}
+  cartBtnTextRect: {fileID: 1095292189}
+  orderBtnTextRect: {fileID: 1329857854}
+  mineBtnTextRect: {fileID: 856309405}
 --- !u!1 &177265922
 GameObject:
   m_ObjectHideFlags: 0
