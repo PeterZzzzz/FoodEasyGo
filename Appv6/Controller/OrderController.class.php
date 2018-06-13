@@ -809,7 +809,54 @@ class OrderController extends BaseController {
 		$creditCardYear = $this->get_param('post.credit_card_year');
 		$creditCardSecurityCode = $this->get_param('post.credit_card_security_code');
 		
+
+
+
 		
+
+
+
+
+		//Check Restaurant is Open
+		$subOrderList = M('order_sub')
+            ->where("`order_id` = $orderID")
+            ->select();
+
+        foreach ($subOrderList as &$subOrderData)
+        {
+        	$restaurant_info = M('restaurant')->where(array("id"=>$subOrderData['restaurant_id']))->find();
+        	$startTimeArray = explode(',', $restaurant_info['from_time']);
+			$endTimeArray = explode(',', $restaurant_info['to_time']);
+
+			$secondStartTimeArray = explode(',', $restaurant_info['second_from_time']);
+			$secondEndTimeArray = explode(',', $restaurant_info['second_to_time']);
+
+			$dw = date("w", time());
+
+			$startTime = $startTimeArray[$dw];
+			$endTime = $endTimeArray[$dw];
+			$secondStartTime = $secondStartTimeArray[$dw];
+			$secondEndTime = $secondEndTimeArray[$dw];
+			// var_dump($startTime,$endTime,$secondStartTime,$secondEndTime);
+			if (startTime == "") {
+				$startTime = $startTimeArray[0];
+			}
+			if (endTime == "") {
+				$endTime = $endTimeArray[0];
+			}
+
+
+//需要增加对预定和非预定种类的区分
+			if($subOrderData['category'] == 1 && !$this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime))
+			{
+				$this->return_error('Error, one of the Restaurant is close');
+			}
+			
+        }
+		
+
+
+
         
 		// Step2-2, Get payment data
         $paymentData = [];

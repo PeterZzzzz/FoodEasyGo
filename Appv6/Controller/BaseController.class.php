@@ -280,17 +280,36 @@ class BaseController extends Controller {
 	 */
 	protected function is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime) {
 		
-		/*patch 1.3.4 starts delivery time ends 30 mins before restaurants close time*/
-		if (strtotime('23:30') < strtotime(date ('H:i:s'))) {
+		// /*patch 1.3.4 starts delivery time ends 30 mins before restaurants close time*/
+		// if (strtotime('23:30') < strtotime(date ('H:i:s'))) {
+		// 	return false;
+		// } else if (strtotime($startTime) < strtotime(date ('H:i:s')) && 
+		// 		strtotime($endTime) > strtotime(date ('H:i:s', strtotime("+30 minutes")))) {
+		// 	return true;
+		// } else {
+		// 	if ($secondStartTime == "" || $secondEndTime == "") {
+		// 		return false;
+		// 	} else if (strtotime($secondStartTime) < strtotime(date ('H:i:s')) && 
+		// 			strtotime($secondEndTime) > strtotime(date ('H:i:s', strtotime("+30 minutes")))) {
+		// 		return true;
+		// 	} else {
+		// 		return false;
+		// 	}
+		// }
+
+
+
+		/*patch 1.7.0 cancel delivery time ends 30 mins before restaurants close time*/
+		if (strtotime('23:59') < strtotime(date ('H:i:s'))) {
 			return false;
 		} else if (strtotime($startTime) < strtotime(date ('H:i:s')) && 
-				strtotime($endTime) > strtotime(date ('H:i:s', strtotime("+30 minutes")))) {
+				strtotime($endTime) > strtotime(date ('H:i:s'))) {
 			return true;
 		} else {
 			if ($secondStartTime == "" || $secondEndTime == "") {
 				return false;
 			} else if (strtotime($secondStartTime) < strtotime(date ('H:i:s')) && 
-					strtotime($secondEndTime) > strtotime(date ('H:i:s', strtotime("+30 minutes")))) {
+					strtotime($secondEndTime) > strtotime(date ('H:i:s'))) {
 				return true;
 			} else {
 				return false;
