@@ -115,8 +115,79 @@ class SearchController extends BaseController {
                 ->limit('0, 30')
                 ->select();
 		}
+
+		$restaurant2 = [];
+		if ($restaurant != null) {
+			for ($i = 0; $i < count($restaurant); $i++) {
+				$res = $restaurant[$i];
+				$startTimeArray = explode(',', $res['from_time']);
+				$endTimeArray = explode(',', $res['to_time']);
+
+				$secondStartTimeArray = explode(',', $res['second_from_time']);
+				$secondEndTimeArray = explode(',', $res['second_to_time']);
+				
+				$dw = date("w", time());
+
+				$startTime = $startTimeArray[$dw];
+				$endTime = $endTimeArray[$dw];
+				$secondStartTime = $secondStartTimeArray[$dw];
+				$secondEndTime = $secondEndTimeArray[$dw];
+				
+				if (startTime == "") {
+					$startTime = $startTimeArray[0];
+				}
+				if (endTime == "") {
+					$endTime = $endTimeArray[0];
+				}
+
+				if ($this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime)) {
+					array_push($restaurant2, $res);
+				}
+			}
+		}
+
+		$dish2 = [];
+		if ($dishList != null) {
+			for ($i = 0; $i < count($dishList); $i++) {
+				$res = M('restaurant')
+					->where("`id` = " . $dishList[$i]['restaurant_id'])
+					->find();
+
+				$startTimeArray = explode(',', $res['from_time']);
+				$endTimeArray = explode(',', $res['to_time']);
+	
+				$secondStartTimeArray = explode(',', $res['second_from_time']);
+				$secondEndTimeArray = explode(',', $res['second_to_time']);
+				
+				$dw = date("w", time());
+	
+				$startTime = $startTimeArray[$dw];
+				$endTime = $endTimeArray[$dw];
+				$secondStartTime = $secondStartTimeArray[$dw];
+				$secondEndTime = $secondEndTimeArray[$dw];
+				
+				if (startTime == "") {
+					$startTime = $startTimeArray[0];
+				}
+				if (endTime == "") {
+					$endTime = $endTimeArray[0];
+				}
+	
+				if ($this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime)) {
+					array_push($dish2, $dishList[$i]);
+				}	
+			}
+		}
+
+		if (count($restaurant2) == 0) {
+			$restaurant2 = null;
+		}
+
+		if (count($dish2) == 0) {
+			$dish2 = null;
+		}
 		
-		$this->return_data(['restaurant' => $restaurant, 'dish' => $dishList, 'grocery' => $groceryList]);
+		$this->return_data(['restaurant' => $restaurant2, 'dish' => $dish2, 'grocery' => $groceryList]);
 	}
 	
 	
