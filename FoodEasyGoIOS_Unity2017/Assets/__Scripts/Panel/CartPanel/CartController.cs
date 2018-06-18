@@ -345,8 +345,8 @@ public class CartData
         string restaurantIDListString = "";
         foreach (KeyValuePair<string, CartDetailData> pair in _cartDetailDic)
         {
-            if (pair.Value._grouponID != "0")
-                continue;
+            //if (pair.Value._grouponID != "0")
+            //    continue;
 
             if (!restaurantIDListString.Contains(" " + pair.Value._restaurantID + " "))
             {
