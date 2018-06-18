@@ -409,13 +409,23 @@ class RestaurantController extends BaseController {
 	
 	public function get_restaurant_list_delivery_fees() {
 		$restaurantIDString = $this->get_param('post.restaurant_id_list');
+		$grouponRestaurantIDString = $this->get_param('post.groupon_restaurant_id_list');
 		$deliveryRegionID = $this->get_param('post.delivery_region_id');
+
+		// echo $restaurantIDString;
+		// echo '==';
+		// echo $deliveryRegionID;
 		
 		$result = M('restaurant_deliver_fee')
 			->where("`restaurant_id` in ($restaurantIDString) and `region_id` = $deliveryRegionID")
 			->field(['restaurant_id', 'deliver_fee'])
 			->select();
+		$result2 = M('restaurant_deliver_fee')
+			->where("`restaurant_id` in ($grouponRestaurantIDString) and `region_id` = $deliveryRegionID")
+			->field(['restaurant_id', 'deliver_fee'])
+			->select();
+
 		
-		$this->return_data($this->null_to_empty_array($result));
+		$this->return_data($this->null_to_empty_array(array_merge($result, $result2)));
 	}
 }

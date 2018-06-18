@@ -565,6 +565,7 @@ public class CartPanelController : BasePanelController
         bool isFinishedGettingDeliverFee = false;
         WWWForm form = new WWWForm();
         form.AddField("restaurant_id_list", CartController.instance.cart.GetRestaurantIDList());
+        form.AddField("groupon_restaurant_id_list", CartController.instance.cart.GetGrouponRestaurantIDList());
         form.AddField("delivery_region_id", this.selectedRegionID);
 
         RestaurantNetworkController.instance.GetRestaurantListDeliverFees(form,
