@@ -297,6 +297,7 @@ class AccessController extends BaseController {
 		$password = $this->get_param ('post.password');
 		$repassword = $this->get_param ('post.repassword');
 		$inviteCode = $this->get_param ('post.invite_code');
+		$createShareCoupon = false;
 		
 		if ($password != $repassword) {
 			$this->return_error('Passwords do not match');
@@ -314,6 +315,7 @@ class AccessController extends BaseController {
 				/*patch ends*/
 		];
 		
+		//如果注册时使用的优惠码可以在表里找到，则给注册者数据存储邀请者ID
 		if ($inviteCode) {
 			$inviter = M('user')
 				->where("`invitation_code`='$inviteCode'")
@@ -321,28 +323,35 @@ class AccessController extends BaseController {
 			
 			if ($inviter) {
 				$userData['inviter_id'] = $inviter['id'];
+				$createShareCoupon = true;
+			}else{
+				$this->return_error('Invalid invitation code');
 			}
 		}
-		
+
+		//随机生成一个不存在的邀请码
 		while (true) {
-			$inviteCode = mt_rand(10000000, 99999999);
+			$invitationCode = mt_rand(10000000, 99999999);
 			$res = M('user')
-				->where("`invitation_code`='$inviteCode'")
+				->where("`invitation_code`='$invitationCode'")
 				->find();
 			
 			if (!$res) {
-				$userData['invitation_code'] = $inviteCode;
+				$userData['invitation_code'] = $invitationCode;
 				break;
 			}
 		}
 		
 		$res = M('user')->add($userData);
-		
 		unset ($userData['password']);
 		unset ($password);
 		unset ($repassword);
-		
+
 		if ($res) {
+			//在生成新用户数据之后才有新用户ID=$res，才可以生成
+			if($createShareCoupon){
+				CouponController::CreateShareCoupon($res,$userData['inviter_id']);
+			}
 		    
 		    //添加加到mailchimp的列表
             require_once(VENDOR_PATH.'/MailChimp.php');

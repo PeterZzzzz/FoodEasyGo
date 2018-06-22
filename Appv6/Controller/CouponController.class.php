@@ -213,184 +213,6 @@ class CouponController extends BaseController {
         }
     }
     
-  //   /**
-  //    * Check if order's coupon is still valid
-  //    * ********************************************************
-  //    * NOTE!!! WILL OVERRIDE ALL COUPON AND DISCOUNT PRICES!!!!
-  //    * ********************************************************
-  //    */
-  //   private static function CheckForCoupon($orderData, $subOrderList, $userData, $finalValidation = false) {
-  //       //echo 'CheckForCoupon</br>';
-  //       $couponSN = $orderData['coupon_sn'];
-  //       if ($couponSN == null || $couponSN == '' || $couponSN == 'First Order') {
-  //           return false;
-		// }
-		
-  //       $restaurantIDList = CouponController::GetSubOrderRestaurantList($subOrderList);
-  //       $couponDetail = CouponController::get_coupon_detail_by_sn($couponSN, $userData['id'], $restaurantIDList);
-
-  //       if (!$couponDetail) {
-  //           //echo 'no discount, revert all discounts';
-  //           CouponController::RevertAllCouponDiscounts($orderData['id']);
-  //           return false;
-  //       }
-
-
-		// if ($couponDetail['type'] == 1) {
-  //           // echo 'coupon type 1, discount coupon'
-
-  //           // discount
-  //           $couponRestaurantID = $couponDetail['restaurant_id'];
-  //           $discount = $couponDetail['discont'] / 10;
-  //           $totalDeliverFee = 0;
-  //           $totalOrderDiscontGoodsPrice=0;
-            
-  //           // update sub order data
-  //           foreach ($subOrderList as &$subOrderData) {
-  //               $restaurantID = $subOrderData['restaurant_id'];
-  //               $currentDiscount = $discount;
-  //               if ($couponRestaurantID != 0 && $restaurantID != $couponRestaurantID) {
-  //                   $currentDiscount = 1;
-  //               }
-
-  //               // var_dump($restaurantID) ;
-  //               // var_dump($couponRestaurantID) ;
-  //               // var_dump($currentDiscount) ;
-
-                
-  //               $currentDeliverPrice = M('restaurant_deliver_fee')
-  //                   ->where("`restaurant_id` = $restaurantID " . 
-  //                            " and `region_id` = " . $subOrderData['region_id'])
-  //                   ->find();
-                
-  //               // Recalculate deliver fee
-  //               $deliverFee = $currentDeliverPrice['deliver_fee'];
-  //               $totalDeliverFee += $deliverFee;
-                
-  //               $updatedSubOrderData = [
-  //                   'discont_goods_price'       => $subOrderData['goods_total_price'] * $currentDiscount,
-  //                   'deliver_price'             => $deliverFee,
-  //                   ];
-                
-
-
-  //               $updatedSubOrderData['sales_price'] = 
-  //                   $subOrderData['goods_total_price'] * 0.07;
-  //               $updatedSubOrderData['discont_total_price'] = 
-  //                   $updatedSubOrderData['discont_goods_price'] + 
-  //                   $subOrderData['extra_price'] +
-  //                   $deliverFee +
-  //                   $updatedSubOrderData['sales_price'] +
-  //                   $subOrderData['tip_price'];
-  //               $totalOrderDiscontGoodsPrice+=$updatedSubOrderData['discont_goods_price'];
-    
-  //               M('order_sub')
-  //                   ->where("`id` = " . $subOrderData['id'])
-  //                   ->save($updatedSubOrderData);
-  //               //print_r($updatedSubOrderData);
-		// 	}
-            
-  //           $updatedOrderData = [
-  //               'discont_goods_price'           => $totalOrderDiscontGoodsPrice,//$orderData['goods_total_price'] * $currentDiscount,
-  //               'deliver_price'                 => $totalDeliverFee,
-  //               ];
-  //           $updatedOrderData['sales_price'] = 
-  //               $orderData['goods_total_price'] * 0.07;
-  //           $updatedOrderData['discont_total_price'] =
-  //               $updatedOrderData['discont_goods_price'] +
-  //               $orderData['extra_price'] + 
-  //               $totalDeliverFee + 
-  //               $updatedOrderData['sales_price'] +
-  //               $orderData['tip_price'];
-
-  //           M('order')
-  //               ->where("`id` = " . $orderData['id'])
-  //               ->save($updatedOrderData);
-            
-  //           if ($finalValidation) {
-  //               M('coupon_sn')
-  //                   ->where("`sn` = '$couponSN'")
-  //                   ->save(['status' => 1]);
-  //           }
-            
-  //           return true;
-
-  //       } else if ($couponDetail['type'] == 2) {
-  //           // echo 'coupon type 2, free delivery coupon';
-  //           // free delivery
-  //           $couponRestaurantID = $couponDetail['restaurant_id'];
-  //           $totalDeliverFee = 0;
-  //           foreach ($subOrderList as &$subOrderData) {
-  //               $restaurantID = $subOrderData['restaurant_id'];
-  //               $currentDeliverPrice = M('restaurant_deliver_fee')
-  //                   ->where("`restaurant_id` = $restaurantID " . 
-  //                            " and `region_id` = " . $subOrderData['region_id'])
-  //                   ->find();
-                
-  //               // Recalculate deliver fee
-  //               $deliverFee = $currentDeliverPrice['deliver_fee'];
-  //               if ($restaurantID == $couponRestaurantID) {
-  //                   $deliverFee = 0;
-  //               }
-
-  //               $totalDeliverFee += $deliverFee;
-
-  //               $updatedSubOrderData = [
-  //                   'discont_goods_price'      => $subOrderData['goods_total_price'],
-  //                   'deliver_price'             => $deliverFee,
-  //                   ];
-  //               $updatedSubOrderData['sales_price'] = 
-  //                   $updatedSubOrderData['discont_goods_price'] * 0.07;
-  //               $updatedSubOrderData['discont_total_price'] = 
-  //                   $updatedSubOrderData['discont_goods_price'] + 
-  //                   $subOrderData['extra_price'] +
-  //                   $updatedSubOrderData['sales_price'] +
-  //                   $subOrderData['tip_price'];
-                
-  //               M('order_sub')
-  //                   ->where("`id` = " . $subOrderData['id'])
-  //                   ->save($updatedSubOrderData);
-                
-
-  //           }
-            
-  //           $updatedOrderData = [
-  //               'discont_goods_price'           => $orderData['goods_total_price'],
-  //               'deliver_price'                 => $totalDeliverFee,
-  //               ];
-  //           $updatedOrderData['sales_price'] = 
-  //               $updatedOrderData['discont_goods_price'] * 0.07;
-  //           $updatedOrderData['discont_total_price'] =
-  //               $updatedOrderData['discont_goods_price'] +
-  //               $orderData['extra_price'] + 
-  //               $totalDeliverFee + 
-  //               $updatedOrderData['sales_price'] +
-  //               $orderData['tip_price'];
-            
-  //           M('order')
-  //               ->where("`id` = " . $orderData['id'])
-  //               ->save($updatedOrderData);
-            
-  //           if ($finalValidation) {
-  //               M('coupon_sn')
-  //                   ->where("`sn` = '$couponSN'")
-  //                   ->save(['status' => 1]);
-  //           }
-            
-  //           return true;
-  //       } else {
-  //           //echo 'no discount, revert all discounts';
-  //           CouponController::RevertAllCouponDiscounts($orderData['id']);
-  //           return false;
-  //       }
-  //   }
-
-
-
-
-
-
-
 
     /**
      * Check if order's coupon is still valid
@@ -594,16 +416,6 @@ class CouponController extends BaseController {
     }
 
 
-
-
-
-
-
-
-
-
-
-	
 	public static function GetSubOrderRestaurantList($subOrderList) {
         $restaurantIDList = "(";
 		foreach ($subOrderList as $subOrder) {
@@ -618,6 +430,7 @@ class CouponController extends BaseController {
         return $restaurantIDList;
     }
 
+
     public static function IncrementCouponSNUsedTimes($couponSN) {
         $couponSNData = M('coupon_sn')
             ->where("`sn` = '$couponSN'")
@@ -631,5 +444,55 @@ class CouponController extends BaseController {
         $couponSNData = M('coupon_sn')
             ->where("`sn` = '$couponSN'")
             ->save($saveData);
+    }
+
+
+    public function CreateShareCoupon($inviteeID, $inviterID) {
+        
+        $shareCouponData = [
+        'endtime' => date("Y-m-d",strtotime("+1 month",strtotime("now"))),
+        'type' => 1,
+        'discont' => 9.50,
+        'region_id' => -1,
+        'status' => 2,
+        'reusable' => 0,
+        'usable_times' => 1,
+        'restaurant_id' => 0,
+        'pay_by' => 1,
+        'name' => "折扣优惠券",
+        'name_en' => "Discount coupon",
+        'email' => "",
+        'sendtime' => date("Y-m-d"),
+        ];
+
+        $saveCouponData = M('coupon')->add($shareCouponData);
+
+        if ($saveCouponData) {
+
+          while (true) {
+            $couponSNCode = mt_rand(10000000, 99999999);
+            $res = M('coupon_sn')
+              ->where("`sn`='$couponSNCode'")
+              ->find();
+      
+            if (!$res) {
+              break;
+            }
+          }
+
+          $couponSNData = [
+          'coupon_id' => $saveCouponData,
+          'sn' => $couponSNCode,
+          'status' => 0,
+          'user_id' => $inviterID,
+          'invitee_id' => $inviteeID,
+          'reusable' => 0,
+          'used_times' => 0,
+          'usable_times' => 1,
+          ];
+
+          $saveCouponSNData = M('coupon_sn')->add($couponSNData);
+
+        }
     }
 }

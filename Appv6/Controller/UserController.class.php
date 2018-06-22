@@ -221,12 +221,26 @@ class UserController extends BaseController {
 			->join(" `food_coupon` on `food_coupon_sn`.`coupon_id` = `food_coupon`.`id`")
 			->where(
 				" `food_coupon_sn`.`user_id` = " . $this->userID .
-				" and `food_coupon`.`endtime` > now() " .
+				" and UNIX_TIMESTAMP(TIMESTAMP(`food_coupon`.`endtime`))+86400 > UNIX_TIMESTAMP(now())" .
 				" and `food_coupon_sn`.`status` = 0 " .
 				" and `food_coupon_sn`.`used_times` < `food_coupon_sn`.`usable_times` "
             )
 			->select();
-		
+
+		foreach ($couponList as &$coupon) {
+			$invitee = M('user')
+			->where('`id`=' . $coupon['invitee_id'])
+			->find();
+			if ($invitee['has_made_first_order'] == "1") {
+				// var_dump("生效了");
+				$coupon['is_valid'] = "1";
+			}else
+			{
+				// var_dump("没下单");
+				$coupon['is_valid'] = "0";
+			}
+		}
+
 		$res = M('user')
 			->where("`id`=$this->userID")
 			->field("`invite_coupon_used`")
@@ -260,7 +274,7 @@ class UserController extends BaseController {
 			->select();
 		
 		foreach ($inviteList as &$invite) {
-			$invite['register_time'] = date("F j, Y, g:i a", $inviteeDetail['register_time']);
+			$invite['register_time'] = date("F j, Y, g:i a", $invite['register_time']);
 			
 		}
 		
@@ -268,7 +282,7 @@ class UserController extends BaseController {
 			$this->return_data([], 'No invitees');
 		} else {
 			foreach ($inviteList as &$invite) {
-				if ($invite['register_time'] < strtotime('today midnight')) {
+				if (strtotime($invite['register_time']) < strtotime('today midnight')) {
 					$invite['today'] = "0";
 				} else {
 					$invite['today'] = "1";
