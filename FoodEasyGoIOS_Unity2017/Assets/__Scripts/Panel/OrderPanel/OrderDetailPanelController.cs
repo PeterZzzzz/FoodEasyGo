@@ -33,6 +33,10 @@ public class OrderDetailPanelController : BasePanelController {
     public Image[] deliverStatusIcons;
     public TextController deliverStatus;
 
+    public SpriteMask mask1;
+    public SpriteMask mask2;
+    public SpriteMask mask3;
+    public SpriteMask mask4;
 
     // Private and temp variables;
     List<GameObject> tempGO;
@@ -47,7 +51,16 @@ public class OrderDetailPanelController : BasePanelController {
         base.Awake ();
 
         headerTitle.ResetUI ("订单详情", "Order Details");
+        mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
         tempGO = new List<GameObject> ();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(defaultScrollRect.GetComponent<RectTransform>().offsetMin.x, defaultScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配7");
+        }
     }
 
     protected new void Start () {
@@ -88,9 +101,6 @@ public class OrderDetailPanelController : BasePanelController {
         
         string orderStatus = _subOrderData["status"].str;
         UpdateDeliverStatus(orderStatus);
-
-
-
 
 
         for (int i=0; _subOrderData.GetField ("goods")[i] != null; i++) {
@@ -175,29 +185,46 @@ public class OrderDetailPanelController : BasePanelController {
         {
             zh = "由餐馆配送";
             en = "Deliver by Restaurant";
+            this.deliverStatus.ResetUI(zh, en);
+            mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
             return;
         }
 
         JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
+        Debug.Log("!!!!!!!!!!!!!!!!!!传进来的配送状态：" + deliverStatus + "    现在用的配送状态：" + orderDeliver);
+
         int fillRate = 0;
         if (orderDeliver.IsNull 
             || orderDeliver.GetField("deliver_status").str == "0")
         {
-            zh = "餐馆已接";
+            zh = "下单成功";
             en = "Order Placed";
             fillRate = 1;
+            mask1.enabled = true;
+            mask2.enabled = mask3.enabled = mask4.enabled = false;
         }
-        else if ("123".Contains(orderDeliver.GetField("deliver_status").str))
+        else if ("12".Contains(orderDeliver.GetField("deliver_status").str))
+        {
+            zh = "备餐中";
+            en = "Preparing Order";
+            fillRate = 2;
+            mask1.enabled = mask2.enabled = true;
+            mask3.enabled = mask4.enabled = false;
+        }
+        else if ("3".Contains(orderDeliver.GetField("deliver_status").str))
         {
             zh = "配送中";
             en = "Out For Delivery";
             fillRate = 3;
+            mask1.enabled = mask2.enabled = mask3.enabled = true;
+            mask4.enabled = false;
         }
         else if (orderDeliver.GetField("deliver_status").str == "4")
         {
             zh = "已送达";
             en = "Delivered";
             fillRate = 4;
+            mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
         }
 
         deliverStatusBar.fillAmount = fillRate / 4f;

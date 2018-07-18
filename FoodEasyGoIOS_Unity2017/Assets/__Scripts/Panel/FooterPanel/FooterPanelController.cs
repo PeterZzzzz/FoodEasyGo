@@ -29,7 +29,12 @@ public class FooterPanelController : MonoBehaviour {
     public Sprite mineIconSelected;
     private Image mineIcon;
     private Text mineText;
-    
+
+    public RectTransform tabbarRect;
+    public RectTransform homeBtnTextRect;
+    public RectTransform cartBtnTextRect;
+    public RectTransform orderBtnTextRect;
+    public RectTransform mineBtnTextRect;
 
     private Color turnOffColor = new Color (0.37f, 0.37f, 0.37f, 1f);
 
@@ -57,6 +62,23 @@ public class FooterPanelController : MonoBehaviour {
         TurnOffAllButtons ();
         homeIcon.sprite = homeIconSelected;
         homeText.color = Extensions.MainColor ();
+
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            tabbarRect.sizeDelta = new Vector2(0, 70);
+
+            Vector2 pos = homeBtnTextRect.position;
+            pos.y += 20;
+            homeBtnTextRect.position = pos;
+            cartBtnTextRect.position = pos;
+            orderBtnTextRect.position = pos;
+            mineBtnTextRect.position = pos;
+
+            Debug.Log("iPhoneX适配1");
+        }
+
     }
 
 

@@ -26,6 +26,14 @@ public class GrouponPanelController : BasePanelController {
         instance = this;
 
         base.Awake ();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            scrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(scrollRect.GetComponent<RectTransform>().offsetMin.x, scrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配13");
+        }
     }
 
     #region Overrides

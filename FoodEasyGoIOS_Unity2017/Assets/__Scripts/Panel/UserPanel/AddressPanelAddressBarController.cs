@@ -20,6 +20,7 @@ public class AddressPanelAddressBarController : MonoBehaviour {
     public RectTransform addressTransform;
     public RectTransform defaultAddressText;
     public RectTransform defaultAddressIcon;
+    public Button verifyBtn;
 
     public bool _isDefault;
     public string _addressID;
@@ -31,6 +32,7 @@ public class AddressPanelAddressBarController : MonoBehaviour {
     public string _state;
     public string _zipCode;
     public string _regionID;
+    public bool _isVerified;
 
 
     // private 
@@ -44,7 +46,7 @@ public class AddressPanelAddressBarController : MonoBehaviour {
         }
     }
 
-    public void Reset (bool isDefault, string id, string name, string phone, string address, string street, string city, string state, string zip, string region) {
+    public void Reset (bool isDefault, string id, string name, string phone, string address, string street, string city, string state, string zip, string region, bool isVerified) {
         _isDefault = isDefault;
         _addressID = id;
         _name = name;
@@ -55,6 +57,7 @@ public class AddressPanelAddressBarController : MonoBehaviour {
         _state = state;
         _zipCode = zip;
         _regionID = region;
+        _isVerified = isVerified;
 
         ResetUI ();
     }
@@ -74,11 +77,23 @@ public class AddressPanelAddressBarController : MonoBehaviour {
             defaultAddressIcon.parent.GetComponent<Image> ().color = new Color (1, 1, 1, 1);
             defaultAddressIcon.gameObject.SetActive (false);
         }
+
+        if (_isVerified)
+        {
+            verifyBtn.gameObject.SetActive(false);
+        }
+        else
+        {
+            verifyBtn.gameObject.SetActive(true);
+        }
         
     }
     
 
     public void OnModifyButtonClicked () {
+        AddressPanelController.instance.isPhoneChanged = false;
+        AddressPanelController.instance.isPhoneVerified = false;
+        AddressPanelController.instance.modifyAddressID = _addressID;
         AddressPanelController.instance.SwitchModifyAddressPanel (true, this);
     }
 

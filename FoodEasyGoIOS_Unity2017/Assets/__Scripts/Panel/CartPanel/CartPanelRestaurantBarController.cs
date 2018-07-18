@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 using LDFW;
 
-public class CartPanelRestaurantBarController : MonoBehaviour {
+public class CartPanelRestaurantBarController : MonoBehaviour
+{
 
     public string restaurantID;
     public RectTransform header;
@@ -25,14 +26,16 @@ public class CartPanelRestaurantBarController : MonoBehaviour {
     private string _nameEN;
     private int headerHeight;
 
-    void Awake () {
-        layoutElement = GetComponent<LayoutElement> ();
-        dishBarList = new List<CartPanelDishBarController> ();
-        headerHeight = (int) header.GetComponent<LayoutElement> ().preferredHeight;
+    void Awake()
+    {
+        layoutElement = GetComponent<LayoutElement>();
+        dishBarList = new List<CartPanelDishBarController>();
+        headerHeight = (int)header.GetComponent<LayoutElement>().preferredHeight;
         layoutElement.preferredHeight = headerHeight;
     }
 
-    public void ResetUI (JSONObject restaurantData, bool isRes, string id, string nameZH, string nameEN, float minConsume) {
+    public void ResetUI(JSONObject restaurantData, bool isRes, string id, string nameZH, string nameEN, float minConsume)
+    {
         isRestaurant = isRes;
         data = restaurantData;
         restaurantID = id;
@@ -40,20 +43,27 @@ public class CartPanelRestaurantBarController : MonoBehaviour {
         _nameZH = nameZH;
         _nameEN = nameEN;
 
-        UpdateUI ();
+        UpdateUI();
     }
 
-    public void UpdateUI () {
+    public void UpdateUI()
+    {
         string nameZH = _nameZH;
         string nameEN = _nameEN;
 
-        if (!isRestaurant || data.GetField ("is_open").str == "1") {
+        //Debug.Log("data = " + data.ToString());
+
+        if (data != null && data.GetField("is_open") != null && data.GetField("is_open").str == "1")
+        {
             isOpen = true;
-            if (!isMinOrderSatisfied) {
+            if (!isMinOrderSatisfied)
+            {
                 nameZH += " <color=#FF0000>(最低消费: $" + _minOrder + ")</color>";
                 nameEN += " <color=#FF0000>(Min Order: $" + _minOrder + ")</color>";
             }
-        } else {
+        }
+        else
+        {
             isOpen = false;
             nameZH += " <color=#FF0000>(该店还未开始营业)</color>";
             nameEN += " <color=#FF0000>(Restaurant is not open)</color>";
@@ -61,92 +71,112 @@ public class CartPanelRestaurantBarController : MonoBehaviour {
 
         if (canDeliver)
         {
-            noDeliveryMask.gameObject.SetActive (false);
+            noDeliveryMask.gameObject.SetActive(false);
         }
         else
         {
-            noDeliveryMask.gameObject.SetActive (true);
+            noDeliveryMask.gameObject.SetActive(true);
             nameZH += " <color=#FF0000>地址不支持配送</color>";
             nameEN += " <color=#FF0000>Address not eligible for delivery</color>";
             //noDeliveryMask.transform.SetParent(
         }
-        
+
 
         title.supportRichText = true;
-        title.ResetUI (nameZH, nameEN);
+        title.ResetUI(nameZH, nameEN);
     }
 
-    public void OnDeleteButtonClicked () {
-        PopUpPanelController.instance.DisplayPopUpPanel (
+    public void OnDeleteButtonClicked()
+    {
+        PopUpPanelController.instance.DisplayPopUpPanel(
             null,
-            () => {
+            () =>
+            {
                 CartPanelDishBarController barController;
-                for (int i=0; i<transform.childCount; i++) {
-                    barController = transform.GetChild (i).GetComponent<CartPanelDishBarController> ();
-                    if (barController != null) {
-                        CartController.instance.DeleteCartDetail (barController.cartDetailData._id);
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    barController = transform.GetChild(i).GetComponent<CartPanelDishBarController>();
+                    if (barController != null)
+                    {
+                        CartController.instance.DeleteCartDetail(barController.cartDetailData._id);
                     }
                 }
                 transform.parent = null;
-				CartPanelController.instance.ReloadPanel();
-                gameObject.DestroyGO ();
+                CartPanelController.instance.ReloadPanel();
+                gameObject.DestroyGO();
             },
             "确定删除这个商店的所有订单吗？",
             "Are you sure you want to delete all orders made for this restaurant?");
     }
 
-    public void AddDishBar (CartPanelDishBarController dishBar) {
-        dishBar.transform.SetParent (transform);
+    public void AddDishBar(CartPanelDishBarController dishBar)
+    {
+        dishBar.transform.SetParent(transform);
         dishBar.transform.localScale = Vector3.one;
         dishBar.isRestaurantOpen = isOpen;
-        dishBarList.Add (dishBar);
+        dishBarList.Add(dishBar);
         layoutElement.preferredHeight += dishBar.layoutElement.preferredHeight;
-        noDeliveryMask.transform.SetAsLastSibling ();
+        noDeliveryMask.transform.SetAsLastSibling();
 
-        CheckForMinOrder ();
+        CheckForMinOrder();
     }
 
-    public void RemoveDishBar (CartPanelDishBarController dishBar) {
+    public void RemoveDishBar(CartPanelDishBarController dishBar)
+    {
         layoutElement.preferredHeight -= dishBar.layoutElement.preferredHeight;
-        DebugLogger.Log ("height = " + layoutElement.preferredHeight);
-        if (layoutElement.preferredHeight < 110) {
-            gameObject.DestroyGO ();
-        } else {
-            dishBarList.Remove (dishBar);
-            dishBar.gameObject.DestroyGO ();
+        DebugLogger.Log("height = " + layoutElement.preferredHeight);
+        if (layoutElement.preferredHeight < 110)
+        {
+            gameObject.DestroyGO();
+        }
+        else
+        {
+            dishBarList.Remove(dishBar);
+            dishBar.gameObject.DestroyGO();
         }
 
-        CheckForMinOrder ();
+        CheckForMinOrder();
 
-        CartPanelController.instance.UpdateTitleBarInfo ();
-        CartPanelController.instance.UpdateRestaurantStatus ();
-        CartPanelController.instance.UpdatePayButtonStatus ();
+        CartPanelController.instance.UpdateTitleBarInfo();
+        CartPanelController.instance.UpdateRestaurantStatus();
+        CartPanelController.instance.UpdatePayButtonStatus();
     }
 
-    public float GetTotalPrice () {
+    public float GetTotalPrice()
+    {
         float total = 0f;
-        foreach (CartPanelDishBarController dish in dishBarList) {
-            if (dish != null && dish.isSelectedForCheckOut) {
-                total += dish.cartDetailData.GetTotalPrice ();
+        foreach (CartPanelDishBarController dish in dishBarList)
+        {
+            if (dish != null && dish.isSelectedForCheckOut)
+            {
+                total += dish.cartDetailData.GetTotalPrice();
             }
         }
         return total;
     }
-    
-    public float GetExtraFee () {
-        if (GetTotalPrice () >= float.Parse (data.GetField ("min_consume").str)) {
+
+    public float GetExtraFee()
+    {
+        if (GetTotalPrice() >= float.Parse(data.GetField("min_consume").str))
+        {
             return 0f;
-        } else {
-            return float.Parse (data.GetField ("extra_fee").str);
+        }
+        else
+        {
+            return float.Parse(data.GetField("extra_fee").str);
         }
     }
 
-    public void CheckForMinOrder () {
-        if (GetTotalPrice () < _minOrder) {
+    public void CheckForMinOrder()
+    {
+        if (GetTotalPrice() < _minOrder)
+        {
             isMinOrderSatisfied = false;
-        } else {
+        }
+        else
+        {
             isMinOrderSatisfied = true;
         }
-        UpdateUI ();
+        UpdateUI();
     }
 }

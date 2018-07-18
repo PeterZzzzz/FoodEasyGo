@@ -51,6 +51,16 @@ public class RestaurantNetworkController : ServerCallController
         getRestaurantListCall = CommonWWWCall (restaurantControllerURL + "get_restaurant_list", form, success, failure);
     }
 
+    //// Get Restaurant List Reserve
+    //LDFWWWWCallCoroutineWrapper getRestaurantReserveListCall = null;
+    //public void GetRestaurantReserveList (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    //{
+    //    if (getRestaurantReserveListCall != null)
+    //        getRestaurantReserveListCall.Dispose ();
+
+    //    getRestaurantReserveListCall = CommonWWWCall (restaurantControllerURL + "get_restaurant_reserve_list", form, success, failure);
+    //}
+
     // Get Target Restaurant List
     LDFWWWWCallCoroutineWrapper getTargetRestaurantListCall = null;
     public void GetTargetRestaurantList (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)

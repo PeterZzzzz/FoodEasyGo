@@ -16,6 +16,7 @@ public class HomePanelController : BasePanelController
     public Transform slideShow;
     public Transform slideImagePrefab;
 
+    public RectTransform headerRect;
     public ScrollRect mainScrollRect;
     public HomeRestaurantSectionController restaurantSectionController;
     public HomeGroceryScrollviewController groceryScrollviewController;
@@ -61,6 +62,21 @@ public class HomePanelController : BasePanelController
         // grocery section
         float height = panelSizeDelta.x * 0.25f + 50;
         groceryLayoutElement.preferredHeight = height;
+
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            mainScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(mainScrollRect.GetComponent<RectTransform>().offsetMin.x, mainScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+            mainScrollRect.GetComponent<RectTransform>().offsetMax = new Vector2(mainScrollRect.GetComponent<RectTransform>().offsetMax.x, mainScrollRect.GetComponent<RectTransform>().offsetMax.y - 15);
+
+            Vector2 pos = headerRect.position;
+            pos.y -= 15;
+            headerRect.position = pos;
+
+            Debug.Log("iPhoneX适配2");
+
+        }
 
     }
 
@@ -257,8 +273,11 @@ public class HomePanelController : BasePanelController
     #region Others
     public void OnSearchEndEdit ()
     {
-        SearchPanelController.instance.OpenPanel ();
-        SearchPanelController.instance.SearchForInput (searchInput.text);
+        if(!string.IsNullOrEmpty(searchInput.text))
+        {
+            SearchPanelController.instance.OpenPanel();
+            SearchPanelController.instance.SearchForInput(searchInput.text);
+        }
     }
 
     public void OpenChangeLocationPanel () {

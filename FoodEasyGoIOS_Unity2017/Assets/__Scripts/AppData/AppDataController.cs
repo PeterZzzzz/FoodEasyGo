@@ -86,6 +86,16 @@ public class AppDataController : MonoBehaviour {
             return "";
         }
     }
+
+    public string GetDeliveryDestineTimeID (string val) {
+        foreach (var pair in deliveryDestineTime)
+        {
+            if (pair.Value.Contains(val))
+                return pair.Key;
+        }
+        return null;
+    }
+
     #endregion
 
 

@@ -2,6 +2,8 @@
 using System.Collections;
 
 using cn.sharesdk.unity3d;
+using System.IO;
+using UnityEngine.UI;
 
 public class SharePanelController : BasePanelController {
 
@@ -12,6 +14,7 @@ public class SharePanelController : BasePanelController {
     public Transform facebookButton;
     public Transform copyButton;
     public Transform cancelButton;
+    public Image img;
 
 
     protected new void Awake () {
@@ -32,14 +35,41 @@ public class SharePanelController : BasePanelController {
         transform.localScale = Vector3.zero;
     }
 
-    public void ShareContent (string content) {
-        DebugLogger.Log ("Sharepanel.shareContent is called");
-        ShareContent sContent = new ShareContent ();
-        sContent.SetText (content);
-        sContent.SetImageUrl ("https://www.foodeasygo.com/Public/Home/images/minLogo.png");
-        sContent.SetTitle ("FoodEasyGo");
-        sContent.SetShareType (ContentType.Text);
-        ssdk.ShowPlatformList (null, sContent, 100, 100);
+    public void ShareContent (string title, string content) {
+       
+        ShareContent sContent = new ShareContent();
+        sContent.SetText(content);
+        sContent.SetImageUrl("https://www.foodeasygo.com/Public/Home/images/WeChatShareLogo.png");
+        sContent.SetTitle(title);
+        sContent.SetUrl(Config.iOSDownloadAddress);
+        sContent.SetShareType(ContentType.Webpage);
+        ssdk.ShowPlatformList(null, sContent, 100, 100);
+    }
+
+    public void ShareMomentsContent(string content)
+    {
+        //FileStream fileStream = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+        //fileStream.Seek(0, SeekOrigin.Begin);
+        //byte[] bytes = new byte[fileStream.Length];
+        //fileStream.Read(bytes, 0, (int)fileStream.Length);
+        //fileStream.Close();
+        //fileStream.Dispose();
+        //fileStream = null;
+        //int w = 600;
+        //int h = 600;
+        //Texture2D texture = new Texture2D(w, h);
+        //texture.LoadImage(bytes);
+        //Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        //img.sprite = sprite;
+        //img.gameObject.SetActive(true);
+
+        ShareContent sContent = new ShareContent();
+        sContent.SetImageUrl("https://www.foodeasygo.com/Public/Home/images/WeChatShareLogo.png");
+        sContent.SetTitle(content);
+        sContent.SetUrl("http://www.foodeasygo.com");
+        sContent.SetShareType(ContentType.Webpage);
+        ssdk.ShareContent(PlatformType.WeChatMoments, sContent);
+
     }
 
     public void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result) {

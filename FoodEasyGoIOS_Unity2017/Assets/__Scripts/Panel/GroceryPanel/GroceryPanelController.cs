@@ -12,6 +12,7 @@ public class GroceryPanelController : BasePanelController {
     public RectTransform tipBar;
     public RectTransform categoryBar;
     public RectTransform categoryBarContent;
+
     public Animator tipAnimator;
 
     public RectTransform defaultDisplay;
@@ -42,6 +43,14 @@ public class GroceryPanelController : BasePanelController {
         instance = this;
 
         base.Awake ();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultDisplay.offsetMin = new Vector2(defaultDisplay.offsetMin.x, defaultDisplay.offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配11");
+        }
     }
 
     #region Overrdies
@@ -89,10 +98,16 @@ public class GroceryPanelController : BasePanelController {
     public void CloseTipBar () {
         tipBar.localScale = Vector3.zero;
         tipAnimator.enabled = false;
-
         categoryBar.anchoredPosition = new Vector2 (0, -70);
         defaultDisplay.anchoredPosition = new Vector2 (0, -120);
         defaultDisplay.sizeDelta = new Vector2 (defaultDisplay.sizeDelta.x, -170);
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultDisplay.sizeDelta = new Vector2(defaultDisplay.sizeDelta.x, -190);
+            Debug.Log("iPhoneX适配11");
+        }
+
         categoryDisplay.anchoredPosition = new Vector2 (0, -300);
     }
     #endregion

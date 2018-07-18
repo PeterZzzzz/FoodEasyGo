@@ -10,6 +10,7 @@ public class UserDataNetworkController : ServerCallController {
     public string userAddressControllerURL;
     public string userPaymentControllerURL;
     public string imageControllerURL;
+    public string smsControllerURL;
 
 
     protected void Awake () {
@@ -23,6 +24,7 @@ public class UserDataNetworkController : ServerCallController {
         userAddressControllerURL = Config.serverAPIURL + "UserAddress/";
         userPaymentControllerURL = Config.serverAPIURL + "UserPayment/";
         imageControllerURL = Config.serverAPIURL + "Image/";
+        smsControllerURL = Config.serverAPIURL + "SMS/";
     }
 
 
@@ -69,6 +71,51 @@ public class UserDataNetworkController : ServerCallController {
         }
         userAddressCall = CommonWWWCall (userAddressControllerURL + "modify_user_address", form, success, failure);
     }
+    public void SetPhoneNumberVerified(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure){
+        if (userAddressCall != null)
+        {
+            userAddressCall.Dispose();
+        }
+        userAddressCall = CommonWWWCall(userAddressControllerURL + "set_phone_verification", form, success, failure);
+    }
+    public void SetPhoneNumberUnverified(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (userAddressCall != null)
+        {
+            userAddressCall.Dispose();
+        }
+        userAddressCall = CommonWWWCall(userAddressControllerURL + "set_phone_unverification", form, success, failure);
+    }
+    public void GetVerificationInfo(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (sendCodeCall != null)
+        {
+            sendCodeCall.Dispose();
+        }
+        sendCodeCall = CommonWWWCall(userAddressControllerURL + "get_phone_verification", form, success, failure);
+    }
+    #endregion
+
+
+    #region SendVerifiationCode
+    LDFWWWWCallCoroutineWrapper sendCodeCall = null;
+    public void SendVerificationCode(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if(sendCodeCall != null){
+            sendCodeCall.Dispose();
+        }
+        CommonWWWCall(smsControllerURL + "generateCode", form, success, failure);
+    }
+
+    public void CheckVerificationCode(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (sendCodeCall != null)
+        {
+            sendCodeCall.Dispose();
+        }
+        sendCodeCall = CommonWWWCall(smsControllerURL + "checkCode", form, success, failure);
+    }
+
     #endregion
 
 
@@ -141,6 +188,29 @@ public class UserDataNetworkController : ServerCallController {
         }
         leaveMessageCall = CommonWWWCall (userDataControllerURL + "leave_message", form, success, failure);
     }
+
+    //save_help
+    LDFWWWWCallCoroutineWrapper saveHelpCall = null;
+    public void SaveHelp(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (saveHelpCall != null)
+        {
+            saveHelpCall.Dispose();
+        }
+        saveHelpCall = CommonWWWCall(userDataControllerURL + "save_help", form, success, failure);
+    }
+
+    //send_help_email
+    LDFWWWWCallCoroutineWrapper sendEmail = null;
+    public void SendEmail(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (sendEmail != null)
+        {
+            sendEmail.Dispose();
+        }
+        sendEmail = CommonWWWCall(userDataControllerURL + "send_help_email", form, success, failure);
+    }
+
 
     LDFWWWWCallCoroutineWrapper updateUserIOSTokenCall = null;
     public void UpdateUserIOSToken (WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)

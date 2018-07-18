@@ -37,40 +37,49 @@ public class OrderHelpPanelController : BasePanelController {
         base.OpenPanel();
         subOrderID = orderID;
     }
+ 
+    public override void ResetPanel()
+    {
+    
+    }
 
+    public override void ReloadPanel()
+    {
+        
+    }
 
     public void MissingItemBtnClick(){
-        OrderHelpInputPanelController.instance.OpenPanel(1,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(1, subOrderID);
     }
 
     public void IncorrectItemBtnClick()
     {
-        OrderHelpInputPanelController.instance.OpenPanel(2,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(2, subOrderID);
     }
 
     public void ChangeAddressBtnClick()
     {
-        OrderHelpInputPanelController.instance.OpenPanel(3,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(3, subOrderID);
     }
 
     public void CancelOrderBtnClick()
     {
-        OrderHelpInputPanelController.instance.OpenPanel(4,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(4, subOrderID);
     }
 
     public void PoorQualityBtnClick()
     {
-        OrderHelpInputPanelController.instance.OpenPanel(5,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(5, subOrderID);
     }
 
     public void RefundBtnClick()
     {
-        OrderHelpInputPanelController.instance.OpenPanel(6,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(6, subOrderID);
     }
 
     public void OtherBtnClick()
     {
-        OrderHelpInputPanelController.instance.OpenPanel(7,subOrderID);
+        OrderHelpInputPanelController.instance.OpenPanel(7, subOrderID);
     }
 
     public void ContactUsBtnClick()

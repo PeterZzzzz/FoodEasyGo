@@ -32,6 +32,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 	public TextController dishDescription;
 	public TextController deliveryText;
 	public InputField noteInputField;
+    public RectTransform footerRect;
 
 
 	// Prefabs
@@ -63,6 +64,18 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
 		cartDetailData = null;
 		tempList = new List<GameObject>();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            contentScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(contentScrollRect.GetComponent<RectTransform>().offsetMin.x, contentScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Vector2 pos = footerRect.position;
+            pos.y += 20;
+            footerRect.position = pos;
+            Debug.Log("iPhoneX适配12");
+
+        }
 	}
 
 

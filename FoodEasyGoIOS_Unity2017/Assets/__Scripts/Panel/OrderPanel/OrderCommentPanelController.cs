@@ -9,9 +9,11 @@ public class OrderCommentPanelController : BasePanelController {
 
     public static OrderCommentPanelController           instance;
 
+    public RectTransform mainPanelRect;
     public Transform commodityCommentSection;
     public Transform driverCommentSection;
     public Button submitButton;
+    public RectTransform submitBtnRect;
     public InputField commodityInputField;
     public InputField driverInputField;
 
@@ -35,6 +37,16 @@ public class OrderCommentPanelController : BasePanelController {
 
         headerTitle.ResetUI ("评价", "Comment");
 
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            mainPanelRect.offsetMin = new Vector2(mainPanelRect.offsetMin.x, mainPanelRect.offsetMin.y + 20);
+
+            Vector2 pos = submitBtnRect.position;
+            pos.y += 20;
+            submitBtnRect.position = pos;
+            Debug.Log("iPhoneX适配8");
+        }
     }
 
 

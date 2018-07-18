@@ -49,8 +49,13 @@ public class CouponPanelController : BasePanelController {
                                 currentCoupon.localScale = Vector3.one;
 
                                 currentCoupon.Find ("Panel/Title").GetComponent<TextController> ().ResetUI (
-                                    float.Parse (normalCoupon[i].GetField ("discont").str) + " 折优惠\n" + (normalCoupon[i].GetField ("reusable").str == "1" ? "(不限次)" : "(单次)"),
-                                    (100f - float.Parse (normalCoupon[i].GetField ("discont").str) * 10) + "% OFF\n" + (normalCoupon[i].GetField ("reusable").str == "1" ? "(Reusable)" : "(Once)"));
+                                    float.Parse (normalCoupon[i].GetField ("discont").str) + " 折优惠\n" + 
+                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")",
+
+                                    (100f - float.Parse (normalCoupon[i].GetField ("discont").str) * 10) + "% OFF\n" + 
+                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")");
+
+
                                 currentCoupon.Find ("Panel/Code").GetComponent<TextController> ().ResetUI (
                                     normalCoupon[i].GetField ("sn").str);
                                 currentCoupon.Find ("Panel/Date").GetComponent<TextController> ().ResetUI (
@@ -63,8 +68,12 @@ public class CouponPanelController : BasePanelController {
                                 currentCoupon.localScale = Vector3.one;
 
                                 currentCoupon.Find ("Panel/Title").GetComponent<TextController> ().ResetUI (
-                                    "免费配送\n" + (normalCoupon[i].GetField ("reusable").str == "1" ? "(不限次)" : "(单次)"),
-                                    "Free Delivery\n" + (normalCoupon[i].GetField ("reusable").str == "1" ? "(Once)" : "(Reusable)"));
+                                    "免费配送\n" + 
+                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")",
+
+                                    "Free Delivery\n" + 
+                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")");
+                                    
                                 currentCoupon.Find ("Panel/Code").GetComponent<TextController> ().ResetUI (
                                     normalCoupon[i].GetField ("sn").str);
                                 currentCoupon.Find ("Panel/Date").GetComponent<TextController> ().ResetUI (

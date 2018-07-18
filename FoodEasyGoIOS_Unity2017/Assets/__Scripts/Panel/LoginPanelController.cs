@@ -22,6 +22,8 @@ public class LoginPanelController : BasePanelController {
     public Transform                        facebookButton;
     public RectTransform                    logoTransform;
 
+    public Text versionText;
+
     protected new void Awake () {
         if (instance != null) {
             Destroy (instance.gameObject);
@@ -29,7 +31,8 @@ public class LoginPanelController : BasePanelController {
         instance = this;
 
         base.Awake ();
-        
+        versionText.text = "Version :" + Application.version;
+
     }
     
     protected new IEnumerator Start () {
@@ -60,29 +63,68 @@ public class LoginPanelController : BasePanelController {
         }
     }
 
-    public void OnLoginButtonClicked () {
-        Regex r = new Regex (@"^[a-zA-Z0-9._-]*@[a-zA-Z0-9]*[.][a-zA-Z0-9]*$");
-        if (true || r.IsMatch (emailInputField.text)) {
+    public void OnLoginButtonClicked()
+    {
+        string local = Application.version;
+        int indexOfLocalVersion = local.LastIndexOf(".", System.StringComparison.Ordinal);
+        string localAppVersion = local.Remove(indexOfLocalVersion);
 
-            LoadingPanelController.instance.DisplayPanel ();
+        AccountAccessNetworkController.instance.GetAppVersion(
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+            {
+                string updatedVersion = data.str;
+                int indexOfUpdatedVersion = updatedVersion.LastIndexOf(".", System.StringComparison.Ordinal);
+                string updatedAppVersion = updatedVersion.Remove(indexOfUpdatedVersion);
+                //Debug.Log("本地版本是：" + localAppVersion + "    " + "最新的版本是：" + updatedAppVersion);
+                int a = string.Compare(localAppVersion, updatedAppVersion);
+                if (a < 0)
+                {
+                    if (Config.currentLanguage == Language.chinese)
+                        MessagePanelController.instance.DisplayPanel("新版本V: " + updatedVersion + " 已经上架，请前往商店更新以便更好的使用App -- FoodEasyGo Development team");
+                    else
+                        MessagePanelController.instance.DisplayPanel("An update to latest version : " + updatedVersion + " is required, please check app store for an update, thank you -- FoodEasyGo Development team");
 
-            AccountAccessNetworkController.instance.UserLogin (
+                }
+                else
+                {
+                    Login();
+                }
+            }),
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+            {
+                //Debug.Log("没有得到版本号");
+            }));
+
+    }
+
+
+    public void Login()
+    {
+        Regex r = new Regex(@"^[a-zA-Z0-9._-]*@[a-zA-Z0-9]*[.][a-zA-Z0-9]*$");
+        if (true || r.IsMatch(emailInputField.text))
+        {
+
+            LoadingPanelController.instance.DisplayPanel();
+
+            AccountAccessNetworkController.instance.UserLogin(
                 emailInputField.text,
                 passwordInputField.text,
-                new LDFWServerResponseEvent ((JSONObject json, string m) => {
-                    PlayerPrefsController.SetAutoLogin (true);
-                    PlayerPrefsController.SetUserCredentials (emailInputField.text, passwordInputField.text);
-                    LoadingPanelController.instance.HidePanelImmediately ();
-                    UserDataController.instance.OnUserLoggedIn (json, emailInputField.text, passwordInputField.text);
-                    SceneController.LoadMainScene ();
+                new LDFWServerResponseEvent((JSONObject json, string m) => {
+                    PlayerPrefsController.SetAutoLogin(true);
+                    PlayerPrefsController.SetUserCredentials(emailInputField.text, passwordInputField.text);
+                    LoadingPanelController.instance.HidePanelImmediately();
+                    UserDataController.instance.OnUserLoggedIn(json, emailInputField.text, passwordInputField.text);
+                    SceneController.LoadMainScene();
                 }),
-                new LDFWServerResponseEvent ((JSONObject json, string m) => {
-                    PlayerPrefsController.SetAutoLogin (false);
-                    LoadingPanelController.instance.HidePanelImmediately ();
-                    MessagePanelController.instance.DisplayPanel (json.GetField ("c").f.ToString () + ":" + m);
+                new LDFWServerResponseEvent((JSONObject json, string m) => {
+                    PlayerPrefsController.SetAutoLogin(false);
+                    LoadingPanelController.instance.HidePanelImmediately();
+                    MessagePanelController.instance.DisplayPanel(json.GetField("c").f.ToString() + ":" + m);
                 }));
-        } else {
-            MessagePanelController.instance.DisplayPanel (ErrorMessageConfig.EmailError[CommonFunctions.GetCurrentLanguageIndex ()]);
+        }
+        else
+        {
+            MessagePanelController.instance.DisplayPanel(ErrorMessageConfig.EmailError[CommonFunctions.GetCurrentLanguageIndex()]);
         }
     }
     

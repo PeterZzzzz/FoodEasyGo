@@ -92,7 +92,6 @@ namespace LDFW.UI {
         }
 
         public virtual void SelectToggle (int index) {
-            
 			for (int i=0; i<toggleElementParent.childCount && i < selectedList.Length; i++) {
                 if (i == index) {
                     toggleElementParent.GetChild (i).GetComponent<LDFWToggleElementController> ().SelectToggleElement ();

@@ -22,10 +22,10 @@ public class PlaceOrderPanelTipCustomToggleElementController : LDFWToggleElement
         inputField.text = "";
     }
 
-    public void OnInputFieldEndEdit () {
-        base.OnPointerClick (null);
-        PlaceOrderPanelController.instance.OnCustomTipButtonClicked (inputField.text);
-    }
+    //public void OnInputFieldEndEdit () {
+    //    base.OnPointerClick (null);
+    //    PlaceOrderPanelController.instance.OnCustomTipButtonClicked (inputField.text);
+    //}
 
     public void OnPointerDown (PointerEventData eventData) {
         inputField.OnPointerDown (eventData);

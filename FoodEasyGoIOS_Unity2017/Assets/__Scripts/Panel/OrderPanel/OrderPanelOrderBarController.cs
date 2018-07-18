@@ -9,6 +9,7 @@ using System;
 
 public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler {
 
+    private JSONObject      goods;
     public string           _orderID;
     public string           _subOrderID;
     public string           _restaurantID;
@@ -41,7 +42,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     }
 
     public void Reset (string orderID, string orderStatus, string date, JSONObject orderData, JSONObject subOrderData) {
-        JSONObject goods = subOrderData.GetField ("goods");
+        goods = subOrderData.GetField ("goods");
         _orderStatus = orderStatus;
 
         _orderData = orderData;
@@ -51,33 +52,35 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
         _subOrderID = subOrderData.GetField ("id").str;
 
         if (orderStatus == "1") {
-            statusText.ResetUI ("未完成", "Incomplete");
+            statusText.ResetUI ("下单未完成", "Order Incomplete");
         } else if (orderStatus == "2") {
             string zh = "已完成\n";
             string en = "Complete\n";
 
             string deliverType = goods[0].GetField("restaurant").GetField("deliver_type").str;
             if (deliverType == "2") {
-                zh += "由餐馆配送";
-                en += "Deliver by Restaurant";
+                zh = "由餐馆配送";
+                en = "Deliver by Restaurant";
             } else {
                 JSONObject orderDeliver = subOrderData.GetField("deliver_status");
-                if (orderDeliver.IsNull || "0,1,2,".Contains(orderDeliver.GetField("deliver_status").str)) {
-                    zh += "等待配送";
-                    en += "Waiting for Delivery";
+                if (orderDeliver.IsNull || orderDeliver.GetField("deliver_status").str == "0"){
+                    zh = "下单成功";
+                    en = "Order Placed";
+                } else if ("1,2,".Contains(orderDeliver.GetField("deliver_status").str)) {
+                    zh = "备餐中";
+                    en = "Preparing Order";
                 } else if (orderDeliver.GetField("deliver_status").str == "3") {
-                    zh += "配送中";
-                    en += "Delivery in Progress";
-                } else if (orderDeliver.GetField("deliver_status").str == "4")
-                {
-                    zh += "配送成功";
-                    en += "Delivery Completed";
+                    zh = "配送中";
+                    en = "Delivery in Progress";
+                } else if (orderDeliver.GetField("deliver_status").str == "4") {
+                    zh = "配送成功";
+                    en = "Delivery Completed";
                 }
             }
             
             statusText.ResetUI (zh, en);
         } else {
-            statusText.ResetUI ("已取消", "Cancelled");
+            statusText.ResetUI ("本单已取消", "Order Cancelled");
         }
 
 
@@ -123,15 +126,12 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
 
     public void SwitchButtons () {
         if (_orderStatus == "1") {
-            //statusText.ResetUI ("Incomplete", "未完成");
             commentButton.gameObject.SetActive (false);
             shareButton.gameObject.SetActive (false);
         } else if (_orderStatus == "2") {
-            //statusText.ResetUI ("Complete", "已完成");
             commentButton.gameObject.SetActive (true);
             shareButton.gameObject.SetActive (true);
         } else {
-            //statusText.ResetUI ("Cancelled", "已取消");
             commentButton.gameObject.SetActive (false);
             shareButton.gameObject.SetActive (false);
         }
@@ -146,7 +146,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     }
 
     public void OnShareButtonClicked () {
-        MainCanvasController.instance.ShareFoodEasyGo ();
+        MainCanvasController.instance.ShareToMoments(goods);
     }
 
     public void OnCommentButtonClicked () {
@@ -162,6 +162,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     }
 
     public void OnHelpButtonClick(){
+
         string orderId = _subOrderData.GetField("order_number").str;
         OrderHelpPanelController.instance.OpenPanel(orderId);
     }

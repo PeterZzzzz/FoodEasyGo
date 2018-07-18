@@ -32,6 +32,14 @@ public class PaymentPanelController : BasePanelController {
         base.Awake ();
 
         SwitchModifyPaymentPanel (false);
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            defaultScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(defaultScrollRect.GetComponent<RectTransform>().offsetMin.x, defaultScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+
+            Debug.Log("iPhoneX适配15");
+        }
     }
 
 

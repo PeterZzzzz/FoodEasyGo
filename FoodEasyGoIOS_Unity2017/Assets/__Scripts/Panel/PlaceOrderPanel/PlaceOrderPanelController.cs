@@ -30,6 +30,8 @@ public class PlaceOrderPanelController : BasePanelController
     public InputField couponInputField;
     public Button payButton;
     public bool isCurrentOrderInstantSend = false;
+    public RectTransform scrollRect;
+    public RectTransform bottomBarRect;
 
     // Prefab
     public Transform restaurantBarPrefab;
@@ -55,6 +57,8 @@ public class PlaceOrderPanelController : BasePanelController
     public string orderNumber;
     public string orderID;
 
+    private float tipChose = 0.15f;
+
 
     new void Awake()
     {
@@ -67,6 +71,18 @@ public class PlaceOrderPanelController : BasePanelController
         base.Awake();
 
         tempGOList = new List<GameObject>();
+
+        if (Screen.width == 1125)
+        {
+            // iPhoneX
+            scrollRect.offsetMin = new Vector2(scrollRect.offsetMin.x, scrollRect.offsetMin.y + 20);
+
+            Vector2 pos = bottomBarRect.position;
+            pos.y += 20;
+            bottomBarRect.position = pos;
+            Debug.Log("iPhoneX适配4");
+
+        }
     }
 
 
@@ -157,6 +173,7 @@ public class PlaceOrderPanelController : BasePanelController
             yield return new WaitForSeconds(0.5f);
 
 
+        tipSection.Find("ToggleController").GetComponent<LDFWToggleController>().Reset();
         targetRegionDeliveryFee = 0f;
 
         JSONObject creditCardJSON = AppDataController.instance.GetCreditCard("default");
@@ -203,7 +220,7 @@ public class PlaceOrderPanelController : BasePanelController
                         restaurantBarController.transform.Find("Header/Title").GetComponent<TextController>().textEN,
                         "即买即送", "Delivers Now");
 
-                    foreach (var dishBarController in deliveryContent.GetChild (i).GetComponent<CartPanelRestaurantBarController> ().dishBarList)
+                    foreach (var dishBarController in deliveryContent.GetChild(i).GetComponent<CartPanelRestaurantBarController>().dishBarList)
                     {
                         if (dishBarController.isSelectedForCheckOut)
                             cartDetailIDString = cartDetailIDString + "," + dishBarController.cartDetailData._id;
@@ -256,7 +273,7 @@ public class PlaceOrderPanelController : BasePanelController
                         AppDataController.instance.GetDeliveryDestineTime (
                             reservationContent.GetChild (i).GetChild (1).GetComponent<CartPanelDishBarController> ().cartDetailData._deliverTimeID), "");
                             */
-                    foreach (var dishBar in reservationContent.GetChild (i).GetComponent<CartPanelRestaurantBarController> ().dishBarList)
+                    foreach (var dishBar in reservationContent.GetChild(i).GetComponent<CartPanelRestaurantBarController>().dishBarList)
                     {
                         cartDetailIDString = cartDetailIDString + "," + dishBar.cartDetailData._id;
                     }
@@ -280,23 +297,14 @@ public class PlaceOrderPanelController : BasePanelController
 
 
         cartDetailIDString = cartDetailIDString.Substring(1);
-        
+
         // Get fees
         CartPanelController.instance.GetTotalPriceDetails(out totalPrice, out extraFee, out deliveryFee);
-        
-        feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text = "$ " + totalPrice;
-        feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text = "$ " + extraFee;
-        DebugLogger.Log("Updating current deliveryFee to " + deliveryFee);
-        feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + deliveryFee;
-        feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.07f).ToString("0.00");
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
-        //UpdateDeliveryFee (targetRegionDeliveryFee.ToString ("0.00"));
-        feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ 0.00";
-        tipSection.Find("ToggleController").GetComponent<LDFWToggleController>().Reset();
+
+        UpdateFeeSection(float.Parse(totalPrice), float.Parse(extraFee), float.Parse(deliveryFee), 0);
         LoadingPanelController.instance.HidePanelImmediately();
 
         UpdateDeliveryFee(deliveryFee);
-        CalcualteTotalPrice();
 
 
         if (string.IsNullOrEmpty(orderNumber))
@@ -307,6 +315,17 @@ public class PlaceOrderPanelController : BasePanelController
 
     }
 
+    private void UpdateFeeSection(float goodsTotalPrice, float extraFee, float deliveryFee, float discountPrice) {
+        feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text = "$ " + goodsTotalPrice.ToString("0.00");
+        feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text = "$ " + extraFee.ToString("0.00");
+        feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + deliveryFee.ToString("0.00");
+        feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.07f).ToString("0.00");
+        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (goodsTotalPrice * tipChose).ToString("0.00");
+        feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ " + discountPrice.ToString("0.00");
+
+        CalcualteTotalPrice();
+    }
+
     /// <summary>
     /// Calcualtes total tax fee and total fee
     /// </summary>
@@ -314,8 +333,7 @@ public class PlaceOrderPanelController : BasePanelController
     {
 
         feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " +
-        ((float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) +
-        float.Parse(feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text.Substring(2))) * 0.07f).ToString("0.00");
+        ((float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2))) * 0.07f).ToString("0.00");
 
 
         feeSection.Find("TotalFeeTitle/Text").GetComponent<Text>().text = "$ " +
@@ -421,48 +439,37 @@ public class PlaceOrderPanelController : BasePanelController
     /// </summary>
     public void ValidateCoupon()
     {
-        string couponString = couponInputField.text;
+        string couponString = couponInputField.text.ToUpper();
         Debug.Log("Entered Coupon = " + couponString);
 
-        if (!string.IsNullOrEmpty(couponString))
-        {
-            WWWForm form = new WWWForm();
-            form.AddField("coupon_sn", couponString);
-            LoadingPanelController.instance.DisplayPanel();
-            OrderNetworkController.instance.GetCouponData(form, 
-                new LDFWServerResponseEvent((JSONObject coupon, string m) =>
-                    {
-                        LoadingPanelController.instance.HidePanel();
-                        if (int.Parse(coupon.GetField("type").str) == 1)
-                        //float.Parse(coupon.GetField("discont").str) != 0f)
-                        {
-                            float discount = float.Parse(coupon.GetField("discont").str);
-                            feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ -" +
-                            (float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) * (10f - discount) * 0.1f).ToString("0.00");
+        WWWForm form = new WWWForm();
+        form.AddField("coupon_sn", couponString);
+        form.AddField("order_id", orderID);
+        LoadingPanelController.instance.DisplayPanel();
+        OrderNetworkController.instance.ApplyCoupon(form,
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+                {
+                    data = data.GetField("d");
+                    LoadingPanelController.instance.HidePanel();
+                    UpdateFeeSection(
+                        float.Parse(data.GetField("goods_total_price").str),
+                        float.Parse(data.GetField("extra_price").str),
+                        float.Parse(data.GetField("deliver_price").str),
+                        float.Parse(data.GetField("discont_goods_price").str) - float.Parse(data.GetField("goods_total_price").str));
+            
 
-                            isUsingFreeDelivery = false;
-                        }
-                        else
-                        {
-                            feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text = "$ 0.00";
-                            feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ 0.00";
-                            isUsingFreeDelivery = true;
-                        }
+                }),
+            new LDFWServerResponseEvent((JSONObject data, string m) =>
+                {
+                    couponInputField.text = "";
+                    CartPanelController.instance.GetTotalPriceDetails(out totalPrice, out extraFee, out deliveryFee);
+                    UpdateFeeSection(float.Parse(totalPrice), float.Parse(extraFee), float.Parse(deliveryFee), 0);
+                    MessagePanelController.instance.DisplayPanel(m);
+                    LoadingPanelController.instance.HidePanel();
+                }));
 
-                        CalcualteTotalPrice();
-                        couponInputField.interactable = false;
-                        selectedCouponID = coupon.GetField("id").str;
 
-                    }),
-                new LDFWServerResponseEvent((JSONObject data, string m) =>
-                    {
-                        couponInputField.text = "";
-                        MessagePanelController.instance.DisplayPanel(m);
-                        LoadingPanelController.instance.HidePanel();
-                    }));
 
-             
-        }
     }
 
     #endregion
@@ -494,7 +501,7 @@ public class PlaceOrderPanelController : BasePanelController
                     DebugLogger.Log("Updating highest delivery to " + key + ", " + CartPanelController.instance.restaurantDeliverFee[key]);
                     highestRestaurantID = key;
                     highestDelivery = CartPanelController.instance.restaurantDeliverFee[key];
-                }   
+                }
             }
             DebugLogger.Log("Total and highestDelivery = " + totalDelivery.ToString("0.00") + ", " + highestDelivery.ToString("0.00"));
             feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + (totalDelivery - highestDelivery).ToString("0.00");
@@ -543,32 +550,44 @@ public class PlaceOrderPanelController : BasePanelController
 
     public void On15TipButtonClicked()
     {
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
-        CalcualteTotalPrice();
+        if (!string.IsNullOrEmpty(totalPrice))
+        {
+            feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.15f).ToString("0.00");
+            tipChose = 0.15f;
+            CalcualteTotalPrice();
+        }
     }
 
     public void On18TipButtonClicked()
     {
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.18f).ToString("0.00");
-        CalcualteTotalPrice();
+        if (!string.IsNullOrEmpty(totalPrice))
+        {
+            feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.18f).ToString("0.00");
+            tipChose = 0.18f;
+            CalcualteTotalPrice();
+        }
     }
 
     public void On20TipButtonClicked()
     {
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.2f).ToString("0.00");
-        CalcualteTotalPrice();
+        if (!string.IsNullOrEmpty(totalPrice))
+        {
+            feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + (float.Parse(totalPrice) * 0.2f).ToString("0.00");
+            tipChose = 0.2f;
+            CalcualteTotalPrice();
+        }
     }
 
-    public void OnCustomTipButtonClicked(string text)
-    {
-        float amount = 0f;
-        if (!string.IsNullOrEmpty(text) && !float.TryParse(text, out amount))
-        {
-            MessagePanelController.instance.DisplayPanel("Invalid tip");
-        }
-        feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + amount.ToString("0.00");
-        CalcualteTotalPrice();
-    }
+    //public void OnCustomTipButtonClicked(string text)
+    //{
+    //    float amount = 0f;
+    //    if (!string.IsNullOrEmpty(text) && !float.TryParse(text, out amount))
+    //    {
+    //        MessagePanelController.instance.DisplayPanel("Invalid tip");
+    //    }
+    //    feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + amount.ToString("0.00");
+    //    CalcualteTotalPrice();
+    //}
 
     #endregion
 
@@ -648,7 +667,8 @@ public class PlaceOrderPanelController : BasePanelController
         form.AddField("coupon_sn", couponSection.Find("Input").GetComponent<InputField>().text);
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
-
+        form.AddField("instruction", addressSection.Find("AddressBar/Instruction").GetComponent<InputField>().text);
+        //Debug.Log(addressSection.Find("AddressBar/Instruction/Text").GetComponent<Text>().text);
 
         if (string.IsNullOrEmpty(selectedCreditCardID))
         {
@@ -676,7 +696,7 @@ public class PlaceOrderPanelController : BasePanelController
                         OpenConfirmWindow();
                         UserDataController.instance.hasMadeFirstOrder = "1";
                     }
-                
+
                     /*
                 confirmOrderPanel.Find ("OrderNumber").GetComponent<TextController> ().ResetUI (
                     "订单号: <color=orange>" + orderNumber + "</color>",
@@ -720,7 +740,7 @@ public class PlaceOrderPanelController : BasePanelController
                         confirmOrderPanel.Find("OrderNumber").GetComponent<TextController>().ResetUI(
                             "订单号: " + subOrderNumber + "\n" + checkEmailZH,
                             "Order ID: " + subOrderNumber + "\n" + checkEmailEN);
-                        
+
                         confirmOrderPanel.gameObject.SetActive(true);
                         if (checkForCompletionIEnumerator != null)
                         {

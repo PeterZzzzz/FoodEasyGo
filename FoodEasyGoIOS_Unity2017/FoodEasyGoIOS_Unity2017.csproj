@@ -14,6 +14,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile></TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>iOS:9</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
@@ -387,6 +388,7 @@
     <Compile Include="Assets\__Scripts\Test\Test1.cs" />
     <Compile Include="Assets\__Scripts\UI\ButtonController.cs" />
     <Compile Include="Assets\__Scripts\UI\InputFieldController.cs" />
+    <Compile Include="Assets\__Scripts\UI\MobileInputController.cs" />
     <Compile Include="Assets\__Scripts\UI\ScrollRectController.cs" />
     <Compile Include="Assets\__Scripts\UI\TextController.cs" />
     <Compile Include="Assets\__Scripts\Userdata\UserDataController.cs" />
