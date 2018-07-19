@@ -810,13 +810,6 @@ class OrderController extends BaseController {
 		$creditCardSecurityCode = $this->get_param('post.credit_card_security_code');
 		
 
-
-
-		
-
-
-
-
 		//Check Restaurant is Open
 		$subOrderList = M('order_sub')
             ->where("`order_id` = $orderID")
@@ -846,7 +839,7 @@ class OrderController extends BaseController {
 			}
 
 
-//需要增加对预定和非预定种类的区分
+			//需要增加对预定和非预定种类的区分
 			if($subOrderData['category'] == 1 && !$this->is_within_time_frame($startTime, $endTime, $secondStartTime, $secondEndTime))
 			{
 				$this->return_error('Error, one of the Restaurant is close');
@@ -855,9 +848,6 @@ class OrderController extends BaseController {
         }
 		
 
-
-
-        
 		// Step2-2, Get payment data
         $paymentData = [];
         if ($paymentType == 2) {

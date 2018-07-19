@@ -48,16 +48,17 @@ public class CouponPanelController : BasePanelController {
                                 currentCoupon.SetParent (defaultScrollRect.content);
                                 currentCoupon.localScale = Vector3.one;
 
-                                currentCoupon.Find ("Panel/Title").GetComponent<TextController> ().ResetUI (
-                                    float.Parse (normalCoupon[i].GetField ("discont").str) + " 折优惠\n" + 
-                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")",
+                                currentCoupon.Find("Panel/Title").GetComponent<TextController>().ResetUI(normalCoupon[i].GetField("name").str, normalCoupon[i].GetField("name_en").str);
+                                currentCoupon.Find("Panel/Discount").GetComponent<TextController>().ResetUI((100f - float.Parse(normalCoupon[i].GetField("discont").str) * 10) + "% OFF");
 
-                                    (100f - float.Parse (normalCoupon[i].GetField ("discont").str) * 10) + "% OFF\n" + 
-                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")");
-
-
-                                currentCoupon.Find ("Panel/Code").GetComponent<TextController> ().ResetUI (
-                                    normalCoupon[i].GetField ("sn").str);
+                                if (normalCoupon[i].GetField("is_valid").str.Equals("0"))
+                                {
+                                    currentCoupon.Find("Panel/Code").GetComponent<TextController>().ResetUI("优惠券未生效", "Invalid Coupon");
+                                }else
+                                {
+                                    currentCoupon.Find("Panel/Code").GetComponent<TextController>().ResetUI(normalCoupon[i].GetField("sn").str);
+                                }
+                                
                                 currentCoupon.Find ("Panel/Date").GetComponent<TextController> ().ResetUI (
                                     "有效期至: " + normalCoupon[i].GetField ("endtime").str,
                                     "Expiry Date: " + normalCoupon[i].GetField ("endtime").str);
@@ -67,13 +68,8 @@ public class CouponPanelController : BasePanelController {
                                 currentCoupon.SetParent (defaultScrollRect.content);
                                 currentCoupon.localScale = Vector3.one;
 
-                                currentCoupon.Find ("Panel/Title").GetComponent<TextController> ().ResetUI (
-                                    "免费配送\n" + 
-                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")",
-
-                                    "Free Delivery\n" + 
-                                    "(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")");
-                                    
+                                currentCoupon.Find("Panel/Title").GetComponent<TextController>().ResetUI("免费配送", "Free Delivery");
+                                currentCoupon.Find("Panel/Discount").GetComponent<TextController>().ResetUI("(" + normalCoupon[i].GetField("used_times").str + "/" + normalCoupon[i].GetField("usable_times").str + ")");
                                 currentCoupon.Find ("Panel/Code").GetComponent<TextController> ().ResetUI (
                                     normalCoupon[i].GetField ("sn").str);
                                 currentCoupon.Find ("Panel/Date").GetComponent<TextController> ().ResetUI (

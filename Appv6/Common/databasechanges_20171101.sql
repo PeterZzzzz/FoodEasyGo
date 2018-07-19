@@ -17,3 +17,6 @@ CREATE TABLE `food_app_version` (
 
 //数据库更改如下03/21/2018
 ALTER TABLE `food_order_sub` ADD `phone_reminded` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '0是未提醒，1是已提醒，不需要提醒的都为1' AFTER `fax_status`;
+
+//数据库添加06/18/2018
+ALTER TABLE `food_coupon_sn` ADD `invitee_id` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '被邀请者ID' AFTER `user_id`;
