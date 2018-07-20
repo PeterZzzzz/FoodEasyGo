@@ -171,7 +171,7 @@ public class PaymentPanelController : BasePanelController {
         if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Card number cannot be empty");
             return false;
-        } else if (modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text.Length < 16) {
+        } else if (modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text.Length < 15) {
             MessagePanelController.instance.DisplayPanel ("Card number too short");
             return false;
         } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text)) {

@@ -21,7 +21,7 @@ class UserPaymentController extends BaseController {
 	 */
 	public function get_user_payment_list () {
 		$result = M('user_payment')
-			->where("`user_id` = $this->userID and char_length(`credit_card_number`) = 16")
+			->where("`user_id` = $this->userID and char_length(`credit_card_number`) > 14")
 			->field(['id', 'credit_card_number', 'expiration_time', 'is_default', 'billing_first_name', 'billing_last_name'])
 			->select();
 		

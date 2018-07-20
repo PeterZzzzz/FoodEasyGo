@@ -284,7 +284,8 @@ public class PlaceOrderPanelController : BasePanelController
         // Set payment method
         if (isCurrentOrderInstantSend)
         {
-            paymentSection.GetChild(0).localScale = Vector3.one;
+            //暂时取消现金接单(改回来Vector3.one)
+            paymentSection.GetChild(0).localScale = Vector3.zero;
             paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
             paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
         }
