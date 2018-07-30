@@ -173,7 +173,7 @@ public class OrderDetailPanelController : BasePanelController {
 
     private void UpdateDeliverStatus(string deliverStatus) {
         foreach (var icon in deliverStatusIcons)
-            icon.color = Color.gray;
+            icon.color = new Color(204f / 255f, 204f / 255f, 204f / 255f, 1);
         deliverStatusBar.fillAmount = 0;
 
         string zh = "已完成";

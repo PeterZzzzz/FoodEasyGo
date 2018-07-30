@@ -17,8 +17,15 @@ public class HomeGrouponScrollviewElementController : MonoBehaviour, IPointerCli
         GrouponDetailPanelController.instance.grouponData = grouponData;
         GrouponDetailPanelController.instance.OpenPanel ();
         */
-        
-        RestaurantDetailPanelController.instance.OpenPanelForGroupon (grouponID);
+
+        if(grouponID == "56")
+        {
+            Debug.Log("分享好友活动");
+            InvitationPanelController.instance.OpenPanel();
+        }else
+        {
+            RestaurantDetailPanelController.instance.OpenPanelForGroupon(grouponID);
+        }
     }
 
     public void ResetUI (string id, string title_zh, string title_en, string text_zh, string text_en, string imgURL) {

@@ -93,4 +93,14 @@ public class OrderNetworkController : ServerCallController {
         }
         getCouponStatusCall = CommonWWWCall (orderControllerURL + "apply_coupon_sn", form, success, failure);
     }
+
+    // Save restaurant notification
+    LDFWWWWCallCoroutineWrapper saveRestaurantNotificationCall = null;
+    public void SaveRestaurantNotification(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (saveRestaurantNotificationCall != null) {
+            saveRestaurantNotificationCall.Dispose();
+        }
+        saveRestaurantNotificationCall = CommonWWWCall(orderControllerURL + "create_restaurant_notification", form, success, failure);
+    }
 }

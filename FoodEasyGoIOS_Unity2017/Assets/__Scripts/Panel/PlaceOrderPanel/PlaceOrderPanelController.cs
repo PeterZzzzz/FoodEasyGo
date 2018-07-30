@@ -688,12 +688,14 @@ public class PlaceOrderPanelController : BasePanelController
                     LoadingPanelController.instance.HidePanelImmediately();
                     if (paymentSection.GetComponent<LDFWToggleController>().GetSelectedElements() != "0")
                     {
+                        //信用卡结账
                         SwitchUniwebviewPanel(true);
                         uniwebviewPanel.GetComponent<PlaceOrderPanelUniwebview>().OpenURL();
                         StartCheckForCompletetionCoroutine();
                     }
                     else
                     {
+                        //现金结账
                         OpenConfirmWindow();
                         UserDataController.instance.hasMadeFirstOrder = "1";
                     }
@@ -729,6 +731,12 @@ public class PlaceOrderPanelController : BasePanelController
                     LoadingPanelController.instance.HidePanelImmediately();
                     if (data.GetField("status").str == "2")
                     {
+                        OrderNetworkController.instance.SaveRestaurantNotification(form,
+                                new LDFWServerResponseEvent((JSONObject d, string r) =>
+                                {
+                                    MessagePanelController.instance.DisplayPanel(r);
+                                }), null);
+
                         string subOrderNumber = "";
                         for (int i = 0; i < data.GetField("sub_order_number").Count; i++)
                         {
