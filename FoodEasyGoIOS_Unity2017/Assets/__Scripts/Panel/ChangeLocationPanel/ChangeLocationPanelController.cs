@@ -12,7 +12,10 @@ public class ChangeLocationPanelController : BasePanelController
     public InputFieldController manualZipCodeInputField;
     public Button manualZipCodeSubmitButton;
     public Text noteText;
-    
+
+    public GameObject savedAddressBarfab;
+    public ScrollRect addressScrollRect;
+    public string selectedAddressID;
 
     public Dictionary<string, JSONObject> regionDic;
 
@@ -38,15 +41,17 @@ public class ChangeLocationPanelController : BasePanelController
     #region Overrides
     public override void ResetPanel ()
     {
+        addressScrollRect.content.DestroyAllChildren();
         manualZipCodeInputField.text = "";
+        selectedAddressID = "0";
 
         if (Config.currentLanguage == Language.chinese)
         {
-            noteText.text = "请输入当前所在地区邮编\n(定位按钮可以帮您获取当前地址邮编)";
+            noteText.text = "请选择配送地址或输入当前所在地区邮编\n(定位按钮可以帮您获取当前地址邮编)";
         }
         else if (Config.currentLanguage == Language.english)
         {
-            noteText.text = "Please enter the your zip code.\nLocation Button will fetch your current zip";
+            noteText.text = "Please choose a address or enter your zip code.\nLocation Button will fetch your current zip";
         }
     }
 
@@ -58,6 +63,47 @@ public class ChangeLocationPanelController : BasePanelController
             manualZipCodeInputField.text = "02170";
             OnSubmitButtonClicked ();
         }
+
+        //Loading saved address for select panel
+        LoadingPanelController.instance.DisplayPanel();
+        AddressPanelController.instance.GetAddressList(new LDFWServerResponseEvent((JSONObject data, string m) =>
+        {
+            LoadingPanelController.instance.HidePanelImmediately();
+            if (data != null && data.Count > 0)
+            {
+                for (int i = 0; data[i] != null; i++)
+                {
+                    Transform address = Instantiate(savedAddressBarfab).transform;
+                    address.GetComponent<ChangeLocationPanelAddressBarController>().Reset(
+                        data[i].GetField("id").str,
+                        data[i].GetField("name").str,
+                        data[i].GetField("phone").str,
+                        data[i].GetField("address").str,
+                        data[i].GetField("street").str,
+                        data[i].GetField("city").str,
+                        data[i].GetField("state").str,
+                        data[i].GetField("zip_code").str,
+                        data[i].GetField("region_id").str
+                    );
+                    address.SetParent(addressScrollRect.content);
+                    address.localScale = Vector3.one;
+                    address.GetComponent<ChangeLocationPanelAddressBarController>().parentScrollRect = addressScrollRect;
+                }
+            }
+
+            if (addressScrollRect.content.childCount <= 0)
+            {
+                addressScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(true);
+            }
+            else
+            {
+                addressScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(false);
+            }
+        }),
+        new LDFWServerResponseEvent((JSONObject data, string m) =>
+        {
+            LoadingPanelController.instance.HidePanelImmediately();
+        }));
     }
 
     public override void DisplayPanel ()
@@ -81,12 +127,9 @@ public class ChangeLocationPanelController : BasePanelController
                 UserDataController.instance.targetServiceRegionZipCode = json.GetField ("zipcode").str;
                 UserDataController.instance.targetServiceRegionNameEN = json.GetField ("name_en").str;
                 UserDataController.instance.targetServiceRegionNameZH = json.GetField ("name").str;
-
                 PanelListController.instance.SetHomePanelAsBasePanel ();
-                //GetAvailableRegions ();
+                AppDataController.instance.SyncAddressList();
 
-                //HomePanelController.instance.ReloadPanel ();
-                //PanelListController.instance.RemovePanel ();
             }),
             new LDFWServerResponseEvent ((JSONObject json, string m) =>
             {
@@ -102,6 +145,27 @@ public class ChangeLocationPanelController : BasePanelController
 
     public void OnInputFieldsChanged ()
     {
+        //reset address select button UI
+        int addressCount = addressScrollRect.content.childCount;
+        for (int i = 0; i < addressCount; i++)
+        {
+            addressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/Text").GetComponent<TextController>().ResetUI("未选择", "Unselected");
+            addressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/CricleBackground").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            addressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/CricleBackground/SelectIcon").gameObject.SetActive(false);
+
+        }
+        //unselect of address
+        selectedAddressID = "0";
+
+        if (Config.currentLanguage == Language.chinese)
+        {
+            noteText.text = "配送到此邮编";
+        }
+        else if (Config.currentLanguage == Language.english)
+        {
+            noteText.text = "Deliver to this zip code";
+        }
+
         if (string.IsNullOrEmpty (manualZipCodeInputField.text) || manualZipCodeInputField.text.Length < 5)
             manualZipCodeSubmitButton.interactable = false;
         else
@@ -119,6 +183,15 @@ public class ChangeLocationPanelController : BasePanelController
         {
             PanelListController.instance.RemovePanel ();
         }
+    }
+
+    public void OnAddAddressBtnClicked()
+    {
+        AddressPanelController.instance.OpenPanel();
+        AddressPanelController.instance.isPhoneChanged = false;
+        AddressPanelController.instance.isPhoneVerified = false;
+        AddressPanelController.instance.modifyAddressID = "";
+        AddressPanelController.instance.SwitchModifyAddressPanel(true, null);
     }
 
 

@@ -123,6 +123,8 @@ public class AddressPanelController : BasePanelController
     public void OnCloseButtonClicked()
     {
         AppDataController.instance.SyncAddressList();
+        ChangeLocationPanelController.instance.ResetPanel();
+        ChangeLocationPanelController.instance.ReloadPanel();
     }
     #endregion
 
