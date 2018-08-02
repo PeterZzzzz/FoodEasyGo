@@ -18,7 +18,7 @@ public class HomeGrouponScrollviewElementController : MonoBehaviour, IPointerCli
         GrouponDetailPanelController.instance.OpenPanel ();
         */
 
-        if(grouponID == "56")
+        if(grouponID == "58")
         {
             Debug.Log("分享好友活动");
             InvitationPanelController.instance.OpenPanel();
