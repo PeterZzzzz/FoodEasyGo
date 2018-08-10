@@ -264,7 +264,9 @@ public class HomePanelController : BasePanelController
     }
     public void OnGrouponMoreButtonClicked ()
     {
-        GrouponPanelController.instance.OpenPanel ();
+        //1.9.0取消Groupon入口改为分享入口
+        //GrouponPanelController.instance.OpenPanel ();
+        InvitationPanelController.instance.OpenPanel();
     }
     #endregion
 

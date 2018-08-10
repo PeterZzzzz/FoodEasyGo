@@ -24,7 +24,6 @@ public class AddressPanelController : BasePanelController
     public Button sendCodeBtn;
     public int waitForResend = 20;
 
-    // private
     AddressPanelAddressBarController currentBar = null;
 
     private bool useYunPianServer = true;
@@ -87,7 +86,7 @@ public class AddressPanelController : BasePanelController
                         data[i].GetField("state").str,
                         data[i].GetField("zip_code").str,
                         data[i].GetField("region_id").str,
-                        true
+                        data[i].GetField("phone_verified").str == "1" ? true : false
                     );
                     address.SetParent(defaultScrollRect.content);
                     address.localScale = Vector3.one;
@@ -123,8 +122,6 @@ public class AddressPanelController : BasePanelController
     public void OnCloseButtonClicked()
     {
         AppDataController.instance.SyncAddressList();
-        ChangeLocationPanelController.instance.ResetPanel();
-        ChangeLocationPanelController.instance.ReloadPanel();
     }
     #endregion
 

@@ -16,6 +16,14 @@ public class ChangeLocationPanelController : BasePanelController
     public GameObject savedAddressBarfab;
     public ScrollRect addressScrollRect;
     public string selectedAddressID;
+    public Transform addAddressPanel;
+    public InputField codeInputField;
+    public Button sendCodeBtn;
+    public Coroutine sendCodeCoroutine;
+    public int waitForResend = 20;
+    public bool isPhoneVerified;
+
+    private bool useYunPianServer = true;
 
     public Dictionary<string, JSONObject> regionDic;
 
@@ -44,6 +52,7 @@ public class ChangeLocationPanelController : BasePanelController
         addressScrollRect.content.DestroyAllChildren();
         manualZipCodeInputField.text = "";
         selectedAddressID = "0";
+        addAddressPanel.gameObject.SetActive(false);
 
         if (Config.currentLanguage == Language.chinese)
         {
@@ -65,8 +74,7 @@ public class ChangeLocationPanelController : BasePanelController
         }
 
         //Loading saved address for select panel
-        LoadingPanelController.instance.DisplayPanel();
-        AddressPanelController.instance.GetAddressList(new LDFWServerResponseEvent((JSONObject data, string m) =>
+        GetAddressList(new LDFWServerResponseEvent((JSONObject data, string m) =>
         {
             LoadingPanelController.instance.HidePanelImmediately();
             if (data != null && data.Count > 0)
@@ -187,12 +195,203 @@ public class ChangeLocationPanelController : BasePanelController
 
     public void OnAddAddressBtnClicked()
     {
-        AddressPanelController.instance.OpenPanel();
-        AddressPanelController.instance.isPhoneChanged = false;
-        AddressPanelController.instance.isPhoneVerified = false;
-        AddressPanelController.instance.modifyAddressID = "";
-        AddressPanelController.instance.SwitchModifyAddressPanel(true, null);
+        addAddressPanel.gameObject.SetActive(true);
+        isPhoneVerified = false;
+        addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().interactable = true;
+        addAddressPanel.Find("Content/Verification/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/Unit/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text = "";
+
+        addAddressPanel.Find("Content/SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
+        sendCodeBtn.interactable = true;
     }
+
+    public void OnCancelBtnClicked()
+    {
+        if(sendCodeCoroutine != null)
+            StopCoroutine(sendCodeCoroutine);
+        
+        ResetPanel();
+        ReloadPanel();
+    }
+
+    public void OnSaveAddressBtnClicked()
+    {
+        if (ValidateModifyAddressPanel())
+        {
+
+            AddAddress(
+                addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Content/Unit/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text,
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                {
+                    AppDataController.instance.SyncAddressList(() =>
+                    {
+                        SetPhoneVerified();
+                        Debug.Log("本地更新地址成功");
+                    });
+                    //需要放到上面的括号里才能按顺序执行异步后台交互，不然直接执行SetPhoneVerified()而不会执行本地地址更新
+                    //SetPhoneVerified();
+                }),
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                {
+                    MessagePanelController.instance.DisplayPanel(m);
+                }));
+        }
+    }
+
+    public void OnSendCodeBtnClicked()
+    {
+        if (addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text.Length == 10)
+        {
+            sendCodeCoroutine = StartCoroutine(CodeCoroutine());
+        }
+        else
+        {
+            MessagePanelController.instance.DisplayPanel("Please enter 10 digits Phone number");
+        }
+    }
+
+    private IEnumerator CodeCoroutine()
+    {
+        sendCodeBtn.interactable = false;
+        SendVerificationCode();
+
+        for (int i = waitForResend; i >= 0; i--)
+        {
+            addAddressPanel.Find("Content/SendCodeButton/Text").GetComponent<TextController>().ResetUI("重新发送" + i + "s", "Resend in" + i + "s");
+            yield return new WaitForSeconds(1.0f);
+        }
+        addAddressPanel.Find("Content/SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
+        sendCodeBtn.interactable = true;
+
+    }
+
+    public void CheckVerificationCode()
+    {
+
+        if (codeInputField.text.Length == 4)
+        {
+            Debug.Log("Check code now");
+
+            WWWForm form = new WWWForm();
+            form.AddField("phone", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
+            form.AddField("code", codeInputField.text);
+            UserDataNetworkController.instance.CheckVerificationCode(form,
+                                                                     new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                     {
+                                                                         MessagePanelController.instance.DisplayPanel(m);
+                                                                         isPhoneVerified = true;
+                                                                         addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().interactable = false;
+                                                                         Debug.Log("code正确");
+                                                                     }),
+                                                                     new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                     {
+                                                                         MessagePanelController.instance.DisplayPanel(m);
+                                                                         isPhoneVerified = false;
+                                                                         Debug.Log("code错误");
+                                                                     }));
+        }
+    }
+
+
+    public bool ValidateModifyAddressPanel()
+    {
+        if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text))
+        {
+            MessagePanelController.instance.DisplayPanel("Name cannot be null");
+            return false;
+        }
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text))
+        {
+            MessagePanelController.instance.DisplayPanel("Phone number cannot be null");
+            return false;
+        }
+        else if (addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text.Length != 10)
+        {
+            MessagePanelController.instance.DisplayPanel("Please enter 10 digits Phone number");
+            return false;
+        }
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text))
+        {
+            MessagePanelController.instance.DisplayPanel("Street cannot be null");
+            return false;
+        }
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text))
+        {
+            MessagePanelController.instance.DisplayPanel("City cannot be null");
+            return false;
+        }
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text))
+        {
+            MessagePanelController.instance.DisplayPanel("State cannot be null");
+            return false;
+        }
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text))
+        {
+            MessagePanelController.instance.DisplayPanel("Postal cannot be null");
+            return false;
+        }
+        else if (!isPhoneVerified)
+        {
+            MessagePanelController.instance.DisplayPanel("Verification code incorrect");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void SetPhoneVerified()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("phoneNumber", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
+        UserDataNetworkController.instance.SetPhoneNumberVerified(form,
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                {
+                                                                    MessagePanelController.instance.DisplayPanel(m);
+                                                                    Debug.Log("验证电话成功");
+                                                                    addAddressPanel.gameObject.SetActive(false);
+                                                                    ResetPanel();
+                                                                    ReloadPanel();
+                                                                }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) =>
+                                                                {
+                                                                    MessagePanelController.instance.DisplayPanel(m);
+                                                                    Debug.Log("验证电话失败");
+                                                                    addAddressPanel.gameObject.SetActive(false);
+                                                                    ResetPanel();
+                                                                    ReloadPanel();
+                                                                }));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     #region GeoLocation
@@ -326,5 +525,54 @@ public class ChangeLocationPanelController : BasePanelController
             Input.location.Stop();
         }
     }
+    #endregion
+
+    #region ServerCalls
+
+    public void GetAddressList(LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        UserDataNetworkController.instance.GetUserAddressList(success, failure);
+    }
+
+    public void AddAddress(string name, string phone, string address, string street, string city, string state, string zipCode, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        LoadingPanelController.instance.DisplayPanel();
+        WWWForm form = new WWWForm();
+        form.AddField("name", name);
+        form.AddField("phone", phone);
+        form.AddField("address", address);
+        form.AddField("street", street);
+        form.AddField("city", city);
+        form.AddField("state", state);
+        form.AddField("address_zip_code", zipCode);
+        UserDataNetworkController.instance.AddUserAddress(form, success, failure);
+    }
+
+    public void SendVerificationCode()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("phone", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
+
+        if (useYunPianServer)
+        {
+            Debug.Log("使用云片");
+            form.AddField("service", "Yunpian/send_sms");
+            useYunPianServer = !useYunPianServer;
+        }
+        else
+        {
+            Debug.Log("使用AWS");
+            form.AddField("service", "Aws/send_sms");
+            useYunPianServer = !useYunPianServer;
+        }
+
+        UserDataNetworkController.instance.SendVerificationCode(form,
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(data.GetField("c").f.ToString() + ":" + m); }));
+    }
+
+
+
     #endregion
 }

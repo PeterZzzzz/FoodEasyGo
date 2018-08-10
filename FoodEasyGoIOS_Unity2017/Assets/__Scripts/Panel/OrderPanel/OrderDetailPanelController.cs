@@ -191,7 +191,6 @@ public class OrderDetailPanelController : BasePanelController {
         }
 
         JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
-        Debug.Log("!!!!!!!!!!!!!!!!!!传进来的配送状态：" + deliverStatus + "    现在用的配送状态：" + orderDeliver);
 
         int fillRate = 0;
         if (orderDeliver.IsNull 

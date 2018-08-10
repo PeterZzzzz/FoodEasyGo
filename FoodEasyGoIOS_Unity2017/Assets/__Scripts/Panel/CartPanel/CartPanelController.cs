@@ -635,8 +635,7 @@ public class CartPanelController : BasePanelController
             {
                 Debug.Log("no ver");
                 isPhoneVerified = false;
-            };
-            isPhoneVerified = true;
+            }
         }),
         new LDFWServerResponseEvent((JSONObject data, string m) =>
         {

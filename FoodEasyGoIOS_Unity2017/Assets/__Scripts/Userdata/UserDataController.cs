@@ -15,8 +15,6 @@ public class UserDataController : MonoBehaviour {
     public string targetServiceRegionNameZH;
     public string targetServiceRegionNameEN;
 
-    //public string avatarURL;
-    //public Texture2D avatarTexture;
     public string userID;
     public string email;
     public string password;
@@ -32,15 +30,13 @@ public class UserDataController : MonoBehaviour {
     public string inviterID;
     public string hasMadeFirstOrder;
     public string status;
-    //public string deliveryFee;
     public string iosToken;
-
     public string googleMapKey;
 
-    //public Dictionary<string, float> regionDeliveryFeeDic;
-
-
-
+    public string earnedPoint;
+    public string pendingPoint;
+    public string redeemedPoint;
+    public string receivedPoint;
 
     void Awake () {
         if (instance != null) {
@@ -82,6 +78,10 @@ public class UserDataController : MonoBehaviour {
 
         googleMapKey = data.GetField ("google_map_key").str;
 
-        //CartController.instance.GetCartDetails ();
+        //earnedPoint = data.GetField("user_data").GetField("earned_point").str;
+        //pendingPoint = data.GetField("user_data").GetField("pending_point").str;
+        //redeemedPoint = data.GetField("user_data").GetField("redeemed_point").str;
+        //receivedPoint = data.GetField("user_data").GetField("received_point").str;
+
     }
 }
