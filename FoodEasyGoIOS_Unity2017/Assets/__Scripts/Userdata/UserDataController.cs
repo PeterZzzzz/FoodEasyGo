@@ -37,6 +37,7 @@ public class UserDataController : MonoBehaviour {
     public string pendingPoint;
     public string redeemedPoint;
     public string receivedPoint;
+    public string availablePoint;
 
     void Awake () {
         if (instance != null) {
@@ -78,10 +79,11 @@ public class UserDataController : MonoBehaviour {
 
         googleMapKey = data.GetField ("google_map_key").str;
 
-        //earnedPoint = data.GetField("user_data").GetField("earned_point").str;
-        //pendingPoint = data.GetField("user_data").GetField("pending_point").str;
-        //redeemedPoint = data.GetField("user_data").GetField("redeemed_point").str;
-        //receivedPoint = data.GetField("user_data").GetField("received_point").str;
+        earnedPoint = data.GetField("user_data").GetField("earned_point").str;
+        pendingPoint = data.GetField("user_data").GetField("pending_point").str;
+        redeemedPoint = data.GetField("user_data").GetField("redeemed_point").str;
+        receivedPoint = data.GetField("user_data").GetField("received_point").str;
+        availablePoint = (int.Parse(earnedPoint) - int.Parse(redeemedPoint) + int.Parse(receivedPoint)).ToString();
 
     }
 }

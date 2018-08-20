@@ -36,8 +36,8 @@ public class UserPanelController : BasePanelController {
     }
     public override void ReloadPanel () {
         userName.text = UserDataController.instance.firstName;
-        //pendingBtnText.ResetUI("待处理积分 :\n" + UserDataController.instance.pendingPoint, "Pending points :\n" + UserDataController.instance.pendingPoint);
-        //AvailableBtnText.ResetUI("可兑换积分 :\n" + (int.Parse(UserDataController.instance.earnedPoint) - int.Parse(UserDataController.instance.pendingPoint)).ToString(), "Available points:\n" + (int.Parse(UserDataController.instance.earnedPoint) - int.Parse(UserDataController.instance.redeemedPoint)).ToString());
+        pendingBtnText.ResetUI("待处理积分 :\n" + UserDataController.instance.pendingPoint, "Pending points :\n" + UserDataController.instance.pendingPoint);
+        AvailableBtnText.ResetUI("可兑换积分 :\n" + UserDataController.instance.availablePoint, "Available points:\n" + UserDataController.instance.availablePoint);
     }
     #endregion
 

@@ -32,6 +32,12 @@ public class PlaceOrderPanelController : BasePanelController
     public bool isCurrentOrderInstantSend = false;
     public RectTransform scrollRect;
     public RectTransform bottomBarRect;
+    public Transform RedeemPointSection;
+    public InputField redeemInputField;
+    public Button redeemBtn;
+    public Transform RedeemDiscountSection;
+    public bool isUsingRedeem;
+    public string totalPriceBeforeRedeem;
 
     // Prefab
     public Transform restaurantBarPrefab;
@@ -56,6 +62,7 @@ public class PlaceOrderPanelController : BasePanelController
 
     public string orderNumber;
     public string orderID;
+    public decimal savedPrice;
 
     private float tipChose = 0.15f;
 
@@ -112,6 +119,14 @@ public class PlaceOrderPanelController : BasePanelController
         uniwebviewPanel.gameObject.SetActive(false);
         orderNumber = "";
         confirmOrderPanel.gameObject.SetActive(false);
+
+        RedeemPointSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + UserDataController.instance.availablePoint, "Available Point :" + UserDataController.instance.availablePoint);
+        redeemInputField.text = "";
+        redeemBtn.interactable = false;
+        RedeemDiscountSection.gameObject.SetActive(false);
+        redeemBtn.transform.Find("Text").GetComponent<TextController>().ResetUI("兑换", "Redeem");
+        isUsingRedeem = false;
+
         while (tempGOList.Count > 0)
         {
             tempGOList[0].DestroyGO();
@@ -336,14 +351,13 @@ public class PlaceOrderPanelController : BasePanelController
         feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text = "$ " +
         ((float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2))) * 0.07f).ToString("0.00");
 
-
-        feeSection.Find("TotalFeeTitle/Text").GetComponent<Text>().text = "$ " +
-        (float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) +
+        totalPriceBeforeRedeem = (float.Parse(feeSection.Find("TotalPriceTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("ExtraFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text.Substring(2))).ToString("0.00");
+        feeSection.Find("TotalFeeTitle/Text").GetComponent<Text>().text = "$ " + totalPriceBeforeRedeem;
     }
 
     /// <summary>
@@ -457,6 +471,8 @@ public class PlaceOrderPanelController : BasePanelController
                         float.Parse(data.GetField("extra_price").str),
                         float.Parse(data.GetField("deliver_price").str),
                         float.Parse(data.GetField("discont_goods_price").str) - float.Parse(data.GetField("goods_total_price").str));
+                    if (isUsingRedeem)
+                        RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ " + (decimal.Parse(totalPriceBeforeRedeem) - savedPrice).ToString("0.00");
             
 
                 }),
@@ -669,7 +685,18 @@ public class PlaceOrderPanelController : BasePanelController
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
         form.AddField("instruction", addressSection.Find("AddressBar/Instruction").GetComponent<InputField>().text);
-        //Debug.Log(addressSection.Find("AddressBar/Instruction/Text").GetComponent<Text>().text);
+        if(isUsingRedeem)
+        {
+            form.AddField("is_using_redeem", isUsingRedeem.ToString());
+            form.AddField("redeemed_point", redeemInputField.text);
+            form.AddField("saved_total", Math.Round((decimal.Parse(redeemInputField.text) / Config.spendPointRate), 2).ToString());
+        }else
+        {
+            form.AddField("is_using_redeem", isUsingRedeem.ToString());
+            form.AddField("redeemed_point", "0");
+            form.AddField("saved_total", "0");
+        }
+
 
         if (string.IsNullOrEmpty(selectedCreditCardID))
         {
@@ -902,10 +929,73 @@ public class PlaceOrderPanelController : BasePanelController
             address.GetField("address").str + ", " + address.GetField("street").str + ", " + address.GetField("city").str + ", "
             + address.GetField("state").str + ", " + address.GetField("zip_code").str);
 
-        //TestAddress (address);
     }
 
 
     #endregion
 
+
+    #region RedeemPoint
+    public void OnRedeemInputFieldValueChanged()
+    {
+        if(!redeemInputField.text.Equals(""))
+        {
+            redeemBtn.interactable = true;
+        }
+        else
+        {
+            redeemBtn.interactable = false;
+        }
+    }
+
+    public void OnRedeemBtnClick()
+    {
+        //先检查一下优惠券有没有使用,如果有用，先跑一遍优惠券的逻辑把钱算出来。
+        //if (couponInputField.text != "")
+            //ValidateCoupon();
+        
+
+        if(isUsingRedeem)
+        {   
+            //正在使用兑换，点击后关闭窗口
+            RedeemDiscountSection.gameObject.SetActive(false);
+            redeemBtn.transform.Find("Text").GetComponent<TextController>().ResetUI("兑换", "Redeem");
+            isUsingRedeem = false;
+            redeemInputField.text = "";
+            RedeemDiscountSection.Find("SavedText").GetComponent<TextController>().text = "$ 0.00";
+            RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ 0.00";
+            RedeemPointSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + UserDataController.instance.availablePoint, "Available Point :" + UserDataController.instance.availablePoint);
+
+        }
+        else
+        {
+            //没有使用兑换，初始状态
+            //前端检查输入点数有没有超过已有点数
+            Debug.Log("要兑换的分数：" + redeemInputField.text + " 可用的分数：" + UserDataController.instance.availablePoint);
+            if (int.Parse(redeemInputField.text) > int.Parse(UserDataController.instance.availablePoint))
+            {
+                Debug.Log("You don't have enough points");
+                return;
+            }
+            //前端检查兑换金额有没有超过此单总金额
+            savedPrice = Math.Round((decimal.Parse(redeemInputField.text) / Config.spendPointRate), 2);
+            Debug.Log("减去金额：" + savedPrice + "这一单总金额：" + totalPriceBeforeRedeem);
+            if (savedPrice > decimal.Parse(totalPriceBeforeRedeem) - 1)
+            {
+                Debug.Log("Tooooo muuuuch points!!");
+                return;
+            }
+
+
+            RedeemDiscountSection.gameObject.SetActive(true);
+            redeemBtn.transform.Find("Text").GetComponent<TextController>().ResetUI("取消", "Cancel");
+            isUsingRedeem = true;
+            RedeemPointSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + (int.Parse(UserDataController.instance.availablePoint) - int.Parse(redeemInputField.text)).ToString(), "Available Point :" + (int.Parse(UserDataController.instance.availablePoint) - int.Parse(redeemInputField.text)).ToString());
+            RedeemDiscountSection.Find("SavedText").GetComponent<TextController>().text = "$ " + savedPrice.ToString("0.00");
+            RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ " + (decimal.Parse(totalPriceBeforeRedeem) - savedPrice).ToString("0.00");
+        }
+
+    }
+
+    #endregion
 }

@@ -26,3 +26,11 @@ ALTER TABLE `food_user` ADD `earned_point` INT(10) NOT NULL DEFAULT '0' COMMENT 
 ALTER TABLE `food_user` ADD `pending_point` INT(10) NOT NULL DEFAULT '0' COMMENT '所有订单pending_point的总和' AFTER `earned_point`;
 ALTER TABLE `food_user` ADD `redeemed_point` INT(10) NOT NULL DEFAULT '0' COMMENT '已兑换掉的point，用于记录' AFTER `pending_point`;
 ALTER TABLE `food_user` ADD `received_point` INT(10) NOT NULL DEFAULT '0' COMMENT '用于记录赠送用户积分' AFTER `redeemed_point`;
+
+ALTER TABLE `food_order` ADD `redeemed_point` INT(10) NOT NULL DEFAULT '0' COMMENT '该订单使用的积分' AFTER `tip_price`;
+
+ALTER TABLE `food_order_sub` ADD `pending_point` INT(10) NOT NULL DEFAULT '0' COMMENT '该订单正在处理的积分' AFTER `prepare_time`;
+ALTER TABLE `food_order_sub` ADD `adjusted_point` INT(10) NOT NULL COMMENT '该订单调整的积分' AFTER `pending_point`;
+ALTER TABLE `food_order_sub` ADD `earned_point` INT(10) NOT NULL COMMENT '该订单获得的积分' AFTER `adjusted_point`;
+ALTER TABLE `food_order_sub` ADD `redeemed_point` INT(10) NOT NULL COMMENT '该订单使用的积分' AFTER `earned_point`;
+

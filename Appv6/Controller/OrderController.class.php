@@ -801,6 +801,9 @@ class OrderController extends BaseController {
 		$paymentID = $this->get_param('post.payment_id');
 		$tip = $this->get_param('post.tip');
 		$instruction = $this->get_param('post.instruction');
+		$isUsingRedeem = $this->get_param('post.is_using_redeem');
+		$redeemedPoint = $this->get_param('post.redeemed_point');
+		$savedTotal = $this->get_param('post.saved_total');
         
         $creditCardFirstName = $this->get_param('post.credit_card_first_name');
 		$creditCardLastName = $this->get_param('post.credit_card_last_name');
@@ -950,8 +953,8 @@ class OrderController extends BaseController {
         
         // Check for coupon status
 		$couponStatus = CouponController::ValidateCouponStatus($orderID);
+		OrderController::CheckRedeemCheckout($isUsingRedeem, $redeemedPoint, $savedTotal, $orderID);
 
-		
         
         if ($paymentType == 1 ) {
             if ($couponStatus == 1) {
@@ -974,6 +977,75 @@ class OrderController extends BaseController {
 
         //$this->return_error('test');
 		$this->return_data([], 'Success');
+	}
+
+	public function CheckRedeemCheckout($isUsingRedeem, $redeemedPoint, $savedTotal, $orderID)
+	{
+		
+		if($isUsingRedeem == "True")
+		{
+			//order表里discont_total_price减去$savedTotal，redeemed_point加上$redeemedPoint
+			$order = M('order')
+				->where("`id` = $orderID")
+				->find();
+			
+			$redeemOrderData['discont_total_price'] = $order['discont_total_price'] - $savedTotal;
+			$redeemOrderData['redeemed_point'] = $redeemedPoint;
+
+			$result = M('order')
+				->where("`id` = $orderID")
+                ->save($redeemOrderData);
+			
+			//suborder中拆分$redeemedPoint到每一单去，并且discont_goods_price减去相应的价格
+			$subOrderList = M('order_sub')
+            	->where("`order_id` = $orderID")
+            	->select();
+            $savedPrice = $savedTotal;
+            foreach ($subOrderList as &$subOrderData)
+            {
+            	if($savedPrice > 0)
+            	{
+            		if($savedPrice>$subOrderData['discont_total_price'])
+            		{
+            			$subOrderData['redeemed_point'] = $subOrderData['discont_total_price']*1000;
+            			$savedPrice -= $subOrderData['discont_total_price'];
+            			$subOrderData['discont_total_price'] = 0;
+
+            		}else
+            		{
+            			$subOrderData['redeemed_point'] = $savedPrice*1000;
+            			$subOrderData['discont_total_price'] -= $savedPrice;
+            			$savedPrice = 0;
+            		}
+            	}
+            	
+            	$subResult = M('order_sub')
+            		->where("`id` = " . $subOrderData['id'])
+                	->save($subOrderData);
+            }
+		}
+		else
+		{
+			//不使用积分的时候还原积分数据
+			$redeemOrderData['redeemed_point'] = 0;
+
+			$result = M('order')
+				->where("`id` = $orderID")
+                ->save($redeemOrderData);
+
+            $subOrderList = M('order_sub')
+            	->where("`order_id` = $orderID")
+            	->select();
+            
+            foreach ($subOrderList as &$subOrderData)
+            {
+            	$subOrderData['redeemed_point'] = 0;
+            	
+            	$subResult = M('order_sub')
+            		->where("`id` = " . $subOrderData['id'])
+                	->save($subOrderData);
+            }
+		}
 	}
 
 
