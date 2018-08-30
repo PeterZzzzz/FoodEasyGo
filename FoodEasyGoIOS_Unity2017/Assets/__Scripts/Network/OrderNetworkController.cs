@@ -103,4 +103,15 @@ public class OrderNetworkController : ServerCallController {
         }
         saveRestaurantNotificationCall = CommonWWWCall(orderControllerURL + "create_restaurant_notification", form, success, failure);
     }
+
+    // Save change of membership point
+    LDFWWWWCallCoroutineWrapper changeMembershipPointCall = null;
+    public void ChangeMembershipPoint(WWWForm form, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        if (changeMembershipPointCall != null)
+        {
+            changeMembershipPointCall.Dispose();
+        }
+        changeMembershipPointCall = CommonWWWCall(orderControllerURL + "change_membership_point", form, success, failure);
+    }
 }

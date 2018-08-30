@@ -15,6 +15,7 @@ public class UserPanelController : BasePanelController {
     public Text                                 userName;
     public TextController                       pendingBtnText;
     public TextController                       AvailableBtnText;
+    public Transform                            membershipInfoPanel;
 
     private IEnumerator                         userImageDownloadIEnumerator;
     private ImageDownloader2                    userImageDownloader;
@@ -31,13 +32,28 @@ public class UserPanelController : BasePanelController {
 
     #region Overrides
     public override void ResetPanel () {
+        membershipInfoPanel.gameObject.SetActive(false);
         PersistentDataControl.instance.LoadCachedTextureToRawImage("UserIcon", UserDataController.instance.userID + ".png", userImage);
         DownloadUserImage ();
     }
     public override void ReloadPanel () {
         userName.text = UserDataController.instance.firstName;
-        pendingBtnText.ResetUI("待处理积分 :\n" + UserDataController.instance.pendingPoint, "Pending points :\n" + UserDataController.instance.pendingPoint);
-        AvailableBtnText.ResetUI("可兑换积分 :\n" + UserDataController.instance.availablePoint, "Available points:\n" + UserDataController.instance.availablePoint);
+        switch(UserDataController.instance.membershipStatus)
+        {
+            case "1":
+                pendingBtnText.ResetUI("会员等级 :\nMember", "Membership Status :\nMember");
+                break;
+            case "2":
+                pendingBtnText.ResetUI("会员等级 :\nPremium Member", "Membership Status :\nPremium Member");
+                break;
+            case "3":
+                pendingBtnText.ResetUI("会员等级 :\nPremium+ Member", "Membership Status :\nPremium+ Member");
+                break;
+            default:
+                break;
+        }
+        AvailableBtnText.ResetUI("待处理积分 :" + UserDataController.instance.pendingPoint + "\n" + "可兑换积分 :" + UserDataController.instance.availablePoint,
+                                 "Pending points :" + UserDataController.instance.pendingPoint + "\n" + "Available points :" + UserDataController.instance.availablePoint);
     }
     #endregion
 
@@ -127,5 +143,15 @@ public class UserPanelController : BasePanelController {
         if (userImageDownloadIEnumerator != null)
             StopCoroutine (userImageDownloadIEnumerator);
         StartCoroutine (userImageDownloadIEnumerator = userImageDownloader.StartDownloadCoroutine ());
+    }
+
+    public void OnMemberStatusButtonClicked()
+    {
+        membershipInfoPanel.gameObject.SetActive(true);
+    }
+
+    public void OnCloseMembershipPanelButtonClicked()
+    {
+        membershipInfoPanel.gameObject.SetActive(false);
     }
 }

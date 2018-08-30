@@ -38,6 +38,7 @@ public class UserDataController : MonoBehaviour {
     public string redeemedPoint;
     public string receivedPoint;
     public string availablePoint;
+    public string membershipStatus;
 
     void Awake () {
         if (instance != null) {
@@ -84,6 +85,11 @@ public class UserDataController : MonoBehaviour {
         redeemedPoint = data.GetField("user_data").GetField("redeemed_point").str;
         receivedPoint = data.GetField("user_data").GetField("received_point").str;
         availablePoint = (int.Parse(earnedPoint) - int.Parse(redeemedPoint) + int.Parse(receivedPoint)).ToString();
-
+        if (int.Parse(earnedPoint) < 30000)
+            membershipStatus = "1";
+        else if (int.Parse(earnedPoint) >= 30000 && int.Parse(earnedPoint) <= 70000)
+            membershipStatus = "2";
+        else
+            membershipStatus = "3";
     }
 }

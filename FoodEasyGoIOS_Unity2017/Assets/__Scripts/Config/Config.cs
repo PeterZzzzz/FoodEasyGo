@@ -31,7 +31,7 @@ public static class Config
     //public static string serverDomain = "http://192.168.1.102/";
     //public static string serverDomain = "http://127.0.0.1/";
     //public static string serverDomain = "localhost/";
-    public static string serverDomain = "http://10.0.1.50/";
+    public static string serverDomain = "http://10.0.1.74/";
 
     //public static string serverAPIURL = serverDomain + "api.php/Appv6/";
     public static string serverAPIURL = serverDomain + "Appv6/";
@@ -56,8 +56,8 @@ public static class Config
     public static string iOSDownloadAddress = "https://itunes.apple.com/us/app/foodeasygo/id1207497369?mt=8";
 
     // Membership
-    public static int diamondMembershipRate = 20;
-    public static int goldMembershipRate = 15;
-    public static int silverMembershipRate = 10;
+    public static int premiumPlusMembershipRate = 20;
+    public static int premiumMembershipRate = 15;
+    public static int membershipRate = 10;
     public static int spendPointRate = 1000;
 }

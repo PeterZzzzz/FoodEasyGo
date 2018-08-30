@@ -981,9 +981,23 @@ class OrderController extends BaseController {
 
 	public function CheckRedeemCheckout($isUsingRedeem, $redeemedPoint, $savedTotal, $orderID)
 	{
-		
+
 		if($isUsingRedeem == "True")
 		{
+
+			//先要判断一下积分是否还够使用
+			$orderData = M('order')
+				->where("`id` = $orderID")
+				->find();
+			$userData = M('user')
+				->where(array("id"=>$orderData['user_id']))
+                ->find();
+            $availablePoint = $userData['earned_point'] - $userData['redeemed_point'] + $userData['received_point'];
+            if($availablePoint < $redeemedPoint)
+            	$this->return_error("Error, You don't have enough points");
+
+
+		
 			//order表里discont_total_price减去$savedTotal，redeemed_point加上$redeemedPoint
 			$order = M('order')
 				->where("`id` = $orderID")
@@ -1045,6 +1059,84 @@ class OrderController extends BaseController {
             		->where("`id` = " . $subOrderData['id'])
                 	->save($subOrderData);
             }
+		}
+	}
+
+	public function change_membership_point()
+	{
+		$orderID = $this->get_param('post.order_id');
+		$isUsingRedeem = $this->get_param('post.is_using_redeem');
+		$receivePointRate = $this->get_param('post.receive_point_rate');
+		$totalGoodsPrice = $this->get_param('post.total_goods_price');
+		$redeemedPoint = $this->get_param('post.redeemed_point');
+		$savedPrice = $this->get_param('post.saved_price');
+
+		if($isUsingRedeem == "True")
+		{
+			//1. 如果使用了积分，首先判断($totalGoodsPrice - $savedPrice)是否大于0，如果大于，则按照拆分规则加入subOrder的pendPoint字段中,如果小于，则不加分。
+			$receivedPoint = 0;
+			if(($totalGoodsPrice - $savedPrice) > 0)
+			{
+				$subOrderList = M('order_sub')
+            		->where("`order_id` = $orderID")
+            		->order('`id` desc')
+            		->select();
+            	$userSpendPrice = $totalGoodsPrice - $savedPrice;
+            	foreach ($subOrderList as &$subOrderData)
+            	{
+            		if($userSpendPrice > $subOrderData['discont_goods_price'])
+            		{
+            			$subOrderData['pending_point'] = $subOrderData['discont_goods_price'] * $receivePointRate;
+            			$userSpendPrice -= $subOrderData['discont_goods_price'];
+            		}else
+            		{
+            			$subOrderData['pending_point'] = $userSpendPrice * $receivePointRate;
+            			$userSpendPrice = 0;
+            		}
+            		$receivedPoint += $subOrderData['pending_point'];
+            		$subOrderUpdateResult = M('order_sub')
+            			->where("`id` = " . $subOrderData['id'])
+                		->save($subOrderData);
+            	}
+			}
+			else
+			{
+
+			}
+
+			//2. （减去使用的积分）在user表中的redeemed_point中加入$redeemedPoint。
+			$orderData = M('order')
+				->where("`id` = $orderID")
+				->find();
+			
+			$userData = M('user')
+				->where(array("id"=>$orderData['user_id']))
+                ->find();
+            $updateUserData['redeemed_point'] = $userData['redeemed_point'] + $redeemedPoint;
+			$userUpdateResult = M('user')
+				->where(array("id"=>$orderData['user_id']))
+                ->save($updateUserData);
+			//3. 返回1:减去的分数，用于在本地更新。
+            $returnData['receivedPoint'] = $receivedPoint;
+            $returnData['redeemedPoint'] = $redeemedPoint;
+            if($userUpdateResult)
+            	$this->return_data($returnData, 'Point Redeemed');
+		}
+		else
+		{
+			//如果没有使用积分，则不需要减分的过程，只需要将subOrder中每一个菜品的pendingPoint字段加上该单相应的价格乘以$receivePointRate。
+			$subOrderList = M('order_sub')
+            	->where("`order_id` = $orderID")
+            	->select();
+           	foreach ($subOrderList as &$subOrderData)
+            {
+            	$subOrderData['pending_point'] = $subOrderData['discont_goods_price'] * $receivePointRate;
+            	$subOrderUpdateResult = M('order_sub')
+            		->where("`id` = " . $subOrderData['id'])
+                	->save($subOrderData);
+            }
+
+            $this->return_data(['$redeemedPoint' => "0"], 'No Redeemed');
 		}
 	}
 
