@@ -6,6 +6,7 @@ public class MessagePanelController : BasePanelController {
 
     public static MessagePanelController        instance;
     public Text                                 messageText;
+    public bool messageShow;
 
     protected new void Awake () {
         if (instance != null) {
@@ -42,10 +43,33 @@ public class MessagePanelController : BasePanelController {
     }
 
     public override void DisplayPanel () {
-        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(0, 1, 1);
+        messageShow = true;
     }
 
     public override void HidePanelImmediately () {
-        transform.localScale = Vector3.zero;
+        messageShow = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if(messageShow)
+        {
+            if(transform.localScale.x <= 1)
+            {
+                transform.localScale += new Vector3(0.1f, 0, 0);
+            }
+
+        }else
+        {
+            if(transform.localScale.x > 0)
+            {
+                transform.localScale -= new Vector3(0.2f, 0, 0);
+            }else
+            {
+                transform.localScale = Vector3.zero;
+            }
+        }
+
     }
 }

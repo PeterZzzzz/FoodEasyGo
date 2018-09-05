@@ -1017,7 +1017,7 @@ class OrderController extends BaseController {
             $savedPrice = $savedTotal;
             foreach ($subOrderList as &$subOrderData)
             {
-            	if($savedPrice > 0)
+            	if($savedPrice >= 0)
             	{
             		if($savedPrice>$subOrderData['discont_total_price'])
             		{
@@ -1067,13 +1067,17 @@ class OrderController extends BaseController {
 		$orderID = $this->get_param('post.order_id');
 		$isUsingRedeem = $this->get_param('post.is_using_redeem');
 		$receivePointRate = $this->get_param('post.receive_point_rate');
-		$totalGoodsPrice = $this->get_param('post.total_goods_price');
 		$redeemedPoint = $this->get_param('post.redeemed_point');
 		$savedPrice = $this->get_param('post.saved_price');
 
 		if($isUsingRedeem == "True")
 		{
 			//1. 如果使用了积分，首先判断($totalGoodsPrice - $savedPrice)是否大于0，如果大于，则按照拆分规则加入subOrder的pendPoint字段中,如果小于，则不加分。
+			$orderData = M('order')
+				->where("`id` = $orderID")
+				->find();
+			$totalGoodsPrice = $orderData['discont_goods_price'];
+
 			$receivedPoint = 0;
 			if(($totalGoodsPrice - $savedPrice) > 0)
 			{
@@ -1105,10 +1109,6 @@ class OrderController extends BaseController {
 			}
 
 			//2. （减去使用的积分）在user表中的redeemed_point中加入$redeemedPoint。
-			$orderData = M('order')
-				->where("`id` = $orderID")
-				->find();
-			
 			$userData = M('user')
 				->where(array("id"=>$orderData['user_id']))
                 ->find();
@@ -1116,7 +1116,9 @@ class OrderController extends BaseController {
 			$userUpdateResult = M('user')
 				->where(array("id"=>$orderData['user_id']))
                 ->save($updateUserData);
-			//3. 返回1:减去的分数，用于在本地更新。
+			//3. 交易成功，创建餐馆推送。
+            OrderController::createRestaurantNotification($orderID);
+            //4. 返回1:减去的分数，用于在本地更新。
             $returnData['receivedPoint'] = $receivedPoint;
             $returnData['redeemedPoint'] = $redeemedPoint;
             if($userUpdateResult)
@@ -1135,12 +1137,34 @@ class OrderController extends BaseController {
             		->where("`id` = " . $subOrderData['id'])
                 	->save($subOrderData);
             }
-
+            //交易成功，创建餐馆推送。
+            OrderController::createRestaurantNotification($orderID);
             $this->return_data(['$redeemedPoint' => "0"], 'No Redeemed');
 		}
 	}
 
 
+	public function createRestaurantNotification($order_ID)
+    {
+    	$orderID = $order_ID;
+    	$subOrderList = M('order_sub')
+            ->where("`order_id` = $orderID")
+            ->select();
+        foreach ($subOrderList as &$subOrderData) 
+        {
+        	$sub_order_info = $subOrderData;
+        	$restaurant_info = M('restaurant')->where(array("id"=>$subOrderData['restaurant_id']))->find();
+        //如果餐馆没有ios_token，那么不写入推送表，直接返回成功，不然可能会卡住推送表，使后续推送失败
+        if(!$restaurant_info['ios_token'])
+            continue;
+        $res1=M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "sub_order_number"=>$sub_order_info['order_number'], "title"=>"有新单/New Order", "body"=>"你有新的订单，单号".$sub_order_info['order_number']." / You have a new order, order number ".$sub_order_info['order_number'], "status"=>0, "create_time"=>time(), "target_send_time"=>time()));
+        $res3=M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "sub_order_number"=>$sub_order_info['order_number'], "title"=>"3分钟未确认/3 min order not confirmed", "body"=>"你的订单".$sub_order_info['order_number']."已经下单3分钟，尚未确认，请尽快确认，如有问题，请联系FoodEasyGo客服/Your order ".$sub_order_info['order_number']." has been unconfirmed for more than 3 minutes, please confirm order ASAP, or contact us if there's a problem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+180)));
+        $res5= M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "sub_order_number"=>$sub_order_info['order_number'], "title"=>"5分钟未确认/5 min order not confirmed", "body"=>"你的订单".$sub_order_info['order_number']."已经下单5分钟，尚未确认，请尽快确认，如有问题，请联系FoodEasyGo客服/Your order ".$sub_order_info['order_number']." has been unconfirmed for more than 5 minutes, please confirm order ASAP, or contact us if there's a problem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+300)));
+        
+    	}
+    }
+
+    //取消使用此方法，使用createRestaurantNotification代替。
     public function create_restaurant_notification()
     {
     	$orderID = $this->get_param('post.order_id');
@@ -1154,7 +1178,7 @@ class OrderController extends BaseController {
 
         //如果餐馆没有ios_token，那么不写入推送表，直接返回成功，不然可能会卡住推送表，使后续推送失败
         if(!$restaurant_info['ios_token'])
-            return true;
+            continue;
         $res1=M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "sub_order_number"=>$sub_order_info['order_number'], "title"=>"有新单/New Order", "body"=>"你有新的订单，单号".$sub_order_info['order_number']." / You have a new order, order number ".$sub_order_info['order_number'], "status"=>0, "create_time"=>time(), "target_send_time"=>time()));
         $res3=M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "sub_order_number"=>$sub_order_info['order_number'], "title"=>"3分钟未确认/3 min order not confirmed", "body"=>"你的订单".$sub_order_info['order_number']."已经下单3分钟，尚未确认，请尽快确认，如有问题，请联系FoodEasyGo客服/Your order ".$sub_order_info['order_number']." has been unconfirmed for more than 3 minutes, please confirm order ASAP, or contact us if there's a problem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+180)));
         $res5= M('restaurant_notification')->add(array("restaurant_id"=>$restaurant_info['id'], "ios_token"=>$restaurant_info['ios_token'], "sub_order_number"=>$sub_order_info['order_number'], "title"=>"5分钟未确认/5 min order not confirmed", "body"=>"你的订单".$sub_order_info['order_number']."已经下单5分钟，尚未确认，请尽快确认，如有问题，请联系FoodEasyGo客服/Your order ".$sub_order_info['order_number']." has been unconfirmed for more than 5 minutes, please confirm order ASAP, or contact us if there's a problem", "status"=>0, "create_time"=>time(), "target_send_time"=>(time()+300)));

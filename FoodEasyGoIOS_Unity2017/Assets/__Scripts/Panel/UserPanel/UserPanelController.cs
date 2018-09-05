@@ -41,13 +41,13 @@ public class UserPanelController : BasePanelController {
         switch(UserDataController.instance.membershipStatus)
         {
             case "1":
-                pendingBtnText.ResetUI("会员等级 :\nMember", "Membership Status :\nMember");
+                pendingBtnText.ResetUI("会员等级 :\n普通会员", "Membership Status :\nMember");
                 break;
             case "2":
-                pendingBtnText.ResetUI("会员等级 :\nPremium Member", "Membership Status :\nPremium Member");
+                pendingBtnText.ResetUI("会员等级 :\n优享会员", "Membership Status :\nPremium Member");
                 break;
             case "3":
-                pendingBtnText.ResetUI("会员等级 :\nPremium+ Member", "Membership Status :\nPremium+ Member");
+                pendingBtnText.ResetUI("会员等级 :\n优享会员+", "Membership Status :\nPremium+ Member");
                 break;
             default:
                 break;

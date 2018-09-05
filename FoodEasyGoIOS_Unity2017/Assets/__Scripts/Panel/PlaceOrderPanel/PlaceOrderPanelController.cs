@@ -478,7 +478,7 @@ public class PlaceOrderPanelController : BasePanelController
                         if ((decimal.Parse(totalPriceBeforeRedeem) - savedPrice) < 1)
                         {
                             couponInputField.text = "";
-                            MessagePanelController.instance.DisplayPanel("To much point");
+                            ValidateCoupon();
                         }else{
                             RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ " + (decimal.Parse(totalPriceBeforeRedeem) - savedPrice).ToString("0.00");
                         }
@@ -490,11 +490,10 @@ public class PlaceOrderPanelController : BasePanelController
                     couponInputField.text = "";
                     CartPanelController.instance.GetTotalPriceDetails(out totalPrice, out extraFee, out deliveryFee);
                     UpdateFeeSection(float.Parse(totalPrice), float.Parse(extraFee), float.Parse(deliveryFee), 0);
+                    RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ " + (decimal.Parse(totalPriceBeforeRedeem) - savedPrice).ToString("0.00");
                     MessagePanelController.instance.DisplayPanel(m);
                     LoadingPanelController.instance.HidePanel();
                 }));
-
-
 
     }
 
@@ -790,7 +789,6 @@ public class PlaceOrderPanelController : BasePanelController
                 pointForm.AddField("receive_point_rate", Config.membershipRate);
                 break;
         }
-        pointForm.AddField("total_goods_price", (decimal.Parse(totalPrice)).ToString("0.00"));
         if(isUsingRedeem)
         {
             pointForm.AddField("redeemed_point", redeemInputField.text);
@@ -810,24 +808,22 @@ public class PlaceOrderPanelController : BasePanelController
                     LoadingPanelController.instance.HidePanelImmediately();
                     if (data.GetField("status").str == "2")
                     {
-                        string membershipPointZH = "";
-                        string membershipPointEN = "";
                         OrderNetworkController.instance.ChangeMembershipPoint(pointForm,
                                 new LDFWServerResponseEvent((JSONObject d, string r) =>
                                 {
                                     UserDataController.instance.availablePoint = (int.Parse(UserDataController.instance.availablePoint) - int.Parse(d.GetField("redeemedPoint").str)).ToString();
-                                    membershipPointZH = "本次消费使用积分: " + d.GetField("redeemedPoint").str + "得到积分: " + d.GetField("receivedPoint") + "\n" + "获得的积分将于30天后可以使用";
-                                    membershipPointEN = "This order using points: " + d.GetField("redeemedPoint").str + "You have received points: " + d.GetField("receivedPoint") + "\n" + "These points will be available after 30 days";
+                                    //membershipPointZH = "本次消费使用积分: " + d.GetField("redeemedPoint").str + "得到积分: " + d.GetField("receivedPoint") + "\n" + "获得的积分将于30天后可以使用";
+                                    //membershipPointEN = "This order using points: " + d.GetField("redeemedPoint").str + "You have received points: " + d.GetField("receivedPoint") + "\n" + "These points will be available after 30 days";
                                     Debug.Log("available :" + UserDataController.instance.availablePoint + "using : " + d.GetField("redeemedPoint").str + "received : " + d.GetField("receivedPoint"));
 
 
                                 }), null);
 
-                        OrderNetworkController.instance.SaveRestaurantNotification(form,
-                                new LDFWServerResponseEvent((JSONObject d, string r) =>
-                                {
-                                    MessagePanelController.instance.DisplayPanel(r);
-                                }), null);
+                        //OrderNetworkController.instance.SaveRestaurantNotification(form,
+                                //new LDFWServerResponseEvent((JSONObject d, string r) =>
+                                //{
+                                //    MessagePanelController.instance.DisplayPanel(r);
+                                //}), null);
 
                         string subOrderNumber = "";
                         for (int i = 0; i < data.GetField("sub_order_number").Count; i++)
@@ -839,8 +835,8 @@ public class PlaceOrderPanelController : BasePanelController
                         string checkEmailZH = "部分订单可能由餐馆自行配送，请查看您的确认邮件.";
                         string checkEmailEN = "Please check your email for order details.";
                         confirmOrderPanel.Find("OrderNumber").GetComponent<TextController>().ResetUI(
-                        "订单号: " + subOrderNumber + "\n" + checkEmailZH + "\n" + membershipPointZH,
-                        "Order ID: " + subOrderNumber + "\n" + checkEmailEN + "\n" + membershipPointEN);
+                        "订单号: " + subOrderNumber + "\n" + checkEmailZH,
+                        "Order ID: " + subOrderNumber + "\n" + checkEmailEN);
 
                         confirmOrderPanel.gameObject.SetActive(true);
                         if (checkForCompletionIEnumerator != null)
@@ -1037,6 +1033,7 @@ public class PlaceOrderPanelController : BasePanelController
             if (int.Parse(redeemInputField.text) > int.Parse(UserDataController.instance.availablePoint))
             {
                 Debug.Log("You don't have enough points");
+                MessagePanelController.instance.DisplayPanel("You don't have enough points");
                 return;
             }
             //前端检查兑换金额有没有超过此单总金额
@@ -1045,6 +1042,7 @@ public class PlaceOrderPanelController : BasePanelController
             if (savedPrice > decimal.Parse(totalPriceBeforeRedeem) - 1)
             {
                 Debug.Log("Tooooo muuuuch points!!");
+                MessagePanelController.instance.DisplayPanel("too much points");
                 return;
             }
 
