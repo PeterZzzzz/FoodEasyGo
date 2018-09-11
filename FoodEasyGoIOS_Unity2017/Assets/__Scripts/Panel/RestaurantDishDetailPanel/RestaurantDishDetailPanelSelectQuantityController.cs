@@ -25,7 +25,7 @@ public class RestaurantDishDetailPanelSelectQuantityController : MonoBehaviour {
 
     public void OpenController(RestaurantDishDetailAttributeToggleElementController toggleElement, string attributeName, int quantity) {
         attributeToggleElementController = toggleElement;
-        dishText.ResetUI (RestaurantDishDetailPanelController.instance.nameText.text);
+        dishText.ResetUI (RestaurantDishDetailPanelController.instance.pageTitle.text);
         attrText.ResetUI (attributeName);
         selectedQuantity = quantity;
         quantityText.ResetUI (selectedQuantity.ToString ());

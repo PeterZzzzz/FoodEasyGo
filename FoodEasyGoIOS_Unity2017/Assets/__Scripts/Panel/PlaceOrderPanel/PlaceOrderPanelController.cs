@@ -819,12 +819,6 @@ public class PlaceOrderPanelController : BasePanelController
 
                                 }), null);
 
-                        //OrderNetworkController.instance.SaveRestaurantNotification(form,
-                                //new LDFWServerResponseEvent((JSONObject d, string r) =>
-                                //{
-                                //    MessagePanelController.instance.DisplayPanel(r);
-                                //}), null);
-
                         string subOrderNumber = "";
                         for (int i = 0; i < data.GetField("sub_order_number").Count; i++)
                         {

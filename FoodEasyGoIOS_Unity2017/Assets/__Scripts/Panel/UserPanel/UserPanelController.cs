@@ -16,6 +16,9 @@ public class UserPanelController : BasePanelController {
     public TextController                       pendingBtnText;
     public TextController                       AvailableBtnText;
     public Transform                            membershipInfoPanel;
+    public Sprite membershipInfoEn;
+    public Sprite membershipInfoZh;
+
 
     private IEnumerator                         userImageDownloadIEnumerator;
     private ImageDownloader2                    userImageDownloader;
@@ -47,7 +50,7 @@ public class UserPanelController : BasePanelController {
                 pendingBtnText.ResetUI("会员等级 :\n优享会员", "Membership Status :\nPremium Member");
                 break;
             case "3":
-                pendingBtnText.ResetUI("会员等级 :\n优享会员+", "Membership Status :\nPremium+ Member");
+                pendingBtnText.ResetUI("会员等级 :\n尊享会员", "Membership Status :\nPremium+ Member");
                 break;
             default:
                 break;
@@ -148,6 +151,10 @@ public class UserPanelController : BasePanelController {
     public void OnMemberStatusButtonClicked()
     {
         membershipInfoPanel.gameObject.SetActive(true);
+        if(Config.currentLanguage == Language.english)
+            membershipInfoPanel.Find("Content").GetComponent<SpriteRenderer>().sprite = membershipInfoEn;
+        else
+            membershipInfoPanel.Find("Content").GetComponent<SpriteRenderer>().sprite = membershipInfoZh;
     }
 
     public void OnCloseMembershipPanelButtonClicked()

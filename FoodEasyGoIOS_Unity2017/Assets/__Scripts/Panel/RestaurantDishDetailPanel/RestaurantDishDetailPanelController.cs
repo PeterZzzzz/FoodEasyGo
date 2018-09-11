@@ -26,7 +26,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 	public RectTransform topSection;
 	public RectTransform bottomSection;
 	public RawImage dishImage;
-	public TextController nameText;
+	public TextController dishDetail;
 	public TextController priceText;
 	public TextController selectedText;
 	public TextController dishDescription;
@@ -84,7 +84,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 	public override void ResetPanel()
 	{
 		topSection.Find("Image").GetComponent<RawImage>().texture = null;
-		topSection.Find("Name").GetComponent<TextController>().ResetUI("");
+        topSection.Find("Detail").GetComponent<TextController>().ResetUI("");
 		topSection.Find("Price").GetComponent<TextController>().ResetUI("");
 
 		//selectedText.ResetUI ("已选: ", "Selected: ");
@@ -220,7 +220,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 					//dishImage.rectTransform.rect.Set (0, 30, rawImageSize.x / rawImageSize.y * 200, 200);
 				}, null));
 
-		nameText.ResetUI(data.GetField("name").str, data.GetField("name_en").str);
+        dishDetail.ResetUI("菜品详情: " + data.GetField("describe").str, "Dish details: " + data.GetField("describe_en").str);
 		priceText.ResetUI("$" + data.GetField("price").str);
 		//selectedText.ResetUI ("已选: ", "Selected: ");
 		//dishDescription.ResetUI (data.GetField ("describe").str, data.GetField ("describe_en").str);
