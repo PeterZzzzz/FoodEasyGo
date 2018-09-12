@@ -357,6 +357,7 @@ MonoBehaviour:
   restaurantImage: {fileID: 114000013810224168}
   restaurantClosedCurtain: {fileID: 224000013336875660}
   title: {fileID: 114000012131143800}
+  starSection: {fileID: 0}
   open: {fileID: 114000011269460126}
   minConsump: {fileID: 114000011597002270}
   description: {fileID: 114000012873371106}

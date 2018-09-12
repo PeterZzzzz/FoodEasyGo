@@ -131,7 +131,7 @@ class RestaurantController extends BaseController {
 			}
 			
 			$res = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, ratings')
 				->where("`id` in
 						(select restaurant_id from food_restaurant_deliver_fee where region_id = $this->targetRegionID) and region_id not in (172, 174)
 						and `status` = 1 and `goods_type` = 2 " . $instantSendSQL . $restaurantTypeSQL)
