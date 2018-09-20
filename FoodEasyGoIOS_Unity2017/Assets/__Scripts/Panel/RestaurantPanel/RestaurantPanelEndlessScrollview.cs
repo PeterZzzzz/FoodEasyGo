@@ -17,7 +17,7 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
     private string _scheduleID;
     private string _restaurantTypeID = "";
     private string _sortTypeID = "";
-
+    public Texture defaultImage;
 
     public void Reset(bool instantSend, bool isSchedule, string scheduleID, string typeid, string sorttypeid)
     {
@@ -107,6 +107,27 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
         if (dataIndex < _dataLength && scrollRectElementIndex < _contentElementCount)
         {
             _scrollRectElementParentContent.GetChild(scrollRectElementIndex).GetComponent<RestaurantPanelRestaurantBarController>().ReloadUI(_data[dataIndex]);
+        }
+    }
+
+    public override void ContentBottomAction()
+    {
+        if (_lastActiveIndex >= _contentElementCount - 1)
+        {
+            if (_contentEndDataIndex < _dataLength - 1)
+            {
+                _scrollRectElementParentContent.GetChild(0).Find("Image").GetComponent<RawImage>().texture = defaultImage;
+                _scrollRectElementParentContent.GetChild(0).SetAsLastSibling();
+                _scrollRectElementParentContent.anchoredPosition -= new Vector2(0f, _scrollRectElementPreferredHeight);
+                _contentTopActionPosition += _scrollRectElementPreferredHeight;
+                _contentBottomActionPosition += _scrollRectElementPreferredHeight;
+
+
+                _contentStartDataIndex++;
+                _contentEndDataIndex++;
+                LoadDataIntoScrollRectElement(_contentEndDataIndex, _contentElementCount - 1);
+
+            }
         }
     }
 
