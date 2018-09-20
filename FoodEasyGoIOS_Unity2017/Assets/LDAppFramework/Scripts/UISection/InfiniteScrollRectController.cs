@@ -24,9 +24,7 @@ namespace LDFW.UI {
 
         protected float _contentTopActionPosition;
         protected float _contentBottomActionPosition;
-
-
-        
+        protected float _otherElementTotalHeight;
 
         protected void Awake () {
             _scrollRect.onValueChanged.AddListener (OnScrollRectContentValueChanged);
@@ -45,13 +43,13 @@ namespace LDFW.UI {
             _scrollRectContent.pivot = new Vector2 (0.5f, 1f);
 
             // Set scroll rect content size
-            float otherElementTotalHeight = 0;
+            _otherElementTotalHeight = 0;
             for (int i=0; i<_scrollRectContent.childCount; i++) {
                 if (_scrollRectContent.GetChild (i) != _scrollRectElementParentContent) {
-                    otherElementTotalHeight += (_scrollRectContent.GetChild (i).transform as RectTransform).rect.height;
+                    _otherElementTotalHeight += (_scrollRectContent.GetChild (i).transform as RectTransform).rect.height;
                 }
             }
-            _scrollRectContent.sizeDelta = new Vector2 (_scrollRectContent.sizeDelta.x, _dataLength * _scrollRectElementPreferredHeight + otherElementTotalHeight);
+            _scrollRectContent.sizeDelta = new Vector2 (_scrollRectContent.sizeDelta.x, _dataLength * _scrollRectElementPreferredHeight + _otherElementTotalHeight);
 
             // Set scroll rect element parent position
             _scrollRectElementParentContent.anchorMin = new Vector2 (0, 1);
@@ -67,8 +65,8 @@ namespace LDFW.UI {
             }
 
             // Set top action and bottom action trigger condition
-            _contentTopActionPosition = _scrollRectElementPreferredHeight * 0.5f + otherElementTotalHeight;
-            _contentBottomActionPosition = _scrollRectElementPreferredHeight * (_scrollRectElementParentContent.childCount - 0.5f) - _scrollRect.viewport.rect.height + otherElementTotalHeight;
+            _contentTopActionPosition = _scrollRectElementPreferredHeight * 0.5f + _otherElementTotalHeight;
+            _contentBottomActionPosition = _scrollRectElementPreferredHeight * (_scrollRectElementParentContent.childCount - 0.5f) - _scrollRect.viewport.rect.height + _otherElementTotalHeight;
 
             // Set starting and ending indices
             _contentStartDataIndex = 0;
@@ -101,6 +99,8 @@ namespace LDFW.UI {
         }
 
         public virtual void OnScrollRectContentValueChanged (Vector2 scrollVector) {
+            Debug.Log("_contentStartDataIndex: " + _contentStartDataIndex + " _contentEndDataIndex: " + _contentEndDataIndex);
+            Debug.Log("High: " + _scrollRectContent.anchoredPosition.y + " _contentTopActionPosition: " + _contentTopActionPosition + " _contentBottomActionPosition: " + _contentBottomActionPosition);
 
             if (_lastActiveIndex >= _contentElementCount - 1) {
                 if (_scrollRectContent.anchoredPosition.y < _contentTopActionPosition) {

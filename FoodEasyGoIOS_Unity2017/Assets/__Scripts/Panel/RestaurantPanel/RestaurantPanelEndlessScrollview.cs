@@ -59,6 +59,9 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
                         _dataLength = _data.Count;
                         base.LoadData();
 
+                        // 设置预加载位置
+                        _contentTopActionPosition = _scrollRectElementPreferredHeight * 3 + _otherElementTotalHeight;
+                        _contentBottomActionPosition = _scrollRectElementPreferredHeight * (_scrollRectElementParentContent.childCount - 3) - _scrollRect.viewport.rect.height + _otherElementTotalHeight;
                         for (int i = 0; i < _scrollRectElementParentContent.childCount; i++)
                         {
                             _scrollRectElementParentContent.GetChild(i).GetComponent<Image>().raycastTarget = RestaurantDetailPanelController.instance.isRestaurantOpen ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
@@ -83,6 +86,9 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
                         _dataLength = _data.Count;
                         base.LoadData();
 
+                        // 设置预加载位置
+                        _contentTopActionPosition = _scrollRectElementPreferredHeight * 3 + _otherElementTotalHeight;
+                        _contentBottomActionPosition = _scrollRectElementPreferredHeight * (_scrollRectElementParentContent.childCount - 3) - _scrollRect.viewport.rect.height + _otherElementTotalHeight;
                         for (int i = 0; i < _scrollRectElementParentContent.childCount; i++)
                         {
                             _scrollRectElementParentContent.GetChild(i).GetComponent<Image>().raycastTarget = RestaurantDetailPanelController.instance.isRestaurantOpen ? RestaurantDetailPanelController.instance.isRestaurantOpen : true;
