@@ -99,8 +99,8 @@ namespace LDFW.UI {
         }
 
         public virtual void OnScrollRectContentValueChanged (Vector2 scrollVector) {
-            Debug.Log("_contentStartDataIndex: " + _contentStartDataIndex + " _contentEndDataIndex: " + _contentEndDataIndex);
-            Debug.Log("High: " + _scrollRectContent.anchoredPosition.y + " _contentTopActionPosition: " + _contentTopActionPosition + " _contentBottomActionPosition: " + _contentBottomActionPosition);
+            //Debug.Log("_contentStartDataIndex: " + _contentStartDataIndex + " _contentEndDataIndex: " + _contentEndDataIndex);
+            //Debug.Log("High: " + _scrollRectContent.anchoredPosition.y + " _contentTopActionPosition: " + _contentTopActionPosition + " _contentBottomActionPosition: " + _contentBottomActionPosition);
 
             if (_lastActiveIndex >= _contentElementCount - 1) {
                 if (_scrollRectContent.anchoredPosition.y < _contentTopActionPosition) {

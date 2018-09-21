@@ -58,7 +58,7 @@ public class RestaurantPanelRestaurantBarController : MonoBehaviour, IPointerCli
             minConsump.ResetUI ("最低消费：$" + data.GetField ("min_consume").str, "Min Order: $" + data.GetField ("min_consume").str);
             description.ResetUI (data.GetField ("describe").str, data.GetField ("describe_en").str);
             SetRestaurantOpenStatus (data.GetField ("is_open").str == "1");
-            Debug.Log(data.GetField("ratings").str + "   " + double.Parse(data.GetField("ratings").str));
+            //Debug.Log(data.GetField("ratings").str + "   " + double.Parse(data.GetField("ratings").str));
             for (int i = 1; i <= 5; i++)
             {
                 if (i <= double.Parse(data.GetField("ratings").str) || data.GetField("ratings").str == "0.0")

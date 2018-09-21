@@ -59,8 +59,8 @@ public class RestaurantDishDetailAttributeToggleElementController : LDFWToggleEl
         }
 
         transform.Find ("Text").GetComponent<TextController> ().ResetUI (
-            quantityString + _textZH + (price == 0f ? "" : " ($" + price + ")"),
-            quantityString + _textEN + (price == 0f ? "" : " ($" + price + ")"));
+            quantityString + _textZH + (price == 0f ? "" : " (+$" + price + ")"),
+            quantityString + _textEN + (price == 0f ? "" : " (+$" + price + ")"));
     }
 
     /*
