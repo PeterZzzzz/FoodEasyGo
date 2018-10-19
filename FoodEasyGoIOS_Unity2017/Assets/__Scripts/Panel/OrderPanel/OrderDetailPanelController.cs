@@ -54,7 +54,7 @@ public class OrderDetailPanelController : BasePanelController {
         mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
         tempGO = new List<GameObject> ();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             defaultScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(defaultScrollRect.GetComponent<RectTransform>().offsetMin.x, defaultScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);

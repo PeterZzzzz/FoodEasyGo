@@ -27,7 +27,7 @@ public class GrouponPanelController : BasePanelController {
 
         base.Awake ();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             scrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(scrollRect.GetComponent<RectTransform>().offsetMin.x, scrollRect.GetComponent<RectTransform>().offsetMin.y + 20);

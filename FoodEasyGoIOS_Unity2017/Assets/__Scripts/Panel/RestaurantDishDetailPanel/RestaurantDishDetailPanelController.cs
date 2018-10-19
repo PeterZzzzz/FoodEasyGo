@@ -65,7 +65,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 		cartDetailData = null;
 		tempList = new List<GameObject>();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             contentScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(contentScrollRect.GetComponent<RectTransform>().offsetMin.x, contentScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);

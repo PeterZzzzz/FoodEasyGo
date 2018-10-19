@@ -79,7 +79,7 @@ public class PlaceOrderPanelController : BasePanelController
 
         tempGOList = new List<GameObject>();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             scrollRect.offsetMin = new Vector2(scrollRect.offsetMin.x, scrollRect.offsetMin.y + 20);

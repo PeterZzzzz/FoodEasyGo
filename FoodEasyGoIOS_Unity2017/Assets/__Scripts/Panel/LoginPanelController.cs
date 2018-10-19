@@ -79,11 +79,11 @@ public class LoginPanelController : BasePanelController {
                 int a = string.Compare(localAppVersion, updatedAppVersion);
                 if (a < 0)
                 {
-                    if (Config.currentLanguage == Language.chinese)
-                        MessagePanelController.instance.DisplayPanel("新版本V: " + updatedVersion + " 已经上架，请前往商店更新以便更好的使用App -- FoodEasyGo Development team");
-                    else
-                        MessagePanelController.instance.DisplayPanel("An update to latest version : " + updatedVersion + " is required, please check app store for an update, thank you -- FoodEasyGo Development team");
-
+                    PopUpPanelController.instance.DisplayPopUpPanel(null, () =>
+                    {
+                        Application.OpenURL(Config.iOSDownloadAddress);
+                    },
+                    "新版本V: " + updatedVersion + " 已经上架，请前往商店更新以便更好的使用App -- FoodEasyGo Development team", "An update to latest version : " + updatedVersion + " is required, please check app store for an update, thank you -- FoodEasyGo Development team", "稍后", "Later", "更新", "Update");
                 }
                 else
                 {

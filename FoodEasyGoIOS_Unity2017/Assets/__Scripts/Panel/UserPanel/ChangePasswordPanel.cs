@@ -23,7 +23,7 @@ public class ChangePasswordPanel : BasePanelController {
 
         base.Awake ();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             contentRect.offsetMin = new Vector2(contentRect.offsetMin.x, contentRect.offsetMin.y + 20);

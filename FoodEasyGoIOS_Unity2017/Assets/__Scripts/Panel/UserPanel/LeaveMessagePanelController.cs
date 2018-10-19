@@ -29,7 +29,7 @@ public class LeaveMessagePanelController : BasePanelController {
 
         headerTitle.ResetUI ("留言", "Leave a comment");
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             panelRect.offsetMin = new Vector2(panelRect.offsetMin.x, panelRect.offsetMin.y + 20);

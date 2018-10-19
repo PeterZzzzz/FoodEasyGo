@@ -64,7 +64,7 @@ public class HomePanelController : BasePanelController
         groceryLayoutElement.preferredHeight = height;
 
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             mainScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(mainScrollRect.GetComponent<RectTransform>().offsetMin.x, mainScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);

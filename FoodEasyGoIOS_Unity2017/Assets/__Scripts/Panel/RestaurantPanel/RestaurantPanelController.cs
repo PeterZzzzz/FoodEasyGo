@@ -47,7 +47,7 @@ public class RestaurantPanelController : BasePanelController
 
         base.Awake();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             defaultDisplayRect.offsetMin = new Vector2(defaultDisplayRect.offsetMin.x, defaultDisplayRect.offsetMin.y + 20);

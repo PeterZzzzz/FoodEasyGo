@@ -64,7 +64,7 @@ public class RestaurantDetailPanelController : BasePanelController
         dictionaryDishData = null;
         dictionaryCommentData = null;
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             viewPortRect.offsetMin = new Vector2(viewPortRect.offsetMin.x, viewPortRect.offsetMin.y + 20);

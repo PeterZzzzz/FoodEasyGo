@@ -37,7 +37,7 @@ public class OrderCommentPanelController : BasePanelController {
 
         headerTitle.ResetUI ("评价", "Comment");
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             mainPanelRect.offsetMin = new Vector2(mainPanelRect.offsetMin.x, mainPanelRect.offsetMin.y + 20);

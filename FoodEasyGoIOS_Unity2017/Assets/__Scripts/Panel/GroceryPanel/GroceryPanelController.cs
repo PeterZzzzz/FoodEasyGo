@@ -44,7 +44,7 @@ public class GroceryPanelController : BasePanelController {
 
         base.Awake ();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             defaultDisplay.offsetMin = new Vector2(defaultDisplay.offsetMin.x, defaultDisplay.offsetMin.y + 20);

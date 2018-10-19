@@ -28,7 +28,7 @@ public class SearchPanelController : BasePanelController {
 
         base.Awake ();
 
-        if (Screen.width == 1125)
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
             historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
