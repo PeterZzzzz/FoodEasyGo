@@ -319,6 +319,20 @@ class UserController extends BaseController {
 			echo 'Success' . $upload->savePath;
 		}
 	}
+
+	/**
+	 * Uploads test log
+	 */
+	public function save_test_string() {
+		$outputString = ['output' => $this->get_param('post.out_put')];
+		
+		$res = M('debug')->add($outputString);
+            if (!$res) {
+                $this->server_unavailable_error();
+            }else {
+                $this->return_data([], 'Message has been received');
+            }
+	}
 	
 }
 

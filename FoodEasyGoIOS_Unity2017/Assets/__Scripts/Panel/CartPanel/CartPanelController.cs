@@ -436,6 +436,17 @@ public class CartPanelController : BasePanelController
 
     private IEnumerator CheckOutCoroutine()
     {
+        bool isCashAccept = true;
+        foreach (KeyValuePair<string, CartDetailData> pair in CartController.instance.cart._cartDetailDic)
+        {
+            if(restaurantDic[pair.Value._restaurantID].GetField("accept_cash").str.Equals("0"))
+            {
+                isCashAccept = false;
+                break;
+            }
+        }
+        Debug.Log(isCashAccept);
+        PlaceOrderPanelController.instance.isAcceptCash = isCashAccept;
 
         if (isDisplayNowRestaurant)
             PlaceOrderPanelController.instance.isCurrentOrderInstantSend = true;
@@ -457,9 +468,7 @@ public class CartPanelController : BasePanelController
             yield return new WaitForSeconds(1f);
         }
         LoadingPanelController.instance.HidePanel();
-        //ResetPanel ();
-        //ReloadPanel ();
-        //PlaceOrderPanelController.instance.OpenPanel ();
+
     }
 
     public void SwitchDeliveryContent(bool state)

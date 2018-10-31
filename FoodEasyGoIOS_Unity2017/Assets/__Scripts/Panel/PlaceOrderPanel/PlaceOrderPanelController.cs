@@ -38,6 +38,7 @@ public class PlaceOrderPanelController : BasePanelController
     public Transform RedeemDiscountSection;
     public bool isUsingRedeem;
     public string totalPriceBeforeRedeem;
+    public bool isAcceptCash;
 
     // Prefab
     public Transform restaurantBarPrefab;
@@ -301,10 +302,19 @@ public class PlaceOrderPanelController : BasePanelController
         // Set payment method
         if (isCurrentOrderInstantSend)
         {
-            //暂时取消现金接单(改回来Vector3.one)
-            paymentSection.GetChild(0).localScale = Vector3.zero;
-            paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
-            paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
+            if (isAcceptCash)
+            {
+                Debug.Log("CCCCCCCCcash");
+                paymentSection.GetChild(0).localScale = Vector3.one;
+                paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
+                paymentSection.GetComponent<LDFWToggleController>().SelectToggle(0);
+            }else
+            {
+                Debug.Log("VVVVVVVVvisa");
+                paymentSection.GetChild(0).localScale = Vector3.zero;
+                paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
+                paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
+            }
         }
         else
         {
