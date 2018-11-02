@@ -499,7 +499,7 @@ public class AddressPanelController : BasePanelController
             UserDataNetworkController.instance.CheckVerificationCode(form,
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                      {
-                                                                         MessagePanelController.instance.DisplayPanel(m);
+                                                                         //MessagePanelController.instance.DisplayPanel(m);
                                                                          isPhoneVerified = true;
                                                                          Debug.Log("code正确");
                                                                      }),

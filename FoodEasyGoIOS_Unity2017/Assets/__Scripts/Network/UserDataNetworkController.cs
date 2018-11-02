@@ -241,4 +241,20 @@ public class UserDataNetworkController : ServerCallController {
         downloadUserImageCall = CommonWWWCall (imageControllerURL + "get_image", form, success, failure);
     }
     #endregion
+
+    #region Test     LDFWWWWCallCoroutineWrapper testCall = null;
+    public void SaveTestString(string text, LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("out_put", text);
+
+        if (testCall != null)
+        {
+            testCall.Dispose();
+        }
+        testCall = CommonWWWCall(userDataControllerURL + "save_test_string", form, success, failure);
+    }
+
+
+    #endregion
 }

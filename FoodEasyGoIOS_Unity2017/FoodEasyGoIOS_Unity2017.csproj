@@ -284,6 +284,7 @@
     <Compile Include="Assets\__Scripts\Panel\CartPanel\CartPanelHeader2ToggleElementController.cs" />
     <Compile Include="Assets\__Scripts\Panel\CartPanel\CartPanelRestaurantBarController.cs" />
     <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelAddressBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelAddressCompleteBarController.cs" />
     <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelToggleElement.cs" />
     <Compile Include="Assets\__Scripts\Panel\ChangeLocationPanel\ChangeLocationPanelToggleParent.cs" />

@@ -22,6 +22,10 @@ public class ChangeLocationPanelController : BasePanelController
     public Coroutine sendCodeCoroutine;
     public int waitForResend = 20;
     public bool isPhoneVerified;
+    public InputField unitInputField;
+    public InputField addressCompleteInputField;
+    public GameObject addressCompleteBarPrefab;
+    public ScrollRect addressCompleteScrollRect;
 
     private bool useYunPianServer = true;
 
@@ -201,7 +205,9 @@ public class ChangeLocationPanelController : BasePanelController
         addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text = "";
         addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().interactable = true;
         addAddressPanel.Find("Content/Verification/InputField").GetComponent<InputField>().text = "";
-        addAddressPanel.Find("Content/Unit/InputField").GetComponent<InputField>().text = "";
+        unitInputField.text = "";
+        addressCompleteInputField.text = "";
+        ClearResults();
         addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text = "";
         addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text = "";
         addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text = "";
@@ -228,7 +234,7 @@ public class ChangeLocationPanelController : BasePanelController
             AddAddress(
                 addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text,
                 addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text,
-                addAddressPanel.Find("Content/Unit/InputField").GetComponent<InputField>().text,
+                unitInputField.text,
                 addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text,
                 addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text,
                 addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text,
@@ -377,23 +383,6 @@ public class ChangeLocationPanelController : BasePanelController
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #region GeoLocation
     public void OnFetchGeoButtonClicked()
     {
@@ -525,9 +514,48 @@ public class ChangeLocationPanelController : BasePanelController
             Input.location.Stop();
         }
     }
+
+    public void OnAddressCompleteInputFieldValueChanged()
+    {
+        ClearResults();
+        StartCoroutine(CreateAutoCompleteAddressBar(addressCompleteInputField.text));
+
+    }
+
+    public void ClearResults()
+    {
+        // Reverse loop since you destroy children
+        for (int childIndex = addressCompleteScrollRect.content.childCount - 1; childIndex >= 0; --childIndex)
+        {
+            Transform child = addressCompleteScrollRect.content.GetChild(childIndex);
+            child.SetParent(null);
+            Destroy(child.gameObject);
+        }
+    }
+
+    private IEnumerator CreateAutoCompleteAddressBar(string str)
+    {
+        string addressInput = str;
+        WWW www = new WWW("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + addressInput + "&key=" + "AIzaSyB-90I6TCqL7RwtxTQ3YyB4KqsfgddIqic");
+
+        yield return www;
+        JSONObject data = new JSONObject(www.text);
+
+        Debug.Log(data.GetField("status").str + "\n" + www.text);
+
+        JSONObject addressComponent = data.GetField("predictions");
+        //Debug.Log(addressComponent[0].GetField("description").str);
+        for (int i = 0; addressComponent[i] != null; i++) 
+        {
+            Transform child = Instantiate(addressCompleteBarPrefab).transform;
+            child.GetComponent<ChangeLocationPanelAddressCompleteBarController>().ResetAddressText(addressComponent[i].GetField("description").str);
+            child.SetParent(addressCompleteScrollRect.content);
+            child.localScale = Vector3.one;
+        }
+    }
     #endregion
 
-    #region ServerCalls
+    #region ServerCall
 
     public void GetAddressList(LDFWServerResponseEvent success, LDFWServerResponseEvent failure)
     {
