@@ -368,6 +368,7 @@
     <Compile Include="Assets\__Scripts\Panel\SharePanel\SharePanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\AboutUsPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\AddressPanelAddressBarController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\UserPanel\AddressPanelCompleteBarController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\AddressPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\BusinessCooperationPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\ChangePasswordPanel.cs" />

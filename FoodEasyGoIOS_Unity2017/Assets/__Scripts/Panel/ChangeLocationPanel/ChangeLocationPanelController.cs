@@ -330,7 +330,7 @@ public class ChangeLocationPanelController : BasePanelController
         }
         else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text))
         {
-            MessagePanelController.instance.DisplayPanel("Street cannot be null");
+            MessagePanelController.instance.DisplayPanel("Please choose your address");
             return false;
         }
         else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text))

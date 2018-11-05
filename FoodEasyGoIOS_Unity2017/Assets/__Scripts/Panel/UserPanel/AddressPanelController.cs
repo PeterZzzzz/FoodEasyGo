@@ -11,13 +11,7 @@ public class AddressPanelController : BasePanelController
 {
 
     public static AddressPanelController instance;
-
-
-    // Prefabs
     public GameObject addressBarPrefab;
-
-
-    // Transform
     public ScrollRect defaultScrollRect;
     public Transform modifyAddressPanel;
     public InputField codeInputField;
@@ -30,6 +24,11 @@ public class AddressPanelController : BasePanelController
     public bool isPhoneVerified = false;
     public bool isPhoneChanged = false;
     public string modifyAddressID;
+
+    public InputField unitInputField;
+    public InputField addressInputField;
+    public GameObject addressCompleteBarPrefab;
+    public ScrollRect addressCompleteScrollRect;
 
     new void Awake()
     {
@@ -153,6 +152,10 @@ public class AddressPanelController : BasePanelController
             modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text = currentBar._state;
             modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = currentBar._zipCode;
             codeInputField.text = "";
+
+            unitInputField.text = currentBar._address;
+            addressInputField.text = currentBar._street + ", " + currentBar._city + ", " + currentBar._zipCode;
+            ClearResults();
         }
         else
         {
@@ -166,6 +169,9 @@ public class AddressPanelController : BasePanelController
             modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = "";
             codeInputField.text = "";
 
+            unitInputField.text = "";
+            addressInputField.text = "";
+            ClearResults();
         }
     }
 
@@ -178,7 +184,7 @@ public class AddressPanelController : BasePanelController
                 AddAddress(
                     modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text,
                     modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text,
-                    modifyAddressPanel.Find("Unit/InputField").GetComponent<InputField>().text,
+                    unitInputField.text,
                     modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text,
                     modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text,
                     modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text,
@@ -209,7 +215,7 @@ public class AddressPanelController : BasePanelController
                     currentBar._addressID,
                     modifyAddressPanel.Find("Name/InputField").GetComponent<InputField>().text,
                     modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text,
-                    modifyAddressPanel.Find("Unit/InputField").GetComponent<InputField>().text,
+                    unitInputField.text,
                     modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text,
                     modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text,
                     modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text,
@@ -310,7 +316,7 @@ public class AddressPanelController : BasePanelController
             }
             else if (string.IsNullOrEmpty(modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text))
             {
-                MessagePanelController.instance.DisplayPanel("Street cannot be null");
+                MessagePanelController.instance.DisplayPanel("Please choose your address");
                 return false;
             }
             else if (string.IsNullOrEmpty(modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text))
@@ -358,7 +364,7 @@ public class AddressPanelController : BasePanelController
             }
             else if (string.IsNullOrEmpty(modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text))
             {
-                MessagePanelController.instance.DisplayPanel("Street cannot be null");
+                MessagePanelController.instance.DisplayPanel("Please choose your address");
                 return false;
             }
             else if (string.IsNullOrEmpty(modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text))
@@ -382,6 +388,45 @@ public class AddressPanelController : BasePanelController
             }
         }
 
+    }
+
+    public void OnAddressCompleteInputFieldValueChanged()
+    {
+        ClearResults();
+        StartCoroutine(CreateAutoCompleteAddressBar(addressInputField.text));
+
+    }
+
+    public void ClearResults()
+    {
+        // Reverse loop since you destroy children
+        for (int childIndex = addressCompleteScrollRect.content.childCount - 1; childIndex >= 0; --childIndex)
+        {
+            Transform child = addressCompleteScrollRect.content.GetChild(childIndex);
+            child.SetParent(null);
+            Destroy(child.gameObject);
+        }
+    }
+
+    private IEnumerator CreateAutoCompleteAddressBar(string str)
+    {
+        string addressInput = str;
+        WWW www = new WWW("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + addressInput + "&key=" + "AIzaSyB-90I6TCqL7RwtxTQ3YyB4KqsfgddIqic");
+
+        yield return www;
+        JSONObject data = new JSONObject(www.text);
+
+        Debug.Log(data.GetField("status").str + "\n" + www.text);
+
+        JSONObject addressComponent = data.GetField("predictions");
+        //Debug.Log(addressComponent[0].GetField("description").str);
+        for (int i = 0; addressComponent[i] != null; i++)
+        {
+            Transform child = Instantiate(addressCompleteBarPrefab).transform;
+            child.GetComponent<AddressPanelCompleteBarController>().ResetAddressText(addressComponent[i].GetField("description").str);
+            child.SetParent(addressCompleteScrollRect.content);
+            child.localScale = Vector3.one;
+        }
     }
 
 
