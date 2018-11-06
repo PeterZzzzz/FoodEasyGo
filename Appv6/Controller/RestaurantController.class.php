@@ -144,11 +144,11 @@ class RestaurantController extends BaseController {
 			
 		} else {
 			$res = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, accept_cash')
 				->where("`id` in ($restaurantList)")
 				->select();
 			$grp = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, accept_cash')
 				->where("`id` in ($grouponRestaurantList)")
 				->select();
 		}

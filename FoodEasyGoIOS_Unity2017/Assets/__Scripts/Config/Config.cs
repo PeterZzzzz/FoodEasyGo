@@ -7,7 +7,7 @@ public static class Config
     // Common
     public static Language currentLanguage = Language.chinese;
     public static float panelSlideTime = 0.3f;
-    public static string versionNumberString = "Version 2.0.1";
+    public static string versionNumberString = "Version 2.0.2";
 #if UNITY_EDITOR
     public static bool isDebug = true;
 #else
@@ -26,12 +26,12 @@ public static class Config
 
     // Server
     public static int serverCallGeneralAttemps = 3;
-    //public static string serverDomain = "https://www.foodeasygo.com/";
+    public static string serverDomain = "https://www.foodeasygo.com/";
     //public static string serverDomain = "http://app.foodeasygo.com/";
     //public static string serverDomain = "http://192.168.1.102/";
     //public static string serverDomain = "http://127.0.0.1/";
     //public static string serverDomain = "localhost/";
-    public static string serverDomain = "http://10.0.1.74/";
+    //public static string serverDomain = "http://10.0.1.74/";
 
     //public static string serverAPIURL = serverDomain + "api.php/Appv6/";
     public static string serverAPIURL = serverDomain + "Appv6/";
