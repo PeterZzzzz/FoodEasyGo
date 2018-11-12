@@ -7,7 +7,7 @@ public static class Config
     // Common
     public static Language currentLanguage = Language.chinese;
     public static float panelSlideTime = 0.3f;
-    public static string versionNumberString = "Version 2.0.3";
+    public static string versionNumberString = "Version 2.0.4";
 #if UNITY_EDITOR
     public static bool isDebug = true;
 #else
