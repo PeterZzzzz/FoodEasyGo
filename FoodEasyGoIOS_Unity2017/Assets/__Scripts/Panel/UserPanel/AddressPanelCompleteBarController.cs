@@ -67,13 +67,21 @@ public class AddressPanelCompleteBarController : MonoBehaviour {
 
         }
 
-        AddressPanelController.instance.addressInputField.text = streetNumber + " " + route + " ," + city + " ," + state + " ," + zipCode;
-        AddressPanelController.instance.modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = streetNumber + " " + route;
-        AddressPanelController.instance.modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text = city;
-        AddressPanelController.instance.modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text = state;
-        AddressPanelController.instance.modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = zipCode;
+        if (string.IsNullOrEmpty(streetNumber) || string.IsNullOrEmpty(route)) 
+        {
+            MessagePanelController.instance.DisplayPanel("Please enter vaild address");
+        }else
+        {
+            AddressPanelController.instance.addressInputField.text = streetNumber + " " + route + " ," + city + " ," + state + " ," + zipCode;
+            AddressPanelController.instance.modifyAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = streetNumber + " " + route;
+            AddressPanelController.instance.modifyAddressPanel.Find("City/InputField").GetComponent<InputField>().text = city;
+            AddressPanelController.instance.modifyAddressPanel.Find("State/InputField").GetComponent<InputField>().text = state;
+            AddressPanelController.instance.modifyAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = zipCode;
 
-        AddressPanelController.instance.ClearResults();
+            AddressPanelController.instance.ClearResults();
 
+        }
+
+        Debug.Log("street: " + streetNumber + "\nroute: " + route + "\ncity: " + city + "\nstate: " + state + "\nzipCode: " + zipCode);
     }
 }

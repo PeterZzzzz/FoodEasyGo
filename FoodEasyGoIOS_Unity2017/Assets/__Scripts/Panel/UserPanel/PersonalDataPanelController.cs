@@ -91,6 +91,12 @@ public class PersonalDataPanelController : BasePanelController {
 
     #region Other
     public void OnSaveButtonClicked () {
+
+        if (string.IsNullOrEmpty(firstname.text) || string.IsNullOrEmpty(lastName.text) || string.IsNullOrEmpty(sexText.text) || string.IsNullOrEmpty(contactNumber.text)) 
+        {
+            MessagePanelController.instance.DisplayPanel("Please enter all info");
+            return;
+        }
         WWWForm form = new WWWForm ();
         form.AddField ("first_name", firstname.text);
         form.AddField ("last_name", lastName.text);
@@ -101,6 +107,7 @@ public class PersonalDataPanelController : BasePanelController {
         UserDataNetworkController.instance.UpdatePersonalData (form,
             new LDFWServerResponseEvent ((JSONObject data, string m) => {
                 AccountAccessNetworkController.instance.BackgroundUserLogin ();
+                UserPanelController.instance.userName.text = firstname.text;
                 LoadingPanelController.instance.HidePanelImmediately ();
             }),
             new LDFWServerResponseEvent ((JSONObject data, string m) => {
