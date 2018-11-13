@@ -517,6 +517,7 @@ public class ChangeLocationPanelController : BasePanelController
 
     public void OnAddressCompleteInputFieldValueChanged()
     {
+        addressCompleteScrollRect.gameObject.SetActive(true);
         ClearResults();
         StartCoroutine(CreateAutoCompleteAddressBar(addressCompleteInputField.text));
 
@@ -536,22 +537,32 @@ public class ChangeLocationPanelController : BasePanelController
     private IEnumerator CreateAutoCompleteAddressBar(string str)
     {
         string addressInput = str;
-        WWW www = new WWW("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + addressInput + "&key=" + "AIzaSyB-90I6TCqL7RwtxTQ3YyB4KqsfgddIqic");
+        //WWW www = new WWW("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + addressInput + "&key=" + "AIzaSyB-90I6TCqL7RwtxTQ3YyB4KqsfgddIqic");
+        WWW www = new WWW("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + addressInput + "&key=" + UserDataController.instance.googlePlaceKey);
 
         yield return www;
         JSONObject data = new JSONObject(www.text);
-
         Debug.Log(data.GetField("status").str + "\n" + www.text);
 
-        JSONObject addressComponent = data.GetField("predictions");
-        //Debug.Log(addressComponent[0].GetField("description").str);
-        for (int i = 0; addressComponent[i] != null; i++) 
+        if (data.GetField("status") == null || data.GetField("status").str != "OK")
         {
-            Transform child = Instantiate(addressCompleteBarPrefab).transform;
-            child.GetComponent<ChangeLocationPanelAddressCompleteBarController>().ResetAddressText(addressComponent[i].GetField("description").str);
-            child.SetParent(addressCompleteScrollRect.content);
-            child.localScale = Vector3.one;
+            //改为实时输入联想之后就注释掉了，因为在输入过程中会有返回status != OK
+            //MessagePanelController.instance.DisplayPanel("Please try again later");
         }
+        else
+        {
+            JSONObject addressComponent = data.GetField("predictions");
+            //Debug.Log(addressComponent[0].GetField("description").str);
+            for (int i = 0; addressComponent[i] != null; i++)
+            {
+                Transform child = Instantiate(addressCompleteBarPrefab).transform;
+                child.GetComponent<ChangeLocationPanelAddressCompleteBarController>().ResetAddressText(addressComponent[i].GetField("description").str);
+                child.SetParent(addressCompleteScrollRect.content);
+                child.localScale = Vector3.one;
+            }
+        }
+
+
     }
     #endregion
 

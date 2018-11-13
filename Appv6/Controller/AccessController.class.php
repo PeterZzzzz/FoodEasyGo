@@ -280,7 +280,10 @@ class AccessController extends BaseController {
 				['user_data' => $user,
 				 'token' => $this->accessToken, 
 				 'category' => $shortcutList,
-				 'google_map_key' => C('GOOGLEMAP_API')],
+				 'google_map_key' => C('GOOGLEMAP_API'),
+				 'google_place_key' => C('GOOGLEPLACE_API')
+				],
+				 
 				"Login successful"
 				);
 	}

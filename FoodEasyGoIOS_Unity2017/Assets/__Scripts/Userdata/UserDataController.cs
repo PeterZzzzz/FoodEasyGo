@@ -32,6 +32,7 @@ public class UserDataController : MonoBehaviour {
     public string status;
     public string iosToken;
     public string googleMapKey;
+    public string googlePlaceKey;
 
     public string earnedPoint;
     public string pendingPoint;
@@ -79,6 +80,7 @@ public class UserDataController : MonoBehaviour {
         iosToken = data.GetField ("user_data").GetField ("ios_token").str;
 
         googleMapKey = data.GetField ("google_map_key").str;
+        googlePlaceKey = data.GetField("google_place_key").str;
 
         earnedPoint = data.GetField("user_data").GetField("earned_point").str;
         pendingPoint = data.GetField("user_data").GetField("pending_point").str;

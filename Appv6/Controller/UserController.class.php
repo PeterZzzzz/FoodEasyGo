@@ -50,8 +50,7 @@ class UserController extends BaseController {
 	public function get_user_details () {
 		$user = $this->get_user_based_on_id ();
 		$user['google_map_key'] = C('GOOGLEMAP_API');
-		
-		
+				
 		return $this->return_data ($user);
 	}
 	

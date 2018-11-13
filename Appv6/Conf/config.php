@@ -9,6 +9,7 @@ return array(
 		'RESTAURANT_PAGE_LENGTH'			=>  20,
 		'GROCERY_PAGE_LENGTH'				=>  30,
 		'GOOGLEMAP_API'         =>  'AIzaSyADB_2Pk1vBchDLPG37g0IsCmlp0BBm8Ls',
+		'GOOGLEPLACE_API'       =>  'AIzaSyB-90I6TCqL7RwtxTQ3YyB4KqsfgddIqic',
 		'APP_LATEST_VERSION'    => '1.0.1',
 		'SHOW_PAGE_TRACE'       =>FALSE,
 		
