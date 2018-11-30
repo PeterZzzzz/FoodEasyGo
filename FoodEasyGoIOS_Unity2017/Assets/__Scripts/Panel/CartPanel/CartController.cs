@@ -152,6 +152,11 @@ public class CartController : MonoBehaviour
         return cart.CountForGoodsType(goodsTypeID);
     }
 
+    public int CountForGoods(string goodsID)
+    {
+        return cart.CountForGoods(goodsID);
+    }
+
     public void DeleteCartDetail(string cartDetailID)
     {
         cart.DeleteCartDetail(cartDetailID);
@@ -267,6 +272,20 @@ public class CartData
             if (pair.Value._goodsTypeID == goodsTypeID)
             {
                 total++;
+            }
+        }
+        return total;
+    }
+
+    public int CountForGoods(string goodsID)
+    {
+        int total = 0;
+        foreach (KeyValuePair<string, CartDetailData> pair in _cartDetailDic)
+        {
+            if (pair.Value._goodsID == goodsID)
+            {
+                //Debug.Log("pair.Value._goodsID :" + pair.Value._goodsID + "number: " + pair.Value._number);
+                total += pair.Value._number;
             }
         }
         return total;

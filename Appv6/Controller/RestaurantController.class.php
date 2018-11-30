@@ -265,24 +265,55 @@ class RestaurantController extends BaseController {
 			$restaurantDetails['is_open'] = "0";
 		}
 		
-		$restaurantDishList = M('restaurant_dish_type_seperate')
-			->join(' left join food_restaurant_dish on food_restaurant_dish_type_seperate.id = food_restaurant_dish.type_seperate ')
-			->where(' food_restaurant_dish.status = 1 and food_restaurant_dish.restaurant_id = ' . $restaurantID)
-			->group(' food_restaurant_dish.type_seperate ')
-			->order(' total_sale desc ')
-			->field(' food_restaurant_dish_type_seperate.id as type_id, food_restaurant_dish_type_seperate.title, food_restaurant_dish_type_seperate.title_en, sum(food_restaurant_dish.sail_count) as total_sale ')
-			->select();
+		//添加一菜品多分类后这个方法就不适用了，因为food_restaurant_dish.type_seperate不唯一，所以不能用来串联表
+		// $restaurantDishList = M('restaurant_dish_type_seperate')
+		// 	->join(' left join food_restaurant_dish on food_restaurant_dish_type_seperate.id = food_restaurant_dish.type_seperate ')
+		// 	->where(' food_restaurant_dish.status = 1 and food_restaurant_dish.restaurant_id = ' . $restaurantID)
+		// 	->group(' food_restaurant_dish.type_seperate ')
+		// 	->order(' total_sale desc ')
+		// 	->field(' food_restaurant_dish_type_seperate.id as type_id, food_restaurant_dish_type_seperate.title, food_restaurant_dish_type_seperate.title_en, sum(food_restaurant_dish.sail_count) as total_sale ')
+		// 	->select();
 		
+		// for ($i=0; $restaurantDishList[$i] != null; $i++) {
+		// 	$dishList = M('restaurant_dish')
+		// 		->where(" status = 1 and restaurant_id = $restaurantID and type_seperate = " . $restaurantDishList[$i]['type_id'])
+		// 		->select();
+		// 	foreach ($dishList as &$dish) {
+		// 		$dish['img'] = unserialize($dish['img'])[0];
+		// 	}
+		// 	$restaurantDishList[$i]['dish_details'] = $dishList;
+		// }
+
+
+		$dishTypeList = M('restaurant_dish')
+			->where("`status` = 1 and `restaurant_id` = $restaurantID")
+			->field('type_seperate')
+			->select();
+		for ($i=0; $dishTypeList[$i] != null; $i++) { 
+			$dishIdArray[$i] = explode(',', $dishTypeList[$i]['type_seperate']);
+		}
+		$dishIdList = [];
+		array_walk_recursive($dishIdArray, function($value) use (&$dishIdList) {array_push($dishIdList, $value);});
+		$dishIdList = array_unique($dishIdList);
+		$dishIdListStr = '(' . implode(',',$dishIdList) . ')';
+
+		$restaurantDishList = M('restaurant_dish_type_seperate')
+			->where("`id` in " . $dishIdListStr)
+			->field(' id as type_id, title, title_en ')
+			->select();
+
 		for ($i=0; $restaurantDishList[$i] != null; $i++) {
 			$dishList = M('restaurant_dish')
-				->where(" status = 1 and restaurant_id = $restaurantID and type_seperate = " . $restaurantDishList[$i]['type_id'])
+				->where(" status = 1 and restaurant_id = $restaurantID and type_seperate like '%" . $restaurantDishList[$i]['type_id'] . "%'")
 				->select();
+				// 测试模式下，查看最后一条执行的Sql语句，并写入webhook表中
+				// M('webhook')->add(array('content' => M('restaurant_dish')->getLastSql()));
 			foreach ($dishList as &$dish) {
 				$dish['img'] = unserialize($dish['img'])[0];
 			}
 			$restaurantDishList[$i]['dish_details'] = $dishList;
 		}
-		
+
 		if (is_array($restaurantDishList) || is_array($restaurantDetails)) {
 			$this->return_data(['restaurant' => $restaurantDetails, 'dish' => $restaurantDishList]);
 		} else {

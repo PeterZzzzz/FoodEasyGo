@@ -34,3 +34,6 @@ ALTER TABLE `food_order_sub` ADD `pending_point` INT(10) NOT NULL DEFAULT '0' CO
 ALTER TABLE `food_order_sub` ADD `modified_point` INT(10) NOT NULL COMMENT '该订单调整的积分' AFTER `pending_point`;
 ALTER TABLE `food_order_sub` ADD `earned_point` INT(10) NOT NULL COMMENT '该订单获得的积分' AFTER `adjusted_point`;
 ALTER TABLE `food_order_sub` ADD `redeemed_point` INT(10) NOT NULL COMMENT '该订单使用的积分' AFTER `earned_point`;
+
+//菜品分类类型改变 11/19/2018
+ALTER TABLE `food_restaurant_dish` CHANGE `type_seperate` `type_seperate` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '1000' COMMENT '根据餐馆分组的分类 默认1000是默认(default)这个分类';

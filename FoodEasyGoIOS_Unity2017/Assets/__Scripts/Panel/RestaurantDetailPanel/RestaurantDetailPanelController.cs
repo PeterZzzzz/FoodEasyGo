@@ -103,9 +103,7 @@ public class RestaurantDetailPanelController : BasePanelController
         basicInfoSection.Find("HourIcon/Text").GetComponent<TextController>().ResetUI("");
         basicInfoSection.Find("AddressIcon/Text").GetComponent<TextController>().ResetUI("");
 
-
         SwitchToDishMode();
-        //basicInfoSection.Find ("Tip").gameObject.SetActive (true);
 
     }
 
@@ -307,11 +305,16 @@ public class RestaurantDetailPanelController : BasePanelController
             categoryBar.anchoredPosition = new Vector2(0, -typeIndex * 50);
             categoryBar.sizeDelta = new Vector2(0, 50);
 
-            categoryBar.GetComponent<RestaurantDetailPanelCategoryBarController>().Reset(typeData[typeIndex].GetField("type_id").str);
+            categoryBar.GetComponent<RestaurantDetailPanelCategoryBarController>().Reset(typeData[typeIndex].GetField("dish_details"), typeData[typeIndex].GetField("type_id").str);
             JSONObject dishData = typeData[typeIndex].GetField("dish_details");
             for (int dishIndex = 0; dishIndex < dishData.Count; dishIndex++)
             {
-                dictionaryDishData.Add(dishData[dishIndex].GetField("id").str, dishData[dishIndex]);
+                if(!dictionaryDishData.ContainsKey(dishData[dishIndex].GetField("id").str))
+                {
+                    //Debug.Log("zzzzzzzz" + dishData[dishIndex].GetField("id").str + "::::" + dishData[dishIndex]);
+                    dictionaryDishData.Add(dishData[dishIndex].GetField("id").str, dishData[dishIndex]);
+
+                }
             }
         }
 
@@ -367,7 +370,7 @@ public class RestaurantDetailPanelController : BasePanelController
             categoryBar.Find("Text").GetComponent<TextController>().ResetUI(data[i].GetField("name").str, data[i].GetField("name_en").str);
             categoryBar.SetParent(RestaurantDetailPanelCategoryScrollRectController.instance.content);
             categoryBar.localScale = Vector3.one;
-            categoryBar.GetComponent<RestaurantDetailPanelCategoryBarController>().Reset(data[i].GetField("id").str, false);
+            categoryBar.GetComponent<RestaurantDetailPanelCategoryBarController>().Reset(null, data[i].GetField("id").str, false);
             JSONObject dishData = data[i].GetField("groupon_list");
 
         }
