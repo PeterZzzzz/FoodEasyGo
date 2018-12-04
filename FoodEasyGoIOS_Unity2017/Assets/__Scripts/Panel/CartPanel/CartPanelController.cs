@@ -445,7 +445,7 @@ public class CartPanelController : BasePanelController
                 break;
             }
         }
-        Debug.Log(isCashAccept);
+        //Debug.Log(isCashAccept);
         PlaceOrderPanelController.instance.isAcceptCash = isCashAccept;
 
         if (isDisplayNowRestaurant)

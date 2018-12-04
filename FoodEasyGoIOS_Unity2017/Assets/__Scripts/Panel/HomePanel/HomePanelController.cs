@@ -23,9 +23,8 @@ public class HomePanelController : BasePanelController
     public HomeGrouponScrollviewController grouponScrollviewController;
 
     public Transform shortCutSection;
-
     public InputFieldController searchInput;
-
+    public bool isRefreshPage;
 
     #region ResolutionAdjustment
     public LayoutElement slideShowLayoutElement;
@@ -83,20 +82,23 @@ public class HomePanelController : BasePanelController
     #region Overrides
     public override void ResetPanel ()
     {
-        slideShow.Find ("ImageParent").DestroyAllChildren ();
+        mainScrollRect.content.offsetMax = Vector2.one;
 
-        groceryScrollviewController.content.DestroyAllChildren ();
-
-        //mainScrollRect.content.anchoredPosition = Vector2.zero;
+        Debug.Log(isRefreshPage);
+        if (isRefreshPage)
+        {
+            slideShow.Find("ImageParent").DestroyAllChildren();
+            groceryScrollviewController.content.DestroyAllChildren();
+        }
     }
 
     public override void ReloadPanel ()
     {
-
-        zipcodeText.ResetUI (UserDataController.instance.targetServiceRegionNameZH, UserDataController.instance.targetServiceRegionNameEN);
-
-
-        StartCoroutine (LoadPanelCoroutine ());
+        if(isRefreshPage)
+        {
+            zipcodeText.ResetUI(UserDataController.instance.targetServiceRegionNameZH, UserDataController.instance.targetServiceRegionNameEN);
+            StartCoroutine(LoadPanelCoroutine());
+        }
     }
 
     public override void DisplayPanel ()
@@ -192,6 +194,7 @@ public class HomePanelController : BasePanelController
             //LoadRegionDeliveryFee ();
         }
         mainScrollRect.content.anchoredPosition = Vector2.zero;
+        PanelListController.instance.isHomeRefresh = false;
 
         yield return new WaitForSeconds (2f);
 

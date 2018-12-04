@@ -139,6 +139,7 @@ public class ChangeLocationPanelController : BasePanelController
                 UserDataController.instance.targetServiceRegionZipCode = json.GetField ("zipcode").str;
                 UserDataController.instance.targetServiceRegionNameEN = json.GetField ("name_en").str;
                 UserDataController.instance.targetServiceRegionNameZH = json.GetField ("name").str;
+                PanelListController.instance.isHomeRefresh = true;
                 PanelListController.instance.SetHomePanelAsBasePanel ();
                 AppDataController.instance.SyncAddressList();
 

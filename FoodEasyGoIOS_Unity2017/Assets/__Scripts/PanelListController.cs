@@ -17,6 +17,8 @@ public class PanelListController : MonoBehaviour
 
     public BasePanelController currentBasePanel;
 
+    public bool isHomeRefresh;
+
     void Awake()
     {
         if (instance != null)
@@ -105,17 +107,61 @@ public class PanelListController : MonoBehaviour
 
     public void SetHomePanelAsBasePanel()
     {
+        //Debug.Log("currnt controller: " + currentBasePanel);
+        //if (currentBasePanel != null && currentBasePanel == HomePanelController.instance)
+        //{
+        //    Debug.Log("Home");
+        //    return;
+        //}
+
+
+
+        //if ((currentBasePanel != null && currentBasePanel == CartPanelController.instance) || (currentBasePanel != null && currentBasePanel == OrderPanelController.instance) || (currentBasePanel != null && currentBasePanel == UserPanelController.instance))
+        //{
+        //    Debug.Log("Cart/Order/Mine");
+        //    HomePanelController.instance.isRefreshPage = false;
+        //}
+        //else
+        //{
+        //    Debug.Log("刚一进来/转换地址");
+        //    HomePanelController.instance.isRefreshPage = true;
+        //}
+        //currentBasePanel = HomePanelController.instance;
+        //HomePanelController.instance.DisplayPanel();
+        //CartPanelController.instance.HidePanel();
+        //OrderPanelController.instance.HidePanel();
+        //UserPanelController.instance.HidePanel();
+        //HideAllPanels();
+
+
+        Debug.Log("currnt controller: " + currentBasePanel);
+        if (currentBasePanel != null && currentBasePanel == HomePanelController.instance && !isHomeRefresh) 
+        {
+            Debug.Log("Home");
+            return;
+        }
+
+
+
+        if (isHomeRefresh)
+            Debug.Log("刚一进来/转换地址");
+        else
+            Debug.Log("Cart/Order/Mine");
+
         currentBasePanel = HomePanelController.instance;
+        HomePanelController.instance.isRefreshPage = isHomeRefresh;
         HomePanelController.instance.DisplayPanel();
         CartPanelController.instance.HidePanel();
         OrderPanelController.instance.HidePanel();
         UserPanelController.instance.HidePanel();
         HideAllPanels();
+
     }
 
     public void SetCartPanelAsBasePanel()
     {
         currentBasePanel = CartPanelController.instance;
+        isHomeRefresh = false;
         HomePanelController.instance.HidePanel();
         CartPanelController.instance.DisplayPanel();
         OrderPanelController.instance.HidePanel();
@@ -126,6 +172,7 @@ public class PanelListController : MonoBehaviour
     public void SetOrderPanelAsBasePanel()
     {
         currentBasePanel = OrderPanelController.instance;
+        isHomeRefresh = false;
         HomePanelController.instance.HidePanel();
         CartPanelController.instance.HidePanel();
         OrderPanelController.instance.DisplayPanel();
@@ -136,6 +183,7 @@ public class PanelListController : MonoBehaviour
     public void SetUserPanelAsBasePanel()
     {
         currentBasePanel = UserPanelController.instance;
+        isHomeRefresh = false;
         HomePanelController.instance.HidePanel();
         CartPanelController.instance.HidePanel();
         OrderPanelController.instance.HidePanel();
