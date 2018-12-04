@@ -66,7 +66,9 @@ public class SharePanelController : BasePanelController {
         ShareContent sContent = new ShareContent();
         sContent.SetImageUrl("https://www.foodeasygo.com/Public/Home/images/WeChatShareLogo.png");
         sContent.SetTitle(content);
-        sContent.SetUrl("http://www.foodeasygo.com");
+        //Alex暂时改为app下载链接
+        //sContent.SetUrl("http://www.foodeasygo.com");
+        sContent.SetUrl(Config.iOSDownloadAddress);
         sContent.SetShareType(ContentType.Webpage);
         ssdk.ShareContent(PlatformType.WeChatMoments, sContent);
 

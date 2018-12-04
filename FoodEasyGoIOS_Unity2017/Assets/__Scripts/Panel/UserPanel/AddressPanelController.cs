@@ -503,7 +503,7 @@ public class AddressPanelController : BasePanelController
         UserDataNetworkController.instance.SetPhoneNumberVerified(form,
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                 {
-                                                                    MessagePanelController.instance.DisplayPanel(m);
+                                                                    MessagePanelController.instance.DisplayPanel(m.Replace("\"", ""));
                                                                     Debug.Log("验证电话成功");
                                                                     SwitchModifyAddressPanel(false);
                                                                     AddressPanelController.instance.ResetPanel();
@@ -524,7 +524,7 @@ public class AddressPanelController : BasePanelController
         WWWForm form = new WWWForm();
         form.AddField("phone", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
 
-        if (useYunPianServer)
+        if (!useYunPianServer)
         {
             Debug.Log("使用云片");
             form.AddField("service", "Yunpian/send_sms");
@@ -537,7 +537,7 @@ public class AddressPanelController : BasePanelController
             useYunPianServer = !useYunPianServer;
         }
         UserDataNetworkController.instance.SendVerificationCode(form,
-                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m.Replace("\"", "")); }),
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(data.GetField("c").f.ToString() + ":" + m); }));
     }
 
@@ -554,7 +554,7 @@ public class AddressPanelController : BasePanelController
             UserDataNetworkController.instance.CheckVerificationCode(form,
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                      {
-                                                                         //MessagePanelController.instance.DisplayPanel(m);
+                                                                         //MessagePanelController.instance.DisplayPanel(m.Replace("\"", ""));
                                                                          isPhoneVerified = true;
                                                                          Debug.Log("code正确");
                                                                      }),

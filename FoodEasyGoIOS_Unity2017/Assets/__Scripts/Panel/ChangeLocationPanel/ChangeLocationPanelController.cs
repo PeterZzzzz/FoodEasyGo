@@ -297,7 +297,7 @@ public class ChangeLocationPanelController : BasePanelController
             UserDataNetworkController.instance.CheckVerificationCode(form,
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                      {
-                                                                         MessagePanelController.instance.DisplayPanel(m);
+                                                                         MessagePanelController.instance.DisplayPanel(m.Replace("\"", ""));
                                                                          isPhoneVerified = true;
                                                                          addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().interactable = false;
                                                                          Debug.Log("code正确");
@@ -367,7 +367,7 @@ public class ChangeLocationPanelController : BasePanelController
         UserDataNetworkController.instance.SetPhoneNumberVerified(form,
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                 {
-                                                                    MessagePanelController.instance.DisplayPanel(m);
+                                                                    MessagePanelController.instance.DisplayPanel(m.Replace("\"", ""));
                                                                     Debug.Log("验证电话成功");
                                                                     addAddressPanel.gameObject.SetActive(false);
                                                                     ResetPanel();
@@ -594,7 +594,7 @@ public class ChangeLocationPanelController : BasePanelController
         WWWForm form = new WWWForm();
         form.AddField("phone", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
 
-        if (useYunPianServer)
+        if (!useYunPianServer)
         {
             Debug.Log("使用云片");
             form.AddField("service", "Yunpian/send_sms");
@@ -608,7 +608,7 @@ public class ChangeLocationPanelController : BasePanelController
         }
 
         UserDataNetworkController.instance.SendVerificationCode(form,
-                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m); }),
+                                                                new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(m.Replace("\"", "")); }),
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) => { MessagePanelController.instance.DisplayPanel(data.GetField("c").f.ToString() + ":" + m); }));
     }
 

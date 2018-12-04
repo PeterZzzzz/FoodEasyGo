@@ -165,8 +165,9 @@ public class MainCanvasController : MonoBehaviour {
             restaurantName = goods[0].GetField("restaurant").GetField("name").str;
         else
             restaurantName = goods[0].GetField("restaurant").GetField("name_en").str;
-        string text = "Hey! 刚刚我在FoodEasyGo上点了" + restaurantName + "的餐，首单免运费，快来试试吧！";
-            
+        //string text = "Hey! 刚刚我在FoodEasyGo上点了" + restaurantName + "的餐，首单免运费，快来试试吧！";
+        string text = "刚刚使用这个APP点了" + restaurantName + "的外卖，体验很棒，推荐给大家，首单免运费！";
+
         SharePanelController.instance.ShareMomentsContent(text);
     }
 

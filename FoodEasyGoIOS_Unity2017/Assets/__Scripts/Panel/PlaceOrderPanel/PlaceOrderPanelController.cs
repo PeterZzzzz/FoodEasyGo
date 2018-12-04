@@ -775,6 +775,7 @@ public class PlaceOrderPanelController : BasePanelController
 
     public void OnRestaurantButtonClicked()
     {
+        PanelListController.instance.isHomeRefresh = true;
         PanelListController.instance.SetHomePanelAsBasePanel();
     }
 

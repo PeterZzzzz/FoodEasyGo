@@ -18,6 +18,8 @@ public class HomePanelController : BasePanelController
 
     public RectTransform headerRect;
     public ScrollRect mainScrollRect;
+    public RectTransform groceryContent;
+
     public HomeRestaurantSectionController restaurantSectionController;
     public HomeGroceryScrollviewController groceryScrollviewController;
     public HomeGrouponScrollviewController grouponScrollviewController;
@@ -83,8 +85,9 @@ public class HomePanelController : BasePanelController
     public override void ResetPanel ()
     {
         mainScrollRect.content.offsetMax = Vector2.one;
+        if(groceryContent != null)
+            groceryContent.offsetMin = Vector2.zero;
 
-        Debug.Log(isRefreshPage);
         if (isRefreshPage)
         {
             slideShow.Find("ImageParent").DestroyAllChildren();
