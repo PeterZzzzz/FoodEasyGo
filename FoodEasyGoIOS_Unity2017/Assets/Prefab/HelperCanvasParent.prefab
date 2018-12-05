@@ -1391,26 +1391,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gifList:
-  - {fileID: 21300000, guid: 621f51b885e19fa41b01cdf70b99f4ab, type: 3}
-  - {fileID: 21300000, guid: 0dd3b81d833fb994b97046243a017822, type: 3}
-  - {fileID: 21300000, guid: 96c4d0f12b935f247bdf73153dea0fc8, type: 3}
-  - {fileID: 21300000, guid: 57cf71c69efb83e4c816b0c57eacdf8f, type: 3}
-  - {fileID: 21300000, guid: c8f02d96fab0cd348b0715647820eb8c, type: 3}
-  - {fileID: 21300000, guid: 4e49c1f9f8a835b4a983fd97aed0441b, type: 3}
-  - {fileID: 21300000, guid: 6337fde063b52ba4ba2696f2473a6965, type: 3}
-  - {fileID: 21300000, guid: c7146434896ffec4fa6ac83fb8cec691, type: 3}
-  - {fileID: 21300000, guid: ca83f4a89b1d9ec449c25d3340323a09, type: 3}
-  - {fileID: 21300000, guid: ecbd523c9ca49834ca60389acae2927f, type: 3}
-  - {fileID: 21300000, guid: 4627b9079cf49a74a83ae2a206b4b6b0, type: 3}
-  - {fileID: 21300000, guid: 02aea2b824f64394fbb5408acd09d59b, type: 3}
-  - {fileID: 21300000, guid: 3a7e3c08dd876074fa9fb15cf79d94e4, type: 3}
-  - {fileID: 21300000, guid: 334d832840ddbba43aa9dbe3c1713c1d, type: 3}
-  - {fileID: 21300000, guid: 26eeec105665e254496583be5ca86585, type: 3}
-  - {fileID: 21300000, guid: ce925448d33d41c48a827b3a96580644, type: 3}
-  - {fileID: 21300000, guid: c6b63d6e57468f348bfffb444d1fb045, type: 3}
-  - {fileID: 21300000, guid: 6db7e3ed45d604f46b34909530f6c04f, type: 3}
-  - {fileID: 21300000, guid: ab43a750ae55d9e42ad47ea00b7c7914, type: 3}
-  - {fileID: 21300000, guid: 7b983bfc7a779b04fa49a62b590b80b7, type: 3}
+  - {fileID: 21300000, guid: 00573e4428bec4c6c97cb93b467e9b46, type: 3}
+  - {fileID: 21300000, guid: fcdd2d9d2c2b64431ad9c9e30061cdfc, type: 3}
+  - {fileID: 21300000, guid: 26563f5d850914896aee910ed7aa9ea2, type: 3}
+  - {fileID: 21300000, guid: 6d07cc7eb552141308e32a4f025297c3, type: 3}
+  - {fileID: 21300000, guid: bc56d1055c9b04036adf9a0e1d7d05cf, type: 3}
+  - {fileID: 21300000, guid: bef5a38b8eb374a50848bce423b24c9b, type: 3}
+  - {fileID: 21300000, guid: 7d4e52120f0244019a785d2c9370c98c, type: 3}
+  - {fileID: 21300000, guid: 12f6b99f6ad404600a8ebd786b0d450a, type: 3}
+  - {fileID: 21300000, guid: 9d9f0d44bf9334fcabf4903dd62e832b, type: 3}
+  - {fileID: 21300000, guid: 977660063f3a4481aa96e65aa410c871, type: 3}
+  - {fileID: 21300000, guid: 743469fb8a6d24f5eb84e84150c22912, type: 3}
+  - {fileID: 21300000, guid: b6a88652d466342c781f8fd47a08f7a0, type: 3}
+  - {fileID: 21300000, guid: 3680cda98bc0d4e4e95c339d5faf0b98, type: 3}
+  - {fileID: 21300000, guid: 2d84b3d78ad014c7ab421e44cd29ef70, type: 3}
+  - {fileID: 21300000, guid: 984274dbcba4d4e479730ac7b8fe5b4e, type: 3}
+  - {fileID: 21300000, guid: bb26100cbb65643c2b63ab8beb8c169c, type: 3}
+  - {fileID: 21300000, guid: 8588c8db07a8c4c9e82f84e2d5949b43, type: 3}
+  - {fileID: 21300000, guid: b29ac218f992541d5a847b05eeba836d, type: 3}
+  - {fileID: 21300000, guid: 2c03879beca03424099d0c3967d483a1, type: 3}
+  - {fileID: 21300000, guid: aa2d8190cb1ef437ea71c322c6ff3940, type: 3}
+  - {fileID: 21300000, guid: 0c9e623244e2643159ac0697c20ee50f, type: 3}
+  - {fileID: 21300000, guid: 1ec097fd99ac94e6aa64de5627a75900, type: 3}
+  - {fileID: 21300000, guid: 8a7f44dd619d64202aedc94352730bc9, type: 3}
+  - {fileID: 21300000, guid: 8dd6cd1a0eb2b4da5ab1cc1f1a9ea72c, type: 3}
+  - {fileID: 21300000, guid: a6160236eefc14d5bb098294a104c401, type: 3}
+  - {fileID: 21300000, guid: 0e595edb7347044b8a68d498b6326fde, type: 3}
+  - {fileID: 21300000, guid: 88f35071177b1401186b59b27b8e52e8, type: 3}
+  - {fileID: 21300000, guid: e4e7680dc12604634b3433bdb971a7bc, type: 3}
+  - {fileID: 21300000, guid: 7bb65c47f3af1465ea8bdad2079be64e, type: 3}
+  - {fileID: 21300000, guid: 2799128490d804c26999a9b86bf92ec9, type: 3}
   gifImage: {fileID: 114000012072899220}
   background: {fileID: 114000013670530142}
 --- !u!114 &114000010867649890
@@ -1891,6 +1901,7 @@ MonoBehaviour:
   status: 
   iosToken: 
   googleMapKey: 
+  googlePlaceKey: 
   earnedPoint: 
   pendingPoint: 
   redeemedPoint: 
@@ -2071,6 +2082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageText: {fileID: 114000010799307400}
+  messageShow: 0
 --- !u!114 &114000012345627980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4218,7 +4230,7 @@ RectTransform:
   m_GameObject: {fileID: 1000010967886930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -10, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 224000010744026000}
   m_RootOrder: 1

@@ -293,7 +293,8 @@ public class PlaceOrderPanelController : BasePanelController
                             */
                     foreach (var dishBar in reservationContent.GetChild(i).GetComponent<CartPanelRestaurantBarController>().dishBarList)
                     {
-                        cartDetailIDString = cartDetailIDString + "," + dishBar.cartDetailData._id;
+                        if (dishBar.isSelectedForCheckOut)
+                            cartDetailIDString = cartDetailIDString + "," + dishBar.cartDetailData._id;
                     }
                 }
             }
@@ -305,13 +306,11 @@ public class PlaceOrderPanelController : BasePanelController
             //既点即送
             if (isAcceptCash)
             {
-                Debug.Log("CCCCCCCCcash");
                 paymentSection.GetChild(0).localScale = Vector3.one;
                 paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
                 paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
             }else
             {
-                Debug.Log("VVVVVVVVvisa");
                 paymentSection.GetChild(0).localScale = Vector3.zero;
                 paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
                 paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);

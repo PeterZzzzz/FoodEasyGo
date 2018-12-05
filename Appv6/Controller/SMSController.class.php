@@ -25,7 +25,7 @@ class SMSController extends BaseController {
             $res1=M('verification_code')->add($data);
             if($res1)
             {
-                $res2=R($service, array($phone_us, "【FoodEasyGo】Your verification code is $code"));
+                $res2=R($service, array($phone_us, "[FoodEasyGo] Your verification code is $code"));
                 $this->return_data([], 'Verification code send');
             }else{
                 $this->return_error('Please try again later');
