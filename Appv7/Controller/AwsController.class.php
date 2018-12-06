@@ -1,5 +1,5 @@
 <?php
-namespace Appv6\Controller;
+namespace Appv7\Controller;
 require_once 'Addons/AWSSNS/aws-autoloader.php';
 /*
  * To change this license header, choose License Headers in Project Properties.

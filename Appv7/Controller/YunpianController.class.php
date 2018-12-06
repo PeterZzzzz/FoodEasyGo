@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Appv6\Controller;
+namespace Appv7\Controller;
 
 /**
  * Description of RecruitController

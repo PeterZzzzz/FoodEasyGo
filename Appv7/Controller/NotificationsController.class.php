@@ -1,6 +1,6 @@
 <?php
 
-namespace Appv6\Controller;
+namespace Appv7\Controller;
 
 require 'Addons/AWSSNS/aws-autoloader.php';
 use Aws\Sns\SnsClient;

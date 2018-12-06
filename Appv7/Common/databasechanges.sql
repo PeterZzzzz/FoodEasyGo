@@ -37,3 +37,16 @@ ALTER TABLE `food_order_sub` ADD `redeemed_point` INT(10) NOT NULL COMMENT '该�
 
 //菜品分类类型改变 11/19/2018
 ALTER TABLE `food_restaurant_dish` CHANGE `type_seperate` `type_seperate` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '1000' COMMENT '根据餐馆分组的分类 默认1000是默认(default)这个分类';
+
+//环保袋数据库变更如下 12/06/2018
+ALTER TABLE `food_restaurant` ADD `reusable_bags_fee` DECIMAL(10,2) NOT NULL DEFAULT '0' COMMENT '是否收环保袋费用 0:否 1:是' AFTER `accept_cash`;
+ALTER TABLE `food_order_sub` ADD `reusable_bags_fee` DECIMAL(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '环保袋费用' AFTER `extra_price`;
+
+
+
+
+
+
+
+
+

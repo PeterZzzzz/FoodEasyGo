@@ -33,8 +33,8 @@ public static class Config
     //public static string serverDomain = "localhost/";
     //public static string serverDomain = "http://10.0.1.74/";
 
-    //public static string serverAPIURL = serverDomain + "api.php/Appv6/";
-    public static string serverAPIURL = serverDomain + "Appv6/";
+    //public static string serverAPIURL = serverDomain + "api.php/Appv7/";
+    public static string serverAPIURL = serverDomain + "Appv7/";
 
     public static string infoControllerURL = serverAPIURL + "Info/";
     public static string accessControllerURL = serverAPIURL + "Access/";

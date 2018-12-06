@@ -154,7 +154,7 @@ PlayerSettings:
     iOS: com.xianhe.foodeasygo
     tvOS: com.maxo.foodeasygo
   buildNumber:
-    iOS: 1.0
+    iOS: 2.0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
