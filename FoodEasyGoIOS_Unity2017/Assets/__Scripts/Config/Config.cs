@@ -7,7 +7,7 @@ public static class Config
     // Common
     public static Language currentLanguage = Language.chinese;
     public static float panelSlideTime = 0.3f;
-    public static string versionNumberString = "Version 2.1.0";
+    public static string versionNumberString = "Version 2.2.0";
 #if UNITY_EDITOR
     public static bool isDebug = true;
 #else
@@ -33,8 +33,7 @@ public static class Config
     //public static string serverDomain = "localhost/";
     //public static string serverDomain = "http://10.0.1.74/";
 
-    //public static string serverAPIURL = serverDomain + "api.php/Appv7/";
-    public static string serverAPIURL = serverDomain + "Appv7/";
+    public static string serverAPIURL = serverDomain + "Appv8/";
 
     public static string infoControllerURL = serverAPIURL + "Info/";
     public static string accessControllerURL = serverAPIURL + "Access/";

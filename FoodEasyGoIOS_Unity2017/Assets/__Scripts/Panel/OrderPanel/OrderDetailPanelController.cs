@@ -146,14 +146,15 @@ public class OrderDetailPanelController : BasePanelController {
         }
 
         fees.Find ("Text1").GetComponent<TextController> ().ResetUI (
-            "商品总价\n配送费\n额外费用\n销售税\n小费\n合计", "Base price\nDelivery fee\nExtra fee\nTax\nTip\nTotal");
-        fees.Find ("Text2").GetComponent<TextController> ().ResetUI (
-            "$ " + float.Parse (_subOrderData.GetField ("goods_total_price").str).ToString ("0.00") +
-            "\n$ " + float.Parse (_subOrderData.GetField ("deliver_price").str).ToString ("0.00") +
-            "\n$ " + float.Parse (_subOrderData.GetField ("extra_price").str).ToString ("0.00") +
-            "\n$ " + float.Parse (_subOrderData.GetField ("sales_price").str).ToString ("0.00") +
-            "\n$ " + float.Parse (_subOrderData.GetField ("tip_price").str).ToString ("0.00") +
-            "\n$ " + float.Parse (_subOrderData.GetField ("discont_total_price").str).ToString ("0.00"));
+            "商品总价\n配送费\n额外费用\n销售税\n小费\n环保袋费\n合计", "Base price\nDelivery fee\nExtra fee\nTax\nTip\nTake-out Bags Fee\nTotal");
+        fees.Find("Text2").GetComponent<TextController>().ResetUI(
+            "$ " + float.Parse(_subOrderData.GetField("goods_total_price").str).ToString("0.00") +
+            "\n$ " + float.Parse(_subOrderData.GetField("deliver_price").str).ToString("0.00") +
+            "\n$ " + float.Parse(_subOrderData.GetField("extra_price").str).ToString("0.00") +
+            "\n$ " + float.Parse(_subOrderData.GetField("sales_price").str).ToString("0.00") +
+            "\n$ " + float.Parse(_subOrderData.GetField("tip_price").str).ToString("0.00") +
+            "\n$ " + float.Parse(_subOrderData.GetField("reusable_bags_fee").str).ToString("0.00") +
+            "\n$ " + float.Parse(_subOrderData.GetField("discont_total_price").str).ToString("0.00"));
 
         delivery.ResetUI ("");
         wechat.ResetUI ("foodeasygo");

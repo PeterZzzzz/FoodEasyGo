@@ -369,7 +369,8 @@ public class PlaceOrderPanelController : BasePanelController
         float.Parse(feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("TaxFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
         float.Parse(feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text.Substring(2)) +
-        float.Parse(feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text.Substring(2))).ToString("0.00");
+        float.Parse(feeSection.Find("DiscountTitle/Text").GetComponent<Text>().text.Substring(2))+
+        float.Parse(feeSection.Find("ReusableBagsTitle/Text").GetComponent<Text>().text.Substring(2))).ToString("0.00");
         feeSection.Find("TotalFeeTitle/Text").GetComponent<Text>().text = "$ " + totalPriceBeforeRedeem;
     }
 
@@ -541,6 +542,7 @@ public class PlaceOrderPanelController : BasePanelController
             }
             DebugLogger.Log("Total and highestDelivery = " + totalDelivery.ToString("0.00") + ", " + highestDelivery.ToString("0.00"));
             feeSection.Find("DeliveryFeeTitle/Text").GetComponent<Text>().text = "$ " + (totalDelivery - highestDelivery).ToString("0.00");
+            CalcualteTotalPrice();
             DebugLogger.Log("CouponInputField.text = " + couponInputField.text);
         }
         else
@@ -711,12 +713,13 @@ public class PlaceOrderPanelController : BasePanelController
         {
             form.AddField("pay_type", "2");
         }
-        form.AddField("tip", feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text.Substring(1));
+        form.AddField("tip", feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text.Substring(2));
         form.AddField("coupon_sn", couponSection.Find("Input").GetComponent<InputField>().text);
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
         form.AddField("instruction", addressSection.Find("AddressBar/Instruction").GetComponent<InputField>().text);
-        if(isUsingRedeem)
+        form.AddField("reusable_bags_fee", feeSection.Find("ReusableBagsTitle/Text").GetComponent<Text>().text.Substring(2));
+        if (isUsingRedeem)
         {
             form.AddField("is_using_redeem", isUsingRedeem.ToString());
             form.AddField("redeemed_point", redeemInputField.text);
@@ -824,6 +827,7 @@ public class PlaceOrderPanelController : BasePanelController
                                 new LDFWServerResponseEvent((JSONObject d, string r) =>
                                 {
                                     UserDataController.instance.availablePoint = (int.Parse(UserDataController.instance.availablePoint) - int.Parse(d.GetField("redeemedPoint").str)).ToString();
+                                    UserDataController.instance.pendingPoint = (int.Parse(UserDataController.instance.pendingPoint) + int.Parse(d.GetField("receivedPoint").str)).ToString();
                                     //membershipPointZH = "本次消费使用积分: " + d.GetField("redeemedPoint").str + "得到积分: " + d.GetField("receivedPoint") + "\n" + "获得的积分将于30天后可以使用";
                                     //membershipPointEN = "This order using points: " + d.GetField("redeemedPoint").str + "You have received points: " + d.GetField("receivedPoint") + "\n" + "These points will be available after 30 days";
                                     Debug.Log("available :" + UserDataController.instance.availablePoint + "using : " + d.GetField("redeemedPoint").str + "received : " + d.GetField("receivedPoint"));
@@ -1064,4 +1068,9 @@ public class PlaceOrderPanelController : BasePanelController
     }
 
     #endregion
+
+    public void OnReusableBagInfoBtnClick()
+    {
+        MessagePanelController.instance.DisplayPanel("环保袋成本费");
+    }
 }

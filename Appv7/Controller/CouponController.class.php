@@ -88,14 +88,14 @@ class CouponController extends BaseController {
                 'discont_goods_price'       => $subOrderData['goods_total_price'],
                 'deliver_price'             => $deliverFee,
                 ];
-            $updatedSubOrderData['sales_price'] = 
-                $updatedSubOrderData['discont_goods_price'] * 0.07;
+            $updatedSubOrderData['sales_price'] = $updatedSubOrderData['discont_goods_price'] * 0.07;
             $updatedSubOrderData['total_price'] = 
                 $updatedSubOrderData['discont_goods_price'] + 
                 $subOrderData['extra_price'] +
                 $deliverFee +
                 $updatedSubOrderData['sales_price'] +
-                $subOrderData['tip_price'];
+                $subOrderData['tip_price'] +
+                $subOrderData['reusable_bags_fee'];
             $updatedSubOrderData['discont_total_price'] = 
                 $updatedSubOrderData['total_price'];
                 
@@ -245,6 +245,7 @@ class CouponController extends BaseController {
             $discount = $couponDetail['discont'] / 10;
             $totalDeliverFee = 0;
             $totalOrderDiscontGoodsPrice=0;
+            $totalReusableBagsFee = 0;
             
             // update sub order data
             foreach ($subOrderList as &$subOrderData) {
@@ -282,8 +283,10 @@ class CouponController extends BaseController {
                     $subOrderData['extra_price'] +
                     $deliverFee +
                     $updatedSubOrderData['sales_price'] +
+                    $subOrderData['reusable_bags_fee'] +
                     $subOrderData['tip_price'];
-                $totalOrderDiscontGoodsPrice+=$updatedSubOrderData['discont_goods_price'];
+                $totalOrderDiscontGoodsPrice += $updatedSubOrderData['discont_goods_price'];
+                $totalReusableBagsFee += $subOrderData['reusable_bags_fee'];
     
                 M('order_sub')
                     ->where("`id` = " . $subOrderData['id'])
@@ -302,6 +305,7 @@ class CouponController extends BaseController {
                 $orderData['extra_price'] + 
                 $totalDeliverFee + 
                 $updatedOrderData['sales_price'] +
+                $totalReusableBagsFee +
                 $orderData['tip_price'];
 
             M('order')
@@ -323,6 +327,7 @@ class CouponController extends BaseController {
             $hightestDeliverySubOrder  = null;
             $hightestDeliveryFee = 0;
             $totalDeliverFee = 0;
+            $totalReusableBagsFee = 0;
 
             foreach ($subOrderList as &$subOrderData) {
                 $restaurantID = $subOrderData['restaurant_id'];
@@ -345,6 +350,7 @@ class CouponController extends BaseController {
                     $subOrderData['extra_price'] +
                     $updatedSubOrderData['deliver_price'] +
                     $updatedSubOrderData['sales_price'] +
+                    $subOrderData['reusable_bags_fee'] +
                     $subOrderData['tip_price'];
                 
                 M('order_sub')
@@ -362,7 +368,7 @@ class CouponController extends BaseController {
                 }
 
                 $totalDeliverFee += $deliverFee;
-           
+                $totalReusableBagsFee += $subOrderData['reusable_bags_fee'];
             }
                 
             $updatedSubOrderData = [
@@ -375,6 +381,7 @@ class CouponController extends BaseController {
             	$updatedSubOrderData['discont_goods_price']+
             	$hightestDeliverySubOrder['extra_price']+
             	$updatedSubOrderData['sales_price']+
+                $hightestDeliverySubOrder['reusable_bags_fee'] +
             	$hightestDeliverySubOrder['tip_price'];
             $updatedSubOrderData['total_price'] = $updatedSubOrderData['discont_total_price'] + $hightestDeliveryFee;
 
@@ -394,6 +401,7 @@ class CouponController extends BaseController {
                 $orderData['extra_price'] + 
                 $updatedOrderData['deliver_price'] + 
                 $updatedOrderData['sales_price'] +
+                $totalReusableBagsFee +
                 $orderData['tip_price'];
             $updatedOrderData['total_price'] = $updatedOrderData['discont_total_price'] + $hightestDeliveryFee;
 

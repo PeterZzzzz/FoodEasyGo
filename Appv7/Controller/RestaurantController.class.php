@@ -130,6 +130,7 @@ class RestaurantController extends BaseController {
 					break;
 			}
 			
+			//这块搜索的是打开餐厅列表页面时候返回的数据
 			$res = M('restaurant')
 				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, ratings')
 				->where("`id` in
@@ -143,12 +144,14 @@ class RestaurantController extends BaseController {
 			
 			
 		} else {
+
+			//这块返回的是结账的时候餐厅返回的数据
 			$res = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, accept_cash')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, accept_cash, reusable_bags_fee')
 				->where("`id` in ($restaurantList)")
 				->select();
 			$grp = M('restaurant')
-				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, accept_cash')
+				->field('id, img, name, name_en, describe, describe_en, min_consume, destine_time, goods_type, from_time, to_time, second_from_time, second_to_time, extra_fee, accept_cash, reusable_bags_fee')
 				->where("`id` in ($grouponRestaurantList)")
 				->select();
 		}

@@ -162,6 +162,7 @@ class OrderController extends BaseController {
 				$resCatCombine['deliver_type'] = $restaurantData['deliver_type'];
 				$resCatCombine['reciver_type'] = $restaurantData['reciver_type'];
 				$resCatCombine['phone_remind'] = $restaurantData['phone_remind'];
+				$resCatCombine['reusable_bags_fee'] = $restaurantData['reusable_bags_fee'];
 
 				$extraFee = $restaurantData['extra_fee'];
 				$minOrder = $restaurantData['min_consume'];
@@ -470,6 +471,7 @@ class OrderController extends BaseController {
 		}
         
 		$totalSalesTax = $totalGoodsPrice * 0.07;
+		$tipPrice = $totalGoodsPrice * 0.15;
 		$totalPrice = $totalGoodsPrice + $totalDeliveryFee + $totalExtraFee + $totalSalesTax + $tipPrice; 
 
 		// Generate order number:
@@ -541,14 +543,15 @@ class OrderController extends BaseController {
 				// Get prices
 				$subGoodsTotalPrice = $cartRestaurant['total_goods_price'];
 				$subDeliveryFee = $cartRestaurant['delivery_price'];
-                
+                $reusableBagsFee = $cartRestaurant['reusable_bags_fee'];
+
                 // Add driver_deliver_fee
                 $subDriverDeliveryFee = $cartRestaurant['driver_delivery_price'];
 				$subExtraFee = $cartRestaurant['extra_price'];
 				$subTipPrice = $tipPrice * $subGoodsTotalPrice / $totalGoodsPrice;
 				$subSalesPrice = $subGoodsTotalPrice * 0.07;
 				
-				$subTotalPrice = $subGoodsTotalPrice + $subDeliveryFee + $subExtraFee + $subSalesPrice + $subTipPrice;
+				$subTotalPrice = $subGoodsTotalPrice + $subDeliveryFee + $subExtraFee + $subSalesPrice + $subTipPrice + $reusableBagsFee;
 				
 				
 				// Get discounted prices
@@ -577,6 +580,7 @@ class OrderController extends BaseController {
                         // Add driver_deliver_fee
                         'driver_deliver_price'        => $subDriverDeliveryFee,
 						'extra_price'                 => $subExtraFee,
+						'reusable_bags_fee'           => $reusableBagsFee,
 						'sales_price'                 => $subSalesPrice,
 						'tip_price'                   => $subTipPrice,
 						'driver_id'                   => 0,
@@ -804,6 +808,7 @@ class OrderController extends BaseController {
 		$isUsingRedeem = $this->get_param('post.is_using_redeem');
 		$redeemedPoint = $this->get_param('post.redeemed_point');
 		$savedTotal = $this->get_param('post.saved_total');
+		$reusableBagsFee = $this->get_param('post.reusable_bags_fee');
         
         $creditCardFirstName = $this->get_param('post.credit_card_first_name');
 		$creditCardLastName = $this->get_param('post.credit_card_last_name');
@@ -875,9 +880,9 @@ class OrderController extends BaseController {
             ->where("`id` = $orderID")
             ->find();
         $totalPrice = $orderData['goods_total_price'] * 1.07 + $orderData['deliver_price']
-			+ $orderData['extra_price'] + $tempDeliveryFee + $tip;
+			+ $orderData['extra_price'] + $tempDeliveryFee + $tip + $reusableBagsFee;
         $discountTotalPrice = $orderData['discont_goods_price'] * 1.07 + $orderData['deliver_price']
-			+ $orderData['extra_price'] + $tempDeliveryFee + $tip;
+			+ $orderData['extra_price'] + $tempDeliveryFee + $tip + $reusableBagsFee;
         
         // Save order data
         $updatedOrderData = [
@@ -940,6 +945,7 @@ class OrderController extends BaseController {
                 + $subOrderData['deliver_price']
                 + $subOrderData['extra_price']
                 + $subOrderData['sales_price']
+                + $subOrderData['reusable_bags_fee']
                 + $updatedSubOrderData['tip_price'];
             $updatedSubOrderData['discont_total_price'] = 
                 $updatedSubOrderData['total_price'];
