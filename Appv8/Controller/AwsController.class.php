@@ -1,24 +1,26 @@
 <?php
-
+namespace Appv8\Controller;
+require_once 'Addons/AWSSNS/aws-autoloader.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-namespace Appv7\Controller;
-
 /**
  * Description of RecruitController
  *
  * @author zsw
  */
-class YunpianController extends BaseController {
+class AwsController extends BaseController {
 
+    //phone is full phone number, like +1718xxx6868, text is full text 
     public function send_sms($phone, $text)
     {
-        $res=sendSmsYunpian($phone, $text);
-        return $res;
+
+        sendSmsAWS($phone, $text);
+        
     }
+
 
 }

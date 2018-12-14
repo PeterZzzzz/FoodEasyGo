@@ -1,6 +1,6 @@
 <?php
 
-namespace Appv7\Controller;
+namespace Appv8\Controller;
 
 /**
  * App API - User Controller

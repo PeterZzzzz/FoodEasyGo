@@ -1,6 +1,6 @@
 <?php
 
-namespace Appv7\Controller;
+namespace Appv8\Controller;
 use Think\Storage;
 
 /**
