@@ -524,7 +524,7 @@ public class AddressPanelController : BasePanelController
         WWWForm form = new WWWForm();
         form.AddField("phone", modifyAddressPanel.Find("ContactNumber/InputField").GetComponent<InputField>().text);
 
-        if (!useYunPianServer)
+        if (useYunPianServer)
         {
             Debug.Log("使用云片");
             form.AddField("service", "Yunpian/send_sms");
