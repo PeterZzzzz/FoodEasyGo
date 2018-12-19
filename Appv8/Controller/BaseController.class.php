@@ -537,7 +537,7 @@ class BaseController extends Controller {
 				$email_data['send_password'] = think_encrypt($merchant_region['mail_password'], C('FOOD_AUTH_KEY'));
 				$email_data['send_from_name'] = $merchant_region['mail_sender'];
 				if(2 == $sub_order['category']) {
-					$email_data['expect_send_time'] = date('Y-m-d H:i:s',strtotime(date('Y-m-d').' '.$deliver_times[0]." -".$reserve_set['sendtime']." hours"));
+					$email_data['expect_send_time'] = date('Y-m-d H:i:s', strtotime(date('Y-m-d') . ' ' . $deliver_times[0] . " -" . $reserve_set['sendtime'] . " hours -" . $reserve_set['sendtime_minute'] . " minutes"));
 				} else {
 					$email_data['expect_send_time'] = date('Y-m-d H:i:s');
 				}

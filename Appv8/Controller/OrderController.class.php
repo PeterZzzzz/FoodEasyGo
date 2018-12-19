@@ -817,6 +817,14 @@ class OrderController extends BaseController {
 		$creditCardYear = $this->get_param('post.credit_card_year');
 		$creditCardSecurityCode = $this->get_param('post.credit_card_security_code');
 		
+		//Check if tip = 0
+		if($tip == 0)
+		{
+			$zeroTipOrderData = M('order')
+            ->where("`id` = $orderID")
+            ->find();
+            $tip = $zeroTipOrderData['goods_total_price'] * 0.15;
+		}
 
 		//Check Restaurant is Open
 		$subOrderList = M('order_sub')

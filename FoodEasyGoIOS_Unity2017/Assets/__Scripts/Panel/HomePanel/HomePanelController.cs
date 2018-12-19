@@ -28,6 +28,14 @@ public class HomePanelController : BasePanelController
     public InputFieldController searchInput;
     public bool isRefreshPage;
 
+    public Image weatherIcon;
+    public TextController weather;
+    public Text temperature;
+    public Sprite clear;
+    public Sprite cloud;
+    public Sprite rain;
+    public Sprite snow;
+
     #region ResolutionAdjustment
     public LayoutElement slideShowLayoutElement;
     public GridLayoutGroup restaurantSectionGridLayoutGroup;
@@ -101,6 +109,7 @@ public class HomePanelController : BasePanelController
         {
             zipcodeText.ResetUI(UserDataController.instance.targetServiceRegionNameZH, UserDataController.instance.targetServiceRegionNameEN);
             StartCoroutine(LoadPanelCoroutine());
+            StartCoroutine(LoadWeather());
         }
     }
 
@@ -194,7 +203,6 @@ public class HomePanelController : BasePanelController
             }
             LoadSlideImages ();
             LoadCategoryDdata ();
-            //LoadRegionDeliveryFee ();
         }
         mainScrollRect.content.anchoredPosition = Vector2.zero;
         PanelListController.instance.isHomeRefresh = false;
@@ -233,28 +241,43 @@ public class HomePanelController : BasePanelController
             null);
     }
 
-    /*
-    public void LoadRegionDeliveryFee ()
+    public IEnumerator LoadWeather()
     {
-        CartNetworkController.instance.GetRegionDeliveryFee (
-            new LDFWServerResponseEvent ((JSONObject data, string m) =>
-            {
+        WWW www = new WWW("https://api.openweathermap.org/data/2.5/weather?zip=" + UserDataController.instance.zipCode + ", us&appid=078753ae1790d233f5b4bfd2878b27de");
+        yield return www;
+         JSONObject data = new JSONObject(www.text);
+        string weatherType = data["weather"][0]["main"].str;
+        string temp = (data["main"]["temp"].n - 273.15).ToString("0");
+        temperature.text = temp + " ℃";
+        //Debug.Log("www" + "\n" + data + "\nwwww\n" + weatherType + "\nwwww\n" + temp + "\nwwww\n" + UserDataController.instance.zipCode);
 
-                Dictionary<string, float> feeDic = new Dictionary<string, float> ();
-
-                if (data != null || data.Count != 0)
-                {
-                    for (int i = 0; data[i] != null; i++)
-                    {
-                        feeDic.Add (data[i].GetField ("zipcode").str, float.Parse (data[i].GetField ("fee").str));
-                    }
-                }
-
-                UserDataController.instance.regionDeliveryFeeDic = feeDic;
-
-            }), null);
+        if (weatherType == "Clear")
+        {
+            weatherIcon.sprite = clear;
+            weather.ResetUI("晴", "Clear");
+        }
+        else if (weatherType == "Clouds")
+        {
+            weatherIcon.sprite = cloud;
+            weather.ResetUI("阴", "Clouds");
+        }
+        else if (weatherType == "Rain")
+        {
+            weatherIcon.sprite = rain;
+            weather.ResetUI("雨", "Rain");
+        }
+        else if (weatherType == "Snow")
+        {
+            weatherIcon.sprite = snow;
+            weather.ResetUI("雪", "Snow");
+        }
+        else
+        {
+            weatherIcon.sprite = clear;
+            weather.ResetUI("晴", "Clear");
+        }
     }
-    */
+
 
     #endregion
 
