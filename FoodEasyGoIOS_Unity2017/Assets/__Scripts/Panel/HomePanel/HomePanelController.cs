@@ -245,7 +245,7 @@ public class HomePanelController : BasePanelController
     {
         WWW www = new WWW("https://api.openweathermap.org/data/2.5/weather?zip=" + UserDataController.instance.zipCode + ", us&appid=078753ae1790d233f5b4bfd2878b27de");
         yield return www;
-         JSONObject data = new JSONObject(www.text);
+        JSONObject data = new JSONObject(www.text);
         string weatherType = data["weather"][0]["main"].str;
         string temp = (data["main"]["temp"].n - 273.15).ToString("0");
         temperature.text = temp + " ℃";
