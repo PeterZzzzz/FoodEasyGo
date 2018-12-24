@@ -1122,17 +1122,18 @@ class OrderController extends BaseController {
 
 			}
 
-			//2. （减去使用的积分）在user表中的redeemed_point中加入$redeemedPoint。
+			//2. （减去使用的积分）在user表中的redeemed_point中加入$redeemedPoint, 并加上pending的分数。
 			$userData = M('user')
 				->where(array("id"=>$orderData['user_id']))
                 ->find();
             $updateUserData['redeemed_point'] = $userData['redeemed_point'] + $redeemedPoint;
+            $updateUserData['pending_point'] = $userData['pending_point'] + $receivedPoint;
 			$userUpdateResult = M('user')
 				->where(array("id"=>$orderData['user_id']))
                 ->save($updateUserData);
 			//3. 交易成功，创建餐馆推送。
-            OrderController::createRestaurantNotification($orderID);
-            //4. 返回1:减去的分数，用于在本地更新。
+            OrderController::createRestaurantNotification($orderID);            
+            //4. 返回:减去的分数，用于在本地更新。
             $returnData['receivedPoint'] = $receivedPoint;
             $returnData['redeemedPoint'] = $redeemedPoint;
             if($userUpdateResult)
@@ -1144,13 +1145,28 @@ class OrderController extends BaseController {
 			$subOrderList = M('order_sub')
             	->where("`order_id` = $orderID")
             	->select();
+            $receivedPoint = 0;
            	foreach ($subOrderList as &$subOrderData)
             {
             	$subOrderData['pending_point'] = $subOrderData['discont_goods_price'] * $receivePointRate;
+            	$receivedPoint += $subOrderData['pending_point'];
             	$subOrderUpdateResult = M('order_sub')
             		->where("`id` = " . $subOrderData['id'])
                 	->save($subOrderData);
             }
+
+            //将所有pending points存入user表中
+            $orderData = M('order')
+				->where("`id` = $orderID")
+				->find();
+			$userData = M('user')
+				->where(array("id"=>$orderData['user_id']))
+                ->find();
+            $updateUserData['pending_point'] = $userData['pending_point'] + $receivedPoint;
+			$userUpdateResult = M('user')
+				->where(array("id"=>$orderData['user_id']))
+                ->save($updateUserData);
+
             //交易成功，创建餐馆推送。
             OrderController::createRestaurantNotification($orderID);
             $this->return_data(['$redeemedPoint' => "0"], 'No Redeemed');

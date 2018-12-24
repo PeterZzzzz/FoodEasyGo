@@ -307,6 +307,8 @@
     <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeRestaurantSectionController.cs" />
     <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeRestaurantSectionElementController.cs" />
     <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeSlideController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\HomeTypeSelectToggleElementController.cs" />
+    <Compile Include="Assets\__Scripts\Panel\HomePanel\ItemDisplayScrollViewController.cs" />
     <Compile Include="Assets\__Scripts\Panel\HomePanel\LanguageButtonController.cs" />
     <Compile Include="Assets\__Scripts\Panel\LoadingCanvasController.cs" />
     <Compile Include="Assets\__Scripts\Panel\LoadingPanelController.cs" />

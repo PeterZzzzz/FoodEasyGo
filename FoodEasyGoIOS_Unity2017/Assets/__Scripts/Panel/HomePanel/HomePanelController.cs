@@ -18,10 +18,11 @@ public class HomePanelController : BasePanelController
 
     public RectTransform headerRect;
     public ScrollRect mainScrollRect;
-    public RectTransform groceryContent;
+    public RectTransform itemDisplayContent;
 
     public HomeRestaurantSectionController restaurantSectionController;
     public HomeGroceryScrollviewController groceryScrollviewController;
+    public ItemDisplayScrollViewController itemDisplayScrollViewController;
     public HomeGrouponScrollviewController grouponScrollviewController;
 
     public Transform shortCutSection;
@@ -93,13 +94,14 @@ public class HomePanelController : BasePanelController
     public override void ResetPanel ()
     {
         mainScrollRect.content.offsetMax = Vector2.one;
-        if(groceryContent != null)
-            groceryContent.offsetMin = Vector2.zero;
+        if(itemDisplayContent != null)
+            itemDisplayContent.offsetMin = Vector2.zero;
 
         if (isRefreshPage)
         {
             slideShow.Find("ImageParent").DestroyAllChildren();
             groceryScrollviewController.content.DestroyAllChildren();
+            itemDisplayScrollViewController.content.DestroyAllChildren();
         }
     }
 
@@ -170,21 +172,30 @@ public class HomePanelController : BasePanelController
         }
         else
         {
-            RestaurantNetworkController.instance.GetRestaurantRecommendedList (
-                new LDFWServerResponseEvent ((JSONObject data, string m) =>
-                {
-                    restaurantSectionController.LoadData (data);
-                }),
-                new LDFWServerResponseEvent ((JSONObject data, string m) =>
-                {
-                }));
+            //RestaurantNetworkController.instance.GetRestaurantRecommendedList (
+                //new LDFWServerResponseEvent ((JSONObject data, string m) =>
+                //{
+                //    restaurantSectionController.LoadData (data);
+                //}),
+                //new LDFWServerResponseEvent ((JSONObject data, string m) =>
+                //{
+                //}));
 
-            GroceryNetworkController.instance.GetGroceryRecommendedList (
-                new LDFWServerResponseEvent ((JSONObject data, string m) =>
+            //GroceryNetworkController.instance.GetGroceryRecommendedList (
+                //new LDFWServerResponseEvent ((JSONObject data, string m) =>
+                //{
+                //    groceryScrollviewController.LoadData (data);
+                //}),
+                //new LDFWServerResponseEvent ((JSONObject data, string m) =>
+                //{
+                //}));
+
+            RestaurantNetworkController.instance.GetRestaurantRecommendedList(
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
                 {
-                    groceryScrollviewController.LoadData (data);
+                    itemDisplayScrollViewController.LoadRestaurantData(data);
                 }),
-                new LDFWServerResponseEvent ((JSONObject data, string m) =>
+                new LDFWServerResponseEvent((JSONObject data, string m) =>
                 {
                 }));
 
@@ -202,7 +213,7 @@ public class HomePanelController : BasePanelController
                 CartController.instance.GetCartDetails ();
             }
             LoadSlideImages ();
-            LoadCategoryDdata ();
+            //LoadCategoryDdata ();
         }
         mainScrollRect.content.anchoredPosition = Vector2.zero;
         PanelListController.instance.isHomeRefresh = false;
@@ -296,6 +307,16 @@ public class HomePanelController : BasePanelController
         //1.9.0取消Groupon入口改为分享入口
         //GrouponPanelController.instance.OpenPanel ();
         InvitationPanelController.instance.OpenPanel();
+    }
+
+    public void OnTypeRestaurantBtnClicked()
+    {
+        Debug.Log("刷新餐厅");
+    }
+
+    public void OnTypeGroceryBtnClicked()
+    {
+        Debug.Log("刷新超市小商品");
     }
     #endregion
 

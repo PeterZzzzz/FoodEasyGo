@@ -15,7 +15,7 @@ public static class Extensions {
     }
 
     public static Color MainColor () {
-        return new Color (255f / 255f, 176f / 255f, 58f / 255f, 1f);
+        return new Color (255f / 255f, 215f / 255f, 95f / 255f, 1f);
     }
     
     public static void DestroyAllChildren (this Transform trans) {
