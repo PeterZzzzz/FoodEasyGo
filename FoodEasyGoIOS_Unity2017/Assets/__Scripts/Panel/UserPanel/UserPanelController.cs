@@ -13,8 +13,8 @@ public class UserPanelController : BasePanelController {
     public static UserPanelController           instance;
     public RawImage                             userImage;
     public Text                                 userName;
-    public TextController                       pendingBtnText;
-    public TextController                       AvailableBtnText;
+    public TextController                       statusBtnText;
+    public TextController                       pointBtnText;
     public Transform                            membershipInfoPanel;
     public Sprite membershipInfoEn;
     public Sprite membershipInfoZh;
@@ -44,18 +44,18 @@ public class UserPanelController : BasePanelController {
         switch(UserDataController.instance.membershipStatus)
         {
             case "1":
-                pendingBtnText.ResetUI("会员等级 :\n普通会员", "Membership Status :\nMember");
+                statusBtnText.ResetUI("普通会员", "Member");
                 break;
             case "2":
-                pendingBtnText.ResetUI("会员等级 :\n优享会员", "Membership Status :\nPremium Member");
+                statusBtnText.ResetUI("优享会员", "Premium Member");
                 break;
             case "3":
-                pendingBtnText.ResetUI("会员等级 :\n尊享会员", "Membership Status :\nPremium+ Member");
+                statusBtnText.ResetUI("尊享会员", "Premium+ Member");
                 break;
             default:
                 break;
         }
-        AvailableBtnText.ResetUI("待处理积分 :" + UserDataController.instance.pendingPoint + "\n" + "可兑换积分 :" + UserDataController.instance.availablePoint,
+        pointBtnText.ResetUI("待处理积分 :" + UserDataController.instance.pendingPoint + "\n" + "可兑换积分 :" + UserDataController.instance.availablePoint,
                                  "Pending points :" + UserDataController.instance.pendingPoint + "\n" + "Available points :" + UserDataController.instance.availablePoint);
     }
     #endregion
