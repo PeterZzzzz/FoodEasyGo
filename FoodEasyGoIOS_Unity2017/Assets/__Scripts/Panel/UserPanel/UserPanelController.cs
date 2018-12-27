@@ -55,8 +55,7 @@ public class UserPanelController : BasePanelController {
             default:
                 break;
         }
-        pointBtnText.ResetUI("待处理积分 :" + UserDataController.instance.pendingPoint + "\n" + "可兑换积分 :" + UserDataController.instance.availablePoint,
-                                 "Pending points :" + UserDataController.instance.pendingPoint + "\n" + "Available points :" + UserDataController.instance.availablePoint);
+        pointBtnText.ResetUI(UserDataController.instance.availablePoint, UserDataController.instance.availablePoint);
     }
     #endregion
 

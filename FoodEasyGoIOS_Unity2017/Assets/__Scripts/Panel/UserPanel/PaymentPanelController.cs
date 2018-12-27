@@ -19,6 +19,9 @@ public class PaymentPanelController : BasePanelController {
     // Transform
     public ScrollRect defaultScrollRect;
     public Transform modifyPaymentPanel;
+    public TextController ModifyCardPanelTitle;
+    public Button SetDefaultButton;
+    public Button DeleteButton;
 
     // private
     PaymentPanelPaymentBarController currentBar = null;
@@ -97,9 +100,6 @@ public class PaymentPanelController : BasePanelController {
         }));
     }
 
-    public void OnCloseButtonClicked () {
-        AppDataController.instance.SyncCreditCardList ();
-    }
     #endregion
 
 
@@ -115,14 +115,19 @@ public class PaymentPanelController : BasePanelController {
 
         if (state && bar != null) {
             currentBar = bar;
+            ModifyCardPanelTitle.ResetUI("编辑信用卡", "Modify your Card");
+            SetDefaultButton.gameObject.SetActive(true);
+            DeleteButton.gameObject.SetActive(true);
             modifyPaymentPanel.Find ("FirstName/InputField").GetComponent<InputField> ().text = currentBar._firstName;
             modifyPaymentPanel.Find ("LastName/InputField").GetComponent<InputField> ().text = currentBar._lastName;
             modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text = currentBar._cardNumber;
             modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text = currentBar._month;
             modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text = currentBar._year;
-            //modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text = currentBar._securityCode;
             modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text = "";
         } else {
+            ModifyCardPanelTitle.ResetUI("添加信用卡", "Add a new Card");
+            SetDefaultButton.gameObject.SetActive(false);
+            DeleteButton.gameObject.SetActive(false);
             modifyPaymentPanel.Find ("FirstName/InputField").GetComponent<InputField> ().text = "";
             modifyPaymentPanel.Find ("LastName/InputField").GetComponent<InputField> ().text = "";
             modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text = "";
@@ -196,6 +201,52 @@ public class PaymentPanelController : BasePanelController {
     }
 
 
+    public void OnCloseButtonClicked()
+    {
+        AppDataController.instance.SyncCreditCardList();
+    }
+
+    public void OnModifyCardPanelCloseBtnClicked()
+    {
+        modifyPaymentPanel.gameObject.SetActive(false);
+    }
+
+    public void OnDeleteButtonCliced()
+    {
+        PopUpPanelController.instance.DisplayPopUpPanel(null, () => {
+            DeletePayment(currentBar._id, new LDFWServerResponseEvent((JSONObject data, string m) => {
+                currentBar.transform.SetParent(null);
+                ResetPanel();
+                ReloadPanel();
+                currentBar.gameObject.DestroyGO();
+                AppDataController.instance.SyncCreditCardList();
+            }), null);
+        },
+            "确定删除行用卡？",
+            "Are you sure to delete this credit card?");
+    }
+
+    public void OnSetDefaultButtonClicked()
+    {
+        DebugLogger.Log("OnSetDefaultButtonClicked ");
+        if (!currentBar._isDefault)
+        {
+            DebugLogger.Log("On Set Default");
+            WWWForm form = new WWWForm();
+            form.AddField("payment_id", currentBar._id);
+
+            LoadingPanelController.instance.DisplayPanel();
+            UserDataNetworkController.instance.SetDefaultPayment(form,
+                new LDFWServerResponseEvent((JSONObject data, string m) => {
+                    ResetPanel();
+                    ReloadPanel();
+                }),
+                new LDFWServerResponseEvent((JSONObject data, string m) => {
+                    ResetPanel();
+                    ReloadPanel();
+                }));
+        }
+    }
     #endregion
 
 
