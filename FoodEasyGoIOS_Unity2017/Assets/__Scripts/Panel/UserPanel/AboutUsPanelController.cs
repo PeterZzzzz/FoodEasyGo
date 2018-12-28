@@ -12,8 +12,7 @@ public class AboutUsPanelController : BasePanelController {
 
     public static AboutUsPanelController            instance;
 
-    public TextController                           contactSectionLeft;
-    public TextController                           contactSectionRight;
+    public TextController                           contactSection;
     public Text                                     versionText;
 
 
@@ -33,7 +32,7 @@ public class AboutUsPanelController : BasePanelController {
     public override void ResetPanel () {
     }
     public override void ReloadPanel () {
-        versionText.text = "Version :"+Application.version;
+        versionText.text = "Version :" + Application.version;
 
         LoadingPanelController.instance.DisplayPanel ();
         InfoNetworkController.instance.GetContactInfo (
@@ -49,39 +48,18 @@ public class AboutUsPanelController : BasePanelController {
 
 
     private IEnumerator LoadData (JSONObject data) {
-        contactSectionLeft.ResetUI ("", "");
-        contactSectionRight.ResetUI ("", "");
-        
-        /*
+        contactSection.ResetUI ("", "");
+
         if (data != null && data.Count > 0) {
             for (int i = 0; data[i] != null; i++) {
-                contactSectionLeft.Append ("\n", "\n");
-                contactSectionRight.Append ("\n", "\n");
+                contactSection.Append ("\n", "\n");
 
-                contactSectionLeft.Append (data[i].GetField ("title_zh").str, data[i].GetField ("title_en").str);
-                contactSectionRight.Append (data[i].GetField ("content_zh").str.Replace (",", "\n"), data[i].GetField ("content_en").str.Replace (",", "\n"));
+                contactSection.Append (data[i].GetField ("title_zh").str, data[i].GetField ("title_en").str);
+                contactSection.Append (": ", ": ");
+                contactSection.Append (data[i].GetField ("content_zh").str.Replace (",", ", "), data[i].GetField ("content_en").str.Replace (",", ", "));
                 yield return null;
-                while (contactSectionLeft.preferredHeight < contactSectionRight.preferredHeight) {
-                    contactSectionLeft.Append ("\n", "\n");
-                }
+
             }
-
-        }
-        */
-        if (data != null && data.Count > 0) {
-            for (int i = 0; data[i] != null; i++) {
-                contactSectionLeft.Append ("\n", "\n");
-
-                contactSectionLeft.Append (data[i].GetField ("title_zh").str, data[i].GetField ("title_en").str);
-                contactSectionLeft.Append (": ", ": ");
-                contactSectionLeft.Append (data[i].GetField ("content_zh").str.Replace (",", ", "), data[i].GetField ("content_en").str.Replace (",", ", "));
-                yield return null;
-                while (contactSectionLeft.preferredHeight < contactSectionRight.preferredHeight) {
-                    contactSectionLeft.Append ("\n", "\n");
-                }
-            }
-
-        }
-        
+        }  
     }
 }

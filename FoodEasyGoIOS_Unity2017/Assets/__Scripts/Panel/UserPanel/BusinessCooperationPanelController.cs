@@ -40,8 +40,8 @@ public class BusinessCooperationPanelController : BasePanelController {
                         transform.Find ("Panel/Section1/Text").GetComponent<TextController> ().ResetUI (
                             data[0].GetField ("description_zh").str.Replace ("，", ", ").Replace (",", ", "), 
                             data[0].GetField ("description_en").str.Replace ("，", ", ").Replace (",", ", "));
-                        LDFWImageDownloadController.instance.AddToCacheList (
-                            new ImageDownloader2 (data[0].GetField ("img").str.Replace ("\\/", "/"), "general", transform.Find ("Panel/Section1/Icon").GetComponent<RawImage> (), 2, null, null));
+                        //LDFWImageDownloadController.instance.AddToCacheList (
+                            //new ImageDownloader2 (data[0].GetField ("img").str.Replace ("\\/", "/"), "general", transform.Find ("Panel/Section1/Icon").GetComponent<RawImage> (), 2, null, null));
 
                     }
                     if (data[1] != null) {
@@ -50,8 +50,8 @@ public class BusinessCooperationPanelController : BasePanelController {
                         transform.Find ("Panel/Section2/Text").GetComponent<TextController> ().ResetUI (
                             data[1].GetField ("description_zh").str.Replace ("，", ", ").Replace (",", ", "), 
                             data[1].GetField ("description_en").str.Replace ("，", ", ").Replace (",", ", "));
-                        LDFWImageDownloadController.instance.AddToCacheList (
-                            new ImageDownloader2 (data[1].GetField ("img").str.Replace ("\\/", "/"), "general", transform.Find ("Panel/Section2/Icon").GetComponent<RawImage> (), 2, null, null));
+                        //LDFWImageDownloadController.instance.AddToCacheList (
+                            //new ImageDownloader2 (data[1].GetField ("img").str.Replace ("\\/", "/"), "general", transform.Find ("Panel/Section2/Icon").GetComponent<RawImage> (), 2, null, null));
                     }
                     if (data[2] != null) {
                         transform.Find ("Panel/Section3/Title").GetComponent<TextController> ().ResetUI (
@@ -59,8 +59,8 @@ public class BusinessCooperationPanelController : BasePanelController {
                         transform.Find ("Panel/Section3/Text").GetComponent<TextController> ().ResetUI (
                             data[2].GetField ("description_zh").str.Replace ("，", ", ").Replace (",", ", "), 
                             data[2].GetField ("description_en").str.Replace ("，", ", ").Replace (",", ", "));
-                        LDFWImageDownloadController.instance.AddToCacheList (
-                            new ImageDownloader2 (data[2].GetField ("img").str.Replace ("\\/", "/"), "general", transform.Find ("Panel/Section3/Icon").GetComponent<RawImage> (), 2, null, null));
+                        //LDFWImageDownloadController.instance.AddToCacheList (
+                            //new ImageDownloader2 (data[2].GetField ("img").str.Replace ("\\/", "/"), "general", transform.Find ("Panel/Section3/Icon").GetComponent<RawImage> (), 2, null, null));
                     }
                 }
 

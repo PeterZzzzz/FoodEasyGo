@@ -439,7 +439,10 @@ public class AddressPanelController : BasePanelController
         }
     }
 
-
+    public void OnCloseModifyAddressPanelBtnClicked()
+    {
+        modifyAddressPanel.gameObject.SetActive(false);
+    }
     #endregion
 
 
