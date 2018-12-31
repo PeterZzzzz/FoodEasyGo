@@ -11,10 +11,10 @@ using Debug = UnityEngine.Debug;
 public class LeaveMessagePanelController : BasePanelController {
 
     public static LeaveMessagePanelController           instance;
-    public InputFieldController nameInputField;
-    public InputFieldController emailInputField;
-    public InputFieldController contactInputField;
-    public InputFieldController commentInputField;
+    public InputField nameInputField;
+    public InputField emailInputField;
+    public InputField contactInputField;
+    public InputField commentInputField;
     public ButtonController submitButton;
     public RectTransform panelRect;
 
