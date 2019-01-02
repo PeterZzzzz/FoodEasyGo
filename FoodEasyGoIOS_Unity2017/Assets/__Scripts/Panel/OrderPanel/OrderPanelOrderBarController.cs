@@ -23,22 +23,18 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
     public TextController   dishList;
     public TextController   dishNumberList;
     public TextController   totalPrice;
-    
+    public TextController   totalGoodsNum;
 
     public RawImage         image;
-    public Button           deleteButton;
     public Button           shareButton;
     public Button           commentButton;
-    public Button           againButton;
     public Button           helpButton;
 
 
 
     void Awake () {
-        deleteButton.onClick.AddListener (OnDeleteButtonClicked);
         shareButton.onClick.AddListener (OnShareButtonClicked);
         commentButton.onClick.AddListener (OnCommentButtonClicked);
-        againButton.onClick.AddListener (OnAgainButtonClicked);
     }
 
     public void Reset (string orderID, string orderStatus, string date, JSONObject orderData, JSONObject subOrderData) {
@@ -90,6 +86,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
             new ImageDownloader2 (goods[0].GetField ("restaurant").GetField ("img").str.Replace ("\\/", "/"), "order", image, 1, null, null));
 
 
+        int goodsNumber = 0;
         dishList.ResetUI ("");
         dishNumberList.ResetUI ("");
         totalPrice.ResetUI ("");
@@ -101,6 +98,7 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
             dishNumberList.ResetUI (
                 dishNumberList.textZH + "x" + goods[i].GetField ("number").str + "\n",
                 dishNumberList.textEN + "x" + goods[i].GetField ("number").str + "\n");
+            goodsNumber += int.Parse(goods[i].GetField("number").str);
         }
 
         dishList.textZH = dishList.textZH.TrimEnd ('\n');
@@ -108,8 +106,14 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
         dishNumberList.textZH = dishNumberList.textZH.TrimEnd ('\n');
         dishNumberList.textEN = dishNumberList.textEN.TrimEnd ('\n');
 
-        string totalPriceString = "$" + float.Parse (subOrderData.GetField ("discont_total_price").str).ToString ("0.00");
-        totalPrice.ResetUI ("总价格: " + totalPriceString, "Total Price: " + totalPriceString);
+        string totalPriceString = "$ " + float.Parse (subOrderData.GetField ("discont_total_price").str).ToString ("0.00");
+        totalPrice.ResetUI(totalPriceString, totalPriceString);
+        if (goodsNumber == 1)
+            totalGoodsNum.ResetUI("共 " + goodsNumber + " 件商品", goodsNumber + " good in total");
+        else if (goodsNumber > 1)
+            totalGoodsNum.ResetUI("共 " + goodsNumber + " 件商品", goodsNumber + " goods in total");
+        else
+            totalGoodsNum.ResetUI("无商品", "0 goods in total");
 
         if (subOrderData.GetField ("driver_grade").str != "0") {
             commentButton.gameObject.SetActive (false);
@@ -139,22 +143,12 @@ public class OrderPanelOrderBarController : MonoBehaviour, IPointerClickHandler 
 
 
 
-
-
-    public void OnDeleteButtonClicked () {
-
-    }
-
     public void OnShareButtonClicked () {
         MainCanvasController.instance.ShareToMoments(goods);
     }
 
     public void OnCommentButtonClicked () {
         OrderCommentPanelController.instance.OpenPanel (this, _subOrderID, _restaurantID);
-    }
-
-    public void OnAgainButtonClicked () {
-
     }
 
     public void OnPointerClick (PointerEventData eventData) {
