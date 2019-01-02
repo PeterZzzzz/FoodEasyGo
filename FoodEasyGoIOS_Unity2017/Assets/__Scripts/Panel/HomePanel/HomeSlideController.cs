@@ -92,61 +92,61 @@ public class HomeSlideController : BaseUIController
         {
             time += Time.deltaTime;
             //Debug.Log(indexOfImage);
-            if (MobileInputController.instance != null)
-            {
-                if (MobileInputController.instance.SwipeLeft)
-                {
-                    Debug.Log("向左滑");
-                    LDFWTweenPosition tp;
-                    tp = imageParent.GetChild(indexOfImage).GetComponent<LDFWTweenPosition>();
-                    tp.Init(Vector3.zero, new Vector3(-MainCanvasController.instance.canvasSize.x, 0f, 0f), 0.5f, 0f);
-                    tp.Play();
+            //if (MobileInputController.instance != null)
+            //{
+            //    if (MobileInputController.instance.SwipeLeft)
+            //    {
+            //        Debug.Log("向左滑");
+            //        LDFWTweenPosition tp;
+            //        tp = imageParent.GetChild(indexOfImage).GetComponent<LDFWTweenPosition>();
+            //        tp.Init(Vector3.zero, new Vector3(-MainCanvasController.instance.canvasSize.x, 0f, 0f), 0.5f, 0f);
+            //        tp.Play();
 
-                    if (indexOfImage < slideNumber - 1)
-                    {
-                        tp = imageParent.GetChild(indexOfImage + 1).GetComponent<LDFWTweenPosition>();
-                    }
-                    else
-                    {
-                        tp = imageParent.GetChild(0).GetComponent<LDFWTweenPosition>();
-                    }
-                    tp.Init(new Vector3(MainCanvasController.instance.canvasSize.x, 0f, 0f), Vector3.zero, 0.5f, 0f);
-                    tp.Play();
-                    if (indexOfImage == slideNumber - 1)
-                    {
-                        indexOfImage -= slideNumber;
-                    }
-                    indexOfImage += 1;
-                    time = 0;
+            //        if (indexOfImage < slideNumber - 1)
+            //        {
+            //            tp = imageParent.GetChild(indexOfImage + 1).GetComponent<LDFWTweenPosition>();
+            //        }
+            //        else
+            //        {
+            //            tp = imageParent.GetChild(0).GetComponent<LDFWTweenPosition>();
+            //        }
+            //        tp.Init(new Vector3(MainCanvasController.instance.canvasSize.x, 0f, 0f), Vector3.zero, 0.5f, 0f);
+            //        tp.Play();
+            //        if (indexOfImage == slideNumber - 1)
+            //        {
+            //            indexOfImage -= slideNumber;
+            //        }
+            //        indexOfImage += 1;
+            //        time = 0;
 
-                }
+            //    }
 
-                if (MobileInputController.instance.SwipeRight)
-                {
-                    Debug.Log("向右滑");
-                    LDFWTweenPosition tp;
-                    tp = imageParent.GetChild(indexOfImage).GetComponent<LDFWTweenPosition>();
-                    tp.Init(Vector3.zero, new Vector3(MainCanvasController.instance.canvasSize.x, 0f, 0f), 0.5f, 0f);
-                    tp.Play();
+            //    if (MobileInputController.instance.SwipeRight)
+            //    {
+            //        Debug.Log("向右滑");
+            //        LDFWTweenPosition tp;
+            //        tp = imageParent.GetChild(indexOfImage).GetComponent<LDFWTweenPosition>();
+            //        tp.Init(Vector3.zero, new Vector3(MainCanvasController.instance.canvasSize.x, 0f, 0f), 0.5f, 0f);
+            //        tp.Play();
 
-                    if (indexOfImage > 0)
-                    {
-                        tp = imageParent.GetChild(indexOfImage - 1).GetComponent<LDFWTweenPosition>();
-                    }
-                    else
-                    {
-                        tp = imageParent.GetChild(slideNumber - 1).GetComponent<LDFWTweenPosition>();
-                    }
-                    tp.Init(new Vector3(-MainCanvasController.instance.canvasSize.x, 0f, 0f), Vector3.zero, 0.5f, 0f);
-                    tp.Play();
-                    if (indexOfImage == 0)
-                    {
-                        indexOfImage = slideNumber;
-                    }
-                    indexOfImage -= 1;
-                    time = 0;
-                }
-            }
+            //        if (indexOfImage > 0)
+            //        {
+            //            tp = imageParent.GetChild(indexOfImage - 1).GetComponent<LDFWTweenPosition>();
+            //        }
+            //        else
+            //        {
+            //            tp = imageParent.GetChild(slideNumber - 1).GetComponent<LDFWTweenPosition>();
+            //        }
+            //        tp.Init(new Vector3(-MainCanvasController.instance.canvasSize.x, 0f, 0f), Vector3.zero, 0.5f, 0f);
+            //        tp.Play();
+            //        if (indexOfImage == 0)
+            //        {
+            //            indexOfImage = slideNumber;
+            //        }
+            //        indexOfImage -= 1;
+            //        time = 0;
+            //    }
+            //}
 
             if (time >= interval)
             {
