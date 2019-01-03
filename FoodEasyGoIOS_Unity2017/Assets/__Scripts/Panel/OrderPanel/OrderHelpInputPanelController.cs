@@ -131,7 +131,7 @@ public class OrderHelpInputPanelController : BasePanelController {
 
     }
 
-    public void submitClick()
+    public void SubmitClick()
     {
 
         WWWForm form = new WWWForm();
