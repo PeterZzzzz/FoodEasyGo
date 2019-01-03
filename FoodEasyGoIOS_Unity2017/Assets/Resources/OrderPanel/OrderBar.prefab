@@ -763,7 +763,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5E2E\u52A9"
+  m_Text: Help
   textZH: "\u5E2E\u52A9"
   textEN: Help
 --- !u!114 &114418861374831904
@@ -860,7 +860,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BC4\u8BBA"
+  m_Text: Comment
   textZH: "\u8BC4\u8BBA"
   textEN: Comment
 --- !u!114 &114585537467438102
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5206\u4EAB"
+  m_Text: Share
   textZH: "\u5206\u4EAB"
   textEN: Share
 --- !u!114 &114921653347648866
