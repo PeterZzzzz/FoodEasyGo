@@ -79,13 +79,14 @@ public class OrderCommentPanelController : BasePanelController {
     public void OnCommodityStarClicked (int index) {
         commodityStarCount = index + 1;
         CheckSubmitButtonValidity ();
-        for (int i=0; i<4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (i <= index) {
                 commodityCommentSection.Find ("Stars/Star" + i + "/Select").localScale = Vector3.one;
             } else {
                 commodityCommentSection.Find ("Stars/Star" + i + "/Select").localScale = Vector3.zero;
             }
         }
+        Debug.Log(commodityStarCount);
     }
 
 
@@ -96,13 +97,14 @@ public class OrderCommentPanelController : BasePanelController {
     public void OnDriverStarClicked (int index) {
         driverStarCount = index + 1;
         CheckSubmitButtonValidity ();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (i <= index) {
                 driverCommentSection.Find ("Stars/Star" + i + "/Select").localScale = Vector3.one;
             } else {
                 driverCommentSection.Find ("Stars/Star" + i + "/Select").localScale = Vector3.zero;
             }
         }
+        Debug.Log(driverStarCount);
     }
 
     #endregion
