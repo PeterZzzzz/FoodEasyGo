@@ -86,7 +86,6 @@ public class OrderCommentPanelController : BasePanelController {
                 commodityCommentSection.Find ("Stars/Star" + i + "/Select").localScale = Vector3.zero;
             }
         }
-        Debug.Log(commodityStarCount);
     }
 
 
@@ -104,7 +103,6 @@ public class OrderCommentPanelController : BasePanelController {
                 driverCommentSection.Find ("Stars/Star" + i + "/Select").localScale = Vector3.zero;
             }
         }
-        Debug.Log(driverStarCount);
     }
 
     #endregion

@@ -14,45 +14,43 @@ public class OrderDetailPanelController : BasePanelController {
     public JSONObject                                   _subOrderData;
 
     // Order List
-    public ScrollRect                                 defaultScrollRect;
+    public ScrollRect defaultScrollRect;
+    public RawImage image;
     public TextController restaurant;
+    public Transform DetailSection;
+    public Transform DishDetailSection;
     public Transform dishBar;
-    public Transform coupon;
-    public Transform fees;
-    public TextController delivery;
-    public TextController wechat;
+    public Text totalGoodsPrice;
+    public Text deliveryFee;
+    public Text extraFee;
+    public Text Tax;
+    public Text Tip;
+    public Text takeoutFee;
+    public Text discount;
+    public Text totalPrice;
+
+    public Text estimateDeliveryTime;
+    public Text weChat;
+
     public TextController orderID;
-    public TextController contactPerson;
+    public TextController couponType;
+    public TextController contact;
     public TextController email;
     public TextController address;
     public TextController paymentMethod;
     public TextController orderTime;
-    //public TextController notes;
-
-    public Image deliverStatusBar;
-    public Image[] deliverStatusIcons;
     public TextController deliverStatus;
-
-    public SpriteMask mask1;
-    public SpriteMask mask2;
-    public SpriteMask mask3;
-    public SpriteMask mask4;
-
-    // Private and temp variables;
     List<GameObject> tempGO;
-    
 
     protected new void Awake () {
         if (instance != null) {
             instance.gameObject.DestroyGO ();
         }
         instance = this;
-
         base.Awake ();
 
         headerTitle.ResetUI ("订单详情", "Order Details");
-        mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
-        tempGO = new List<GameObject> ();
+        tempGO = new List<GameObject>();
 
         if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
@@ -71,13 +69,16 @@ public class OrderDetailPanelController : BasePanelController {
 
     #region Overrides
     public override void ResetPanel () {
-        while (tempGO.Count > 0) {
-            tempGO[0].DestroyGO ();
-            tempGO.RemoveAt (0);
+        while (tempGO.Count > 0)
+        {
+            tempGO[0].DestroyGO();
+            tempGO.RemoveAt(0);
         }
     }
 
     public override void ReloadPanel () {
+        defaultScrollRect.content.offsetMax = Vector2.one;
+        defaultScrollRect.content.anchoredPosition = Vector2.zero;
     }
 
     public override void OpenPanel () {
@@ -96,13 +97,17 @@ public class OrderDetailPanelController : BasePanelController {
 
     #region LoadData
     public void ResetData () {
+
+        //Delivery status
+        UpdateDeliverStatus();
+        //Load restaurant image
+        LDFWImageDownloadController.instance.AddToCacheList(
+            new ImageDownloader2(_subOrderData.GetField("goods")[0].GetField("restaurant").GetField("img").str.Replace("\\/", "/"), "order", image, 1, null, null));
+        //Load restaurant name
         restaurant.ResetUI (_subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name").str, 
-            _subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name_en").str);
-        
-        string orderStatus = _subOrderData["status"].str;
-        UpdateDeliverStatus(orderStatus);
+        _subOrderData.GetField ("goods")[0].GetField ("restaurant").GetField ("name_en").str);
 
-
+        //Load dish details
         for (int i=0; _subOrderData.GetField ("goods")[i] != null; i++) {
             JSONObject goodsData = _subOrderData.GetField ("goods")[i];
             Transform newDishBar;
@@ -114,69 +119,65 @@ public class OrderDetailPanelController : BasePanelController {
                 dishBar.Find ("Price").GetComponent<TextController> ().ResetUI ("$" + goodsData.GetField ("goods_price").str);
             } else {
                 newDishBar = Instantiate (dishBar.gameObject).transform;
-                tempGO.Add (newDishBar.gameObject);
-                newDishBar.SetParent (defaultScrollRect.content);
+                tempGO.Add(newDishBar.gameObject);
+                newDishBar.SetParent(DishDetailSection);
                 newDishBar.localScale = Vector3.one;
-                newDishBar.SetSiblingIndex (dishBar.GetSiblingIndex () + 1);
+                newDishBar.SetSiblingIndex (i);
                 newDishBar.Find ("DishName").GetComponent<TextController>().ResetUI (
                     goodsData.GetField ("goods_name_zh").str, goodsData.GetField ("goods_name_en").str);
                 newDishBar.Find ("Quantity").GetComponent<TextController> ().ResetUI ("x" + goodsData.GetField ("number").str);
                 newDishBar.Find ("Price").GetComponent<TextController> ().ResetUI ("$" + goodsData.GetField ("goods_price").str);
-
             }
-
-            //LDFWImageDownloadController.instance.AddToCacheList (
-            //    new ImageDownloader2 (goodsData.GetField ("goods_img").str.Replace ("\\/", "/"), "restaurant", newDishBar.Find ("RawImage").GetComponent<RawImage>(), 1, null, null));
-
         }
+
+        DetailSection.GetComponent<LayoutElement>().preferredHeight = 420 + (DishDetailSection.childCount - 1) * 40;
+
+        //Load price section
+        totalGoodsPrice.text = "$ " + float.Parse(_subOrderData.GetField("goods_total_price").str).ToString("0.00");
+        deliveryFee.text = "$ " + float.Parse(_subOrderData.GetField("deliver_price").str).ToString("0.00");
+        extraFee.text = "$ " + float.Parse(_subOrderData.GetField("extra_price").str).ToString("0.00");
+        Tax.text = "$ " + float.Parse(_subOrderData.GetField("sales_price").str).ToString("0.00");
+        Tip.text = "$ " + float.Parse(_subOrderData.GetField("tip_price").str).ToString("0.00");
+        takeoutFee.text = "$ " + float.Parse(_subOrderData.GetField("reusable_bags_fee").str).ToString("0.00");
+        discount.text = "$ " + (float.Parse(_subOrderData.GetField("total_price").str) - float.Parse(_subOrderData.GetField("discont_total_price").str)).ToString("0.00");
+        totalPrice.text = "$ " + float.Parse(_subOrderData.GetField("discont_total_price").str).ToString("0.00");
+
+        //Load Content Section
+        weChat.text = "foodeasygo";
+
+        //Load Order Section
+        orderID.ResetUI(_subOrderData.GetField("order_number").str);
 
         string couponCode = _orderData.GetField ("coupon_sn").str;
         if (string.IsNullOrEmpty (couponCode)) {
-            coupon.Find ("Text1").GetComponent<TextController> ().ResetUI ("");
-            coupon.Find ("Text2").GetComponent<TextController> ().ResetUI ("");
-            coupon.GetComponent<LayoutElement> ().preferredHeight = 0;
+            couponType.ResetUI("无","None");
         } else {
-            coupon.Find ("Text1").GetComponent<TextController> ().ResetUI ("");
-            if (couponCode.Substring (0, 1) == "F" && couponCode.Substring (0,1) == "f") {
-                coupon.Find ("Text2").GetComponent<TextController> ().ResetUI ("免运费", "Free Delivery" );
+            if (couponCode.Substring (0, 1) == "F" || couponCode.Substring (0,1) == "f") {
+                couponType.ResetUI ("免运费", "Free Delivery" );
             } else {
-                coupon.Find ("Text2").GetComponent<TextController> ().ResetUI ("折扣", "Discount");
+                couponType.ResetUI ("折扣", "Discount");
             }
-            coupon.GetComponent<LayoutElement> ().preferredHeight = 30;
         }
 
-        fees.Find ("Text1").GetComponent<TextController> ().ResetUI (
-            "商品总价\n配送费\n额外费用\n销售税\n小费\n环保袋费\n合计", "Base price\nDelivery fee\nExtra fee\nTax\nTip\nTake-out Bags Fee\nTotal");
-        fees.Find("Text2").GetComponent<TextController>().ResetUI(
-            "$ " + float.Parse(_subOrderData.GetField("goods_total_price").str).ToString("0.00") +
-            "\n$ " + float.Parse(_subOrderData.GetField("deliver_price").str).ToString("0.00") +
-            "\n$ " + float.Parse(_subOrderData.GetField("extra_price").str).ToString("0.00") +
-            "\n$ " + float.Parse(_subOrderData.GetField("sales_price").str).ToString("0.00") +
-            "\n$ " + float.Parse(_subOrderData.GetField("tip_price").str).ToString("0.00") +
-            "\n$ " + float.Parse(_subOrderData.GetField("reusable_bags_fee").str).ToString("0.00") +
-            "\n$ " + float.Parse(_subOrderData.GetField("discont_total_price").str).ToString("0.00"));
+        contact.ResetUI(_orderData.GetField("first_name").str + " " + _orderData.GetField("last_name").str);
 
-        delivery.ResetUI ("");
-        wechat.ResetUI ("foodeasygo");
-        orderID.ResetUI (_subOrderData.GetField ("order_number").str);
+        email.ResetUI(_orderData.GetField("email").str);
 
-        contactPerson.ResetUI (_orderData.GetField ("first_name").str + " " + _orderData.GetField ("last_name").str);
-        email.ResetUI (_orderData.GetField ("email").str);
-        address.ResetUI (_orderData.GetField ("address").str + " " + _orderData.GetField ("street") + ", " + _orderData.GetField ("city"));
-        if (_orderData.GetField ("payment").str == "1") {
-            paymentMethod.ResetUI ("现金", "Cash");
-        } else {
-            paymentMethod.ResetUI ("信用卡", "Credit Card");
+        address.ResetUI(_orderData.GetField("address").str + " " + _orderData.GetField("street") + ", " + _orderData.GetField("city"));
+
+        if (_orderData.GetField("payment").str == "1")
+        {
+            paymentMethod.ResetUI("现金", "Cash");
         }
+        else
+        {
+            paymentMethod.ResetUI("信用卡", "Credit Card");
+        }
+
         orderTime.ResetUI (_orderData.GetField ("create_time").str);
-        //notes.ResetUI (_subOrderData.GetField ("note").str);
     }
 
-    private void UpdateDeliverStatus(string deliverStatus) {
-        foreach (var icon in deliverStatusIcons)
-            icon.color = new Color(204f / 255f, 204f / 255f, 204f / 255f, 1);
-        deliverStatusBar.fillAmount = 0;
-
+    private void UpdateDeliverStatus() {
         string zh = "已完成";
         string en = "Complete";
 
@@ -187,50 +188,33 @@ public class OrderDetailPanelController : BasePanelController {
             zh = "由餐馆配送";
             en = "Deliver by Restaurant";
             this.deliverStatus.ResetUI(zh, en);
-            mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
             return;
         }
 
         JSONObject orderDeliver = _subOrderData.GetField("deliver_status");
 
-        int fillRate = 0;
         if (orderDeliver.IsNull 
             || orderDeliver.GetField("deliver_status").str == "0")
         {
             zh = "下单成功";
             en = "Order Placed";
-            fillRate = 1;
-            mask1.enabled = true;
-            mask2.enabled = mask3.enabled = mask4.enabled = false;
         }
         else if ("12".Contains(orderDeliver.GetField("deliver_status").str))
         {
             zh = "备餐中";
             en = "Preparing Order";
-            fillRate = 2;
-            mask1.enabled = mask2.enabled = true;
-            mask3.enabled = mask4.enabled = false;
         }
         else if ("3".Contains(orderDeliver.GetField("deliver_status").str))
         {
             zh = "配送中";
             en = "Out For Delivery";
-            fillRate = 3;
-            mask1.enabled = mask2.enabled = mask3.enabled = true;
-            mask4.enabled = false;
         }
         else if (orderDeliver.GetField("deliver_status").str == "4")
         {
             zh = "已送达";
             en = "Delivered";
-            fillRate = 4;
-            mask1.enabled = mask2.enabled = mask3.enabled = mask4.enabled = false;
         }
-
-        deliverStatusBar.fillAmount = fillRate / 4f;
-        for (int i = 0; i < fillRate; i++)
-            deliverStatusIcons[i].color = new Color(1, 176f / 255f, 58f / 255f, 1);
-            
+                    
         this.deliverStatus.ResetUI(zh, en);
     }
     #endregion

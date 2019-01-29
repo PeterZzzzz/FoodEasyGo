@@ -763,7 +763,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help
+  m_Text: "\u5E2E\u52A9"
   textZH: "\u5E2E\u52A9"
   textEN: Help
 --- !u!114 &114418861374831904
@@ -860,7 +860,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Comment
+  m_Text: "\u8BC4\u8BBA"
   textZH: "\u8BC4\u8BBA"
   textEN: Comment
 --- !u!114 &114585537467438102
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Share
+  m_Text: "\u5206\u4EAB"
   textZH: "\u5206\u4EAB"
   textEN: Share
 --- !u!114 &114921653347648866
@@ -1656,7 +1656,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 25, y: 0}
-  m_SizeDelta: {x: 15, y: 20}
+  m_SizeDelta: {x: 10, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224893051884045078
 RectTransform:
