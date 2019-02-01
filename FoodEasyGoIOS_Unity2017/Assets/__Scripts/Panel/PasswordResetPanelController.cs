@@ -12,15 +12,10 @@ public class PasswordResetPanelController : BasePanelController {
 
     public InputField                               emailInputField;
     public InputField                               captchaInputField;
-    //public RawImage                                 captcha;
-    //public ButtonController                         resetCaptchaButton;
     public Text                                     captchaArithmeticText;
     public Button                                   submitButton;
 
     public RectTransform                            logoTransform;
-
-    //private WWW captchaWWW;
-    //private string[] cookie;
 
     private int                                     randomNumber1;
     private int                                     randomNumber2;

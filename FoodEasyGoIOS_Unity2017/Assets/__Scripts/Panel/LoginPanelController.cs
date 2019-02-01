@@ -8,9 +8,6 @@ using LDFW.Network;
 public class LoginPanelController : BasePanelController {
 
     public static LoginPanelController      instance;
-
-    public Transform                        homePanel;
-    
     public string                           email;
     public string                           password;
 
@@ -21,8 +18,7 @@ public class LoginPanelController : BasePanelController {
     public Transform                        googlePlusButton;
     public Transform                        facebookButton;
     public RectTransform                    logoTransform;
-
-    public Text versionText;
+    public Text                             versionText;
 
     protected new void Awake () {
         if (instance != null) {
@@ -31,7 +27,7 @@ public class LoginPanelController : BasePanelController {
         instance = this;
 
         base.Awake ();
-        versionText.text = "Version :" + Application.version;
+        versionText.text = "V " + Application.version;
 
     }
     
