@@ -373,8 +373,6 @@ public class CartPanelController : BasePanelController
 
         addressSection.Find("AddressBar").gameObject.SetActive(true);
         addressSection.Find("Empty").gameObject.SetActive(false);
-        addressSection.Find("AddressBar/Name").GetComponent<TextController>().ResetUI(address.GetField("name").str);
-        addressSection.Find("AddressBar/ContactNumber").GetComponent<TextController>().ResetUI(address.GetField("phone").str);
         addressSection.Find("AddressBar/Address").GetComponent<TextController>().ResetUI(
             address.GetField("address").str + ", " + address.GetField("street").str + ", " + address.GetField("city").str + ", "
             + address.GetField("state").str + ", " + address.GetField("zip_code").str);
@@ -404,24 +402,6 @@ public class CartPanelController : BasePanelController
 
     public void OnCheckOutButtonClicked()
     {
-        if (addressSection.Find("AddressBar/Name").GetComponent<TextController>().IsTextEmpty())
-        {
-            if (Config.currentLanguage == Language.chinese)
-                MessagePanelController.instance.DisplayPanel("缺少收货人名字, 请完善信息");
-            else
-                MessagePanelController.instance.DisplayPanel("Missing recipient name, please complete your address data");
-
-            return;
-        }
-        if (addressSection.Find("AddressBar/ContactNumber").GetComponent<TextController>().IsTextEmpty())
-        {
-            if (Config.currentLanguage == Language.chinese)
-                MessagePanelController.instance.DisplayPanel("缺少联系电话, 请完善信息");
-            else
-                MessagePanelController.instance.DisplayPanel("Missing contact phone number, please complete your address data");
-
-            return;
-        }
         if (!isPhoneVerified)
         {
             if (Config.currentLanguage == Language.chinese)

@@ -14,8 +14,8 @@ public class CartPanelHeader2ToggleElementController : LDFWToggleElementControll
     public override void SelectToggleElement()
     {
         base.SelectToggleElement();
-        line.color = Extensions.AppColor2();
-        text.color = Extensions.AppColor2();
+        line.color = Extensions.MainColor();
+        text.color = Extensions.MainColor();
     }
 
     public override void DeselectToggleElement()
