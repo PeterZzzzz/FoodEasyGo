@@ -9,9 +9,9 @@ public class PlaceOrderPanelTipToggleElementController : LDFWToggleElementContro
 
     public override void SelectToggleElement () {
         base.SelectToggleElement ();
-        GetComponent<Image> ().color = Extensions.AppColor2 ();
+        GetComponent<Image> ().color = Color.white;
         transform.Find ("Background").gameObject.SetActive (false);
-        transform.Find ("Text").GetComponent<Text> ().color = Color.white;
+        transform.Find ("Text").GetComponent<Text> ().color = new Color(0f, 167f / 255f, 255f / 255f, 1f);
     }
 
     public override void DeselectToggleElement () {

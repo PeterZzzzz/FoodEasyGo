@@ -17,32 +17,32 @@ public class PlaceOrderPanelController : BasePanelController
 
 
     // Transform
+    public RectTransform scrollRect;
     public Transform addressSection;
-    public Transform titleRestaurantBarSection;
+    public Transform deliveryInfoSection;
+    public Transform deliverySectionTitle;
     public Transform couponSection;
+    public InputField couponInputField;
     public Transform tipSection;
     public Transform feeSection;
-    public Transform paymentSection;
-    public Transform paymentCreditCardSection;
-    public Transform creditCardSection;
-    public Transform confirmOrderPanel;
-    public Transform uniwebviewPanel;
-    public InputField couponInputField;
-    public Button payButton;
-    public bool isCurrentOrderInstantSend = false;
-    public RectTransform scrollRect;
-    public RectTransform bottomBarRect;
-    public Transform RedeemPointSection;
+    public Transform RedeemSection;
     public InputField redeemInputField;
     public Button redeemBtn;
     public Transform RedeemDiscountSection;
     public bool isUsingRedeem;
     public string totalPriceBeforeRedeem;
+    public InputField instruction;
+    public Transform paymentSection;
+    public Transform paymentCreditCardSection;
+    public Transform creditCardSection;
+    public Button payButton;
+    public Transform confirmOrderPanel;
+    public Transform uniwebviewPanel;
+    public bool isCurrentOrderInstantSend = false;
     public bool isAcceptCash;
 
     // Prefab
     public Transform restaurantBarPrefab;
-
 
     // Private and temp variables
     private List<GameObject> tempGOList;
@@ -50,11 +50,9 @@ public class PlaceOrderPanelController : BasePanelController
     private string selectedCreditCardID = "";
     private string selectedCouponID = "";
     private float targetRegionDeliveryFee = 0f;
-
     private string totalPrice = "";
     private string extraFee = "";
     private string deliveryFee = "";
-
     private string cartDetailIDString = "";
     private bool isUsingFreeDelivery = false;
 
@@ -84,10 +82,6 @@ public class PlaceOrderPanelController : BasePanelController
         {
             // iPhoneX
             scrollRect.offsetMin = new Vector2(scrollRect.offsetMin.x, scrollRect.offsetMin.y + 20);
-
-            Vector2 pos = bottomBarRect.position;
-            pos.y += 20;
-            bottomBarRect.position = pos;
             Debug.Log("iPhoneX适配4");
 
         }
@@ -122,11 +116,12 @@ public class PlaceOrderPanelController : BasePanelController
         confirmOrderPanel.gameObject.SetActive(false);
         tipSection.gameObject.SetActive(false);
 
-        RedeemPointSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + UserDataController.instance.availablePoint, "Available Point :" + UserDataController.instance.availablePoint);
+        RedeemSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + UserDataController.instance.availablePoint, "Available Point :" + UserDataController.instance.availablePoint);
         redeemInputField.text = "";
         redeemBtn.interactable = false;
         savedPrice = 0;
         RedeemDiscountSection.gameObject.SetActive(false);
+        RedeemSection.GetComponent<LayoutElement>().preferredHeight = 90;
         redeemBtn.transform.Find("Text").GetComponent<TextController>().ResetUI("兑换", "Redeem");
         isUsingRedeem = false;
 
@@ -143,19 +138,17 @@ public class PlaceOrderPanelController : BasePanelController
         if (address != null)
         {
 
-            addressSection.Find("AddressBar").gameObject.SetActive(true);
-            addressSection.Find("AddressBar/Name").GetComponent<TextController>().ResetUI(address.GetField("name").str);
-            addressSection.Find("AddressBar/ContactNumber").GetComponent<TextController>().ResetUI(address.GetField("phone").str);
-            addressSection.Find("AddressBar/Address").GetComponent<TextController>().ResetUI(
+            addressSection.gameObject.SetActive(true);
+            addressSection.Find("Address").GetComponent<TextController>().ResetUI(
                 address.GetField("address").str + ", " + address.GetField("street").str + ", " + address.GetField("city").str + ", "
                 + address.GetField("state").str + ", " + address.GetField("zip_code").str);
+            addressSection.Find("Contact").GetComponent<TextController>().ResetUI(address.GetField("name").str + "  " + address.GetField("phone").str);
         }
         else
         {
-            addressSection.Find("AddressBar").gameObject.SetActive(true);
-            addressSection.Find("AddressBar/Name").GetComponent<TextController>().ResetUI("");
-            addressSection.Find("AddressBar/ContactNumber").GetComponent<TextController>().ResetUI("");
-            addressSection.Find("AddressBar/Address").GetComponent<TextController>().ResetUI("");
+            addressSection.gameObject.SetActive(true);
+            addressSection.Find("Address").GetComponent<TextController>().ResetUI("");
+            addressSection.Find("Contact").GetComponent<TextController>().ResetUI("");
         }
 
 
@@ -167,7 +160,7 @@ public class PlaceOrderPanelController : BasePanelController
         creditCardSection.Find("YearSection/Input").GetComponent<InputField>().text = "";
         creditCardSection.Find("SecurityCodeSection/Input").GetComponent<InputField>().text = "";
 
-        //couponSection.FindChild ("Text").GetComponent<Text> ().text = Config.currentLanguage == Language.chinese ? "点击添加优惠券" : "Click to add a coupon";
+        deliveryInfoSection.GetComponent<LayoutElement>().preferredHeight = 130;
     }
 
     /// <summary>
@@ -191,7 +184,7 @@ public class PlaceOrderPanelController : BasePanelController
             yield return new WaitForSeconds(0.5f);
 
 
-        tipSection.Find("ToggleController").GetComponent<LDFWToggleController>().Reset();
+        tipSection.Find("Panel/ToggleController").GetComponent<LDFWToggleController>().Reset();
         targetRegionDeliveryFee = 0f;
 
         JSONObject creditCardJSON = AppDataController.instance.GetCreditCard("default");
@@ -245,7 +238,6 @@ public class PlaceOrderPanelController : BasePanelController
                     }
                 }
             }
-
         }
         else
         {
@@ -284,13 +276,7 @@ public class PlaceOrderPanelController : BasePanelController
                             reservationContent.GetChild(i).Find("Header/Title").GetComponent<TextController>().textEN,
                             deliveryTimeZH, deliveryTimeEN);
                     }
-                    /*
-                    GetNewRestaurantBar (
-                        reservationContent.GetChild (i).Find ("Header/Title").GetComponent<TextController> ().textZH,
-                        reservationContent.GetChild (i).Find ("Header/Title").GetComponent<TextController> ().textEN,
-                        AppDataController.instance.GetDeliveryDestineTime (
-                            reservationContent.GetChild (i).GetChild (1).GetComponent<CartPanelDishBarController> ().cartDetailData._deliverTimeID), "");
-                            */
+
                     foreach (var dishBar in reservationContent.GetChild(i).GetComponent<CartPanelRestaurantBarController>().dishBarList)
                     {
                         if (dishBar.isSelectedForCheckOut)
@@ -306,22 +292,23 @@ public class PlaceOrderPanelController : BasePanelController
             //既点即送
             if (isAcceptCash)
             {
-                paymentSection.GetChild(0).localScale = Vector3.one;
-                paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
-                paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
-            }else
+                paymentSection.GetChild(1).localScale = Vector3.one;
+                paymentSection.GetComponent<LayoutElement>().preferredHeight = 170;
+                paymentSection.GetComponent<LDFWToggleController>().SelectToggle(0);
+            }
+            else
             {
-                paymentSection.GetChild(0).localScale = Vector3.zero;
-                paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
-                paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
+                paymentSection.GetChild(1).localScale = Vector3.zero;
+                paymentSection.GetComponent<LayoutElement>().preferredHeight = 90;
+                paymentSection.GetComponent<LDFWToggleController>().SelectToggle(0);
             }
         }
         else
         {
             //超市团购
-            paymentSection.GetChild(0).localScale = Vector3.zero;
-            paymentSection.GetComponent<LayoutElement>().preferredHeight = 60;
-            paymentSection.GetComponent<LDFWToggleController>().SelectToggle(1);
+            paymentSection.GetChild(1).localScale = Vector3.zero;
+            paymentSection.GetComponent<LayoutElement>().preferredHeight = 90;
+            paymentSection.GetComponent<LDFWToggleController>().SelectToggle(0);
         }
 
 
@@ -385,9 +372,11 @@ public class PlaceOrderPanelController : BasePanelController
     {
         Transform restaurantBar = Instantiate(restaurantBarPrefab.gameObject).transform;
         tempGOList.Add(restaurantBar.gameObject);
-        restaurantBar.SetParent(titleRestaurantBarSection.parent);
+        restaurantBar.SetParent(deliverySectionTitle.parent);
         restaurantBar.localScale = Vector3.one;
-        restaurantBar.SetSiblingIndex(titleRestaurantBarSection.GetSiblingIndex() + 1);
+        restaurantBar.SetSiblingIndex(deliverySectionTitle.GetSiblingIndex() + 1);
+        //动态添加UI的高度
+        deliveryInfoSection.GetComponent<LayoutElement>().preferredHeight += 40;
 
         if (string.IsNullOrEmpty(typeEN))
             typeEN = typeZH;
@@ -556,7 +545,6 @@ public class PlaceOrderPanelController : BasePanelController
     private void GetDeliveryFeeList()
     {
         WWWForm form = new WWWForm();
-        //form.AddField("restaurant_id_list", )
     }
 
     #endregion
@@ -619,17 +607,6 @@ public class PlaceOrderPanelController : BasePanelController
         }
     }
 
-    //public void OnCustomTipButtonClicked(string text)
-    //{
-    //    float amount = 0f;
-    //    if (!string.IsNullOrEmpty(text) && !float.TryParse(text, out amount))
-    //    {
-    //        MessagePanelController.instance.DisplayPanel("Invalid tip");
-    //    }
-    //    feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text = "$ " + amount.ToString("0.00");
-    //    CalcualteTotalPrice();
-    //}
-
     public void OnTipBtnClicked()
     {
         tipSection.gameObject.SetActive(true);
@@ -666,9 +643,6 @@ public class PlaceOrderPanelController : BasePanelController
                     LoadingPanelController.instance.HidePanelImmediately();
                     orderNumber = data.GetField("order_number").str;
                     orderID = data.GetField("order_id").str;
-
-                    //feeSection.Find ("DeliveryFeeTitle/Text").GetComponent<Text> ().text = "$ " + data.GetField ("deliver_price").f.ToString("0.00");
-                    //CalcualteTotalPrice ();
 
                     if (successCallBack == null)
                     {
@@ -707,17 +681,17 @@ public class PlaceOrderPanelController : BasePanelController
         form.AddField("order_id", orderID);
         if (paymentSection.GetComponent<LDFWToggleController>().GetSelectedElements() == "0")
         {
-            form.AddField("pay_type", "1");
+            form.AddField("pay_type", "2");
         }
         else
         {
-            form.AddField("pay_type", "2");
+            form.AddField("pay_type", "1");
         }
         form.AddField("tip", feeSection.Find("TipFeeTitle/Text").GetComponent<Text>().text.Substring(2));
         form.AddField("coupon_sn", couponSection.Find("Input").GetComponent<InputField>().text);
         form.AddField("address_id", CartPanelController.instance.selectedAddressID);
         form.AddField("payment_id", selectedCreditCardID);
-        form.AddField("instruction", addressSection.Find("AddressBar/Instruction").GetComponent<InputField>().text);
+        form.AddField("instruction", instruction.text);
         form.AddField("reusable_bags_fee", feeSection.Find("ReusableBagsTitle/Text").GetComponent<Text>().text.Substring(2));
         if (isUsingRedeem)
         {
@@ -747,7 +721,7 @@ public class PlaceOrderPanelController : BasePanelController
             new LDFWServerResponseEvent((JSONObject data, string m) =>
                 {
                     LoadingPanelController.instance.HidePanelImmediately();
-                    if (paymentSection.GetComponent<LDFWToggleController>().GetSelectedElements() != "0")
+                    if (paymentSection.GetComponent<LDFWToggleController>().GetSelectedElements() == "0")
                     {
                         //信用卡结账
                         SwitchUniwebviewPanel(true);
@@ -760,13 +734,6 @@ public class PlaceOrderPanelController : BasePanelController
                         OpenConfirmWindow();
                         UserDataController.instance.hasMadeFirstOrder = "1";
                     }
-
-                    /*
-                confirmOrderPanel.Find ("OrderNumber").GetComponent<TextController> ().ResetUI (
-                    "订单号: <color=orange>" + orderNumber + "</color>",
-                    "Order ID: <color=orange>" + orderNumber + "</color>");
-                confirmOrderPanel.gameObject.SetActive (true);
-                */
                 }),
             new LDFWServerResponseEvent((JSONObject data, string m) =>
                 {
@@ -844,7 +811,7 @@ public class PlaceOrderPanelController : BasePanelController
 
                         string checkEmailZH = "部分订单可能由餐馆自行配送，请查看您的确认邮件.";
                         string checkEmailEN = "Please check your email for order details.";
-                        confirmOrderPanel.Find("OrderNumber").GetComponent<TextController>().ResetUI(
+                        confirmOrderPanel.Find("Content/OrderNumber").GetComponent<TextController>().ResetUI(
                         "订单号: " + subOrderNumber + "\n" + checkEmailZH,
                         "Order ID: " + subOrderNumber + "\n" + checkEmailEN);
 
@@ -976,8 +943,7 @@ public class PlaceOrderPanelController : BasePanelController
 
         if (address == null)
         {
-            addressSection.Find("AddressBar").gameObject.SetActive(false);
-            addressSection.Find("Empty").gameObject.SetActive(true);
+            addressSection.gameObject.SetActive(false);
         }
 
         // check for delivery fee based on address
@@ -993,13 +959,11 @@ public class PlaceOrderPanelController : BasePanelController
     {
         selectedAddressID = address.GetField("id").str;
 
-        addressSection.Find("AddressBar").gameObject.SetActive(true);
-        addressSection.Find("AddressBar/Name").GetComponent<TextController>().ResetUI(address.GetField("name").str);
-        addressSection.Find("AddressBar/ContactNumber").GetComponent<TextController>().ResetUI(address.GetField("phone").str);
-        addressSection.Find("AddressBar/Address").GetComponent<TextController>().ResetUI(
-            address.GetField("address").str + ", " + address.GetField("street").str + ", " + address.GetField("city").str + ", "
-            + address.GetField("state").str + ", " + address.GetField("zip_code").str);
-
+        addressSection.gameObject.SetActive(true);
+        addressSection.Find("Address").GetComponent<TextController>().ResetUI(
+                address.GetField("address").str + ", " + address.GetField("street").str + ", " + address.GetField("city").str + ", "
+                + address.GetField("state").str + ", " + address.GetField("zip_code").str);
+        addressSection.Find("Contact").GetComponent<TextController>().ResetUI(address.GetField("name").str + "  " + address.GetField("phone").str);
     }
 
 
@@ -1021,18 +985,18 @@ public class PlaceOrderPanelController : BasePanelController
 
     public void OnRedeemBtnClick()
     {
-
-        if(isUsingRedeem)
+        if (isUsingRedeem)
         {   
             //正在使用兑换，点击后关闭窗口
             RedeemDiscountSection.gameObject.SetActive(false);
+            RedeemSection.GetComponent<LayoutElement>().preferredHeight = 90;
             redeemBtn.transform.Find("Text").GetComponent<TextController>().ResetUI("兑换", "Redeem");
             isUsingRedeem = false;
             redeemInputField.text = "";
             savedPrice = 0;
             RedeemDiscountSection.Find("SavedText").GetComponent<TextController>().text = "$ " + savedPrice.ToString("0.00");;
             RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ 0.00";
-            RedeemPointSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + UserDataController.instance.availablePoint, "Available Point :" + UserDataController.instance.availablePoint);
+            RedeemSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + UserDataController.instance.availablePoint, "Available Point :" + UserDataController.instance.availablePoint);
 
         }
         else
@@ -1058,9 +1022,10 @@ public class PlaceOrderPanelController : BasePanelController
 
 
             RedeemDiscountSection.gameObject.SetActive(true);
+            RedeemSection.GetComponent<LayoutElement>().preferredHeight = 170;
             redeemBtn.transform.Find("Text").GetComponent<TextController>().ResetUI("取消", "Cancel");
             isUsingRedeem = true;
-            RedeemPointSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + (int.Parse(UserDataController.instance.availablePoint) - int.Parse(redeemInputField.text)).ToString(), "Available Point :" + (int.Parse(UserDataController.instance.availablePoint) - int.Parse(redeemInputField.text)).ToString());
+            RedeemSection.Find("Header/Point").GetComponent<TextController>().ResetUI("可使用积分 :" + (int.Parse(UserDataController.instance.availablePoint) - int.Parse(redeemInputField.text)).ToString(), "Available Point :" + (int.Parse(UserDataController.instance.availablePoint) - int.Parse(redeemInputField.text)).ToString());
             RedeemDiscountSection.Find("SavedText").GetComponent<TextController>().text = "$ " + savedPrice.ToString("0.00");
             RedeemDiscountSection.Find("FinalPriceText").GetComponent<TextController>().text = "$ " + (decimal.Parse(totalPriceBeforeRedeem) - savedPrice).ToString("0.00");
         }

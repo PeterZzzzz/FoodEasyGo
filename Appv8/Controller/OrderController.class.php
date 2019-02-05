@@ -1169,7 +1169,9 @@ class OrderController extends BaseController {
 
             //交易成功，创建餐馆推送。
             OrderController::createRestaurantNotification($orderID);
-            $this->return_data(['$redeemedPoint' => "0"], 'No Redeemed');
+            $returnData['receivedPoint'] = "0";
+            $returnData['redeemedPoint'] = "0";
+            $this->return_data($returnData, 'No Redeemed');
 		}
 	}
 

@@ -57,7 +57,7 @@ class RestaurantController extends BaseController {
 					(select restaurant_id from food_restaurant_deliver_fee where region_id = $this->targetRegionID) and region_id not in (172, 174)
 					and `status` = 1 and `goods_type` = 2")
 			->order('sort asc')
-			->limit(6)
+			->limit(9)
 			->select();
 		
 		if ($res) {
