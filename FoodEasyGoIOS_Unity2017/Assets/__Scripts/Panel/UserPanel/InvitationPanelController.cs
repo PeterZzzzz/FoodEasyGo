@@ -30,7 +30,7 @@ public class InvitationPanelController : BasePanelController {
         transform.Find ("Content/Description").GetComponent<TextController> ().ResetUI (
             "将您的邀请码分享给好友，好友成功注册且下单后，您将获得95折优惠券一张。",
             "Share your invitation code with your friend, you'll get one 5% off coupon after your friend has made his/her first purchase");
-        transform.Find ("Content/InvitationCode/Text").GetComponent<Text> ().text = UserDataController.instance.invitationCode;
+        transform.Find("Content/InvitationCode").GetComponent<TextController>().ResetUI("我的邀请码 " + UserDataController.instance.invitationCode, "My InvitationCode " + UserDataController.instance.invitationCode);
     }
     #endregion
 
