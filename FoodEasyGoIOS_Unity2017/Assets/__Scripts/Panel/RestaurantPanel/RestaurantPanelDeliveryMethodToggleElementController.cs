@@ -15,13 +15,13 @@ public class RestaurantPanelDeliveryMethodToggleElementController : LDFWToggleEl
     public override void SelectToggleElement () {
         base.SelectToggleElement ();
         
-        text.color = new Color (0.25f, 0.25f, 0.25f, 1f);
+        text.color = Extensions.MainColor();
     }
 
     public override void DeselectToggleElement () {
         base.DeselectToggleElement ();
         
-        text.color = new Color (0.5f, 0.5f, 0.5f, 1f);
+        text.color = new Color (51f / 255f, 51f / 255f, 51f / 255f, 1f);
     }
 
     public override void OnPointerClick (PointerEventData eventData) {

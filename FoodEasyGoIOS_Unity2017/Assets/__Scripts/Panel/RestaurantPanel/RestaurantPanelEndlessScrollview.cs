@@ -30,7 +30,7 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
         _restaurantTypeID = typeid;
         _sortTypeID = sorttypeid;
 
-        _scrollRectElementPreferredHeight = (int)(MainCanvasController.instance.canvasSize.x * 0.5f + 100);
+        _scrollRectElementPreferredHeight = 120;
     }
 
     public override void LoadData()
@@ -116,7 +116,7 @@ public class RestaurantPanelEndlessScrollview : InfiniteScrollRectController
         {
             if (_contentEndDataIndex < _dataLength - 1)
             {
-                _scrollRectElementParentContent.GetChild(0).Find("Image").GetComponent<RawImage>().texture = defaultImage;
+                _scrollRectElementParentContent.GetChild(0).Find("Mask/Image").GetComponent<RawImage>().texture = defaultImage;
                 _scrollRectElementParentContent.GetChild(0).SetAsLastSibling();
                 _scrollRectElementParentContent.anchoredPosition -= new Vector2(0f, _scrollRectElementPreferredHeight);
                 _contentTopActionPosition += _scrollRectElementPreferredHeight;
