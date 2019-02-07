@@ -21,11 +21,12 @@ public class GroceryPanelGroceryBarElementController : MonoBehaviour {
     public string _nameEN1;
     public string _nameEN2;
 
-
+    public RectTransform group1;
     public TextController title1;
     public TextController price1;
     public RawImage image1;
 
+    public RectTransform group2;
     public TextController title2;
     public TextController price2;
     public RawImage image2;
@@ -76,12 +77,12 @@ public class GroceryPanelGroceryBarElementController : MonoBehaviour {
 
             title2.ResetUI (_nameZH2, _nameEN2);
             price2.ResetUI ("$" + _price2);
-            Destroy (image1.texture);
+            Destroy (image2.texture);
             LDFWImageDownloadController.instance.AddToCacheList (new ImageDownloader2 (_imageURL2.Replace ("\\/", "/"), "grocery", image2, 2, null, null));
         }
-        
-        (image1.transform as RectTransform).sizeDelta = Vector2.one * ((transform as RectTransform).rect.size.x - 30) * 0.5f;
-        (image2.transform as RectTransform).sizeDelta = Vector2.one * ((transform as RectTransform).rect.size.x - 30) * 0.5f;
+
+        group1.sizeDelta = Vector2.one * ((transform as RectTransform).rect.size.x - 60) * 0.5f;
+        group2.sizeDelta = Vector2.one * ((transform as RectTransform).rect.size.x - 60) * 0.5f;
     }
 
     public void OnImage1AddButtonClicked () {

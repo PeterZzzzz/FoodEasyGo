@@ -98,13 +98,13 @@ public class GroceryPanelController : BasePanelController {
     public void CloseTipBar () {
         tipBar.localScale = Vector3.zero;
         tipAnimator.enabled = false;
-        categoryBar.anchoredPosition = new Vector2 (0, -70);
-        defaultDisplay.anchoredPosition = new Vector2 (0, -120);
-        defaultDisplay.sizeDelta = new Vector2 (defaultDisplay.sizeDelta.x, -170);
-        if (Screen.width == 1125)
+        categoryBar.anchoredPosition = new Vector2 (0, -100);
+        defaultDisplay.anchoredPosition = new Vector2 (0, -150);
+        defaultDisplay.sizeDelta = new Vector2 (defaultDisplay.sizeDelta.x, -200);
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
-            defaultDisplay.sizeDelta = new Vector2(defaultDisplay.sizeDelta.x, -190);
+            defaultDisplay.sizeDelta = new Vector2(defaultDisplay.sizeDelta.x, -220);
             Debug.Log("iPhoneX适配11");
         }
 
