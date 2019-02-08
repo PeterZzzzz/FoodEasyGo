@@ -18,7 +18,7 @@ public class RestaurantDishDetailAttributeToggleElementController : LDFWToggleEl
         if (canSelectQuantity) {
             base.SelectToggleElement ();
             selecteCover.SetActive (true);
-            text.color = Color.white;
+            text.color = new Color(151f / 255f, 96f / 255, 54f / 255f, 1f);
             
             RestaurantDishDetailPanelSelectQuantityController.instance.OpenController (
                 this, Config.currentLanguage == Language.chinese ? _textZH : _textEN, quantity);
@@ -26,7 +26,7 @@ public class RestaurantDishDetailAttributeToggleElementController : LDFWToggleEl
         } else {
             base.SelectToggleElement ();
             selecteCover.SetActive (true);
-            text.color = Color.white;
+            text.color = new Color(151f / 255f, 96f / 255, 54f / 255f, 1f);
         }
 
         toggleController.UpdateSelectedList();
@@ -39,7 +39,7 @@ public class RestaurantDishDetailAttributeToggleElementController : LDFWToggleEl
         } else {
             base.DeselectToggleElement ();
             selecteCover.SetActive (false);
-            text.color = new Color (0.5f, 0.5f, 0.5f, 1f);
+            text.color = new Color(51f / 255f, 51f / 255, 51f / 255f, 1f);
         }
 
         toggleController.UpdateSelectedList();

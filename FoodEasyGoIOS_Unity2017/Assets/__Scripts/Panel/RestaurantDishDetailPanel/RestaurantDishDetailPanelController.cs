@@ -28,9 +28,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 	public RawImage dishImage;
 	public TextController dishDetail;
 	public TextController priceText;
-	public TextController selectedText;
 	public TextController dishDescription;
-	public TextController deliveryText;
 	public InputField noteInputField;
     public RectTransform footerRect;
 
@@ -87,7 +85,6 @@ public class RestaurantDishDetailPanelController : BasePanelController
         topSection.Find("Detail").GetComponent<TextController>().ResetUI("");
 		topSection.Find("Price").GetComponent<TextController>().ResetUI("");
 
-		//selectedText.ResetUI ("已选: ", "Selected: ");
 		//dishDescription.ResetUI ("");
 		noteInputField.text = "";
 
@@ -140,9 +137,6 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
 		this.dishID = dishID;
 		this.cartDetailID = cartDetailID;
-
-		//UpdateDeliveryText();
-
 		base.OpenPanel();
 	}
 
@@ -157,9 +151,6 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
 		dishID = data._dishData._id;
 		cartDetailID = data._id;
-
-		//UpdateDeliveryText();
-
 
 		base.OpenPanel();
 	}
@@ -182,9 +173,6 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
 		this.dishID = groceryID;
 		this.cartDetailID = cartDetailID;
-
-		//UpdateDeliveryText();
-
 		base.OpenPanel();
 	}
 
@@ -222,7 +210,6 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
         dishDetail.ResetUI("菜品详情: " + data.GetField("describe").str, "Dish details: " + data.GetField("describe_en").str);
 		priceText.ResetUI("$" + data.GetField("price").str);
-		//selectedText.ResetUI ("已选: ", "Selected: ");
 		//dishDescription.ResetUI (data.GetField ("describe").str, data.GetField ("describe_en").str);
 		yield return null;
 
@@ -451,48 +438,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 			}
 		}
 
-		//selectedText.ResetUI ("已选: " + textZH, "Selected: " + textEN);
 	}
-
-	/*
-    public void UpdateDeliveryText()
-    {
-        return;
-        //Debug.Log ("UpdateDeliveryText: " + currentCategoryID);
-        deliveryText.ResetUI("");
-
-        if (currentCategoryID == "1")
-        {
-            deliveryText.ResetUI("配送时间: 即点即送", "Delivery Time: Upon order confirmed");
-
-        }
-        else if (currentCategoryID == "3")
-        {
-            bool isTomorrow = false;
-            int hour = DateTime.Now.Hour;
-
-            if (hour >= 15)
-            {
-                isTomorrow = true;
-            }
-
-            string timeZH = "", timeEN = "";
-
-            if (isTomorrow)
-            {
-                timeZH = "明天 19:00 - 22:00";
-                timeEN = "Tomorrow 19:00 - 22:00";
-            }
-            else
-            {
-                timeZH = "今天 19:00 - 22:00";
-                timeEN = "Today 19:00 - 22:00";
-            }
-
-            deliveryText.ResetUI("配送时间: " + timeZH, "Delivery Time: " + timeEN);
-        }
-    }
-    */
 
 	public bool CheckAttributeValidity() {
 		foreach (var attribute in attributeList)

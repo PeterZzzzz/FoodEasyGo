@@ -77,10 +77,10 @@ public class RestaurantDetailPanelController : BasePanelController
     {
         base.Start();
 
-        dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 70 - 30 - 50;
-        if (Screen.width == 1125)
+        dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 100 - 30 - 50;
+        if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
-            dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 70 - 30 - 50 - 20;
+            dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 100 - 30 - 50 - 20;
             Debug.Log("iPhoneX适配10");
         }
 
