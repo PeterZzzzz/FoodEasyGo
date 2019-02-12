@@ -35,11 +35,11 @@ public class RecruitPanel : BasePanelController {
         LoadingPanelController.instance.DisplayPanel ();
         defaultScrollRect.content.Find ("Title/Text").GetComponent<TextController> ().ResetUI (
             "发送邮件至: info@foodeasygo.com\n" +
-            "邮件标题为: \"应聘xx(岗位名称) - 姓名\"\n" +
+            "邮件标题为: 应聘xx(岗位名称) - 姓名\n" +
             "FoodEasyGo 期待您的加入！",
 
             "Send your email to: info@foodeasygo.com\n" +
-            "Title should be: \"Applying for xx position - your name\"\n" +
+            "Title should be: Applying for xx position - your name\n" +
             "FoodEasyGo is looking forward to hearing from you");
 
         InfoNetworkController.instance.GetRecruit (

@@ -15,7 +15,7 @@ public class LeaveMessagePanelController : BasePanelController {
     public InputField emailInputField;
     public InputField contactInputField;
     public InputField commentInputField;
-    public ButtonController submitButton;
+    public Button submitButton;
     public RectTransform panelRect;
 
 
