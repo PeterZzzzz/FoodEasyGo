@@ -429,10 +429,14 @@ public class CartPanelController : BasePanelController
         PlaceOrderPanelController.instance.isAcceptCash = isCashAccept;
 
         decimal reusableFee = 0;
+        List<string> resIdList = new List<string>();
         foreach (KeyValuePair<string, CartDetailData> pair in CartController.instance.cart._cartDetailDic)
         {
-            //Debug.Log(decimal.Parse(restaurantDic[pair.Value._restaurantID].GetField("reusable_bags_fee").str));
-            reusableFee += decimal.Parse(restaurantDic[pair.Value._restaurantID].GetField("reusable_bags_fee").str);
+            if (!resIdList.Contains(pair.Value._restaurantID))
+            {
+                reusableFee += decimal.Parse(restaurantDic[pair.Value._restaurantID].GetField("reusable_bags_fee").str);
+                resIdList.Add(pair.Value._restaurantID);
+            }
         }
         PlaceOrderPanelController.instance.feeSection.Find("ReusableBagsTitle/Text").GetComponent<Text>().text = "$ " + reusableFee.ToString("0.00");
 
