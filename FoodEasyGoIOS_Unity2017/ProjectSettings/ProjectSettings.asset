@@ -123,7 +123,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 3.0.0
+  bundleVersion: 3.0.1
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -154,7 +154,7 @@ PlayerSettings:
     iOS: com.xianhe.foodeasygo
     tvOS: com.maxo.foodeasygo
   buildNumber:
-    iOS: 3.0
+    iOS: 1.0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
@@ -182,17 +182,26 @@ PlayerSettings:
   uIRequiresFullScreen: 1
   uIStatusBarHidden: 0
   uIExitOnSuspend: 0
-  uIStatusBarStyle: 1
+  uIStatusBarStyle: 0
   iPhoneSplashScreen: {fileID: 0}
-  iPhoneHighResSplashScreen: {fileID: 0}
-  iPhoneTallHighResSplashScreen: {fileID: 0}
-  iPhone47inSplashScreen: {fileID: 0}
-  iPhone55inPortraitSplashScreen: {fileID: 0}
-  iPhone55inLandscapeSplashScreen: {fileID: 0}
-  iPadPortraitSplashScreen: {fileID: 0}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
-  iPadLandscapeSplashScreen: {fileID: 0}
-  iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: f034352ec9bdb444c9cc10fd9953f0fe,
+    type: 3}
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 657cd1e3382ba42af86994139b1a6ab9,
+    type: 3}
+  iPhone47inSplashScreen: {fileID: 2800000, guid: b65bfd102f63742a2b124bd4510e51c3,
+    type: 3}
+  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 21944c2c712714be7b600d285df0feec,
+    type: 3}
+  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: 33e9fdc38e45448998a3f68fb15b4b87,
+    type: 3}
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: 4d652eba673304ae3b238fe9bd6ce303,
+    type: 3}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: ee6712d8ee41246138fc75f02aaf3bfe,
+    type: 3}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: ab6d016f635794b2885e55b3ece7ed62,
+    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: c1099e818a7c2425b99876097f988257,
+    type: 3}
   appleTVSplashScreen: {fileID: 0}
   tvOSSmallIconLayers: []
   tvOSLargeIconLayers: []
@@ -246,10 +255,107 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: fe6a919d10c38584590e8784b080adfd, type: 3}
+      m_Icon: {fileID: 2800000, guid: 3a17fbba49ee944a5bc1fc4e5053c5de, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
+  - m_BuildTarget: iPhone
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 3a17fbba49ee944a5bc1fc4e5053c5de, type: 3}
+      m_Width: 180
+      m_Height: 180
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: c2fcd9aa5ef8047498ba89128f94efe5, type: 3}
+      m_Width: 167
+      m_Height: 167
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 86eda544ce2584be7851ce290c2498d5, type: 3}
+      m_Width: 152
+      m_Height: 152
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 235c198eb8f4947e6b33f52bcf91f7e0, type: 3}
+      m_Width: 144
+      m_Height: 144
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: d4582fd90907548118acba9032afeeb5, type: 3}
+      m_Width: 120
+      m_Height: 120
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: f5de04075783c48408938b10f5b21cdb, type: 3}
+      m_Width: 114
+      m_Height: 114
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 6fed8e36e83b84a8f84d4444eb69abf3, type: 3}
+      m_Width: 76
+      m_Height: 76
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 0cf669620c3884493afcd8b5eeff1f01, type: 3}
+      m_Width: 72
+      m_Height: 72
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: cb62f7ac4a5184cd09e0dfc9b8a5f89f, type: 3}
+      m_Width: 57
+      m_Height: 57
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: d4582fd90907548118acba9032afeeb5, type: 3}
+      m_Width: 120
+      m_Height: 120
+      m_Kind: 3
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 89f5c9e2909744a88b8c921f47da60ad, type: 3}
+      m_Width: 80
+      m_Height: 80
+      m_Kind: 3
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 33fc01c93f5b24e0faf2a757191e1c9f, type: 3}
+      m_Width: 40
+      m_Height: 40
+      m_Kind: 3
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 2c124957b696f4337a62df1ba15e6a0a, type: 3}
+      m_Width: 87
+      m_Height: 87
+      m_Kind: 1
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 657b34435e2544a4e9b8051ac95723ad, type: 3}
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: bd3e47c2a15834914915849cca383c84, type: 3}
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: ddeffd3fad4f04b37bec57825d3c647b, type: 3}
+      m_Width: 60
+      m_Height: 60
+      m_Kind: 2
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 33fc01c93f5b24e0faf2a757191e1c9f, type: 3}
+      m_Width: 40
+      m_Height: 40
+      m_Kind: 2
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: b531eafd722d24906835a9df79c72b4e, type: 3}
+      m_Width: 20
+      m_Height: 20
+      m_Kind: 2
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: f27565162b7244ca8bda75ded47421b2, type: 3}
+      m_Width: 1024
+      m_Height: 1024
+      m_Kind: 4
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings:
