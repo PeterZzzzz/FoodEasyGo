@@ -78,7 +78,6 @@ public class CartPanelRestaurantBarController : MonoBehaviour
             noDeliveryMask.gameObject.SetActive(true);
             nameZH += " <color=#FF0000>地址不支持配送</color>";
             nameEN += " <color=#FF0000>Address not eligible for delivery</color>";
-            //noDeliveryMask.transform.SetParent(
         }
 
 

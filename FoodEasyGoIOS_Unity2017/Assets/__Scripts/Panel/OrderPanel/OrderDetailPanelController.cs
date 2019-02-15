@@ -163,7 +163,7 @@ public class OrderDetailPanelController : BasePanelController {
 
         email.ResetUI(_orderData.GetField("email").str);
 
-        address.ResetUI(_orderData.GetField("address").str + " " + _orderData.GetField("street") + ", " + _orderData.GetField("city"));
+        address.ResetUI(_orderData.GetField("address").str + ", " + _orderData.GetField("street").str + ", " + _orderData.GetField("city").str);
 
         if (_orderData.GetField("payment").str == "1")
         {
