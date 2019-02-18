@@ -23,14 +23,15 @@ public class RestaurantDishDetailPanelController : BasePanelController
 	// Transforms
 	public ScrollRect contentScrollRect;
 	public TextController pageTitle;
-	public RectTransform topSection;
+    public RectTransform imageSection;
+    public RectTransform topSection;
 	public RectTransform bottomSection;
 	public RawImage dishImage;
+    public RectTransform dishImageRect;
 	public TextController dishDetail;
 	public TextController priceText;
 	public TextController dishDescription;
 	public InputField noteInputField;
-    public RectTransform footerRect;
 
 
 	// Prefabs
@@ -66,22 +67,22 @@ public class RestaurantDishDetailPanelController : BasePanelController
         if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
-            contentScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(contentScrollRect.GetComponent<RectTransform>().offsetMin.x, contentScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+            //contentScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(contentScrollRect.GetComponent<RectTransform>().offsetMin.x, contentScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
 
-            Vector2 pos = footerRect.position;
-            pos.y += 20;
-            footerRect.position = pos;
             Debug.Log("iPhoneX适配12");
 
         }
-	}
+
+        dishImageRect.sizeDelta = new Vector2(0, panelSizeDelta.x);
+        imageSection.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.x;
+    }
 
 
 	#region Overrides
 
 	public override void ResetPanel()
 	{
-		topSection.Find("Image").GetComponent<RawImage>().texture = null;
+        dishImage.texture = null;
         topSection.Find("Detail").GetComponent<TextController>().ResetUI("");
 		topSection.Find("Price").GetComponent<TextController>().ResetUI("");
 
@@ -91,7 +92,8 @@ public class RestaurantDishDetailPanelController : BasePanelController
 		RectTransform content = topSection.parent as RectTransform;
 		bottomSection.SetAsFirstSibling();
 		topSection.SetAsFirstSibling();
-		content.DestroyAllChildrenAfterSiblingIndex(1);
+        imageSection.SetAsFirstSibling();
+		content.DestroyAllChildrenAfterSiblingIndex(2);
 
 		while (tempList.Count > 0)
 		{
@@ -326,7 +328,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 					}
 				}
 			}
-			bottomSection.Find("NoteInputField").GetComponent<InputField>().text = cartDetailData._notes;
+            noteInputField.text = cartDetailData._notes;
 			RefreshSelectedAttributesText();
 		}
 	}
@@ -390,7 +392,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 		{
 			CartController.instance.AddToCart(currentCategoryID, RestaurantPanelController.instance.deliveryTimeID, dishBarController.grouponID, dishBarController.grouponGoodsID,
 				dishBarController._restaurantID, RestaurantDetailPanelController.instance.restaurantNameZH, RestaurantDetailPanelController.instance.restaurantNameEN,
-				dishBarController._dishID, dishBarController._dishTypeID, attributeListString, attributeQuantityList, bottomSection.Find("NoteInputField").GetComponent<InputField>().text, Mathf.Max(1, dishBarController._quantity), dishData, attributeDic);
+				dishBarController._dishID, dishBarController._dishTypeID, attributeListString, attributeQuantityList, noteInputField.text, Mathf.Max(1, dishBarController._quantity), dishData, attributeDic);
 
 			if (dishBarController._quantity == 0)
 			{
@@ -403,7 +405,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 			cartDetailData.SetData(
 				cartDetailData._categoryID, cartDetailData._deliverTimeID, cartDetailData._grouponID, cartDetailData._grouponGoodsID,
 				dishBarController._dishID, dishBarController._dishTypeID, dishBarController._restaurantID, RestaurantDetailPanelController.instance.restaurantNameZH, RestaurantDetailPanelController.instance.restaurantNameEN,
-				attributeListString, attributeQuantityList, bottomSection.Find("NoteInputField").GetComponent<InputField>().text, dishBarController._quantity, dishData, attributeDic);
+				attributeListString, attributeQuantityList, noteInputField.text, dishBarController._quantity, dishData, attributeDic);
 		}
 
 		ClosePanel();
@@ -466,6 +468,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
 	public void OnNoteInputFieldPointerDown()
 	{
+        //使该scrollview滑到最底端，如果想回到顶端——>(1,1)
 		contentScrollRect.normalizedPosition = new Vector2(0, 0);
 	}
 
