@@ -11,13 +11,10 @@ using LDFW.Network;
 public class SearchPanelController : BasePanelController {
 
     public static SearchPanelController instance;
-    
+
     public ScrollRect historicalSearchScrollRect;
     public ScrollRect resultSearchScrollRect;
     public InputField searchInput;
-    public RectTransform searchOptionSection;
-    public Text searchButtonText;
-
     public int searchOptionID = 0;
 
     new void Awake () {
@@ -31,8 +28,8 @@ public class SearchPanelController : BasePanelController {
         if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
-            historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
-            resultSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+            //historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
+            //resultSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
 
             Debug.Log("iPhoneX适配5");
 
@@ -42,7 +39,6 @@ public class SearchPanelController : BasePanelController {
     new void Start () {
         base.Start ();
 
-        SwitchSearchOptionSection (false);
     }
 
     #region Overrides
@@ -50,9 +46,6 @@ public class SearchPanelController : BasePanelController {
         SwitchHistoricalSearchScrollRect (true);
         SearchPanelSearchResultPanelController.instance.SwitchSearchResultPanel (false);
         SearchPanelSearchResultPanelController.instance.Reset ();
-
-        TextController textController = searchOptionSection.GetChild (1).Find ("Text").GetComponent<TextController> ();
-        searchButtonText.text = Config.currentLanguage == Language.chinese ? textController.textZH : textController.textEN;
     }
 
     public override void ReloadPanel () {
@@ -89,7 +82,7 @@ public class SearchPanelController : BasePanelController {
     }
 
 
-    public void SearchForInput () {
+    public void SearchBtnOnClicked () {
         if (!string.IsNullOrEmpty (searchInput.text)) {
             SearchForInput (searchInput.text);
         }
@@ -152,16 +145,8 @@ public class SearchPanelController : BasePanelController {
     }
     #endregion
 
-    public void SwitchSearchOptionSection(bool state) {
-        searchOptionSection.gameObject.SetActive (state);
-    }
-
     public void SetSearchOptionID(int id) {
         searchOptionID = id;
-        SwitchSearchOptionSection (false);
 
-        TextController textController = searchOptionSection.GetChild (id + 1).Find ("Text").GetComponent<TextController> ();
-        searchButtonText.text = Config.currentLanguage == Language.chinese ? textController.textZH : textController.textEN;
-        
     }
 }

@@ -367,6 +367,7 @@
     <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchResultEndlessScrollview.cs" />
     <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchResultPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchPanelSearchResultScrollRect.cs" />
+    <Compile Include="Assets\__Scripts\Panel\SearchPanel\SearchToggleElementController.cs" />
     <Compile Include="Assets\__Scripts\Panel\SharePanel\SharePanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\AboutUsPanelController.cs" />
     <Compile Include="Assets\__Scripts\Panel\UserPanel\AddressPanelAddressBarController.cs" />

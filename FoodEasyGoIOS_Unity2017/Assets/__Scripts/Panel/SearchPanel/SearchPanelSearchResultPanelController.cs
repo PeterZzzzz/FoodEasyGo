@@ -80,7 +80,7 @@ public class SearchPanelSearchResultPanelController : MonoBehaviour {
         if (index != sortID) {
             sortID = index;
             UpdateSortType ();
-            SearchPanelController.instance.SearchForInput ();
+            SearchPanelController.instance.SearchBtnOnClicked ();
         }
     }
 
