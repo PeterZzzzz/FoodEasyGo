@@ -14,7 +14,7 @@ public class PersonalDataPanelSexToggleElementController : LDFWToggleElementCont
 
     public override void SelectToggleElement () {
         base.SelectToggleElement ();
-        textController.color = Extensions.AppColor1 ();
+        textController.color = Extensions.MainColor ();
         PersonalDataPanelController.instance.SwitchSexPanel (0);
     }
     public override void DeselectToggleElement () {

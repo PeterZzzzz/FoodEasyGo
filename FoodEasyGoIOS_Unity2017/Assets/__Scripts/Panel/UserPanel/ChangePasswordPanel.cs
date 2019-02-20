@@ -26,9 +26,9 @@ public class ChangePasswordPanel : BasePanelController {
         if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
             // iPhoneX
-            contentRect.offsetMin = new Vector2(contentRect.offsetMin.x, contentRect.offsetMin.y + 20);
+            //contentRect.offsetMin = new Vector2(contentRect.offsetMin.x, contentRect.offsetMin.y + 20);
 
-            Debug.Log("iPhoneX适配16");
+            Debug.Log("iPhoneX适配16失效");
         }
     }
 
