@@ -179,7 +179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Redeem
+  m_Text: "\u5151\u6362"
   textZH: "\u5151\u6362"
   textEN: Redeem
 --- !u!222 &781810
@@ -255,7 +255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Order Number:'
+  m_Text: "\u8BA2\u5355\u53F7:"
   textZH: "\u8BA2\u5355\u53F7:"
   textEN: 'Order Number:'
 --- !u!222 &3927459
@@ -513,7 +513,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -523,7 +523,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -533,7 +533,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -543,7 +543,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -553,7 +553,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -979,7 +979,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Delivery:'
+  m_Text: "\u914D\u9001\u65B9\u5F0F:"
   textZH: "\u914D\u9001\u65B9\u5F0F:"
   textEN: 'Delivery:'
 --- !u!222 &15218357
@@ -1059,7 +1059,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your zipcode
+  m_Text: "\u8F93\u5165\u90AE\u7F16"
   textZH: "\u8F93\u5165\u90AE\u7F16"
   textEN: Enter your zipcode
 --- !u!222 &15838468
@@ -1420,7 +1420,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: My Invitations
+  m_Text: "\u6211\u7684\u9080\u8BF7"
   textZH: "\u6211\u7684\u9080\u8BF7"
   textEN: My Invitations
 --- !u!222 &21563135
@@ -1991,7 +1991,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Add/Update to cart
+  m_Text: "\u52A0\u5165/\u66F4\u65B0\u8D2D\u7269\u8F66"
   textZH: "\u52A0\u5165/\u66F4\u65B0\u8D2D\u7269\u8F66"
   textEN: Add/Update to cart
 --- !u!222 &26721641
@@ -2388,6 +2388,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &35295637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 35295638}
+  - component: {fileID: 35295640}
+  - component: {fileID: 35295639}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &35295638
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 35295637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 187.5, y: -120, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1743904239}
+  - {fileID: 1000254816}
+  - {fileID: 795779049}
+  - {fileID: 2104307461}
+  - {fileID: 1340184204}
+  - {fileID: 50408598}
+  - {fileID: 1707779697}
+  m_Father: {fileID: 1056596944}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -120}
+  m_SizeDelta: {x: -20, y: 230}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &35295639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 35295637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: e95e6c5785a4147959955c3862b6536a, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &35295640
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 35295637}
 --- !u!1 &36814815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,7 +3093,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Please enter your address:'
+  m_Text: "\u8BF7\u8F93\u5165\u60A8\u7684\u5730\u5740:"
   textZH: "\u8BF7\u8F93\u5165\u60A8\u7684\u5730\u5740:"
   textEN: 'Please enter your address:'
 --- !u!222 &47151556
@@ -3140,17 +3215,17 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 50408597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -531, z: 0}
+  m_LocalPosition: {x: 0, y: -305, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1224573696}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 8
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -531}
-  m_SizeDelta: {x: -20, y: 55}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: -75}
+  m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &50408599
 MonoBehaviour:
@@ -3216,14 +3291,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.84313726, b: 0.37254903, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 184ca10c8fb4d4c4b988276fd798c9dc, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3779,7 +3854,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65773591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125, y: -27.5, z: 0}
+  m_LocalPosition: {x: -100, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1342899766}
@@ -3814,18 +3889,18 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter last name
+  m_Text: "\u8BF7\u8F93\u5165\u59D3"
   textZH: "\u8BF7\u8F93\u5165\u59D3"
-  textEN: Please enter last name
+  textEN: Last name
 --- !u!222 &65773594
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3958,7 +4033,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -3968,7 +4043,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -3978,7 +4053,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -3988,7 +4063,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -3998,7 +4073,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -4483,7 +4558,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name
+  m_Text: "\u59D3\u540D"
   textZH: "\u59D3\u540D"
   textEN: Name
 --- !u!222 &74445330
@@ -4829,7 +4904,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Search
+  m_Text: "\u641C\u7D22"
   textZH: "\u641C\u7D22"
   textEN: Search
 --- !u!222 &89272770
@@ -5423,7 +5498,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Unit #'
+  m_Text: "\u5355\u5143\u53F7"
   textZH: "\u5355\u5143\u53F7"
   textEN: 'Unit #'
 --- !u!222 &94338264
@@ -5606,7 +5681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Submit
+  m_Text: "\u63D0\u4EA4"
   textZH: "\u63D0\u4EA4"
   textEN: Submit
 --- !u!222 &97288208
@@ -5833,7 +5908,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address
+  m_Text: "\u5730\u5740"
   textZH: "\u5730\u5740"
   textEN: Address
 --- !u!222 &104874928
@@ -6153,7 +6228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Today's Invitations
+  m_Text: "\u4ECA\u65E5\u9080\u8BF7"
   textZH: "\u4ECA\u65E5\u9080\u8BF7"
   textEN: Today's Invitations
 --- !u!222 &111125705
@@ -6262,7 +6337,7 @@ Prefab:
     - target: {fileID: 224000012081906096, guid: 23c797fec4f6b6041b19268048c19929,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -15.5282135
+      value: -20.81511
       objectReference: {fileID: 0}
     - target: {fileID: 1000014228587866, guid: 23c797fec4f6b6041b19268048c19929, type: 2}
       propertyPath: m_Name
@@ -6933,7 +7008,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sum
+  m_Text: "\u5408\u8BA1"
   textZH: "\u5408\u8BA1"
   textEN: Sum
 --- !u!222 &124627293
@@ -7109,7 +7184,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address Management
+  m_Text: "\u5730\u5740\u7BA1\u7406"
   textZH: "\u5730\u5740\u7BA1\u7406"
   textEN: Address Management
 --- !u!222 &131794391
@@ -7357,7 +7432,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 139525193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.5, y: -55, z: 0}
+  m_LocalPosition: {x: -152.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 290093015}
@@ -7401,7 +7476,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delete Cache
+  m_Text: "\u6E05\u9664\u7F13\u5B58"
   textZH: "\u6E05\u9664\u7F13\u5B58"
   textEN: Delete Cache
 --- !u!222 &139525196
@@ -7748,7 +7823,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Food Section
+  m_Text: "\u5546\u54C1\u8BC4\u4EF7"
   textZH: "\u5546\u54C1\u8BC4\u4EF7"
   textEN: Food Section
 --- !u!222 &142640341
@@ -8801,7 +8876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83ea43c7ad90304ba0a9da3d93f6992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollRectContent: {fileID: 894951167}
   sexPanel: {fileID: 284758439}
   lastName: {fileID: 1052935094}
   firstname: {fileID: 284285450}
@@ -8912,7 +8986,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: See More
+  m_Text: "\u67E5\u770B\u66F4\u591A"
   textZH: "\u67E5\u770B\u66F4\u591A"
   textEN: See More
 --- !u!222 &160253277
@@ -9044,7 +9118,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Delivery:'
+  m_Text: "\u914D\u9001\u65B9\u5F0F:"
   textZH: "\u914D\u9001\u65B9\u5F0F:"
   textEN: 'Delivery:'
 --- !u!222 &161684122
@@ -9291,7 +9365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Groupon
+  m_Text: "\u56E2\u8D2D"
   textZH: "\u56E2\u8D2D"
   textEN: Groupon
 --- !u!222 &166348666
@@ -9370,7 +9444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Change Password
+  m_Text: "\u66F4\u6539\u5BC6\u7801"
   textZH: "\u66F4\u6539\u5BC6\u7801"
   textEN: Change Password
 --- !u!222 &168514767
@@ -9749,7 +9823,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Last Name
+  m_Text: "\u59D3"
   textZH: "\u59D3"
   textEN: Last Name
 --- !u!222 &177265925
@@ -10788,7 +10862,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Base Price
+  m_Text: "\u5546\u54C1\u603B\u4EF7"
   textZH: "\u5546\u54C1\u603B\u4EF7"
   textEN: Base Price
 --- !u!222 &201103266
@@ -11352,7 +11426,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: More
+  m_Text: "\u67E5\u770B\u66F4\u591A"
   textZH: "\u67E5\u770B\u66F4\u591A"
   textEN: More
 --- !u!222 &211935072
@@ -11428,7 +11502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Details
+  m_Text: "\u8BE6\u60C5"
   textZH: "\u8BE6\u60C5"
   textEN: Details
 --- !u!222 &213664181
@@ -11737,7 +11811,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 221959693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -50, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1342899766}
@@ -11772,10 +11846,10 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -12277,7 +12351,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 227908030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -220, z: 0}
+  m_LocalPosition: {x: 177.5, y: -220, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1439684297}
@@ -13881,7 +13955,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -13891,7 +13965,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -13901,7 +13975,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -13911,7 +13985,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -13921,7 +13995,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -14020,7 +14094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Open
+  m_Text: "\u8425\u4E1A\u4E2D"
   textZH: "\u8425\u4E1A\u4E2D"
   textEN: Open
 --- !u!222 &264755997
@@ -14206,7 +14280,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 270374856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125, y: -27.5, z: 0}
+  m_LocalPosition: {x: -100, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1778652882}
@@ -14241,16 +14315,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter expiry year
+  m_Text: "\u8BF7\u8F93\u5165\u5E74\u4EFD"
   textZH: "\u8BF7\u8F93\u5165\u5E74\u4EFD"
   textEN: Please enter expiry year
 --- !u!222 &270374859
@@ -14523,7 +14597,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Other
+  m_Text: "\u5176\u4ED6\u95EE\u9898"
   textZH: "\u5176\u4ED6\u95EE\u9898"
   textEN: Other
 --- !u!222 &273563284
@@ -14775,7 +14849,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restaurant
+  m_Text: "\u9910\u9986"
   textZH: "\u9910\u9986"
   textEN: Restaurant
 --- !u!222 &275776199
@@ -15332,7 +15406,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tip
+  m_Text: "\u5C0F\u8D39"
   textZH: "\u5C0F\u8D39"
   textEN: Tip
 --- !u!222 &283982803
@@ -15890,7 +15964,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 290093014}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -275, z: 0}
+  m_LocalPosition: {x: 177.5, y: -275, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 139525194}
@@ -16541,7 +16615,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Name:'
+  m_Text: "\u59D3\u540D:"
   textZH: "\u59D3\u540D:"
   textEN: 'Name:'
 --- !u!222 &298120507
@@ -16765,7 +16839,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Contact
+  m_Text: "\u8054\u7CFB\u4EBA"
   textZH: "\u8054\u7CFB\u4EBA"
   textEN: Contact
 --- !u!222 &299280583
@@ -16841,7 +16915,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: + Add Address
+  m_Text: "+ \u6DFB\u52A0\u5730\u5740"
   textZH: "+ \u6DFB\u52A0\u5730\u5740"
   textEN: + Add Address
 --- !u!222 &300503488
@@ -16850,6 +16924,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 300503485}
+--- !u!1 &301345534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 301345535}
+  - component: {fileID: 301345537}
+  - component: {fileID: 301345536}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &301345535
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 301345534}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 67.5, y: -27.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1743904239}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -110, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &301345536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 301345534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ea789380d76164d3489d39c6926fa1a8, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: /
+--- !u!222 &301345537
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 301345534}
 --- !u!1 &302712513
 GameObject:
   m_ObjectHideFlags: 0
@@ -17070,7 +17218,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Delivery:'
+  m_Text: "\u914D\u9001\u65B9\u5F0F:"
   textZH: "\u914D\u9001\u65B9\u5F0F:"
   textEN: 'Delivery:'
 --- !u!222 &303347370
@@ -17355,7 +17503,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Available points :'
+  m_Text: "\u53EF\u5151\u6362\u79EF\u5206 :"
   textZH: "\u53EF\u5151\u6362\u79EF\u5206 :"
   textEN: 'Available points :'
 --- !u!222 &306968813
@@ -17526,7 +17674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restaurants
+  m_Text: "\u9910\u9986"
   textZH: "\u9910\u9986"
   textEN: Restaurants
 --- !u!222 &309358912
@@ -18400,7 +18548,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -18410,7 +18558,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -18420,7 +18568,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -18430,7 +18578,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -18440,7 +18588,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -18863,7 +19011,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coupon
+  m_Text: "\u4F18\u60E0\u5238"
   textZH: "\u4F18\u60E0\u5238"
   textEN: Coupon
 --- !u!222 &331399367
@@ -19430,7 +19578,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Shopping Cart
+  m_Text: "\u8D2D\u7269\u8F66"
   textZH: "\u8D2D\u7269\u8F66"
   textEN: Shopping Cart
 --- !u!222 &341413105
@@ -19521,86 +19669,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!1 &341591172
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000013841043006, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 341591173}
-  - component: {fileID: 341591175}
-  - component: {fileID: 341591174}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &341591173
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224000011748727636, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 341591172}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -172.5, y: -55, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1212262700}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &341591174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012274013196, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 341591172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93edbcf0f3205434cb5ba2c0570be946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 3
-    m_AlignByGeometry: 0
-    m_RichText: 0
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Expiry Month
-  textZH: "\u6708"
-  textEN: Expiry Month
---- !u!222 &341591175
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222000012258169512, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 341591172}
 --- !u!1 &344776370
 GameObject:
   m_ObjectHideFlags: 0
@@ -19833,7 +19901,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: My Invitations >>
+  m_Text: "\u6211\u7684\u9080\u8BF7 >>"
   textZH: "\u6211\u7684\u9080\u8BF7 >>"
   textEN: My Invitations >>
 --- !u!222 &348943694
@@ -21920,7 +21988,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 375651460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 167.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1617820778}
@@ -21928,11 +21996,11 @@ RectTransform:
   m_Father: {fileID: 1000254816}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: 0}
-  m_SizeDelta: {x: -125, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -10, y: 0}
+  m_SizeDelta: {x: 210, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &375651462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22107,7 +22175,7 @@ GameObject:
   - component: {fileID: 378386759}
   - component: {fileID: 378386758}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: FirstNameIF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22121,7 +22189,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 378386756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 57.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1994727673}
@@ -22129,11 +22197,11 @@ RectTransform:
   m_Father: {fileID: 1743904239}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: 0}
-  m_SizeDelta: {x: -125, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -120, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &378386758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22573,7 +22641,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter the point (multiple of 10)
+  m_Text: "\u8BF7\u8F93\u5165\u60F3\u5151\u6362\u7684\u70B9\u6570(10\u7684\u500D\u6570)"
   textZH: "\u8BF7\u8F93\u5165\u60F3\u5151\u6362\u7684\u70B9\u6570(10\u7684\u500D\u6570)"
   textEN: Enter the point (multiple of 10)
 --- !u!222 &382497571
@@ -22649,7 +22717,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Leave Message
+  m_Text: "\u7559\u8A00"
   textZH: "\u7559\u8A00"
   textEN: Leave Message
 --- !u!222 &382529002
@@ -22879,7 +22947,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WeChat
+  m_Text: "\u5BA2\u670D\u5FAE\u4FE1"
   textZH: "\u5BA2\u670D\u5FAE\u4FE1"
   textEN: WeChat
 --- !u!222 &387285749
@@ -23034,7 +23102,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Invite Friends
+  m_Text: "\u9080\u8BF7\u597D\u53CB"
   textZH: "\u9080\u8BF7\u597D\u53CB"
   textEN: Invite Friends
 --- !u!222 &391047699
@@ -23375,7 +23443,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 401238208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 154.10599, y: -25, z: 0}
+  m_LocalPosition: {x: 61.96275, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1730736022}
@@ -23740,7 +23808,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Incorrect Items
+  m_Text: "\u9001\u9519\u9910"
   textZH: "\u9001\u9519\u9910"
   textEN: Incorrect Items
 --- !u!222 &403394094
@@ -24056,7 +24124,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Password Again
+  m_Text: "\u786E\u8BA4\u65B0\u5BC6\u7801"
   textZH: "\u786E\u8BA4\u65B0\u5BC6\u7801"
   textEN: New Password Again
 --- !u!222 &405106167
@@ -24492,7 +24560,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 422591550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -165, z: 0}
+  m_LocalPosition: {x: 177.5, y: -165, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1789052309}
@@ -24617,7 +24685,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 422612719}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 162.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 152.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148282339}
@@ -25537,7 +25605,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 432654371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125, y: -27.5, z: 0}
+  m_LocalPosition: {x: -100, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1335235394}
@@ -25572,16 +25640,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter expiry month
+  m_Text: "\u8BF7\u8F93\u5165\u6708\u4EFD"
   textZH: "\u8BF7\u8F93\u5165\u6708\u4EFD"
   textEN: Please enter expiry month
 --- !u!222 &432654374
@@ -25829,7 +25897,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Contact:'
+  m_Text: "\u8054\u7CFB\u65B9\u5F0F:"
   textZH: "\u8054\u7CFB\u65B9\u5F0F:"
   textEN: 'Contact:'
 --- !u!222 &441949242
@@ -26220,7 +26288,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter your first name
+  m_Text: "\u8BF7\u8F93\u5165\u540D"
   textZH: "\u8BF7\u8F93\u5165\u540D"
   textEN: Please enter your first name
 --- !u!222 &450312298
@@ -26296,7 +26364,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: About Us
+  m_Text: "\u5173\u4E8E\u6211\u4EEC"
   textZH: "\u5173\u4E8E\u6211\u4EEC"
   textEN: About Us
 --- !u!222 &450987347
@@ -26376,7 +26444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Male
+  m_Text: "\u7537"
   textZH: "\u7537"
   textEN: Male
 --- !u!222 &452840939
@@ -26612,7 +26680,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Refresh
+  m_Text: "\u5237\u65B0"
   textZH: "\u5237\u65B0"
   textEN: Refresh
 --- !u!222 &458400066
@@ -27296,7 +27364,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: password
+  m_Text: "\u5BC6\u7801"
   textZH: "\u5BC6\u7801"
   textEN: password
 --- !u!222 &465451968
@@ -27598,7 +27666,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You save :'
+  m_Text: "\u5151\u6362\u91D1\u989D :"
   textZH: "\u5151\u6362\u91D1\u989D :"
   textEN: 'You save :'
 --- !u!222 &469887231
@@ -27674,7 +27742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter contact info
+  m_Text: "\u8BF7\u8F93\u5165\u8054\u7CFB\u65B9\u5F0F"
   textZH: "\u8BF7\u8F93\u5165\u8054\u7CFB\u65B9\u5F0F"
   textEN: Please enter contact info
 --- !u!222 &471713311
@@ -28179,7 +28247,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Order Details
+  m_Text: "\u8BA2\u5355\u8BE6\u60C5"
   textZH: "\u8BA2\u5355\u8BE6\u60C5"
   textEN: Order Details
 --- !u!222 &481361395
@@ -28590,7 +28658,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -28600,7 +28668,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -28610,7 +28678,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -28620,7 +28688,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -28630,7 +28698,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -28797,7 +28865,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Business Cooperation
+  m_Text: "\u5546\u52A1\u5408\u4F5C"
   textZH: "\u5546\u52A1\u5408\u4F5C"
   textEN: Business Cooperation
 --- !u!222 &492327642
@@ -28908,7 +28976,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 495322290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -187.5, y: 233.5, z: 0}
+  m_LocalPosition: {x: -177.5, y: 233.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1148282339}
@@ -28922,8 +28990,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 340}
+  m_AnchoredPosition: {x: 10, y: -100}
+  m_SizeDelta: {x: -20, y: 340}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &495322292
 MonoBehaviour:
@@ -29025,7 +29093,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delivery Status
+  m_Text: "\u914D\u9001\u72B6\u6001"
   textZH: "\u914D\u9001\u72B6\u6001"
   textEN: Delivery Status
 --- !u!222 &495912271
@@ -29553,7 +29621,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Month
+  m_Text: "\u6708"
   textZH: "\u6708"
   textEN: Month
 --- !u!222 &502451462
@@ -30574,7 +30642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -30797,7 +30865,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 522123472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -105, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 375651461}
@@ -30832,10 +30900,10 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -30918,7 +30986,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Change Address
+  m_Text: "\u66F4\u6539\u5730\u5740"
   textZH: "\u66F4\u6539\u5730\u5740"
   textEN: Change Address
 --- !u!222 &522140977
@@ -31493,7 +31561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sex
+  m_Text: "\u6027\u522B"
   textZH: "\u6027\u522B"
   textEN: Sex
 --- !u!222 &525283554
@@ -32115,76 +32183,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 542879619}
---- !u!1 &543313082
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 543313083}
-  - component: {fileID: 543313085}
-  - component: {fileID: 543313084}
-  m_Layer: 5
-  m_Name: LastName
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &543313083
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 543313082}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -175, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2066970480}
-  - {fileID: 1342899766}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -175}
-  m_SizeDelta: {x: 0, y: 55}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &543313084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 543313082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a7bd1c302fcf9b94d9e65f15df4d5562, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 0
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &543313085
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 543313082}
 --- !u!1 &543409856
 GameObject:
   m_ObjectHideFlags: 0
@@ -34049,7 +34047,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Unspecified
+  m_Text: "\u672A\u6307\u5B9A"
   textZH: "\u672A\u6307\u5B9A"
   textEN: Unspecified
 --- !u!222 &584346354
@@ -34367,7 +34365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter you security code
+  m_Text: "\u8BF7\u8F93\u5165\u5B89\u5168\u7801"
   textZH: "\u8BF7\u8F93\u5165\u5B89\u5168\u7801"
   textEN: Please enter you security code
 --- !u!222 &588182380
@@ -35552,7 +35550,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607658163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -172.5, y: -55, z: 0}
+  m_LocalPosition: {x: -167.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1743904239}
@@ -35560,8 +35558,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
+  m_AnchoredPosition: {x: 10, y: 0}
+  m_SizeDelta: {x: 120, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &607658165
 MonoBehaviour:
@@ -35587,18 +35585,18 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 14
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: First Name
-  textZH: "\u540D"
-  textEN: First Name
+  m_Text: "\u540D / \u59D3"
+  textZH: "\u540D / \u59D3"
+  textEN: First Name / Last Name
 --- !u!222 &607658166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35673,7 +35671,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your contact
+  m_Text: "\u8F93\u5165\u8054\u7CFB\u65B9\u5F0F"
   textZH: "\u8F93\u5165\u8054\u7CFB\u65B9\u5F0F"
   textEN: Enter your contact
 --- !u!222 &608294831
@@ -35894,7 +35892,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Closed
+  m_Text: "\u4F11\u606F"
   textZH: "\u4F11\u606F"
   textEN: Closed
 --- !u!222 &610873567
@@ -36292,7 +36290,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Unspecified
+  m_Text: "\u672A\u6307\u5B9A"
   textZH: "\u672A\u6307\u5B9A"
   textEN: Unspecified
 --- !u!222 &618330838
@@ -36420,7 +36418,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restaurants
+  m_Text: "\u9910\u9986"
   textZH: "\u9910\u9986"
   textEN: Restaurants
 --- !u!222 &620570339
@@ -36641,7 +36639,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Submit
+  m_Text: "\u63D0\u4EA4"
   textZH: "\u63D0\u4EA4"
   textEN: Submit
 --- !u!222 &627190105
@@ -37499,7 +37497,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 635808317}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 162.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 152.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 778133205}
@@ -37739,7 +37737,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -37749,7 +37747,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -37759,7 +37757,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -37769,7 +37767,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -37779,7 +37777,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -37834,7 +37832,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 643677543}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 162.5, y: -27.500488, z: 0}
+  m_LocalPosition: {x: 152.5, y: -27.500488, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1380820805}
@@ -38551,7 +38549,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address Management
+  m_Text: "\u5730\u5740\u7BA1\u7406"
   textZH: "\u5730\u5740\u7BA1\u7406"
   textEN: Address Management
 --- !u!222 &657790300
@@ -38704,7 +38702,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Business Cooperation
+  m_Text: "\u5546\u4E1A\u5408\u4F5C"
   textZH: "\u5546\u4E1A\u5408\u4F5C"
   textEN: Business Cooperation
 --- !u!222 &658498996
@@ -40059,7 +40057,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cancel
+  m_Text: "\u53D6\u6D88"
   textZH: "\u53D6\u6D88"
   textEN: Cancel
 --- !u!222 &689340382
@@ -40417,7 +40415,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Description
+  m_Text: "\u95EE\u9898\u63CF\u8FF0"
   textZH: "\u95EE\u9898\u63CF\u8FF0"
   textEN: Description
 --- !u!222 &693425197
@@ -40756,7 +40754,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delete
+  m_Text: "\u5220\u9664"
   textZH: "\u5220\u9664"
   textEN: Delete
 --- !u!222 &699056117
@@ -40907,7 +40905,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Postal
+  m_Text: "\u90AE\u7F16"
   textZH: "\u90AE\u7F16"
   textEN: Postal
 --- !u!222 &703988397
@@ -40943,7 +40941,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 705233717}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.5, y: -55, z: 0}
+  m_LocalPosition: {x: -152.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1380820805}
@@ -40987,7 +40985,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: About Us
+  m_Text: "\u5173\u4E8E\u6211\u4EEC"
   textZH: "\u5173\u4E8E\u6211\u4EEC"
   textEN: About Us
 --- !u!222 &705233720
@@ -41825,7 +41823,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter you coupon code
+  m_Text: "\u8F93\u5165\u4F18\u60E0\u7801"
   textZH: "\u8F93\u5165\u4F18\u60E0\u7801"
   textEN: Please enter you coupon code
 --- !u!222 &728752989
@@ -42393,7 +42391,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Leave a message
+  m_Text: "\u7559\u8A00"
   textZH: "\u7559\u8A00"
   textEN: Leave a message
 --- !u!222 &734478921
@@ -43469,7 +43467,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Email
+  m_Text: "\u90AE\u7BB1"
   textZH: "\u90AE\u7BB1"
   textEN: Email
 --- !u!222 &749736556
@@ -44080,7 +44078,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Schedule
+  m_Text: "\u9884\u5B9A"
   textZH: "\u9884\u5B9A"
   textEN: Schedule
 --- !u!222 &756980876
@@ -44468,7 +44466,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Year
+  m_Text: "\u5E74"
   textZH: "\u5E74"
   textEN: Year
 --- !u!222 &764407932
@@ -44545,7 +44543,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name
+  m_Text: "\u59D3\u540D"
   textZH: "\u59D3\u540D"
   textEN: Name
 --- !u!222 &768070560
@@ -44621,7 +44619,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Save
+  m_Text: "\u4FDD\u5B58"
   textZH: "\u4FDD\u5B58"
   textEN: Save
 --- !u!222 &770738236
@@ -44943,7 +44941,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: State
+  m_Text: "\u5DDE"
   textZH: "\u5DDE"
   textEN: State
 --- !u!222 &773732238
@@ -45305,7 +45303,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 778133204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -110, z: 0}
+  m_LocalPosition: {x: 177.5, y: -110, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1435187836}
@@ -45474,7 +45472,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Password
+  m_Text: "\u65B0\u5BC6\u7801"
   textZH: "\u65B0\u5BC6\u7801"
   textEN: New Password
 --- !u!222 &779280465
@@ -45676,7 +45674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Home
+  m_Text: "\u9996\u9875"
   textZH: "\u9996\u9875"
   textEN: Home
 --- !u!222 &781044399
@@ -46599,7 +46597,7 @@ GameObject:
   - component: {fileID: 795779051}
   - component: {fileID: 795779050}
   m_Layer: 5
-  m_Name: Year
+  m_Name: Date
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46612,17 +46610,20 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 795779048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -285, z: 0}
+  m_LocalPosition: {x: 0, y: -110, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2122650011}
   - {fileID: 1778652882}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 4
+  - {fileID: 1335235394}
+  - {fileID: 1002906231}
+  - {fileID: 809560742}
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -285}
+  m_AnchoredPosition: {x: 0, y: -110}
   m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &795779050
@@ -46637,7 +46638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -47234,6 +47235,78 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 805744321}
+--- !u!1 &809560741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1833572246074020, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 809560742}
+  - component: {fileID: 809560744}
+  - component: {fileID: 809560743}
+  m_Layer: 5
+  m_Name: Line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &809560742
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224396283527348434, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809560741}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 795779049}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &809560743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114281903348861818, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809560741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.96862745, g: 0.96862745, b: 0.96862745, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &809560744
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222239963741697632, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809560741}
 --- !u!1 &810512005
 GameObject:
   m_ObjectHideFlags: 0
@@ -47301,7 +47374,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Order List
+  m_Text: "\u8BA2\u5355\u5217\u8868"
   textZH: "\u8BA2\u5355\u5217\u8868"
   textEN: Order List
 --- !u!222 &810512008
@@ -47529,7 +47602,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 814892845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -105, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1474569521}
@@ -47564,10 +47637,10 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -47796,7 +47869,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your state name
+  m_Text: "\u8F93\u5165\u5DDE"
   textZH: "\u8F93\u5165\u5DDE"
   textEN: Enter your state name
 --- !u!222 &822845546
@@ -48568,7 +48641,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Leave a message
+  m_Text: "\u7559\u8A00\u5907\u6CE8"
   textZH: "\u7559\u8A00\u5907\u6CE8"
   textEN: Leave a message
 --- !u!222 &832108437
@@ -48745,7 +48818,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter your number
+  m_Text: "\u8BF7\u8F93\u5165\u7535\u8BDD\u53F7\u7801"
   textZH: "\u8BF7\u8F93\u5165\u7535\u8BDD\u53F7\u7801"
   textEN: Please enter your number
 --- !u!222 &832578589
@@ -49718,7 +49791,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Employment Opportunities
+  m_Text: "\u804C\u4F4D\u62DB\u8058"
   textZH: "\u804C\u4F4D\u62DB\u8058"
   textEN: Employment Opportunities
 --- !u!222 &842735878
@@ -49917,7 +49990,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Messages
+  m_Text: "\u901A\u77E5\u6D88\u606F"
   textZH: "\u901A\u77E5\u6D88\u606F"
   textEN: Messages
 --- !u!222 &847205071
@@ -49993,7 +50066,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: More >
+  m_Text: "\u66F4\u591A >"
   textZH: "\u67E5\u770B\u66F4\u591A"
   textEN: More
 --- !u!222 &847989060
@@ -50229,7 +50302,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Account
+  m_Text: "\u6211\u7684\u8D26\u6237"
   textZH: "\u6211\u7684\u8D26\u6237"
   textEN: Account
 --- !u!222 &856309407
@@ -50580,7 +50653,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You haven't invited anyone yet
+  m_Text: "\u60A8\u8FD8\u6CA1\u6709\u9080\u8BF7\u597D\u53CB"
   textZH: "\u60A8\u8FD8\u6CA1\u6709\u9080\u8BF7\u597D\u53CB"
   textEN: You haven't invited anyone yet
 --- !u!222 &863575241
@@ -51608,7 +51681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Setting
+  m_Text: "\u7CFB\u7EDF\u8BBE\u7F6E"
   textZH: "\u7CFB\u7EDF\u8BBE\u7F6E"
   textEN: Setting
 --- !u!222 &882364354
@@ -53175,6 +53248,78 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 907101093}
+--- !u!1 &910753951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1833572246074020, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 910753952}
+  - component: {fileID: 910753954}
+  - component: {fileID: 910753953}
+  m_Layer: 5
+  m_Name: Line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &910753952
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224396283527348434, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910753951}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1743904239}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &910753953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114281903348861818, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910753951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.96862745, g: 0.96862745, b: 0.96862745, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &910753954
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222239963741697632, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910753951}
 --- !u!1 &911976359
 GameObject:
   m_ObjectHideFlags: 0
@@ -53878,7 +54023,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Security Code
+  m_Text: "\u5B89\u5168\u7801"
   textZH: "\u5B89\u5168\u7801"
   textEN: Security Code
 --- !u!222 &916582141
@@ -54268,7 +54413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Instant Delivery
+  m_Text: "\u5373\u4E70\u5373\u9001"
   textZH: "\u5373\u4E70\u5373\u9001"
   textEN: Instant Delivery
 --- !u!222 &917816494
@@ -55879,7 +56024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Order Time
+  m_Text: "\u4E0B\u5355\u65F6\u95F4"
   textZH: "\u4E0B\u5355\u65F6\u95F4"
   textEN: Order Time
 --- !u!222 &959317447
@@ -57494,7 +57639,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Available Point :'
+  m_Text: "\u53EF\u4F7F\u7528\u79EF\u5206 :"
   textZH: "\u53EF\u4F7F\u7528\u79EF\u5206 :"
   textEN: 'Available Point :'
 --- !u!222 &987752152
@@ -58088,7 +58233,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 995460421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -258.5, z: 0}
+  m_LocalPosition: {x: 187.5, y: -248.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1398511814}
@@ -58132,7 +58277,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: No credit card
+  m_Text: "\u65E0\u4FE1\u7528\u5361\u4FE1\u606F"
   textZH: "\u65E0\u4FE1\u7528\u5361\u4FE1\u606F"
   textEN: No credit card
 --- !u!222 &995460424
@@ -58166,17 +58311,18 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1000254815}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -230, z: 0}
+  m_LocalPosition: {x: 0, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1395529619}
   - {fileID: 375651461}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 3
+  - {fileID: 2039215312}
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -230}
+  m_AnchoredPosition: {x: 0, y: -55}
   m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1000254817
@@ -58191,7 +58337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -58425,6 +58571,80 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1002906230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1002906231}
+  - component: {fileID: 1002906233}
+  - component: {fileID: 1002906232}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1002906231
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002906230}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 67.5, y: -27.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 795779049}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -110, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1002906232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002906230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ea789380d76164d3489d39c6926fa1a8, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: /
+--- !u!222 &1002906233
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002906230}
 --- !u!1 &1007439113
 GameObject:
   m_ObjectHideFlags: 0
@@ -58821,7 +59041,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Total
+  m_Text: "\u5408\u8BA1"
   textZH: "\u5408\u8BA1"
   textEN: Total
 --- !u!222 &1011756529
@@ -64326,7 +64546,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Boston Restaurant
+  m_Text: "\u6CE2\u58EB\u987F\u9910\u9986"
   textZH: "\u6CE2\u58EB\u987F\u9910\u9986"
   textEN: Boston Restaurant
 --- !u!222 &1041468183
@@ -64786,7 +65006,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Take-out Bags Fee
+  m_Text: "\u73AF\u4FDD\u888B\u8D39"
   textZH: "\u73AF\u4FDD\u888B\u8D39"
   textEN: Take-out Bags Fee
 --- !u!222 &1047647978
@@ -65096,7 +65316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Check Out
+  m_Text: "\u7ED3\u7B97"
   textZH: "\u7ED3\u7B97"
   textEN: Check Out
 --- !u!222 &1052154065
@@ -65173,7 +65393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Driver
+  m_Text: "\u53F8\u673A"
   textZH: "\u53F8\u673A"
   textEN: Driver
 --- !u!222 &1052604765
@@ -65496,7 +65716,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Email
+  m_Text: "\u90AE\u7BB1"
   textZH: "\u90AE\u7BB1"
   textEN: Email
 --- !u!222 &1055715803
@@ -65572,7 +65792,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 10
+  m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -65727,15 +65947,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1893328781}
-  - {fileID: 1743904239}
-  - {fileID: 543313083}
-  - {fileID: 1000254816}
-  - {fileID: 795779049}
-  - {fileID: 1212262700}
-  - {fileID: 2104307461}
-  - {fileID: 1340184204}
-  - {fileID: 50408598}
-  - {fileID: 1707779697}
+  - {fileID: 35295638}
   m_Father: {fileID: 1735631269}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65802,7 +66014,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1056955723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130.97946, y: 0, z: 0}
+  m_LocalPosition: {x: 60.588055, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1047647975}
@@ -66140,7 +66352,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1061320905}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -283.5, z: 0}
+  m_LocalPosition: {x: 0, y: -273.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 21013824}
@@ -66149,8 +66361,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: -20, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1061320907
 MonoBehaviour:
@@ -66223,8 +66435,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: ae30072a59a25814e8cfe4b1f70242ed, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -66661,7 +66873,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1075890435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 162.5, y: -27.496094, z: 0}
+  m_LocalPosition: {x: 152.5, y: -27.496094, z: 0}
   m_LocalScale: {x: 1.00032, y: 1.00032, z: 1.00032}
   m_Children: []
   m_Father: {fileID: 290093015}
@@ -67882,7 +68094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cart
+  m_Text: "\u8D2D\u7269\u8F66"
   textZH: "\u8D2D\u7269\u8F66"
   textEN: Cart
 --- !u!222 &1095292191
@@ -68119,7 +68331,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1097868004}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 162.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 152.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422591551}
@@ -68403,7 +68615,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cancel
+  m_Text: "\u53D6\u6D88"
   textZH: "\u53D6\u6D88"
   textEN: Cancel
 --- !u!222 &1111782566
@@ -68482,7 +68694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Grocery
+  m_Text: "\u5546\u54C1"
   textZH: "\u5546\u54C1"
   textEN: Grocery
 --- !u!222 &1113099975
@@ -68862,6 +69074,21 @@ Prefab:
       propertyPath: textEN
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012274013196, guid: 463cb6e753a83494b9568c292a1b2255,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012274013196, guid: 463cb6e753a83494b9568c292a1b2255,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012274013196, guid: 463cb6e753a83494b9568c292a1b2255,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 463cb6e753a83494b9568c292a1b2255, type: 2}
   m_IsPrefabParent: 0
@@ -69225,7 +69452,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: My Coupons
+  m_Text: "\u6211\u7684\u4F18\u60E0\u5238"
   textZH: "\u6211\u7684\u4F18\u60E0\u5238"
   textEN: My Coupons
 --- !u!222 &1122106496
@@ -69705,7 +69932,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Personal Data
+  m_Text: "\u4E2A\u4EBA\u4FE1\u606F"
   textZH: "\u4E2A\u4EBA\u4FE1\u606F"
   textEN: Personal Data
 --- !u!222 &1129994012
@@ -69784,7 +70011,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your name
+  m_Text: "\u8BF7\u8F93\u5165\u59D3\u540D"
   textZH: "\u8BF7\u8F93\u5165\u59D3\u540D"
   textEN: Enter your name
 --- !u!222 &1130294694
@@ -70250,7 +70477,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Search restaurant or dishes/products
+  m_Text: "\u8BF7\u8F93\u5165\u9910\u9986/\u5546\u54C1\u540D"
   textZH: "\u8BF7\u8F93\u5165\u5546\u5BB6/\u5546\u54C1\u540D\u79F0"
   textEN: Search restaurant or dishes/products
 --- !u!222 &1141757068
@@ -70330,7 +70557,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Log Out
+  m_Text: "\u9000\u51FA\u767B\u5F55"
   textZH: "\u9000\u51FA\u767B\u5F55"
   textEN: Log Out
 --- !u!222 &1145286581
@@ -70474,7 +70701,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1148282338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: 0, z: 0}
+  m_LocalPosition: {x: 177.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2067936856}
@@ -70829,7 +71056,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Grocery
+  m_Text: "\u8D85\u5E02"
   textZH: "\u8D85\u5E02"
   textEN: Grocery
 --- !u!222 &1151519762
@@ -71413,7 +71640,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter you expiry month
+  m_Text: "\u8BF7\u8F93\u5165\u5230\u671F\u6708\u4EFD"
   textZH: "\u8BF7\u8F93\u5165\u5230\u671F\u6708\u4EFD"
   textEN: Please enter you expiry month
 --- !u!222 &1164767979
@@ -71898,7 +72125,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -71908,7 +72135,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -71918,7 +72145,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -71928,7 +72155,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -71938,7 +72165,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -72417,7 +72644,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your unit number
+  m_Text: "\u8F93\u5165\u5355\u5143\u53F7"
   textZH: "\u8F93\u5165\u5355\u5143\u53F7"
   textEN: Enter your unit number
 --- !u!222 &1181176257
@@ -72494,7 +72721,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address
+  m_Text: "\u5730\u5740"
   textZH: "\u5730\u5740"
   textEN: Address
 --- !u!222 &1181963860
@@ -73190,7 +73417,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1186162391}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 77.64346, y: 25, z: 0}
+  m_LocalPosition: {x: 75, y: 25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1037886591}
@@ -73233,7 +73460,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cancel
+  m_Text: "\u53D6\u6D88"
   textZH: "\u53D6\u6D88"
   textEN: Cancel
 --- !u!222 &1186162394
@@ -73344,7 +73571,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your zip code
+  m_Text: "\u8F93\u5165\u5730\u533A\u90AE\u7F16"
   textZH: "\u8F93\u5165\u5730\u533A\u90AE\u7F16"
   textEN: Enter your zip code
 --- !u!222 &1186213770
@@ -73440,7 +73667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delivery time
+  m_Text: "\u9884\u8BA1\u9001\u8FBE"
   textZH: "\u9884\u8BA1\u9001\u8FBE"
   textEN: Delivery time
 --- !u!222 &1186824220
@@ -73516,7 +73743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter you credit card number
+  m_Text: "\u8BF7\u8F93\u5165\u5361\u53F7"
   textZH: "\u8BF7\u8F93\u5165\u5361\u53F7"
   textEN: Please enter you credit card number
 --- !u!222 &1187189884
@@ -73818,7 +74045,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: + Add Address
+  m_Text: "+ \u6DFB\u52A0\u5730\u5740"
   textZH: "+ \u6DFB\u52A0\u5730\u5740"
   textEN: + Add Address
 --- !u!222 &1191793328
@@ -73898,7 +74125,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Email
+  m_Text: "\u8BF7\u8F93\u5165\u7535\u8BDD\u53F7\u7801"
   textZH: "\u8BF7\u8F93\u5165\u7535\u8BDD\u53F7\u7801"
   textEN: Please enter your number
 --- !u!222 &1193363529
@@ -74506,76 +74733,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1210598516}
---- !u!1 &1212262699
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1212262700}
-  - component: {fileID: 1212262702}
-  - component: {fileID: 1212262701}
-  m_Layer: 5
-  m_Name: Month
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1212262700
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1212262699}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -340, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 341591173}
-  - {fileID: 1335235394}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -340}
-  m_SizeDelta: {x: 0, y: 55}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1212262701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1212262699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a7bd1c302fcf9b94d9e65f15df4d5562, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 0
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &1212262702
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1212262699}
 --- !u!1 &1212448173
 GameObject:
   m_ObjectHideFlags: 0
@@ -75293,7 +75450,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter your email
+  m_Text: "\u8BF7\u8F93\u5165\u90AE\u7BB1"
   textZH: "\u8BF7\u8F93\u5165\u90AE\u7BB1"
   textEN: Please enter your email
 --- !u!222 &1216372071
@@ -75595,7 +75752,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -75605,7 +75762,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -75615,7 +75772,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -75625,7 +75782,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -75635,7 +75792,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -75816,7 +75973,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your city name
+  m_Text: "\u8F93\u5165\u57CE\u5E02"
   textZH: "\u8F93\u5165\u57CE\u5E02"
   textEN: Enter your city name
 --- !u!222 &1223773085
@@ -75893,7 +76050,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Set Default
+  m_Text: "\u8BBE\u7F6E\u4E3A\u9ED8\u8BA4\u5361\u7247"
   textZH: "\u8BBE\u7F6E\u4E3A\u9ED8\u8BA4\u5361\u7247"
   textEN: Set Default
 --- !u!222 &1224573698
@@ -76160,7 +76317,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Place Order
+  m_Text: "\u786E\u8BA4\u8BA2\u5355"
   textZH: "\u786E\u8BA4\u8BA2\u5355"
   textEN: Place Order
 --- !u!222 &1229571010
@@ -76646,7 +76803,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Event
+  m_Text: "\u8FD1\u671F\u6D3B\u52A8"
   textZH: "\u8FD1\u671F\u6D3B\u52A8"
   textEN: Event
 --- !u!222 &1238995895
@@ -77354,7 +77511,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Now
+  m_Text: "\u5373\u4E70\u5373\u9001"
   textZH: "\u5373\u4E70\u5373\u9001"
   textEN: Now
 --- !u!222 &1249106737
@@ -78186,7 +78343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restaurant
+  m_Text: "\u5546\u5BB6"
   textZH: "\u5546\u5BB6"
   textEN: Restaurant
 --- !u!222 &1264448919
@@ -78586,7 +78743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Send Verification Code
+  m_Text: "\u53D1\u9001\u9A8C\u8BC1\u7801"
   textZH: "\u53D1\u9001\u9A8C\u8BC1\u7801"
   textEN: Send Verification Code
 --- !u!222 &1273479855
@@ -79216,7 +79373,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credit Card Management
+  m_Text: "\u4FE1\u7528\u5361\u7BA1\u7406"
   textZH: "\u4FE1\u7528\u5361\u7BA1\u7406"
   textEN: Credit Card Management
 --- !u!222 &1282444595
@@ -79600,7 +79757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Delivery:'
+  m_Text: "\u914D\u9001\u65B9\u5F0F:"
   textZH: "\u914D\u9001\u65B9\u5F0F:"
   textEN: 'Delivery:'
 --- !u!222 &1293151860
@@ -79838,7 +79995,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: password
+  m_Text: "\u5BC6\u7801"
   textZH: "\u5BC6\u7801"
   textEN: password
 --- !u!222 &1297572497
@@ -80550,7 +80707,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1307922195}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 154.10599, y: -25, z: 0}
+  m_LocalPosition: {x: 61.96275, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 82348777}
@@ -81117,7 +81274,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Orders
+  m_Text: "\u8BA2\u5355"
   textZH: "\u8BA2\u5355"
   textEN: Orders
 --- !u!222 &1329857856
@@ -81196,7 +81353,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Empty
+  m_Text: "\u65E0\u5730\u5740"
   textZH: "\u65E0\u5730\u5740"
   textEN: Empty
 --- !u!222 &1330020538
@@ -81705,7 +81862,7 @@ GameObject:
   - component: {fileID: 1335235396}
   - component: {fileID: 1335235395}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: MonthIF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81718,20 +81875,20 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1335235393}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.5, y: -27.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 167.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432654372}
   - {fileID: 1404169755}
-  m_Father: {fileID: 1212262700}
-  m_RootOrder: 1
+  m_Father: {fileID: 795779049}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: 0}
-  m_SizeDelta: {x: -125, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -10, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1335235395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82425,18 +82582,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1340184203}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -466, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -240, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2141738537}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 7
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -466}
-  m_SizeDelta: {x: -20, y: 55}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: -10}
+  m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1340184205
 MonoBehaviour:
@@ -82509,7 +82666,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ae30072a59a25814e8cfe4b1f70242ed, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -82696,7 +82853,7 @@ GameObject:
   - component: {fileID: 1342899768}
   - component: {fileID: 1342899767}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: LastNameIF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82709,20 +82866,20 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1342899765}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.5, y: -27.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 167.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 65773592}
   - {fileID: 221959694}
-  m_Father: {fileID: 543313083}
-  m_RootOrder: 1
+  m_Father: {fileID: 1743904239}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: 0}
-  m_SizeDelta: {x: -125, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -10, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1342899767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84517,7 +84674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter you expiry year
+  m_Text: "\u8BF7\u8F93\u5165\u5230\u671F\u5E74\u4EFD"
   textZH: "\u8BF7\u8F93\u5165\u5230\u671F\u5E74\u4EFD"
   textEN: Please enter you expiry year
 --- !u!222 &1377695242
@@ -84692,7 +84849,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380820804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -55, z: 0}
+  m_LocalPosition: {x: 177.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 705233718}
@@ -85731,7 +85888,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1395529618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -172.5, y: -55, z: 0}
+  m_LocalPosition: {x: -167.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1000254816}
@@ -85739,7 +85896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1395529620
@@ -85766,16 +85923,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 14
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Card Number
+  m_Text: "\u5361\u53F7"
   textZH: "\u5361\u53F7"
   textEN: Card Number
 --- !u!222 &1395529621
@@ -85966,7 +86123,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -50}
+  m_SizeDelta: {x: 0, y: -70}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1398511815
 MonoBehaviour:
@@ -86158,7 +86315,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1401490211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125, y: -27.5, z: 0}
+  m_LocalPosition: {x: -210, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1474569521}
@@ -86193,16 +86350,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter security code
+  m_Text: "\u8BF7\u8F93\u5165\u5B89\u5168\u7801"
   textZH: "\u8BF7\u8F93\u5165\u5B89\u5168\u7801"
   textEN: Please enter security code
 --- !u!222 &1401490214
@@ -86372,7 +86529,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1404169754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -50, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1335235394}
@@ -86407,10 +86564,10 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -86871,7 +87028,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Poor Quality of food
+  m_Text: "\u9910\u70B9\u8D28\u91CF\u95EE\u9898"
   textZH: "\u9910\u70B9\u8D28\u91CF\u95EE\u9898"
   textEN: Poor Quality of food
 --- !u!222 &1408265195
@@ -87392,7 +87549,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Order Number
+  m_Text: "\u8BA2\u5355\u53F7"
   textZH: "\u8BA2\u5355\u53F7"
   textEN: Order Number
 --- !u!222 &1415217142
@@ -87615,7 +87772,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coupon Management
+  m_Text: "\u4F18\u60E0\u5238\u7BA1\u7406"
   textZH: "\u4F18\u60E0\u5238\u7BA1\u7406"
   textEN: Coupon Management
 --- !u!222 &1420549594
@@ -87819,7 +87976,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1426269581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 68.75048, y: 0, z: 0}
+  m_LocalPosition: {x: 79.85299, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917816491}
@@ -88294,7 +88451,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1435187835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.5, y: -55, z: 0}
+  m_LocalPosition: {x: -152.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 778133205}
@@ -88338,7 +88495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FAQ
+  m_Text: "\u5E38\u89C1\u95EE\u9898"
   textZH: "\u5E38\u89C1\u95EE\u9898"
   textEN: FAQ
 --- !u!222 &1435187838
@@ -88697,7 +88854,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1439684296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.5, y: -55, z: 0}
+  m_LocalPosition: {x: -152.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 227908031}
@@ -88741,7 +88898,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Leave a comment
+  m_Text: "\u7559\u8A00\u53CD\u9988"
   textZH: "\u7559\u8A00\u53CD\u9988"
   textEN: Leave a comment
 --- !u!222 &1439684299
@@ -89212,7 +89369,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u8FD9\u91CC\u662F\u5730\u5740"
   textZH: "\u8FD9\u91CC\u662F\u5730\u5740"
   textEN: 
 --- !u!222 &1446879331
@@ -90332,7 +90489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 1}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -90600,7 +90757,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1474569520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 167.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1401490212}
@@ -90608,11 +90765,11 @@ RectTransform:
   m_Father: {fileID: 2104307461}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: 0}
-  m_SizeDelta: {x: -125, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -10, y: 0}
+  m_SizeDelta: {x: 210, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1474569522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90975,7 +91132,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Total Invitations
+  m_Text: "\u5386\u53F2\u9080\u8BF7"
   textZH: "\u5386\u53F2\u9080\u8BF7"
   textEN: Total Invitations
 --- !u!222 &1476778657
@@ -91162,7 +91319,7 @@ Prefab:
     - target: {fileID: 224000010057691946, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 53.155502
+      value: 54.968155
       objectReference: {fileID: 0}
     - target: {fileID: 224000010064384286, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
@@ -91227,12 +91384,12 @@ Prefab:
     - target: {fileID: 224000012022969382, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -56.780807
+      value: -54.968155
       objectReference: {fileID: 0}
     - target: {fileID: 224000012142940530, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -71.78081
+      value: -69.968155
       objectReference: {fileID: 0}
     - target: {fileID: 224000012328523212, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
@@ -91252,7 +91409,7 @@ Prefab:
     - target: {fileID: 224000012603163210, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 68.1555
+      value: 69.968155
       objectReference: {fileID: 0}
     - target: {fileID: 224000013075803744, guid: 0b41870f0752c1842a34ade685637b73,
         type: 2}
@@ -92336,7 +92493,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Change Password
+  m_Text: "\u4FEE\u6539\u5BC6\u7801"
   textZH: "\u4FEE\u6539\u5BC6\u7801"
   textEN: Change Password
 --- !u!222 &1494409391
@@ -92662,10 +92819,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
-    m_FontSize: 20
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -92673,7 +92830,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Save
+  m_Text: "\u4FDD\u5B58"
   textZH: "\u4FDD\u5B58"
   textEN: Save
 --- !u!222 &1497811179
@@ -92962,7 +93119,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: password
+  m_Text: "\u5BC6\u7801"
   textZH: "\u5BC6\u7801"
   textEN: password
 --- !u!222 &1505771157
@@ -93054,7 +93211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get location
+  m_Text: "\u83B7\u53D6\u4F4D\u7F6E"
   textZH: "\u83B7\u53D6\u4F4D\u7F6E"
   textEN: Get location
 --- !u!222 &1506819416
@@ -93920,7 +94077,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Membership Status :'
+  m_Text: "\u4F1A\u5458\u7B49\u7EA7 :"
   textZH: "\u4F1A\u5458\u7B49\u7EA7 :"
   textEN: 'Membership Status :'
 --- !u!222 &1515794157
@@ -94485,7 +94642,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: First Name
+  m_Text: "\u540D"
   textZH: "\u540D"
   textEN: First Name
 --- !u!222 &1525328913
@@ -94593,7 +94750,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1525865323}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 162.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 152.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 227908031}
@@ -98929,7 +99086,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Discount
+  m_Text: "\u8BA2\u5355\u4F18\u60E0\u7C7B\u578B"
   textZH: "\u8BA2\u5355\u4F18\u60E0\u7C7B\u578B"
   textEN: Discount
 --- !u!222 &1538881287
@@ -99328,7 +99485,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Email
+  m_Text: "\u90AE\u7BB1"
   textZH: "\u90AE\u7BB1"
   textEN: Email
 --- !u!222 &1554934464
@@ -99752,7 +99909,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: City
+  m_Text: "\u57CE\u5E02"
   textZH: "\u57CE\u5E02"
   textEN: City
 --- !u!222 &1557394527
@@ -100051,7 +100208,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u60A8\u5DF2\u7ECF\u63D0\u4EA4\u8BA2\u5355, \u8BF7\u8010\u5FC3\u7B49\u5F85\u3002"
   textZH: "\u60A8\u5DF2\u7ECF\u63D0\u4EA4\u8BA2\u5355, \u8BF7\u8010\u5FC3\u7B49\u5F85\u3002"
   textEN: 
 --- !u!222 &1560942277
@@ -100656,7 +100813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delivery Address
+  m_Text: "\u60A8\u7684\u6536\u8D27\u5730\u5740"
   textZH: "\u60A8\u7684\u6536\u8D27\u5730\u5740"
   textEN: Delivery Address
 --- !u!222 &1571086461
@@ -101282,7 +101439,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1585415871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 118.74952, y: 0, z: 0}
+  m_LocalPosition: {x: 107.64702, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591581839}
@@ -101396,7 +101553,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Min Consumption
+  m_Text: "\u6700\u4F4E\u6D88\u8D39"
   textZH: "\u6700\u4F4E\u6D88\u8D39"
   textEN: Min Consumption
 --- !u!222 &1586313945
@@ -101885,7 +102042,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cancel
+  m_Text: "\u53D6\u6D88"
   textZH: "\u53D6\u6D88"
   textEN: Cancel
 --- !u!222 &1591536434
@@ -101921,7 +102078,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591581838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 137.50096, y: -50, z: 0}
+  m_LocalPosition: {x: 159.70598, y: -50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1585415872}
@@ -102003,7 +102160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Reservation, Grocery, Groupon
+  m_Text: "\u9884\u5B9A\uFF0C\u8D85\u5E02\uFF0C\u56E2\u8D2D"
   textZH: "\u9884\u5B9A\uFF0C\u8D85\u5E02\uFF0C\u56E2\u8D2D"
   textEN: Reservation, Grocery, Groupon
 --- !u!222 &1591581842
@@ -102202,7 +102359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Discount
+  m_Text: "\u4F18\u60E0"
   textZH: "\u4F18\u60E0"
   textEN: Discount
 --- !u!222 &1593300787
@@ -102281,7 +102438,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Historical Search
+  m_Text: "\u5386\u53F2\u641C\u7D22"
   textZH: "\u5386\u53F2\u641C\u7D22"
   textEN: Historical Search
 --- !u!224 &1593989058
@@ -102377,7 +102534,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Comment
+  m_Text: "\u8BC4\u4EF7"
   textZH: "\u8BC4\u4EF7"
   textEN: Comment
 --- !u!222 &1594804167
@@ -102511,7 +102668,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -102521,7 +102678,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -102531,7 +102688,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -102541,7 +102698,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -102551,7 +102708,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224624962295373302, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -102835,7 +102992,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Contact Person
+  m_Text: "\u8054\u7CFB\u4EBA"
   textZH: "\u8054\u7CFB\u4EBA"
   textEN: Contact Person
 --- !u!222 &1597208580
@@ -102871,7 +103028,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1600430314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -172.5, y: -55, z: 0}
+  m_LocalPosition: {x: -167.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2104307461}
@@ -102879,7 +103036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1600430316
@@ -102906,16 +103063,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 14
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Security Code
+  m_Text: "\u5B89\u5168\u7801"
   textZH: "\u5B89\u5168\u7801"
   textEN: Security Code
 --- !u!222 &1600430317
@@ -103231,7 +103388,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address Management
+  m_Text: "\u5730\u5740\u7BA1\u7406"
   textZH: "\u5730\u5740\u7BA1\u7406"
   textEN: Address Management
 --- !u!222 &1605870952
@@ -103535,7 +103692,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1617820777}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125, y: -27.5, z: 0}
+  m_LocalPosition: {x: -210, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 375651461}
@@ -103570,16 +103727,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter card number
+  m_Text: "\u8BF7\u8F93\u5165\u5361\u53F7"
   textZH: "\u8BF7\u8F93\u5165\u5361\u53F7"
   textEN: Please enter card number
 --- !u!222 &1617820780
@@ -103963,7 +104120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Refund
+  m_Text: "\u9000\u6B3E\u9700\u8981\u591A\u4E45\u5230\u8D26"
   textZH: "\u9000\u6B3E\u9700\u8981\u591A\u4E45\u5230\u8D26"
   textEN: Refund
 --- !u!222 &1628424140
@@ -104989,7 +105146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Last Name
+  m_Text: "\u59D3\u6C0F"
   textZH: "\u59D3\u6C0F"
   textEN: Last Name
 --- !u!222 &1642326934
@@ -105638,7 +105795,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Discount
+  m_Text: "\u5546\u54C1\u4F18\u60E0"
   textZH: "\u5546\u54C1\u4F18\u60E0"
   textEN: Discount
 --- !u!222 &1668663904
@@ -105775,7 +105932,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Card #'
+  m_Text: "\u4FE1\u7528\u5361\u5361\u53F7"
   textZH: "\u4FE1\u7528\u5361\u5361\u53F7"
   textEN: 'Card #'
 --- !u!222 &1669681332
@@ -106493,7 +106650,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Unit #'
+  m_Text: "\u5355\u5143\u53F7"
   textZH: "\u5355\u5143\u53F7"
   textEN: 'Unit #'
 --- !u!222 &1684769988
@@ -106770,7 +106927,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter instruction
+  m_Text: "\u8BF7\u8F93\u5165\u5907\u6CE8"
   textZH: "\u8BF7\u8F93\u5165\u5907\u6CE8"
   textEN: Enter instruction
 --- !u!222 &1690906064
@@ -107050,7 +107207,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Contact
+  m_Text: "\u8054\u7CFB\u65B9\u5F0F"
   textZH: "\u8054\u7CFB\u65B9\u5F0F"
   textEN: Contact
 --- !u!222 &1693875826
@@ -107246,7 +107403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Detail
+  m_Text: "\u5E2E\u52A9\u8BE6\u60C5"
   textZH: "\u5E2E\u52A9\u8BE6\u60C5"
   textEN: Detail
 --- !u!222 &1695912357
@@ -108303,17 +108460,17 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1707779696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -596, z: 0}
+  m_LocalPosition: {x: 0, y: -370, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 699056115}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 9
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -596}
-  m_SizeDelta: {x: -20, y: 55}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: -140}
+  m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1707779698
 MonoBehaviour:
@@ -108386,7 +108543,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ae30072a59a25814e8cfe4b1f70242ed, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -108616,7 +108773,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1713828761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -50, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1778652882}
@@ -108651,10 +108808,10 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -108943,7 +109100,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cancel order
+  m_Text: "\u53D6\u6D88\u8BA2\u5355"
   textZH: "\u53D6\u6D88\u8BA2\u5355"
   textEN: Cancel order
 --- !u!222 &1725405740
@@ -109098,7 +109255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delivery Fee
+  m_Text: "\u914D\u9001\u8D39"
   textZH: "\u914D\u9001\u8D39"
   textEN: Delivery Fee
 --- !u!222 &1728195893
@@ -110263,7 +110420,7 @@ GameObject:
   - component: {fileID: 1743904241}
   - component: {fileID: 1743904240}
   m_Layer: 5
-  m_Name: FirstName
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110276,17 +110433,20 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1743904238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -120, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 607658164}
   - {fileID: 378386757}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 1
+  - {fileID: 1342899766}
+  - {fileID: 301345535}
+  - {fileID: 910753952}
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1743904240
@@ -110301,7 +110461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -111069,7 +111229,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1750784480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -72.356544, y: 25, z: 0}
+  m_LocalPosition: {x: -75, y: 25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1037886591}
@@ -111112,7 +111272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Confirm
+  m_Text: "\u786E\u5B9A"
   textZH: "\u786E\u5B9A"
   textEN: Confirm
 --- !u!222 &1750784483
@@ -111566,8 +111726,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Note: 7pm - 10pm delivery on orders placed before 5pm and 2nd day after
-    5pm. Minimum order $30'
+  m_Text: "\u63D0\u793A: \u8D85\u5E02\u6700\u4F4E\u8D77\u9001\u91D1\u989D$30.00. \u5F53\u65E517:00\u524D\u4E0B\u5355,\u5C06\u5728\u5F53\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;
+    17:00\u4E4B\u540E\u7684\u8D85\u5E02\u8BA2\u5355,\u5C06\u4E8E\u6B21\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;"
   textZH: "\u63D0\u793A: \u8D85\u5E02\u6700\u4F4E\u8D77\u9001\u91D1\u989D$30.00. \u5F53\u65E517:00\u524D\u4E0B\u5355,\u5C06\u5728\u5F53\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;
     17:00\u4E4B\u540E\u7684\u8D85\u5E02\u8BA2\u5355,\u5C06\u4E8E\u6B21\u65E57pm-10pm\u4E4B\u95F4\u9001\u8FBE;"
   textEN: 'Note: 7pm - 10pm delivery on orders placed before 5pm and 2nd day after
@@ -112832,7 +112992,7 @@ GameObject:
   - component: {fileID: 1778652884}
   - component: {fileID: 1778652883}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: YearIF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112846,7 +113006,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1778652881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.5, y: -27.5, z: 0}
+  m_LocalPosition: {x: 57.5, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 270374857}
@@ -112854,11 +113014,11 @@ RectTransform:
   m_Father: {fileID: 795779049}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.5, y: 0}
-  m_SizeDelta: {x: -125, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -120, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1778652883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113026,7 +113186,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Extra fees
+  m_Text: "\u989D\u5916\u8D39\u7528"
   textZH: "\u989D\u5916\u8D39\u7528"
   textEN: Extra fees
 --- !u!222 &1778760367
@@ -113734,7 +113894,7 @@ Prefab:
     - target: {fileID: 224688507574536666, guid: a3fae8cba4e034f03b75c57c00303aa5,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -40
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 224688507574536666, guid: a3fae8cba4e034f03b75c57c00303aa5,
         type: 2}
@@ -113958,7 +114118,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1789052308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.5, y: -55, z: 0}
+  m_LocalPosition: {x: -152.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422591551}
@@ -114002,7 +114162,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Refund Policy
+  m_Text: "\u9000\u5355\u9000\u6B3E"
   textZH: "\u9000\u5355\u9000\u6B3E"
   textEN: Refund Policy
 --- !u!222 &1789052311
@@ -115950,7 +116110,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Place Order
+  m_Text: "\u63D0\u4EA4\u8BA2\u5355"
   textZH: "\u63D0\u4EA4\u8BA2\u5355"
   textEN: Place Order
 --- !u!222 &1814250688
@@ -117216,7 +117376,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter verification code
+  m_Text: "\u8BF7\u8F93\u5165\u9A8C\u8BC1\u7801"
   textZH: "\u8BF7\u8F93\u5165\u9A8C\u8BC1\u7801"
   textEN: Please enter verification code
 --- !u!222 &1822833580
@@ -117541,7 +117701,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Street
+  m_Text: "\u8857\u9053"
   textZH: "\u8857\u9053"
   textEN: Street
 --- !u!222 &1830211383
@@ -118044,7 +118204,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Send
+  m_Text: "\u53D1\u9001"
   textZH: "\u53D1\u9001"
   textEN: Send
 --- !u!222 &1833685231
@@ -119140,7 +119300,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help
+  m_Text: "\u5E2E\u52A9"
   textZH: "\u5E2E\u52A9"
   textEN: Help
 --- !u!222 &1852337768
@@ -119269,7 +119429,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dishes
+  m_Text: "\u5546\u54C1"
   textZH: "\u5546\u54C1"
   textEN: Dishes
 --- !u!222 &1852517566
@@ -119653,7 +119813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your street name
+  m_Text: "\u8F93\u5165\u8857\u9053"
   textZH: "\u8F93\u5165\u8857\u9053"
   textEN: Enter your street name
 --- !u!222 &1858647883
@@ -121029,7 +121189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Redeem Point
+  m_Text: "\u5151\u6362\u79EF\u5206"
   textZH: "\u5151\u6362\u79EF\u5206"
   textEN: Redeem Point
 --- !u!222 &1878533239
@@ -121283,7 +121443,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tax
+  m_Text: "\u9500\u552E\u7A0E"
   textZH: "\u9500\u552E\u7A0E"
   textEN: Tax
 --- !u!222 &1883451565
@@ -121715,7 +121875,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tips
+  m_Text: "\u5C0F\u8D39"
   textZH: "\u5C0F\u8D39"
   textEN: Tips
 --- !u!222 &1897441997
@@ -121865,7 +122025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Premium+ Member
+  m_Text: "\u5C0A\u4EAB\u4F1A\u5458"
   textZH: "\u5C0A\u4EAB\u4F1A\u5458"
   textEN: Premium+ Member
 --- !u!222 &1901107320
@@ -122212,7 +122372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u8054\u7CFB\u4EBA && \u7535\u8BDD"
   textZH: "\u8054\u7CFB\u4EBA && \u7535\u8BDD"
   textEN: 
 --- !u!222 &1909966906
@@ -122496,7 +122656,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Set Location
+  m_Text: "\u5207\u6362\u5730\u533A"
   textZH: "\u5207\u6362\u5730\u533A"
   textEN: Set Location
 --- !u!222 &1915314592
@@ -122691,7 +122851,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Empty
+  m_Text: "\u65E0\u5730\u5740"
   textZH: "\u65E0\u5730\u5740"
   textEN: Empty
 --- !u!222 &1916662386
@@ -122843,7 +123003,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Grocery
+  m_Text: "\u8D85\u5E02"
   textZH: "\u8D85\u5E02"
   textEN: Grocery
 --- !u!222 &1920020981
@@ -122922,7 +123082,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Phone Number
+  m_Text: "\u8054\u7CFB\u7535\u8BDD"
   textZH: "\u8054\u7CFB\u7535\u8BDD"
   textEN: Phone Number
 --- !u!222 &1921854134
@@ -123766,7 +123926,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Click to change user info
+  m_Text: "\u70B9\u51FB\u4FEE\u6539\u4E2A\u4EBA\u4FE1\u606F"
   textZH: "\u70B9\u51FB\u4FEE\u6539\u4E2A\u4EBA\u4FE1\u606F"
   textEN: Click to change user info
 --- !u!222 &1935406406
@@ -124632,7 +124792,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Search
+  m_Text: "\u641C\u7D22"
   textZH: "\u641C\u7D22"
   textEN: Search
 --- !u!222 &1948292109
@@ -124708,7 +124868,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Payment Method
+  m_Text: "\u652F\u4ED8\u65B9\u5F0F"
   textZH: "\u652F\u4ED8\u65B9\u5F0F"
   textEN: Payment Method
 --- !u!222 &1950534221
@@ -125563,7 +125723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credit Card Management
+  m_Text: "\u4FE1\u7528\u5361\u7BA1\u7406"
   textZH: "\u4FE1\u7528\u5361\u7BA1\u7406"
   textEN: Credit Card Management
 --- !u!222 &1968950753
@@ -125734,7 +125894,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: First Name
+  m_Text: "\u540D\u5B57"
   textZH: "\u540D\u5B57"
   textEN: First Name
 --- !u!222 &1969664580
@@ -126392,7 +126552,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Missing Items
+  m_Text: "\u6F0F\u9001\u9910"
   textZH: "\u6F0F\u9001\u9910"
   textEN: Missing Items
 --- !u!222 &1975994732
@@ -126656,7 +126816,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Estimated Dlivery Time
+  m_Text: "\u9884\u8BA1\u9001\u8FBE\u65F6\u95F4"
   textZH: "\u9884\u8BA1\u9001\u8FBE\u65F6\u95F4"
   textEN: Estimated Dlivery Time
 --- !u!222 &1977912909
@@ -126735,7 +126895,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Invite Friends
+  m_Text: "\u9080\u8BF7\u597D\u53CB"
   textZH: "\u9080\u8BF7\u597D\u53CB"
   textEN: Invite Friends
 --- !u!222 &1979795375
@@ -126812,7 +126972,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Invite Friends
+  m_Text: "\u9080\u8BF7\u670B\u53CB"
   textZH: "\u9080\u8BF7\u670B\u53CB"
   textEN: Invite Friends
 --- !u!222 &1980535459
@@ -127345,7 +127505,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your first name
+  m_Text: "\u8F93\u5165\u540D\u5B57"
   textZH: "\u8F93\u5165\u540D\u5B57"
   textEN: Enter your first name
 --- !u!222 &1994315207
@@ -127449,7 +127609,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1994727672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125, y: -27.5, z: 0}
+  m_LocalPosition: {x: -100, y: -27.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 378386757}
@@ -127484,18 +127644,18 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter first name
+  m_Text: "\u8BF7\u8F93\u5165\u540D"
   textZH: "\u8BF7\u8F93\u5165\u540D"
-  textEN: Please enter first name
+  textEN: First name
 --- !u!222 &1994727675
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -128072,7 +128232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sales Tax
+  m_Text: "\u9500\u552E\u7A0E"
   textZH: "\u9500\u552E\u7A0E"
   textEN: Sales Tax
 --- !u!222 &2000961270
@@ -128153,7 +128313,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delivery fee
+  m_Text: "\u914D\u9001\u8D39"
   textZH: "\u914D\u9001\u8D39"
   textEN: Delivery fee
 --- !u!222 &2002983607
@@ -128230,7 +128390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Base Price
+  m_Text: "\u5546\u54C1\u603B\u4EF7"
   textZH: "\u5546\u54C1\u603B\u4EF7"
   textEN: Base Price
 --- !u!222 &2003246253
@@ -128950,7 +129110,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dish name
+  m_Text: "\u83DC\u54C1\u540D\u79F0"
   textZH: "\u83DC\u54C1\u540D\u79F0"
   textEN: Dish name
 --- !u!222 &2013976334
@@ -129403,7 +129563,7 @@ Prefab:
     - target: {fileID: 224185464417638632, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.000061035156
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -129413,7 +129573,7 @@ Prefab:
     - target: {fileID: 224862306676893728, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -129423,7 +129583,7 @@ Prefab:
     - target: {fileID: 224183070187523348, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -129433,7 +129593,7 @@ Prefab:
     - target: {fileID: 224636963886098612, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
@@ -129443,7 +129603,7 @@ Prefab:
     - target: {fileID: 224382655090034100, guid: ecf371d75b0834ae7b93f2df9d1dff54,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecf371d75b0834ae7b93f2df9d1dff54, type: 2}
@@ -129696,7 +129856,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Extra Fee
+  m_Text: "\u989D\u5916\u8D39\u7528"
   textZH: "\u989D\u5916\u8D39\u7528"
   textEN: Extra Fee
 --- !u!222 &2023545086
@@ -129897,7 +130057,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Verification Code
+  m_Text: "\u9A8C\u8BC1\u7801"
   textZH: "\u9A8C\u8BC1\u7801"
   textEN: Verification Code
 --- !u!222 &2029075620
@@ -129997,7 +130157,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
-    m_FontSize: 20
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -130008,7 +130168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Save
+  m_Text: "\u4FDD\u5B58"
   textZH: "\u4FDD\u5B58"
   textEN: Save
 --- !u!222 &2032929708
@@ -130256,6 +130416,78 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2037588440}
+--- !u!1 &2039215311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1833572246074020, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2039215312}
+  - component: {fileID: 2039215314}
+  - component: {fileID: 2039215313}
+  m_Layer: 5
+  m_Name: Line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2039215312
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224396283527348434, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039215311}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1000254816}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &2039215313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114281903348861818, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039215311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.96862745, g: 0.96862745, b: 0.96862745, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2039215314
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222239963741697632, guid: acc07e6c0a004044896f869b896ee379,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039215311}
 --- !u!1 &2039265960
 GameObject:
   m_ObjectHideFlags: 0
@@ -130381,8 +130613,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Share your invitation code with your friend, you'll get one 5% off coupon
-    after your friend has made his/her first purchase
+  m_Text: "\u5C06\u60A8\u7684\u9080\u8BF7\u7801\u5206\u4EAB\u7ED9\u597D\u53CB\uFF0C\u597D\u53CB\u6210\u529F\u6CE8\u518C\u4E14\u4E0B\u5355\u540E\uFF0C\u60A8\u5C06\u83B7\u5F9795\u6298\u4F18\u60E0\u5238\u4E00\u5F20\u3002"
   textZH: "\u5C06\u60A8\u7684\u9080\u8BF7\u7801\u5206\u4EAB\u7ED9\u597D\u53CB\uFF0C\u597D\u53CB\u6210\u529F\u6CE8\u518C\u4E14\u4E0B\u5355\u540E\uFF0C\u60A8\u5C06\u83B7\u5F9795\u6298\u4F18\u60E0\u5238\u4E00\u5F20\u3002"
   textEN: Share your invitation code with your friend, you'll get one 5% off coupon
     after your friend has made his/her first purchase
@@ -130460,7 +130691,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your name
+  m_Text: "\u8BF7\u8F93\u5165\u59D3\u540D"
   textZH: "\u8BF7\u8F93\u5165\u59D3\u540D"
   textEN: Enter your name
 --- !u!222 &2040066474
@@ -131933,7 +132164,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Female
+  m_Text: "\u5973"
   textZH: "\u5973"
   textEN: Female
 --- !u!222 &2063394466
@@ -132092,86 +132323,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2065218633}
---- !u!1 &2066970479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000013841043006, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2066970480}
-  - component: {fileID: 2066970482}
-  - component: {fileID: 2066970481}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2066970480
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224000011748727636, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066970479}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -172.5, y: -55, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 543313083}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &2066970481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012274013196, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066970479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93edbcf0f3205434cb5ba2c0570be946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 3
-    m_AlignByGeometry: 0
-    m_RichText: 0
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Last Name
-  textZH: "\u59D3"
-  textEN: Last Name
---- !u!222 &2066970482
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222000012258169512, guid: 463cb6e753a83494b9568c292a1b2255,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066970479}
 --- !u!1 &2067936855
 GameObject:
   m_ObjectHideFlags: 0
@@ -132198,7 +132349,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2067936855}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.5, y: -55, z: 0}
+  m_LocalPosition: {x: -152.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148282339}
@@ -132242,7 +132393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Language
+  m_Text: "\u8BED\u8A00\u8BBE\u7F6E"
   textZH: "\u8BED\u8A00\u8BBE\u7F6E"
   textEN: Language
 --- !u!222 &2067936858
@@ -133091,7 +133242,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Search for restaurant or dishes/products
+  m_Text: "\u8BF7\u8F93\u5165\u5546\u5BB6/\u5546\u54C1\u540D\u79F0"
   textZH: "\u8BF7\u8F93\u5165\u5546\u5BB6/\u5546\u54C1\u540D\u79F0"
   textEN: Search for restaurant or dishes/products
 --- !u!222 &2078829131
@@ -133239,7 +133390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dish
+  m_Text: "\u83DC\u54C1"
   textZH: "\u83DC\u54C1"
   textEN: Dish
 --- !u!222 &2079431654
@@ -133530,7 +133681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Take-out Bags Fee
+  m_Text: "\u73AF\u4FDD\u888B\u8D39"
   textZH: "\u73AF\u4FDD\u888B\u8D39"
   textEN: Take-out Bags Fee
 --- !u!222 &2082239396
@@ -133875,7 +134026,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Comments
+  m_Text: "\u8BC4\u8BBA"
   textZH: "\u8BC4\u8BBA"
   textEN: Comments
 --- !u!222 &2085979053
@@ -134217,7 +134368,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter your name
+  m_Text: "\u8BF7\u8F93\u5165\u59D3\u540D"
   textZH: "\u8BF7\u8F93\u5165\u59D3\u540D"
   textEN: Please enter your name
 --- !u!222 &2090250481
@@ -134516,7 +134667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Final Price :'
+  m_Text: "\u5B9E\u9645\u652F\u4ED8 :"
   textZH: "\u5B9E\u9645\u652F\u4ED8 :"
   textEN: 'Final Price :'
 --- !u!222 &2094466219
@@ -134592,7 +134743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter your last name
+  m_Text: "\u8BF7\u8F93\u5165\u59D3"
   textZH: "\u8BF7\u8F93\u5165\u59D3"
   textEN: Please enter your last name
 --- !u!222 &2095240360
@@ -135100,17 +135251,17 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2104307460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.5, y: -395, z: 0}
+  m_LocalPosition: {x: 0, y: -165, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1600430315}
   - {fileID: 1474569521}
-  m_Father: {fileID: 1056596944}
-  m_RootOrder: 6
+  m_Father: {fileID: 35295638}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -395}
+  m_AnchoredPosition: {x: 0, y: -165}
   m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2104307462
@@ -135125,7 +135276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -135216,7 +135367,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Contact #'
+  m_Text: "\u8054\u7CFB\u7535\u8BDD"
   textZH: "\u8054\u7CFB\u7535\u8BDD"
   textEN: 'Contact #'
 --- !u!222 &2106341334
@@ -135307,7 +135458,7 @@ Prefab:
     - target: {fileID: 224000011199864676, guid: dab615c43885a594ea7b513216e3a0f5,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 17.854834
+      value: 23.897015
       objectReference: {fileID: 0}
     - target: {fileID: 224000011199864676, guid: dab615c43885a594ea7b513216e3a0f5,
         type: 2}
@@ -135417,7 +135568,7 @@ Prefab:
     - target: {fileID: 224000010639173130, guid: dab615c43885a594ea7b513216e3a0f5,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.854834
+      value: -13.897014
       objectReference: {fileID: 0}
     - target: {fileID: 224000010639173130, guid: dab615c43885a594ea7b513216e3a0f5,
         type: 2}
@@ -135974,7 +136125,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Recruit
+  m_Text: "\u804C\u4F4D\u62DB\u8058"
   textZH: "\u804C\u4F4D\u62DB\u8058"
   textEN: Recruit
 --- !u!222 &2114798750
@@ -136703,7 +136854,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2122650010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -172.5, y: -55, z: 0}
+  m_LocalPosition: {x: -167.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 795779049}
@@ -136711,7 +136862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2122650012
@@ -136738,18 +136889,18 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5f6736a412e8f4f22a0e6576e57ce2a5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 14
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Expiry Year
-  textZH: "\u5E74"
-  textEN: Expiry Year
+  m_Text: "\u5E74 / \u6708"
+  textZH: "\u5E74 / \u6708"
+  textEN: Year / Month
 --- !u!222 &2122650013
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -137370,7 +137521,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2128063417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -50, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 378386757}
@@ -137405,10 +137556,10 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3773c503a54904cde91c56c409fee723, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 5
+    m_MaxSize: 14
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -137805,7 +137956,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter your last name
+  m_Text: "\u8F93\u5165\u59D3\u6C0F"
   textZH: "\u8F93\u5165\u59D3\u6C0F"
   textEN: Enter your last name
 --- !u!222 &2130100884
@@ -138236,7 +138387,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credit Card Management
+  m_Text: "\u4FE1\u7528\u5361\u7BA1\u7406"
   textZH: "\u4FE1\u7528\u5361\u7BA1\u7406"
   textEN: Credit Card Management
 --- !u!222 &2138407082
@@ -138527,7 +138678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Save
+  m_Text: "\u4FDD\u5B58"
   textZH: "\u4FDD\u5B58"
   textEN: Save
 --- !u!222 &2141738539
@@ -138830,7 +138981,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Old Password
+  m_Text: "\u539F\u59CB\u5BC6\u7801"
   textZH: "\u539F\u59CB\u5BC6\u7801"
   textEN: Old Password
 --- !u!222 &2144611133

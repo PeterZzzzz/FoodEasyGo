@@ -118,22 +118,22 @@ public class PaymentPanelController : BasePanelController {
             ModifyCardPanelTitle.ResetUI("编辑信用卡", "Modify your Card");
             SetDefaultButton.gameObject.SetActive(true);
             DeleteButton.gameObject.SetActive(true);
-            modifyPaymentPanel.Find ("FirstName/InputField").GetComponent<InputField> ().text = currentBar._firstName;
-            modifyPaymentPanel.Find ("LastName/InputField").GetComponent<InputField> ().text = currentBar._lastName;
-            modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text = currentBar._cardNumber;
-            modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text = currentBar._month;
-            modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text = currentBar._year;
-            modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/Name/FirstNameIF").GetComponent<InputField> ().text = currentBar._firstName;
+            modifyPaymentPanel.Find ("Content/Name/LastNameIF").GetComponent<InputField> ().text = currentBar._lastName;
+            modifyPaymentPanel.Find ("Content/Card/InputField").GetComponent<InputField> ().text = currentBar._cardNumber;
+            modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text = currentBar._month;
+            modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text = currentBar._year;
+            modifyPaymentPanel.Find ("Content/SecurityCode/InputField").GetComponent<InputField> ().text = "";
         } else {
             ModifyCardPanelTitle.ResetUI("添加信用卡", "Add a new Card");
             SetDefaultButton.gameObject.SetActive(false);
             DeleteButton.gameObject.SetActive(false);
-            modifyPaymentPanel.Find ("FirstName/InputField").GetComponent<InputField> ().text = "";
-            modifyPaymentPanel.Find ("LastName/InputField").GetComponent<InputField> ().text = "";
-            modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text = "";
-            modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text = "";
-            modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text = "";
-            modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/Name/FirstNameIF").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/Name/LastNameIF").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/Card/InputField").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text = "";
+            modifyPaymentPanel.Find ("Content/SecurityCode/InputField").GetComponent<InputField> ().text = "";
         }
     }
 
@@ -141,11 +141,11 @@ public class PaymentPanelController : BasePanelController {
         if (ValidateModifyPaymentPanel ()) {
             if (currentBar == null) {
                 AddPayment (
-                    modifyPaymentPanel.Find ("FirstName/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("LastName/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text + "/" + modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Name/FirstNameIF").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Name/LastNameIF").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Card/InputField").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text + "/" + modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/SecurityCode/InputField").GetComponent<InputField> ().text,
                     new LDFWServerResponseEvent ((JSONObject data, string m) => {
                         SwitchModifyPaymentPanel (false);
                         ResetPanel ();
@@ -156,11 +156,11 @@ public class PaymentPanelController : BasePanelController {
             } else {
                 ModifyPayment (
                     currentBar._id,
-                    modifyPaymentPanel.Find ("FirstName/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("LastName/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text + "/" + modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text,
-                    modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Name/FirstNameIF").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Name/LastNameIF").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Card/InputField").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text + "/" + modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text,
+                    modifyPaymentPanel.Find ("Content/SecurityCode/InputField").GetComponent<InputField> ().text,
                     new LDFWServerResponseEvent ((JSONObject data, string m) => {
                         SwitchModifyPaymentPanel (false);
                         ResetPanel ();
@@ -173,28 +173,28 @@ public class PaymentPanelController : BasePanelController {
     }
 
     public bool ValidateModifyPaymentPanel () {
-        if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text)) {
+        if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Content/Card/InputField").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Card number cannot be empty");
             return false;
-        } else if (modifyPaymentPanel.Find ("Card/InputField").GetComponent<InputField> ().text.Length < 15) {
+        } else if (modifyPaymentPanel.Find ("Content/Card/InputField").GetComponent<InputField> ().text.Length < 15) {
             MessagePanelController.instance.DisplayPanel ("Card number too short");
             return false;
-        } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text)) {
+        } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Month cannot be empty");
             return false;
-        } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text)) {
+        } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Year cannot be empty");
             return false;
-        } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("SecurityCode/InputField").GetComponent<InputField> ().text)) {
+        } else if (string.IsNullOrEmpty (modifyPaymentPanel.Find ("Content/SecurityCode/InputField").GetComponent<InputField> ().text)) {
             MessagePanelController.instance.DisplayPanel ("Security code cannot be empty");
             return false;
         }
 
-        if (modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text.Length == 1) {
-            modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text = "0" + modifyPaymentPanel.Find ("Month/InputField").GetComponent<InputField> ().text;
+        if (modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text.Length == 1) {
+            modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text = "0" + modifyPaymentPanel.Find ("Content/Date/MonthIF").GetComponent<InputField> ().text;
         }
-        if (modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text.Length == 1) {
-            modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text = "0" + modifyPaymentPanel.Find ("Year/InputField").GetComponent<InputField> ().text;
+        if (modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text.Length == 1) {
+            modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text = "0" + modifyPaymentPanel.Find ("Content/Date/YearIF").GetComponent<InputField> ().text;
         }
 
         return true;

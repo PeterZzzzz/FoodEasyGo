@@ -11,7 +11,6 @@ public class PersonalDataPanelController : BasePanelController {
 
     public static PersonalDataPanelController instance;
 
-    public Transform scrollRectContent;
     public Transform sexPanel;
 
     public InputFieldController lastName;
