@@ -30,6 +30,9 @@ public class RestaurantDetailPanelController : BasePanelController
     public RectTransform dishContent;
     public RectTransform commentContent;
     public RectTransform noCommentBar;
+    public RectTransform backgroundImageRect;
+    public RectTransform basicInfoSection;
+    public RectTransform contentRaiseDistance;
 
     // Prefab section
     public GameObject dishCategoryBarPrefab;
@@ -83,8 +86,10 @@ public class RestaurantDetailPanelController : BasePanelController
             dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 100 - 30 - 50 - 20;
             Debug.Log("iPhoneX适配10");
         }
-
-        SwitchToDishMode();
+        backgroundImageRect.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.x / 2;
+        //panelSizeDelta.x/2是背景图片的高度，基本信息面板下降高度为背景图高的3/4
+        basicInfoSection.localPosition = new Vector2(basicInfoSection.localPosition.x, basicInfoSection.localPosition.y - panelSizeDelta.x / 8 * 3);
+        contentRaiseDistance.GetComponent<LayoutElement>().preferredHeight = 90 + panelSizeDelta.x / 8 * 3;
     }
 
     #region Overrides
@@ -92,16 +97,13 @@ public class RestaurantDetailPanelController : BasePanelController
     {
 
         DestroyAllCategoryContents();
-
-        Transform basicInfoSection = transform.Find("RestaurantImage");
-        basicInfoSection.Find("Image").GetComponent<RawImage>().texture = null;
-        basicInfoSection.Find("Title").GetComponent<TextController>().ResetUI("");
+        backgroundImageRect.GetComponent<RawImage>().texture = null;
+        basicInfoSection.Find("RestaurantName").GetComponent<TextController>().ResetUI("");
+        basicInfoSection.Find("Address").GetComponent<TextController>().ResetUI("");
+        basicInfoSection.Find("GrouponDescription").GetComponent<TextController>().ResetUI("");
+        basicInfoSection.Find("RatingSection").gameObject.SetActive(false);
+        basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().ResetUI("");
         basicInfoSection.Find("MinConsumption").GetComponent<TextController>().ResetUI("");
-        basicInfoSection.Find("OpenIcon").gameObject.SetActive(false);
-        basicInfoSection.Find("CloseIcon").gameObject.SetActive(false);
-        basicInfoSection.Find("PhoneIcon/Text").GetComponent<TextController>().ResetUI("");
-        basicInfoSection.Find("HourIcon/Text").GetComponent<TextController>().ResetUI("");
-        basicInfoSection.Find("AddressIcon/Text").GetComponent<TextController>().ResetUI("");
 
         SwitchToDishMode();
 
@@ -212,6 +214,7 @@ public class RestaurantDetailPanelController : BasePanelController
     private void DestroyAllCategoryContents()
     {
         RectTransform categoryContent = RestaurantDetailPanelCategoryScrollRectController.instance.content;
+        RestaurantDetailPanelCategoryScrollRectController.instance.normalizedPosition = new Vector2(0, 0);
         while (categoryContent.childCount > 0)
         {
             Transform temp = categoryContent.GetChild(0);
@@ -237,57 +240,64 @@ public class RestaurantDetailPanelController : BasePanelController
         restaurantNameZH = restaurantData.GetField("name").str;
         restaurantNameEN = restaurantData.GetField("name_en").str;
 
-
-        Transform restaurantImageBar = transform.Find("RestaurantImage");
-        //Texture2D cachedImage = AppImageCacheController.instance.RetrieveRestaurantImage (restaurantID.ToString ());
-        LDFWImageDownloadController.instance.AddToCacheList(
-            new ImageDownloader2(restaurantData.GetField("img").str.Replace("\\/", "/"), "restaurant", restaurantImageBar.Find("Image").GetComponent<RawImage>(), 1, null, null));
-
-        LDFWImageDownloadController.instance.AddToCacheList(
-            new ImageDownloader2(restaurantData.GetField("img").str.Replace("\\/", "/"), "restaurant", restaurantImageBar.GetComponent<RawImage>(), 2, null, null));
-
-        restaurantImageBar.Find("Title").GetComponent<TextController>().ResetUI(restaurantData.GetField("name").str, restaurantData.GetField("name_en").str);
-        restaurantImageBar.Find("MinConsumption").GetComponent<TextController>().ResetUI("最低消费: $" + restaurantData.GetField("min_consume").str, "Min Order: $" + restaurantData.GetField("min_consume").str);
-        restaurantImageBar.Find("PhoneIcon/Text").GetComponent<TextController>().ResetUI(restaurantData.GetField("telphone").str);
-        restaurantImageBar.Find("OpenIcon").gameObject.SetActive(false);
-        restaurantImageBar.Find("CloseIcon").gameObject.SetActive(false);
+        //load basic info
+        LDFWImageDownloadController.instance.AddToCacheList(new ImageDownloader2(restaurantData.GetField("img").str.Replace("\\/", "/"), "restaurant", backgroundImageRect.GetComponent<RawImage>(), 5, null, null));
+        basicInfoSection.Find("RestaurantName").GetComponent<TextController>().ResetUI(restaurantNameZH, restaurantNameEN);
+        basicInfoSection.Find("Address").GetComponent<TextController>().ResetUI(restaurantData.GetField("address").str, restaurantData.GetField("address_en").str);
+        //Ratings
+        basicInfoSection.Find("RatingSection").gameObject.SetActive(true);
+        for (int i = 1; i <= 5; i++)
+        {
+            if (i <= double.Parse(restaurantData.GetField("ratings").str) || restaurantData.GetField("ratings").str == "0.0")
+            {
+                basicInfoSection.Find("RatingSection/Stars/Star" + i + "/Select").localScale = Vector3.one;
+            }
+            else
+            {
+                basicInfoSection.Find("RatingSection/Stars/Star" + i + "/Select").localScale = Vector3.zero;
+            }
+        }
+        basicInfoSection.Find("RatingSection/Rate").GetComponent<Text>().text = restaurantData.GetField("ratings").str;
+        //Open status
         if (restaurantData.GetField("is_open").str == "1")
         {
             isRestaurantOpen = true;
-            restaurantImageBar.Find("OpenIcon").gameObject.SetActive(true);
+            basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().ResetUI("营业中", "Open");
+            basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().color = new Color(4f / 255f, 212f / 255f, 119f / 255f, 1f);
         }
         else
         {
             isRestaurantOpen = false;
-            restaurantImageBar.Find("CloseIcon").gameObject.SetActive(true);
+            basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().ResetUI("休息中", "Closed");
+            basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().color = new Color(239f / 255f, 70f / 255f, 64f / 255f, 1f);
         }
+        basicInfoSection.Find("MinConsumption").GetComponent<TextController>().ResetUI("最低消费: $" + restaurantData.GetField("min_consume").str, "Min Order: $" + restaurantData.GetField("min_consume").str);
 
-        string[] startTime = restaurantData.GetField("from_time").str.Split(',');
-        string[] toTime = restaurantData.GetField("to_time").str.Split(',');
-        string[] secondStartTime = restaurantData.GetField("second_from_time").str.Split(',');
-        string[] secondToTime = restaurantData.GetField("second_to_time").str.Split(',');
+        //计算开门时间的code
+        //string[] startTime = restaurantData.GetField("from_time").str.Split(',');
+        //string[] toTime = restaurantData.GetField("to_time").str.Split(',');
+        //string[] secondStartTime = restaurantData.GetField("second_from_time").str.Split(',');
+        //string[] secondToTime = restaurantData.GetField("second_to_time").str.Split(',');
 
-        int currentWeekday = (int)DateTime.Now.DayOfWeek; //0:sunday ~ 6:saturday
-        string hour = "";
-        if (startTime.Length > currentWeekday)
-        {
-            hour = startTime[currentWeekday] + " - ";
-        }
-        if (toTime.Length > currentWeekday)
-        {
-            hour += toTime[currentWeekday];
-        }
-        if (secondStartTime.Length > currentWeekday)
-        {
-            hour += ", " + secondStartTime[currentWeekday] + " - " + secondToTime[currentWeekday];
-        }
-        restaurantImageBar.Find("HourIcon/Text").GetComponent<TextController>().ResetUI(hour);
+        //int currentWeekday = (int)DateTime.Now.DayOfWeek; //0:sunday ~ 6:saturday
+        //string hour = "";
+        //if (startTime.Length > currentWeekday)
+        //{
+        //    hour = startTime[currentWeekday] + " - ";
+        //}
+        //if (toTime.Length > currentWeekday)
+        //{
+        //    hour += toTime[currentWeekday];
+        //}
+        //if (secondStartTime.Length > currentWeekday)
+        //{
+        //    hour += ", " + secondStartTime[currentWeekday] + " - " + secondToTime[currentWeekday];
+        //}
+        //basicInfoSection.Find("HourIcon/Text").GetComponent<TextController>().ResetUI(hour);
 
-        restaurantImageBar.Find("AddressIcon/Text").GetComponent<TextController>().ResetUI(restaurantData.GetField("address").str, restaurantData.GetField("address_en").str);
 
         JSONObject typeData = data.GetField("dish");
-        RestaurantDetailPanelCategoryScrollRectController.instance.content.sizeDelta = new Vector2(
-            RestaurantDetailPanelCategoryScrollRectController.instance.content.sizeDelta.x, 50 * typeData.Count);
+        RestaurantDetailPanelCategoryScrollRectController.instance.content.sizeDelta = new Vector2(100 * typeData.Count, RestaurantDetailPanelCategoryScrollRectController.instance.content.sizeDelta.y);
 
         for (int typeIndex = 0; typeIndex < typeData.Count; typeIndex++)
         {
@@ -298,12 +308,11 @@ public class RestaurantDetailPanelController : BasePanelController
             categoryBar.Find("Text").GetComponent<TextController>().ResetUI(typeData[typeIndex].GetField("title").str, typeData[typeIndex].GetField("title_en").str);
             categoryBar.SetParent(RestaurantDetailPanelCategoryScrollRectController.instance.content);
             categoryBar.localScale = Vector3.one;
-
-            categoryBar.anchorMin = new Vector2(0, 1);
-            categoryBar.anchorMax = Vector2.one;
-            categoryBar.pivot = new Vector2(0.5f, 1);
-            categoryBar.anchoredPosition = new Vector2(0, -typeIndex * 50);
-            categoryBar.sizeDelta = new Vector2(0, 50);
+            categoryBar.anchorMin = Vector2.zero;
+            categoryBar.anchorMax = new Vector2(0, 1);
+            categoryBar.pivot = new Vector2(0, 1);
+            categoryBar.anchoredPosition = new Vector2(typeIndex * 100, 0);
+            categoryBar.sizeDelta = new Vector2(100, 0);
 
             categoryBar.GetComponent<RestaurantDetailPanelCategoryBarController>().Reset(typeData[typeIndex].GetField("dish_details"), typeData[typeIndex].GetField("type_id").str);
             JSONObject dishData = typeData[typeIndex].GetField("dish_details");
@@ -313,24 +322,19 @@ public class RestaurantDetailPanelController : BasePanelController
                 {
                     //Debug.Log("zzzzzzzz" + dishData[dishIndex].GetField("id").str + "::::" + dishData[dishIndex]);
                     dictionaryDishData.Add(dishData[dishIndex].GetField("id").str, dishData[dishIndex]);
-
                 }
             }
         }
 
         yield return null;
         RestaurantDetailPanelCategoryScrollRectController.instance.content.GetComponent<LDFWToggleController>().Reset();
-        //Debug.Log ("Length = " +  RestaurantDetailPanelCategoryScrollRectController.instance.content.GetComponent<LDFWToggleController> ().selectedList.Length);
-        //RestaurantDetailPanelCategoryScrollRectController.instance.content.GetComponent<LDFWToggleController> ().SelectToggle (0);
         RestaurantDetailPanelCategoryScrollRectController.instance.CalculateLayoutInputVertical();
         RestaurantDetailPanelCategoryScrollRectController.instance.CalculateLayoutInputHorizontal();
-
 
         if (typeData[0] != null)
         {
             LoadCategoryDishData(typeData[0].GetField("type_id").str);
         }
-
     }
 
 
@@ -344,23 +348,14 @@ public class RestaurantDetailPanelController : BasePanelController
         JSONObject groupon = data.GetField("groupon");
         data = data.GetField("data");
 
-        // General Data
-        Transform restaurantImageBar = transform.Find("RestaurantImage");
         //Texture2D cachedImage = AppImageCacheController.instance.RetrieveRestaurantImage (restaurantID.ToString ());
-        LDFWImageDownloadController.instance.AddToCacheList(
-            new ImageDownloader2(groupon.GetField("img").str.Replace("\\/", "/"), "restaurant", restaurantImageBar.Find("Image").GetComponent<RawImage>(), 1, null, null));
-
-        LDFWImageDownloadController.instance.AddToCacheList(
-            new ImageDownloader2(groupon.GetField("img").str.Replace("\\/", "/"), "restaurant", restaurantImageBar.GetComponent<RawImage>(), 2, null, null));
-
-        restaurantImageBar.Find("Title").GetComponent<TextController>().ResetUI(groupon.GetField("groupon_name").str, groupon.GetField("groupon_name_en").str);
-        restaurantImageBar.Find("MinConsumption").GetComponent<TextController>().ResetUI("");
-        restaurantImageBar.Find("PhoneIcon/Text").GetComponent<TextController>().ResetUI(groupon.GetField("begin_time").str + " - " + groupon.GetField("end_time").str);
-        restaurantImageBar.Find("OpenIcon").gameObject.SetActive(false);
-        restaurantImageBar.Find("CloseIcon").gameObject.SetActive(false);
-        restaurantImageBar.Find("HourIcon/Text").GetComponent<TextController>().ResetUI(groupon.GetField("send_time").str);
-        restaurantImageBar.Find("AddressIcon/Text").GetComponent<TextController>().ResetUI(groupon.GetField("region_link").str.Replace("&nbsp;", ","));
-
+        LDFWImageDownloadController.instance.AddToCacheList(new ImageDownloader2(groupon.GetField("img").str.Replace("\\/", "/"), "restaurant", backgroundImageRect.GetComponent<RawImage>(), 5, null, null));
+        basicInfoSection.Find("RestaurantName").GetComponent<TextController>().ResetUI(groupon.GetField("groupon_name").str, groupon.GetField("groupon_name_en").str);
+        basicInfoSection.Find("GrouponDescription").GetComponent<TextController>().ResetUI(groupon.GetField("region_link").str.Replace("&nbsp;", ","));
+        basicInfoSection.Find("Address").GetComponent<TextController>().ResetUI("");
+        basicInfoSection.Find("MinConsumption").GetComponent<TextController>().ResetUI("");
+        basicInfoSection.Find("RatingSection").gameObject.SetActive(false);
+        basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().ResetUI("");
 
         for (int i = 0; i < data.Count; i++)
         {
@@ -378,15 +373,7 @@ public class RestaurantDetailPanelController : BasePanelController
         {
             LoadGrouponListData(data[0].GetField("id").str);
         }
-        //var grouponListData = new List<JSONObject>();
-        //if (groupon.Count > 0)
-        //{
-        //    for(int i = 0;i<groupon.Count;i++){
-        //        grouponListData.Add();
-        //    }
-        //    LoadGrouponListData(data[i].GetField("id").str);
 
-        //}
     }
 
 

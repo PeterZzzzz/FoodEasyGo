@@ -17,7 +17,7 @@ public class GroceryPanelDefaultEndlessScrollRectController : InfiniteScrollRect
         _typeID = groceryType;
         _scrollRect.StopMovement ();
         _scrollRectElementParentContent.anchoredPosition = Vector2.zero;
-
+        _scrollRect.normalizedPosition = new Vector2(1, 1);
         base.Reset ();
     }
 
