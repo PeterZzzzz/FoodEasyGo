@@ -16,12 +16,13 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
     public string _price;
     public string _nameZH;
     public string _nameEN;
-    public string _saleCount;
+    public string _desZH;
+    public string _desEN;
     public int _quantity = 0;
 
     public TextController titleT;
     public TextController priceT;
-    public TextController saleCountT;
+    public TextController descriptionT;
     public TextController quantityT;
     public Transform minusButton;
     public Transform plusButton;
@@ -52,13 +53,14 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
                 _data.GetField ("name").str,
                 _data.GetField ("name_en").str,
                 _data.GetField ("price").str,
-                _data.GetField ("sail_count").str);
+                _data.GetField ("describe").str.Replace("\\r","").Replace("\\n",""), 
+                _data.GetField ("describe_en").str.Replace("\\r", "").Replace("\\n", ""));
         } else {
             image.texture = null;
         }
     }
 
-    public void Reset (string imageURL, string restaurant, string dish, string dishTypeid, int number, string nameZH, string nameEN, string priceNumber, string saleCount) {
+    public void Reset (string imageURL, string restaurant, string dish, string dishTypeid, int number, string nameZH, string nameEN, string priceNumber, string descriptionZH, string descriptionEN) {
 
         if (image != null) {
             image.texture = null;
@@ -74,8 +76,8 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
         _nameZH = nameZH;
         _nameEN = nameEN;
         _price = priceNumber;
-        _saleCount = saleCount;
-
+        _desZH = descriptionZH;
+        _desEN = descriptionEN;
         ResetUI ();
     }
 
@@ -83,25 +85,12 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
         if (titleT != null) {
             titleT.ResetUI (_nameZH, _nameEN);
             priceT.ResetUI ("$" + _price);
-            saleCountT.ResetUI ("售出: " + _saleCount, "Sales: " + _saleCount);
+            descriptionT.ResetUI ("详情:" + _desZH, "Details:" + _desEN);
             UpdateUI ();
         }
     }
 
     public void OnPlusButtonClicked () {
-
-        //if (isRestaurant)
-        //{
-        //    if (!RestaurantDetailPanelController.instance.isRestaurantOpen)
-        //    {
-        //        if (string.IsNullOrEmpty(RestaurantPanelController.instance.deliveryTimeID))
-        //        {
-        //            MessagePanelController.instance.DisplayPanel("Restaurant is closed, please choose a delivery time");
-        //            return;
-        //        }
-        //    }
-        //}
-
         if (_quantity <= 0)
         {
             OnPointerClick(null);

@@ -5,50 +5,75 @@ using System.Collections;
 public class RestaurantDetailPanelTransparentBarController : MonoBehaviour {
 
     public static RestaurantDetailPanelTransparentBarController     instance;
+    public bool                                                     isResized = false;
     private LayoutElement                                           layoutElement;
-    private bool                                                    isResizing = false;
+    public bool                                                     isResizing = false;
     private float                                                   resizingSpeed = 2000f;
-    private bool                                                    isResizedDown = false;
+    public float                                                    resizeRange;
 
     void Awake () {
         if (instance != null) {
             Destroy (instance.gameObject);
         }
         instance = this;
-        
         layoutElement = GetComponent<LayoutElement> ();
-        layoutElement.preferredHeight = 120;
         isResizing = false;
-        isResizedDown = false;
+        isResized = false;
+        resizeRange = 0;
     }
 
+    //void Update () {
+    //    if (isResizing) {
+    //        layoutElement.preferredHeight += Time.deltaTime * resizingSpeed;
+
+    //        if (layoutElement.preferredHeight <= 0) {
+    //            layoutElement.preferredHeight = 0;
+    //            isResizing = false;
+    //            isResized = true;
+    //        }
+    //    }
+    //}
+
+    //public void Resize () {
+    //    if (!isResizing && !isResized) {
+    //        isResizing = true;
+    //        resizingSpeed = -200;
+    //    }
+    //}
+
+
+
+
     void Update () {
+        if (resizeRange < layoutElement.preferredHeight)
+            resizeRange = layoutElement.preferredHeight;
+
         if (isResizing) {
             layoutElement.preferredHeight += Time.deltaTime * resizingSpeed;
 
-            if (layoutElement.preferredHeight >= 120) {
-                layoutElement.preferredHeight = 120;
+            if (layoutElement.preferredHeight >= resizeRange) {
+                layoutElement.preferredHeight = resizeRange;
                 isResizing = false;
-                isResizedDown = false;
+                isResized = false;
             } else if (layoutElement.preferredHeight <= 0) {
                 layoutElement.preferredHeight = 0;
                 isResizing = false;
-                isResizedDown = true;
+                isResized = true;
             }
         }
     }
 
     public void ResizeDown () {
-        if (!isResizing && !isResizedDown) {
+        if (!isResizing && !isResized) {
             isResizing = true;
-            resizingSpeed = -200;
+            resizingSpeed = -300;
         }
     }
 
     public void ResizeUp () {
-        if (!isResizing && isResizedDown) {
+        if (!isResizing && isResized) {
             isResizing = true;
-            resizingSpeed = 200;
+            resizingSpeed = 300;
         }
     }
 }

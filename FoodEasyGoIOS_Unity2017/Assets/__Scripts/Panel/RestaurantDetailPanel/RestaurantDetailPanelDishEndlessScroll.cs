@@ -19,7 +19,7 @@ public class RestaurantDetailPanelDishEndlessScroll : InfiniteScrollRectControll
         for (int i = 0; i < _scrollRectElementParentContent.childCount; i++) {
             _scrollRectElementParentContent.GetChild (i).GetComponent<RestaurantDetailPanelDishBarController> ().Reset (null, "");
         }
-        
+
     }
     
 
@@ -27,6 +27,8 @@ public class RestaurantDetailPanelDishEndlessScroll : InfiniteScrollRectControll
         isRestaurant = true;
         _data = data;
         _dataLength = data.Count;
+        _scrollRect.StopMovement();
+        _scrollRect.normalizedPosition = Vector2.one;
         _scrollRectElementParentContent.anchoredPosition = Vector2.zero;
 
         base.LoadData ();
@@ -37,6 +39,7 @@ public class RestaurantDetailPanelDishEndlessScroll : InfiniteScrollRectControll
         isRestaurant = false;
         _data = data;
         _dataLength = _data.Count;
+        _scrollRect.normalizedPosition = Vector2.one;
         _scrollRectElementParentContent.anchoredPosition = Vector2.zero;
         this.grouponID = grouponID;
 
@@ -55,17 +58,17 @@ public class RestaurantDetailPanelDishEndlessScroll : InfiniteScrollRectControll
 
     public override void CleanUp () {
         for (int i = 0; i < _scrollRectElementParentContent.childCount; i++) {
-            _scrollRectElementParentContent.GetChild (i).GetComponent<RestaurantDetailPanelDishBarController> ().Reset (null, "");
+            _scrollRectElementParentContent.GetChild(i).GetComponent<RestaurantDetailPanelDishBarController>().Reset(null, "");
         }
     }
 
     public override void OnScrollRectContentValueChanged (Vector2 scrollVector) {
+    
         if (lastContentYPosition <= 0 && _scrollRectContent.localPosition.y > 0) {
             RestaurantDetailPanelTransparentBarController.instance.ResizeDown ();
         } else if (lastContentYPosition > 0 && _scrollRectContent.localPosition.y <= 0) {
-            RestaurantDetailPanelTransparentBarController.instance.ResizeUp ();
+            //RestaurantDetailPanelTransparentBarController.instance.ResizeUp ();
         }
-
         lastContentYPosition = _scrollRectContent.localPosition.y;
 
         base.OnScrollRectContentValueChanged (scrollVector);

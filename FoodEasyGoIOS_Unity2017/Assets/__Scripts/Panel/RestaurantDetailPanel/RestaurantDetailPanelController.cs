@@ -80,10 +80,10 @@ public class RestaurantDetailPanelController : BasePanelController
     {
         base.Start();
 
-        dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 100 - 30 - 50;
+        dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 80 - 80 - 50;
         if (Screen.width == 1125 || Screen.width == 1242 || Screen.width == 828)
         {
-            dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 100 - 30 - 50 - 20;
+            dishContent.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.y - 80 - 80 - 50 - 20;
             Debug.Log("iPhoneX适配10");
         }
         backgroundImageRect.GetComponent<LayoutElement>().preferredHeight = panelSizeDelta.x / 2;
@@ -104,6 +104,10 @@ public class RestaurantDetailPanelController : BasePanelController
         basicInfoSection.Find("RatingSection").gameObject.SetActive(false);
         basicInfoSection.Find("RestaurantStatus").GetComponent<TextController>().ResetUI("");
         basicInfoSection.Find("MinConsumption").GetComponent<TextController>().ResetUI("");
+        //reset滑动效果区域
+        contentRaiseDistance.GetComponent<LayoutElement>().preferredHeight = 90 + panelSizeDelta.x / 8 * 3;
+        RestaurantDetailPanelTransparentBarController.instance.isResized = false;
+        RestaurantDetailPanelTransparentBarController.instance.isResizing = false;
 
         SwitchToDishMode();
 
@@ -140,18 +144,7 @@ public class RestaurantDetailPanelController : BasePanelController
     public void SwitchToDishMode()
     {
         commentContent.gameObject.SetActive(false);
-        dishContent.gameObject.SetActive(true);
 
-        transform.Find("Viewport/DishContent/TitleSection/DishesButton").GetComponent<RestaurantDetailPanelTitleSectionToggleElementController>().SelectToggleElement();
-        transform.Find("Viewport/DishContent/TitleSection/CommentsButton").GetComponent<RestaurantDetailPanelTitleSectionToggleElementController>().DeselectToggleElement();
-        if (!isRestaurantData)
-        {
-            transform.Find("Viewport/DishContent/TitleSection/CommentsButton").gameObject.SetActive(false);
-        }
-        else
-        {
-            transform.Find("Viewport/DishContent/TitleSection/CommentsButton").gameObject.SetActive(true);
-        }
     }
 
     private IEnumerator LoadDishDetailPanelCoroutine()
@@ -397,7 +390,6 @@ public class RestaurantDetailPanelController : BasePanelController
     public void SwitchToCommentMode()
     {
         commentContent.gameObject.SetActive(true);
-        dishContent.gameObject.SetActive(false);
         if (dictionaryCommentData == null)
         {
             LoadCommentData();

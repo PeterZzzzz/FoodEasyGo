@@ -30,7 +30,6 @@ public class RestaurantDishDetailPanelController : BasePanelController
     public RectTransform dishImageRect;
 	public TextController dishDetail;
 	public TextController priceText;
-	public TextController dishDescription;
 	public InputField noteInputField;
 
 
@@ -83,11 +82,9 @@ public class RestaurantDishDetailPanelController : BasePanelController
 	public override void ResetPanel()
 	{
         dishImage.texture = null;
-        topSection.Find("Detail").GetComponent<TextController>().ResetUI("");
+        dishDetail.ResetUI("");
 		topSection.Find("Price").GetComponent<TextController>().ResetUI("");
-
-		//dishDescription.ResetUI ("");
-		noteInputField.text = "";
+        noteInputField.text = "";
 
 		RectTransform content = topSection.parent as RectTransform;
 		bottomSection.SetAsFirstSibling();
@@ -147,7 +144,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 		cartDetailData = data;
 		currentCategoryID = data._categoryID;
 		dishBarController = Instantiate(Resources.Load("RestaurantDetailPanel/DishPrefab") as GameObject).GetComponent<RestaurantDetailPanelDishBarController>();
-		dishBarController.Reset(data._dishData._imgURL, data._restaurantID, data._dishData._id, data._goodsTypeID, data._number, data._dishData._nameZH, data._dishData._nameEN, data._dishData._price.ToString(), "0");
+        dishBarController.Reset(data._dishData._imgURL, data._restaurantID, data._dishData._id, data._goodsTypeID, data._number, data._dishData._nameZH, data._dishData._nameEN, data._dishData._price.ToString(), "", "");
 		tempList.Add(dishBarController.gameObject);
 		dishBarController.transform.localScale = Vector3.zero;
 
@@ -163,11 +160,11 @@ public class RestaurantDishDetailPanelController : BasePanelController
 		dishBarController = Instantiate(Resources.Load("RestaurantDetailPanel/DishPrefab") as GameObject).GetComponent<RestaurantDetailPanelDishBarController>();
 		if (index == 1)
 		{
-			dishBarController.Reset(groceryBar._imageURL1, groceryBar._restaurant1ID, groceryBar._grocery1ID, "", 1, groceryBar._nameZH1, groceryBar._nameEN1, groceryBar._price1, "0");
+            dishBarController.Reset(groceryBar._imageURL1, groceryBar._restaurant1ID, groceryBar._grocery1ID, "", 1, groceryBar._nameZH1, groceryBar._nameEN1, groceryBar._price1, "", "");
 		}
 		else if (index == 2)
 		{
-			dishBarController.Reset(groceryBar._imageURL2, groceryBar._restaurant2ID, groceryBar._grocery2ID, "", 1, groceryBar._nameZH2, groceryBar._nameEN2, groceryBar._price2, "0");
+            dishBarController.Reset(groceryBar._imageURL2, groceryBar._restaurant2ID, groceryBar._grocery2ID, "", 1, groceryBar._nameZH2, groceryBar._nameEN2, groceryBar._price2, "", "");
 		}
 
 		tempList.Add(dishBarController.gameObject);
@@ -212,10 +209,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
 
         dishDetail.ResetUI("菜品详情: " + data.GetField("describe").str, "Dish details: " + data.GetField("describe_en").str);
 		priceText.ResetUI("$" + data.GetField("price").str);
-		//dishDescription.ResetUI (data.GetField ("describe").str, data.GetField ("describe_en").str);
 		yield return null;
-
-		//topSection.GetComponent<LayoutElement> ().preferredHeight = 500 + (dishDescription.transform as RectTransform).sizeDelta.y;
 
 		//yield return null;
 
