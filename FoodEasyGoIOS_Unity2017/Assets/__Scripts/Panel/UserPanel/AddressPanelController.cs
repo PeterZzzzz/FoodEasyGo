@@ -280,7 +280,7 @@ public class AddressPanelController : BasePanelController
     private IEnumerator SendCodeCoroutine()
     {
         sendCodeBtn.interactable = false;
-        //SendVerificationCode();
+        SendVerificationCode();
 
         for (int i = waitForResend; i >= 0; i--)
         {
