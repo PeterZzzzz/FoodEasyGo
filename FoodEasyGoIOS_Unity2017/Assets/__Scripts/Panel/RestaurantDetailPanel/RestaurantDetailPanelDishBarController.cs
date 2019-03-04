@@ -85,7 +85,7 @@ public class RestaurantDetailPanelDishBarController : MonoBehaviour, IPointerCli
         if (titleT != null) {
             titleT.ResetUI (_nameZH, _nameEN);
             priceT.ResetUI ("$" + _price);
-            descriptionT.ResetUI ("详情:" + _desZH, "Details:" + _desEN);
+            descriptionT.ResetUI(_desZH, _desEN);
             UpdateUI ();
         }
     }
