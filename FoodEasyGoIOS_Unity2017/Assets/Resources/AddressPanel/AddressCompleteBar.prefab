@@ -98,7 +98,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: -1
   m_PreferredWidth: -1
-  m_PreferredHeight: 40
+  m_PreferredHeight: 50
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -194,6 +194,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   address: {fileID: 114225680768626326}
   addressString: 
+  streetNumber: 
+  route: 
+  city: 
+  state: 
+  zipCode: 
 --- !u!222 &222309538341591170
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -77,10 +77,10 @@ public class ChangeLocationPanelAddressCompleteBarController : MonoBehaviour {
             else
             {
                 ChangeLocationPanelController.instance.addressCompleteInputField.text = streetNumber + " " + route + " ," + city + " ," + state + " ," + zipCode;
-                ChangeLocationPanelController.instance.addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text = streetNumber + " " + route;
-                ChangeLocationPanelController.instance.addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text = city;
-                ChangeLocationPanelController.instance.addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text = state;
-                ChangeLocationPanelController.instance.addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text = zipCode;
+                ChangeLocationPanelController.instance.addAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = streetNumber + " " + route;
+                ChangeLocationPanelController.instance.addAddressPanel.Find("City/InputField").GetComponent<InputField>().text = city;
+                ChangeLocationPanelController.instance.addAddressPanel.Find("State/InputField").GetComponent<InputField>().text = state;
+                ChangeLocationPanelController.instance.addAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = zipCode;
 
                 ChangeLocationPanelController.instance.ClearResults();
                 ChangeLocationPanelController.instance.addressCompleteScrollRect.gameObject.SetActive(false);

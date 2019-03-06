@@ -202,19 +202,19 @@ public class ChangeLocationPanelController : BasePanelController
     {
         addAddressPanel.gameObject.SetActive(true);
         isPhoneVerified = false;
-        addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text = "";
-        addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text = "";
-        addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().interactable = true;
-        addAddressPanel.Find("Content/Verification/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("PersonInfoSection/Name/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().interactable = true;
+        addAddressPanel.Find("PersonInfoSection/Verification/InputField").GetComponent<InputField>().text = "";
         unitInputField.text = "";
         addressCompleteInputField.text = "";
         ClearResults();
-        addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text = "";
-        addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text = "";
-        addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text = "";
-        addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("City/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("State/InputField").GetComponent<InputField>().text = "";
+        addAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = "";
 
-        addAddressPanel.Find("Content/SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
+        addAddressPanel.Find("PersonInfoSection/Verification/SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
         sendCodeBtn.interactable = true;
     }
 
@@ -233,13 +233,13 @@ public class ChangeLocationPanelController : BasePanelController
         {
 
             AddAddress(
-                addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text,
-                addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("PersonInfoSection/Name/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text,
                 unitInputField.text,
-                addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text,
-                addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text,
-                addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text,
-                addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Street/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("City/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("State/InputField").GetComponent<InputField>().text,
+                addAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text,
                 new LDFWServerResponseEvent((JSONObject data, string m) =>
                 {
                     AppDataController.instance.SyncAddressList(() =>
@@ -259,7 +259,7 @@ public class ChangeLocationPanelController : BasePanelController
 
     public void OnSendCodeBtnClicked()
     {
-        if (addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text.Length == 10)
+        if (addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text.Length == 10)
         {
             sendCodeCoroutine = StartCoroutine(CodeCoroutine());
         }
@@ -276,10 +276,10 @@ public class ChangeLocationPanelController : BasePanelController
 
         for (int i = waitForResend; i >= 0; i--)
         {
-            addAddressPanel.Find("Content/SendCodeButton/Text").GetComponent<TextController>().ResetUI("重新发送" + i + "s", "Resend in" + i + "s");
+            addAddressPanel.Find("PersonInfoSection/Verification/SendCodeButton/Text").GetComponent<TextController>().ResetUI("重新发送" + i + "s", "Resend in" + i + "s");
             yield return new WaitForSeconds(1.0f);
         }
-        addAddressPanel.Find("Content/SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
+        addAddressPanel.Find("PersonInfoSection/Verification/SendCodeButton/Text").GetComponent<TextController>().ResetUI("发送验证码", "Send Verification Code");
         sendCodeBtn.interactable = true;
 
     }
@@ -292,14 +292,14 @@ public class ChangeLocationPanelController : BasePanelController
             Debug.Log("Check code now");
 
             WWWForm form = new WWWForm();
-            form.AddField("phone", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
+            form.AddField("phone", addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text);
             form.AddField("code", codeInputField.text);
             UserDataNetworkController.instance.CheckVerificationCode(form,
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                      {
                                                                          MessagePanelController.instance.DisplayPanel(m.Replace("\"", ""));
                                                                          isPhoneVerified = true;
-                                                                         addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().interactable = false;
+                                                                         addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().interactable = false;
                                                                          Debug.Log("code正确");
                                                                      }),
                                                                      new LDFWServerResponseEvent((JSONObject data, string m) =>
@@ -314,37 +314,37 @@ public class ChangeLocationPanelController : BasePanelController
 
     public bool ValidateModifyAddressPanel()
     {
-        if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Name/InputField").GetComponent<InputField>().text))
+        if (string.IsNullOrEmpty(addAddressPanel.Find("PersonInfoSection/Name/InputField").GetComponent<InputField>().text))
         {
             MessagePanelController.instance.DisplayPanel("Name cannot be null");
             return false;
         }
-        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text))
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text))
         {
             MessagePanelController.instance.DisplayPanel("Phone number cannot be null");
             return false;
         }
-        else if (addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text.Length != 10)
+        else if (addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text.Length != 10)
         {
             MessagePanelController.instance.DisplayPanel("Please enter 10 digits Phone number");
             return false;
         }
-        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Street/InputField").GetComponent<InputField>().text))
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Street/InputField").GetComponent<InputField>().text))
         {
-            MessagePanelController.instance.DisplayPanel("Please choose your address");
+            MessagePanelController.instance.DisplayPanel("Please Enter your address");
             return false;
         }
-        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/City/InputField").GetComponent<InputField>().text))
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("City/InputField").GetComponent<InputField>().text))
         {
             MessagePanelController.instance.DisplayPanel("City cannot be null");
             return false;
         }
-        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/State/InputField").GetComponent<InputField>().text))
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("State/InputField").GetComponent<InputField>().text))
         {
             MessagePanelController.instance.DisplayPanel("State cannot be null");
             return false;
         }
-        else if (string.IsNullOrEmpty(addAddressPanel.Find("Content/Postal/InputField").GetComponent<InputField>().text))
+        else if (string.IsNullOrEmpty(addAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text))
         {
             MessagePanelController.instance.DisplayPanel("Postal cannot be null");
             return false;
@@ -363,7 +363,7 @@ public class ChangeLocationPanelController : BasePanelController
     public void SetPhoneVerified()
     {
         WWWForm form = new WWWForm();
-        form.AddField("phoneNumber", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
+        form.AddField("phoneNumber", addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text);
         UserDataNetworkController.instance.SetPhoneNumberVerified(form,
                                                                 new LDFWServerResponseEvent((JSONObject data, string m) =>
                                                                 {
@@ -592,7 +592,7 @@ public class ChangeLocationPanelController : BasePanelController
     public void SendVerificationCode()
     {
         WWWForm form = new WWWForm();
-        form.AddField("phone", addAddressPanel.Find("Content/ContactNumber/InputField").GetComponent<InputField>().text);
+        form.AddField("phone", addAddressPanel.Find("PersonInfoSection/ContactNumber/InputField").GetComponent<InputField>().text);
 
         if (useYunPianServer)
         {

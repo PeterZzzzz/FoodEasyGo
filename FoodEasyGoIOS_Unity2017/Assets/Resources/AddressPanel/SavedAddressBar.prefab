@@ -292,7 +292,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address
+  m_Text: "\u5BB6\u5EAD\u4F4F\u5740"
   textZH: "\u5BB6\u5EAD\u4F4F\u5740"
   textEN: Address
 --- !u!114 &114216528818731858
@@ -398,7 +398,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name
+  m_Text: "\u59D3\u540D"
   textZH: "\u59D3\u540D"
   textEN: Name
 --- !u!114 &114464605386026474
@@ -487,7 +487,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Selected
+  m_Text: "\u5DF2\u9009\u62E9"
   textZH: "\u5DF2\u9009\u62E9"
   textEN: Selected
 --- !u!114 &114701828103110472
@@ -522,7 +522,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delete
+  m_Text: "\u5220\u9664"
   textZH: "\u5220\u9664"
   textEN: Delete
 --- !u!114 &114704897800236940
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6901961, b: 0.22745098, a: 1}
+  m_Color: {r: 1, g: 0.84313726, b: 0.37254903, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
