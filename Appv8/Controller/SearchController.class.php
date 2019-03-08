@@ -88,7 +88,7 @@ class SearchController extends BaseController {
 		if ($searchType == 0) {
 			$dishList = M('restaurant_dish')
                  ->where("(`name` like '%$searchString%' or `name_en` like '%$searchString%') and `status` = 1 and `goods_type` = 2 " .
-					" and `restaurant_id` in (select restaurant_id from food_restaurant_deliver_fee where region_id = $this->targetRegionID)")
+					" and `restaurant_id` in (select restaurant_id from food_restaurant_deliver_fee where region_id = $this->targetRegionID) and `restaurant_id` in (select id from food_restaurant where status = 1)")
 					//->order($sortStringDish)
 					->limit('0, 30')
 					->select();

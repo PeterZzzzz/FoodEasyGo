@@ -285,6 +285,11 @@ public class RestaurantDishDetailPanelController : BasePanelController
 				yield return null;
 				toggleParent.GetComponent<LayoutElement>().preferredHeight = 
 					(toggleParent.Find("Title") as RectTransform).sizeDelta.y + (toggleParentController.toggleElementParent as RectTransform).sizeDelta.y + 10;
+                //如果该属性暂时隐藏全部属性选项，则不显示该属性
+                if(toggleParent.Find("SelectionParent").childCount == 0)
+                {
+                    toggleParent.gameObject.SetActive(false);
+                }
 			}
 		}
 		bottomSection.SetAsLastSibling();

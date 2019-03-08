@@ -89,6 +89,9 @@ public class ChangeLocationPanelAddressBarController : MonoBehaviour {
                     selectAddressText.GetComponent<TextController>().ResetUI("已选择", "Selected");
                     selectAddressIcon.parent.GetComponent<Image>().color = new Color(0, 0, 0, 0);
                     selectAddressIcon.gameObject.SetActive(true);
+                    ChangeLocationPanelController.instance.ClearResults(ChangeLocationPanelController.instance.fetchAddressZipScrollRect);
+                    ChangeLocationPanelController.instance.fetchAddressZipScrollRect.gameObject.SetActive(false);
+                    ChangeLocationPanelController.instance.savedAddressScrollRect.gameObject.SetActive(true);
                     if (Config.currentLanguage == Language.chinese)
                     {
                         ChangeLocationPanelController.instance.noteText.text = "配送到选择的地址";

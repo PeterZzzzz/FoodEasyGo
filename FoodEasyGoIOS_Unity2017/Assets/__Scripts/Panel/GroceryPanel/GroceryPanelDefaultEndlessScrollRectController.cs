@@ -35,15 +35,14 @@ public class GroceryPanelDefaultEndlessScrollRectController : InfiniteScrollRect
 
 				_data = data;
 				_dataLength = Mathf.CeilToInt((float)_data.Count / 2f);
-                //DebugLogger.Log("_dataLength = " + _dataLength);
 
 				Reset();
 
                 //for (int i = 0; _data[i] != null; i++)
-                //    DebugLogger.Log(i.ToString() + " = " + _data[i].GetField("name").str);
-
+                    //DebugLogger.Log(i.ToString() + " = " + _data[i].GetField("name").str);
+            
                 for (int i = 0; i/2 < _contentElementCount; i+=2) {
-                    if (i >= _dataLength) {
+                    if (i/2 >= _dataLength) {
                         _scrollRectElementParentContent.GetChild (i/2).gameObject.SetActive (false);
                     } else {
                         _scrollRectElementParentContent.GetChild (i/2).gameObject.SetActive (true);

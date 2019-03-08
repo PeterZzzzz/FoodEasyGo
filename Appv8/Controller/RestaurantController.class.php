@@ -347,7 +347,7 @@ class RestaurantController extends BaseController {
 		
 		foreach ($dishAttributeList as &$attribute) {
 			$dishAttributeDetails = M('restaurant_dish_attr_detail')
-				->where("attr_id = " . $attribute['id'])
+				->where("attr_id = " . $attribute['id'] . " AND is_valid = 1")
 				->select();
 			if ($attribute['least'] == null) {
                 $attribute['least'] = "-1";

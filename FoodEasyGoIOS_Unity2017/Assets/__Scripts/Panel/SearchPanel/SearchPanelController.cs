@@ -31,7 +31,7 @@ public class SearchPanelController : BasePanelController {
             //historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, historicalSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
             //resultSearchScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.x, resultSearchScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
 
-            Debug.Log("iPhoneX适配5");
+            Debug.Log("iPhoneX适配5失效");
 
         }
     }
