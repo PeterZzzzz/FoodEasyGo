@@ -14,7 +14,8 @@ public class ChangeLocationPanelController : BasePanelController
     public Text noteText;
 
     public GameObject savedAddressBarfab;
-    public ScrollRect addressScrollRect;
+    public ScrollRect savedAddressScrollRect;
+    public ScrollRect fetchAddressZipScrollRect;
     public string selectedAddressID;
     public Transform addAddressPanel;
     public InputField codeInputField;
@@ -53,18 +54,18 @@ public class ChangeLocationPanelController : BasePanelController
     #region Overrides
     public override void ResetPanel ()
     {
-        addressScrollRect.content.DestroyAllChildren();
+        savedAddressScrollRect.content.DestroyAllChildren();
         manualZipCodeInputField.text = "";
         selectedAddressID = "0";
         addAddressPanel.gameObject.SetActive(false);
 
         if (Config.currentLanguage == Language.chinese)
         {
-            noteText.text = "请选择配送地址或输入当前所在地区邮编\n(定位按钮可以帮您获取当前地址邮编)";
+            noteText.text = "请选择配送地址或输入当前所在地址或邮编\n(定位按钮可以帮您获取当前地址邮编)";
         }
         else if (Config.currentLanguage == Language.english)
         {
-            noteText.text = "Please choose a address or enter your zip code.\nLocation Button will fetch your current zip";
+            noteText.text = "Please choose a address or enter your Address / zip code.\nLocation Button will fetch your current zip";
         }
     }
 
@@ -97,19 +98,19 @@ public class ChangeLocationPanelController : BasePanelController
                         data[i].GetField("zip_code").str,
                         data[i].GetField("region_id").str
                     );
-                    address.SetParent(addressScrollRect.content);
+                    address.SetParent(savedAddressScrollRect.content);
                     address.localScale = Vector3.one;
-                    address.GetComponent<ChangeLocationPanelAddressBarController>().parentScrollRect = addressScrollRect;
+                    address.GetComponent<ChangeLocationPanelAddressBarController>().parentScrollRect = savedAddressScrollRect;
                 }
             }
 
-            if (addressScrollRect.content.childCount <= 0)
+            if (savedAddressScrollRect.content.childCount <= 0)
             {
-                addressScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(true);
+                savedAddressScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(true);
             }
             else
             {
-                addressScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(false);
+                savedAddressScrollRect.content.parent.Find("EmptyText").gameObject.SetActive(false);
             }
         }),
         new LDFWServerResponseEvent((JSONObject data, string m) =>
@@ -159,12 +160,12 @@ public class ChangeLocationPanelController : BasePanelController
     public void OnInputFieldsChanged ()
     {
         //reset address select button UI
-        int addressCount = addressScrollRect.content.childCount;
+        int addressCount = savedAddressScrollRect.content.childCount;
         for (int i = 0; i < addressCount; i++)
         {
-            addressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/Text").GetComponent<TextController>().ResetUI("未选择", "Unselected");
-            addressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/CricleBackground").GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            addressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/CricleBackground/SelectIcon").gameObject.SetActive(false);
+            savedAddressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/Text").GetComponent<TextController>().ResetUI("未选择", "Unselected");
+            savedAddressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/CricleBackground").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            savedAddressScrollRect.content.GetChild(i).Find("AddressBar/SelectBtn/CricleBackground/SelectIcon").gameObject.SetActive(false);
 
         }
         //unselect of address
@@ -179,10 +180,22 @@ public class ChangeLocationPanelController : BasePanelController
             noteText.text = "Deliver to this zip code";
         }
 
-        if (string.IsNullOrEmpty (manualZipCodeInputField.text) || manualZipCodeInputField.text.Length < 5)
-            manualZipCodeSubmitButton.interactable = false;
+        //根据字数显示面板
+        if (manualZipCodeInputField.text.Length == 0)
+        {
+            savedAddressScrollRect.gameObject.SetActive(true);
+            fetchAddressZipScrollRect.gameObject.SetActive(false);
+        }
         else
-            manualZipCodeSubmitButton.interactable = true;
+        {
+            savedAddressScrollRect.gameObject.SetActive(false);
+            fetchAddressZipScrollRect.gameObject.SetActive(true);
+            ClearResults(fetchAddressZipScrollRect);
+            StartCoroutine(CreateAutoCompleteAddressBar(manualZipCodeInputField.text, fetchAddressZipScrollRect, true));
+        }
+
+
+
     }
 
     public void OnCloseButtonClicked ()
@@ -208,7 +221,7 @@ public class ChangeLocationPanelController : BasePanelController
         addAddressPanel.Find("PersonInfoSection/Verification/InputField").GetComponent<InputField>().text = "";
         unitInputField.text = "";
         addressCompleteInputField.text = "";
-        ClearResults();
+        ClearResults(addressCompleteScrollRect);
         addAddressPanel.Find("Street/InputField").GetComponent<InputField>().text = "";
         addAddressPanel.Find("City/InputField").GetComponent<InputField>().text = "";
         addAddressPanel.Find("State/InputField").GetComponent<InputField>().text = "";
@@ -519,23 +532,23 @@ public class ChangeLocationPanelController : BasePanelController
     public void OnAddressCompleteInputFieldValueChanged()
     {
         addressCompleteScrollRect.gameObject.SetActive(true);
-        ClearResults();
-        StartCoroutine(CreateAutoCompleteAddressBar(addressCompleteInputField.text));
+        ClearResults(addressCompleteScrollRect);
+        StartCoroutine(CreateAutoCompleteAddressBar(addressCompleteInputField.text, addressCompleteScrollRect, false));
 
     }
 
-    public void ClearResults()
+    public void ClearResults(ScrollRect contentParent)
     {
         // Reverse loop since you destroy children
-        for (int childIndex = addressCompleteScrollRect.content.childCount - 1; childIndex >= 0; --childIndex)
+        for (int childIndex = contentParent.content.childCount - 1; childIndex >= 0; --childIndex)
         {
-            Transform child = addressCompleteScrollRect.content.GetChild(childIndex);
+            Transform child = contentParent.content.GetChild(childIndex);
             child.SetParent(null);
             Destroy(child.gameObject);
         }
     }
 
-    private IEnumerator CreateAutoCompleteAddressBar(string str)
+    private IEnumerator CreateAutoCompleteAddressBar(string str, ScrollRect contentParent, bool isFetchZip)
     {
         string addressInput = str;
         //WWW www = new WWW("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + addressInput + "&key=" + "AIzaSyB-90I6TCqL7RwtxTQ3YyB4KqsfgddIqic");
@@ -558,7 +571,8 @@ public class ChangeLocationPanelController : BasePanelController
             {
                 Transform child = Instantiate(addressCompleteBarPrefab).transform;
                 child.GetComponent<ChangeLocationPanelAddressCompleteBarController>().ResetAddressText(addressComponent[i].GetField("description").str);
-                child.SetParent(addressCompleteScrollRect.content);
+                child.GetComponent<ChangeLocationPanelAddressCompleteBarController>().isOnlyFetchZip = isFetchZip;
+                child.SetParent(contentParent.content);
                 child.localScale = Vector3.one;
             }
         }

@@ -68,7 +68,7 @@ public class RestaurantDishDetailPanelController : BasePanelController
             // iPhoneX
             //contentScrollRect.GetComponent<RectTransform>().offsetMin = new Vector2(contentScrollRect.GetComponent<RectTransform>().offsetMin.x, contentScrollRect.GetComponent<RectTransform>().offsetMin.y + 20);
 
-            Debug.Log("iPhoneX适配12");
+            Debug.Log("iPhoneX适配12失效");
 
         }
 

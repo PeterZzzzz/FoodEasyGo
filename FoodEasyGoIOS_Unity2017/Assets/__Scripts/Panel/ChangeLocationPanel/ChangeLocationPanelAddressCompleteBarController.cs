@@ -13,6 +13,7 @@ public class ChangeLocationPanelAddressCompleteBarController : MonoBehaviour {
     public string city;
     public string state;
     public string zipCode;
+    public bool   isOnlyFetchZip;
 
     public void ResetAddressText(string str)
     {
@@ -22,8 +23,14 @@ public class ChangeLocationPanelAddressCompleteBarController : MonoBehaviour {
 
     public void OnAddressClick()
     {
-        StartCoroutine(FetchAddressByString(addressString));
-
+        if(isOnlyFetchZip)
+        {
+            StartCoroutine(FetchZipByString(addressString));
+        }
+        else
+        {
+            StartCoroutine(FetchAddressByString(addressString));
+        }
     }
 
     private IEnumerator FetchAddressByString(string str)
@@ -82,9 +89,64 @@ public class ChangeLocationPanelAddressCompleteBarController : MonoBehaviour {
                 ChangeLocationPanelController.instance.addAddressPanel.Find("State/InputField").GetComponent<InputField>().text = state;
                 ChangeLocationPanelController.instance.addAddressPanel.Find("Postal/InputField").GetComponent<InputField>().text = zipCode;
 
-                ChangeLocationPanelController.instance.ClearResults();
+                ChangeLocationPanelController.instance.ClearResults(ChangeLocationPanelController.instance.addressCompleteScrollRect);
                 ChangeLocationPanelController.instance.addressCompleteScrollRect.gameObject.SetActive(false);
             }
+        }
+        Debug.Log("street: " + streetNumber + "\nroute: " + route + "\ncity: " + city + "\nstate: " + state + "\nzipCode: " + zipCode);
+    }
+
+
+    private IEnumerator FetchZipByString(string str)
+    {
+        //WWW www = new WWW("https://maps.googleapis.com/maps/api/geocode/json?address=" + str + "&key=AIzaSyA7v466-13Perh6WnLg78uwEXTY9dYWmcQ&language=en");
+        WWW www = new WWW("https://maps.googleapis.com/maps/api/geocode/json?address=" + str + "&key=" + UserDataController.instance.googleMapKey);
+
+        yield return www;
+        JSONObject data = new JSONObject(www.text);
+        Debug.Log(data.GetField("status").str + "\n" + www.text);
+
+        if (data.GetField("status") == null || data.GetField("status").str != "OK")
+        {
+            MessagePanelController.instance.DisplayPanel("Please try again later");
+        }
+        else
+        {
+            JSONObject addressComponent = data.GetField("results")[0].GetField("address_components");
+            for (int i = 0; addressComponent[i] != null; i++)
+            {
+                string type = addressComponent[i].GetField("types")[0].str;
+                switch (type)
+                {
+                    case "street_number":
+                        streetNumber = addressComponent[i].GetField("long_name").str;
+                        break;
+                    case "route":
+                        route = addressComponent[i].GetField("short_name").str;
+                        break;
+                    case "locality":
+                        city = addressComponent[i].GetField("long_name").str;
+                        break;
+                    case "administrative_area_level_1":
+                        state = addressComponent[i].GetField("short_name").str;
+                        break;
+                    case "postal_code":
+                        zipCode = addressComponent[i].GetField("long_name").str;
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+            }
+
+
+            //ChangeLocationPanelController.instance.manualZipCodeInputField.text = streetNumber + " " + route + " ," + city + " ," + state + " ," + zipCode;
+            ChangeLocationPanelController.instance.manualZipCodeInputField.text = zipCode;
+            ChangeLocationPanelController.instance.ClearResults(ChangeLocationPanelController.instance.fetchAddressZipScrollRect);
+            ChangeLocationPanelController.instance.fetchAddressZipScrollRect.gameObject.SetActive(false);
+            ChangeLocationPanelController.instance.savedAddressScrollRect.gameObject.SetActive(true);
         }
         Debug.Log("street: " + streetNumber + "\nroute: " + route + "\ncity: " + city + "\nstate: " + state + "\nzipCode: " + zipCode);
     }
